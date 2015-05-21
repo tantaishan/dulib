@@ -1,0 +1,482 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="controls">
+      <UniqueIdentifier>{404f4dec-46bd-44b7-ae0d-90ba9894a884}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tinyXmlW">
+      <UniqueIdentifier>{1d79fb4b-e6bb-4546-984a-2e3cc3831ddd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="controls\AxControl.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duAnimation.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duButton.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duCheckBox.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duComboBox.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duEdit.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duFlash.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duFlashEventSink.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duGifCtrl.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duGridLayout.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duHeaderCtrl.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duHwndObj.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duIMPanelNode.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duLayout.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duLEDTimer.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duLink.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duListBox.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duListBoxEx.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duListCtrl.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duMenu.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duMenuBar.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duMenuItem.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duMLEdit.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duOutlookBar.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duPage.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duPie.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duProgress.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duRadio.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duRemoteCtrl.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duReportCell.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duReportColumn.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duReportHeader.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duReportLine.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duReportView.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duScroll.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duScrollContainer.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duScrollView.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duSlider.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duSpin.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duSplitter.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duStatic.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duStaticEx.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duTabButton.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duTreeCtrl.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duTreeListCtrl.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duTreeListItem.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duWindow.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duXmlStatic.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\MenuPopup.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="duCtrlManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="duCursor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="duDrawHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="duFont.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="duImage.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="dulib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="duMessage.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="duObject.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="duPlugin.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="duProperty.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="duRedrawLayer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="duResManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="duRgn.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="duStyle.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="duStyleGroup.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="duTypeLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="duTypes.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="duUtility.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="duWindowManager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="duZorderList.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="InvokeVTable.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptObject.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="unzip.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyXmlW\tinystr.cpp">
+      <Filter>tinyXmlW</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyXmlW\tinyxml.cpp">
+      <Filter>tinyXmlW</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyXmlW\tinyxmlerror.cpp">
+      <Filter>tinyXmlW</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyXmlW\tinyxmlparser.cpp">
+      <Filter>tinyXmlW</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="controls\AxControl.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duAnimation.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duButton.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duCheckBox.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duComboBox.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duEdit.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duFlash.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duFlashEventSink.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duGifCtrl.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duGridLayout.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duHeaderCtrl.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duHwndObj.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duIMPanelNode.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duLayout.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duLEDTimer.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duLink.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duListBox.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duListBoxEx.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duListCtrl.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duMenu.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duMenuBar.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duMenuItem.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duMLEdit.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duOutlookBar.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duPage.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duPie.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duProgress.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duRadio.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duRemoteCtrl.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duReportCell.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duReportColumn.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duReportHeader.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duReportLine.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duReportView.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duScroll.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duScrollContainer.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duScrollView.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duSlider.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duSpin.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duSplitter.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duStatic.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duStaticEx.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duTabButton.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duTreeCtrl.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duTreeListCtrl.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duTreeListItem.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duWindow.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duXmlStatic.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\Flash.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\MenuPopup.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="duCtrlManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="duCursor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="duDrawHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="duFont.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="duImage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="dulib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="duMessage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="duObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="duPlugin.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="duProperty.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="duRedrawLayer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="duResBase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="duResManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="duRgn.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="duStyle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="duStyleGroup.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="duTypeLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="duTypes.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="duUtility.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="duWindowManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="duZorderList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="unzip.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyXmlW\tinystr.h">
+      <Filter>tinyXmlW</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyXmlW\tinyxml.h">
+      <Filter>tinyXmlW</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

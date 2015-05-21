@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="controls\AxControl.cpp" />
+    <ClCompile Include="controls\duAnimation.cpp" />
+    <ClCompile Include="controls\duButton.cpp" />
+    <ClCompile Include="controls\duCheckBox.cpp" />
+    <ClCompile Include="controls\duComboBox.cpp" />
+    <ClCompile Include="controls\duEdit.cpp" />
+    <ClCompile Include="controls\duFlash.cpp" />
+    <ClCompile Include="controls\duFlashEventSink.cpp" />
+    <ClCompile Include="controls\duGifCtrl.cpp" />
+    <ClCompile Include="controls\duGridLayout.cpp" />
+    <ClCompile Include="controls\duHeaderCtrl.cpp" />
+    <ClCompile Include="controls\duHwndObj.cpp" />
+    <ClCompile Include="controls\duIMPanelNode.cpp" />
+    <ClCompile Include="controls\duLayout.cpp" />
+    <ClCompile Include="controls\duLEDTimer.cpp" />
+    <ClCompile Include="controls\duLink.cpp" />
+    <ClCompile Include="controls\duListBox.cpp" />
+    <ClCompile Include="controls\duListBoxEx.cpp" />
+    <ClCompile Include="controls\duListCtrl.cpp" />
+    <ClCompile Include="controls\duMenu.cpp" />
+    <ClCompile Include="controls\duMenuBar.cpp" />
+    <ClCompile Include="controls\duMenuItem.cpp" />
+    <ClCompile Include="controls\duMLEdit.cpp" />
+    <ClCompile Include="controls\duOutlookBar.cpp" />
+    <ClCompile Include="controls\duPage.cpp" />
+    <ClCompile Include="controls\duPie.cpp" />
+    <ClCompile Include="controls\duProgress.cpp" />
+    <ClCompile Include="controls\duRadio.cpp" />
+    <ClCompile Include="controls\duRemoteCtrl.cpp" />
+    <ClCompile Include="controls\duReportCell.cpp" />
+    <ClCompile Include="controls\duReportColumn.cpp" />
+    <ClCompile Include="controls\duReportHeader.cpp" />
+    <ClCompile Include="controls\duReportLine.cpp" />
+    <ClCompile Include="controls\duReportView.cpp" />
+    <ClCompile Include="controls\duScroll.cpp" />
+    <ClCompile Include="controls\duScrollContainer.cpp" />
+    <ClCompile Include="controls\duScrollView.cpp" />
+    <ClCompile Include="controls\duSlider.cpp" />
+    <ClCompile Include="controls\duSpin.cpp" />
+    <ClCompile Include="controls\duSplitter.cpp" />
+    <ClCompile Include="controls\duStatic.cpp" />
+    <ClCompile Include="controls\duStaticEx.cpp" />
+    <ClCompile Include="controls\duTabButton.cpp" />
+    <ClCompile Include="controls\duTreeCtrl.cpp" />
+    <ClCompile Include="controls\duTreeListCtrl.cpp" />
+    <ClCompile Include="controls\duTreeListItem.cpp" />
+    <ClCompile Include="controls\duWindow.cpp" />
+    <ClCompile Include="controls\duXmlStatic.cpp" />
+    <ClCompile Include="controls\MenuPopup.cpp" />
+    <ClCompile Include="duCtrlManager.cpp" />
+    <ClCompile Include="duCursor.cpp" />
+    <ClCompile Include="duDrawHelper.cpp" />
+    <ClCompile Include="duFont.cpp" />
+    <ClCompile Include="duImage.cpp" />
+    <ClCompile Include="dulib.cpp" />
+    <ClCompile Include="duMessage.cpp" />
+    <ClCompile Include="duObject.cpp" />
+    <ClCompile Include="duPlugin.cpp" />
+    <ClCompile Include="duProperty.cpp" />
+    <ClCompile Include="duRedrawLayer.cpp" />
+    <ClCompile Include="duResManager.cpp" />
+    <ClCompile Include="duRgn.cpp" />
+    <ClCompile Include="duStyle.cpp" />
+    <ClCompile Include="duStyleGroup.cpp" />
+    <ClCompile Include="duTypeLib.cpp" />
+    <ClCompile Include="duTypes.cpp" />
+    <ClCompile Include="duUtility.cpp" />
+    <ClCompile Include="duWindowManager.cpp" />
+    <ClCompile Include="duZorderList.cpp" />
+    <ClCompile Include="InvokeVTable.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="ScriptObject.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="tinyXmlW\tinystr.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="tinyXmlW\tinyxml.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="tinyXmlW\tinyxmlerror.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="tinyXmlW\tinyxmlparser.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="unzip.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="controls\AxControl.h" />
+    <ClInclude Include="controls\duAnimation.h" />
+    <ClInclude Include="controls\duButton.h" />
+    <ClInclude Include="controls\duCheckBox.h" />
+    <ClInclude Include="controls\duComboBox.h" />
+    <ClInclude Include="controls\duEdit.h" />
+    <ClInclude Include="controls\duFlash.h" />
+    <ClInclude Include="controls\duFlashEventSink.h" />
+    <ClInclude Include="controls\duGifCtrl.h" />
+    <ClInclude Include="controls\duGridLayout.h" />
+    <ClInclude Include="controls\duHeaderCtrl.h" />
+    <ClInclude Include="controls\duHwndObj.h" />
+    <ClInclude Include="controls\duIMPanelNode.h" />
+    <ClInclude Include="controls\duLayout.h" />
+    <ClInclude Include="controls\duLEDTimer.h" />
+    <ClInclude Include="controls\duLink.h" />
+    <ClInclude Include="controls\duListBox.h" />
+    <ClInclude Include="controls\duListBoxEx.h" />
+    <ClInclude Include="controls\duListCtrl.h" />
+    <ClInclude Include="controls\duMenu.h" />
+    <ClInclude Include="controls\duMenuBar.h" />
+    <ClInclude Include="controls\duMenuItem.h" />
+    <ClInclude Include="controls\duMLEdit.h" />
+    <ClInclude Include="controls\duOutlookBar.h" />
+    <ClInclude Include="controls\duPage.h" />
+    <ClInclude Include="controls\duPie.h" />
+    <ClInclude Include="controls\duProgress.h" />
+    <ClInclude Include="controls\duRadio.h" />
+    <ClInclude Include="controls\duRemoteCtrl.h" />
+    <ClInclude Include="controls\duReportCell.h" />
+    <ClInclude Include="controls\duReportColumn.h" />
+    <ClInclude Include="controls\duReportHeader.h" />
+    <ClInclude Include="controls\duReportLine.h" />
+    <ClInclude Include="controls\duReportView.h" />
+    <ClInclude Include="controls\duScroll.h" />
+    <ClInclude Include="controls\duScrollContainer.h" />
+    <ClInclude Include="controls\duScrollView.h" />
+    <ClInclude Include="controls\duSlider.h" />
+    <ClInclude Include="controls\duSpin.h" />
+    <ClInclude Include="controls\duSplitter.h" />
+    <ClInclude Include="controls\duStatic.h" />
+    <ClInclude Include="controls\duStaticEx.h" />
+    <ClInclude Include="controls\duTabButton.h" />
+    <ClInclude Include="controls\duTreeCtrl.h" />
+    <ClInclude Include="controls\duTreeListCtrl.h" />
+    <ClInclude Include="controls\duTreeListItem.h" />
+    <ClInclude Include="controls\duWindow.h" />
+    <ClInclude Include="controls\duXmlStatic.h" />
+    <ClInclude Include="controls\Flash.h" />
+    <ClInclude Include="controls\MenuPopup.h" />
+    <ClInclude Include="duCtrlManager.h" />
+    <ClInclude Include="duCursor.h" />
+    <ClInclude Include="duDrawHelper.h" />
+    <ClInclude Include="duFont.h" />
+    <ClInclude Include="duImage.h" />
+    <ClInclude Include="dulib.h" />
+    <ClInclude Include="duMessage.h" />
+    <ClInclude Include="duObject.h" />
+    <ClInclude Include="duPlugin.h" />
+    <ClInclude Include="duProperty.h" />
+    <ClInclude Include="duRedrawLayer.h" />
+    <ClInclude Include="duResBase.h" />
+    <ClInclude Include="duResManager.h" />
+    <ClInclude Include="duRgn.h" />
+    <ClInclude Include="duStyle.h" />
+    <ClInclude Include="duStyleGroup.h" />
+    <ClInclude Include="duTypeLib.h" />
+    <ClInclude Include="duTypes.h" />
+    <ClInclude Include="duUtility.h" />
+    <ClInclude Include="duWindowManager.h" />
+    <ClInclude Include="duZorderList.h" />
+    <ClInclude Include="ScriptObject.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="tinyXmlW\tinystr.h" />
+    <ClInclude Include="tinyXmlW\tinyxml.h" />
+    <ClInclude Include="unzip.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{89CBCE69-7DEA-4425-AACE-0F121600D799}</ProjectGuid>
+    <RootNamespace>Dulib</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Static</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)OutPutObj\$(ProjectName)\$(PlatformTarget)\$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)OutPutObj\$(ProjectName)\$(PlatformTarget)\$(Configuration)\</OutDir>
+    <IntDir>$(OutDir)</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)controls;$(ProjectDir)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)controls;$(ProjectDir)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
