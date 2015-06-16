@@ -21,7 +21,7 @@ class duHwndObj : public duPlugin
 public:
 	virtual void WINAPI RegisterControlProperty() {}
 	virtual void WINAPI OnCreate() {}
-	virtual void WINAPI DrawObject(HDC hDC) {}
+	virtual void WINAPI DrawObject(HDC hDC);
 	virtual void WINAPI Resize(LPRECT lpRect);
 	
 	virtual BOOL WINAPI IsDisable();

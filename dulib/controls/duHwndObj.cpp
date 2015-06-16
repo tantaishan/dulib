@@ -50,6 +50,11 @@ HWND WINAPI duHwndObj::Detach()
 	return ret;
 }
 
+void WINAPI duHwndObj::DrawObject(HDC hDC)
+{
+	InvalidateRect(m_hWndObject, NULL, TRUE);
+}
+
 void WINAPI duHwndObj::Resize(LPRECT lpRect)
 {
 	duPlugin::Resize(lpRect);
