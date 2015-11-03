@@ -6,7 +6,6 @@
 //  File:       duRedrawLayer.cpp
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duRedrawLayer.h"
 
 duRedrawLayer::duRedrawLayer()

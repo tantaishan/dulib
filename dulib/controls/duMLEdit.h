@@ -22,30 +22,30 @@
 class duMLEdit : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
 	
-	virtual LRESULT WINAPI OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-	virtual void WINAPI OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
-	virtual BOOL WINAPI OnKillFocus(duPlugin *pNewFocus);
-	virtual BOOL WINAPI OnSetFocus(duPlugin *pOldFocus);
-	virtual void WINAPI OnMouseMove(POINT pt);
-	virtual void WINAPI OnMouseDbClick(POINT pt);
-	virtual void WINAPI OnMouseLDown(POINT pt);
-	virtual void WINAPI OnMouseLUp(POINT pt);
-	virtual void WINAPI OnMouseRDown(POINT pt);
-	virtual void WINAPI OnMouseRUp(POINT pt);
-	virtual void WINAPI OnTimer(UINT nEventId);
-	virtual BOOL WINAPI OnSetCursor();
-	virtual void WINAPI OnMouseWheel(UINT fwKeys, int zDelta, POINT pt);
-	virtual void WINAPI OnVScroll(ScrollBarAction sbAction, int nPos);
-	virtual void WINAPI OnHScroll(ScrollBarAction sbAction, int nPos);
+	virtual LRESULT OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	virtual void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
+	virtual BOOL OnKillFocus(duPlugin *pNewFocus);
+	virtual BOOL OnSetFocus(duPlugin *pOldFocus);
+	virtual void OnMouseMove(POINT pt);
+	virtual void OnMouseDbClick(POINT pt);
+	virtual void OnMouseLDown(POINT pt);
+	virtual void OnMouseLUp(POINT pt);
+	virtual void OnMouseRDown(POINT pt);
+	virtual void OnMouseRUp(POINT pt);
+	virtual void OnTimer(UINT nEventId);
+	virtual BOOL OnSetCursor();
+	virtual void OnMouseWheel(UINT fwKeys, int zDelta, POINT pt);
+	virtual void OnVScroll(ScrollBarAction sbAction, int nPos);
+	virtual void OnHScroll(ScrollBarAction sbAction, int nPos);
 
-	virtual void WINAPI SetText(LPCTSTR lpszText);
-	virtual LPCTSTR WINAPI GetText() { return m_szTextW; }
-	virtual void WINAPI SetSel(UINT start, UINT end, BOOL after_wrap);
-	virtual LRESULT WINAPI GetSel(PUINT start, PUINT end);
+	virtual void SetText(LPCTSTR lpszText);
+	virtual LPCTSTR GetText() { return m_szTextW; }
+	virtual void SetSel(UINT start, UINT end, BOOL after_wrap);
+	virtual LRESULT GetSel(PUINT start, PUINT end);
 
 public:
 	duMLEdit();

@@ -55,7 +55,7 @@ public:
 
 	BOOL DeletePlugin(duPlugin *pPlugin);
 	duPlugin *Clone(duPlugin *pTemplate, duPlugin *pParent, duPlugin *pPrevious, UINT nSuffix);
-	BOOL CallScript(duPlugin *pPlugin, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	//BOOL CallScript(duPlugin *pPlugin, UINT uMsg, WPARAM wParam, LPARAM lParam);
 	BOOL IsSizeMoving() { return m_fSizeMoving; }
 	void DrawTrialBitmap(HDC hDC);
 
@@ -102,5 +102,5 @@ protected:
 	BOOL m_fSizeMoving;
 };
 
-LRESULT WINAPI DirectUIWinProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-duPlugin *WINAPI CreateDirectUIControl(LPCTSTR lpszType);
+LRESULT DirectUIWinProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+duPlugin* CreateDirectUIControl(LPCTSTR lpszType);

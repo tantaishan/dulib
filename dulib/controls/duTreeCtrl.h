@@ -49,72 +49,72 @@ enum TCHitTestCode
 class duTreeCtrl : public duScrollView
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
 
-	virtual void WINAPI OnMouseMove(POINT pt);
-	virtual void WINAPI OnMouseLeave(POINT pt);
-	virtual void WINAPI OnMouseHover(POINT pt);
-	virtual void WINAPI OnMouseLDown(POINT pt);
-	virtual void WINAPI OnMouseLUp(POINT pt);
-	virtual void WINAPI OnMouseRDown(POINT pt);
-	virtual void WINAPI OnMouseRUp(POINT pt);
-	virtual void WINAPI OnMouseDbClick(POINT pt);
-	virtual void WINAPI OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
-	virtual void WINAPI OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags);
-	virtual void WINAPI GetViewSize(LPSIZE lpSize);
+	virtual void OnMouseMove(POINT pt);
+	virtual void OnMouseLeave(POINT pt);
+	virtual void OnMouseHover(POINT pt);
+	virtual void OnMouseLDown(POINT pt);
+	virtual void OnMouseLUp(POINT pt);
+	virtual void OnMouseRDown(POINT pt);
+	virtual void OnMouseRUp(POINT pt);
+	virtual void OnMouseDbClick(POINT pt);
+	virtual void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
+	virtual void OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags);
+	virtual void GetViewSize(LPSIZE lpSize);
 	
-	virtual TreeCtrlItem *WINAPI GetRootItem() { return m_pRoot; }	
-	virtual TreeCtrlItem *WINAPI InsertItem(LPCTSTR lpszText, LPCTSTR lpszImage, TreeCtrlItem *pParent, TreeCtrlItem *pInsertAfter);
-	virtual BOOL WINAPI DeleteItem(TreeCtrlItem *pItem);
-	virtual BOOL WINAPI ItemHasChildren(TreeCtrlItem *pItem);
-	virtual LPCTSTR WINAPI GetItemStyle() { return m_szItemStyle; }
-	virtual void WINAPI SetItemStyle(LPCTSTR lpszStyle);
-	virtual LPCTSTR WINAPI GetIndentStyle() { return m_szIndentStyle; }
-	virtual void WINAPI SetIndentStyle(LPCTSTR lpszStyle);
-	virtual LPCTSTR WINAPI GetFont() { return m_szFont; }
-	virtual void WINAPI SetFont(LPCTSTR lpszFont);
-	virtual int WINAPI GetIndentWidth() { return m_nIndentWidth; }
-	virtual void WINAPI SetIndentWidth(int nIndentWidth) { m_nIndentWidth = nIndentWidth; }
-	virtual int WINAPI GetIndentHeight() { return m_nIndentHeight; }
-	virtual void WINAPI SetIndentHeight(int nIndentHeight) { m_nIndentHeight = nIndentHeight; }
-	virtual int WINAPI GetItemHeight() { return m_nItemHeight; }
-	virtual void WINAPI SetItemHeight(int nItemHeight);
-	virtual int WINAPI GetIconWidth() { return m_nIconWidth; }
-	virtual void WINAPI SetIconWidth(int nIconWidth) { m_nIconWidth = nIconWidth; }
-	virtual int WINAPI GetIconHeight() { return m_nIconHeight; }
-	virtual void WINAPI SetIconHeight(int nIconHeight) { m_nIconHeight = nIconHeight; }
-	virtual int WINAPI GetIndentIconSpace() { return m_nIndentIconSpace; }
-	virtual void WINAPI SetIndentIconSpace(int nIndentIconSpace) { m_nIndentIconSpace = nIndentIconSpace; }
-	virtual int WINAPI GetIconTextSpace() { return m_nIconTextSpace; }
-	virtual void WINAPI SetIconTextSpace(int nIconTextSpace) { m_nIconTextSpace = nIconTextSpace; }
-	virtual COLORREF WINAPI GetTextColor() { return m_clrText; }
-	virtual void WINAPI SetTextColor(COLORREF clrText) { m_clrText = clrText; }
-	virtual int WINAPI GetLastHitCode() { return (int)m_hitCode; }
+	virtual TreeCtrlItem *GetRootItem() { return m_pRoot; }	
+	virtual TreeCtrlItem *InsertItem(LPCTSTR lpszText, LPCTSTR lpszImage, TreeCtrlItem *pParent, TreeCtrlItem *pInsertAfter);
+	virtual BOOL DeleteItem(TreeCtrlItem *pItem);
+	virtual BOOL ItemHasChildren(TreeCtrlItem *pItem);
+	virtual LPCTSTR GetItemStyle() { return m_szItemStyle; }
+	virtual void SetItemStyle(LPCTSTR lpszStyle);
+	virtual LPCTSTR GetIndentStyle() { return m_szIndentStyle; }
+	virtual void SetIndentStyle(LPCTSTR lpszStyle);
+	virtual LPCTSTR GetFont() { return m_szFont; }
+	virtual void SetFont(LPCTSTR lpszFont);
+	virtual int GetIndentWidth() { return m_nIndentWidth; }
+	virtual void SetIndentWidth(int nIndentWidth) { m_nIndentWidth = nIndentWidth; }
+	virtual int GetIndentHeight() { return m_nIndentHeight; }
+	virtual void SetIndentHeight(int nIndentHeight) { m_nIndentHeight = nIndentHeight; }
+	virtual int GetItemHeight() { return m_nItemHeight; }
+	virtual void SetItemHeight(int nItemHeight);
+	virtual int GetIconWidth() { return m_nIconWidth; }
+	virtual void SetIconWidth(int nIconWidth) { m_nIconWidth = nIconWidth; }
+	virtual int GetIconHeight() { return m_nIconHeight; }
+	virtual void SetIconHeight(int nIconHeight) { m_nIconHeight = nIconHeight; }
+	virtual int GetIndentIconSpace() { return m_nIndentIconSpace; }
+	virtual void SetIndentIconSpace(int nIndentIconSpace) { m_nIndentIconSpace = nIndentIconSpace; }
+	virtual int GetIconTextSpace() { return m_nIconTextSpace; }
+	virtual void SetIconTextSpace(int nIconTextSpace) { m_nIconTextSpace = nIconTextSpace; }
+	virtual COLORREF GetTextColor() { return m_clrText; }
+	virtual void SetTextColor(COLORREF clrText) { m_clrText = clrText; }
+	virtual int GetLastHitCode() { return (int)m_hitCode; }
 	
-	virtual TreeCtrlItem *WINAPI GetNextItem(TreeCtrlItem *pItem);
-	virtual LPCTSTR WINAPI GetItemText(TreeCtrlItem *pItem);
-	virtual void WINAPI SetItemText(TreeCtrlItem *pItem, LPCTSTR lpszText);
-	virtual LPCTSTR WINAPI GetItemIcon(TreeCtrlItem *pItem);
-	virtual void WINAPI SetItemIcon(TreeCtrlItem *pItem, LPCTSTR lpszIcon);
-	virtual int WINAPI GetItemLevel(TreeCtrlItem *pItem);
-	virtual BOOL WINAPI IsExpand(TreeCtrlItem *pItem);
-	virtual void WINAPI Expand(TreeCtrlItem *pItem, BOOL fExpand);
-	virtual TreeCtrlItem *WINAPI GetParent(TreeCtrlItem *pItem);
-	virtual TreeCtrlItem *WINAPI GetNextSibling(TreeCtrlItem *pItem);
-	virtual TreeCtrlItem *WINAPI GetFirstChild(TreeCtrlItem *pItem);
-	virtual TreeCtrlItem *WINAPI GetCurSelItem() { return m_pSelect; }
-	virtual void WINAPI DeleteAllItems();
-	virtual INT_PTR WINAPI GetItemData(TreeCtrlItem *pItem);
-	virtual BOOL WINAPI SetItemData(TreeCtrlItem *pItem, INT_PTR pData);
-	virtual BOOL WINAPI IsAutoShowTooltip(){return m_fAutoShowToolTip;}
-	virtual void WINAPI SetAutoShowTooltip(BOOL fAutoShowTooltip);
-	virtual TreeCtrlItem * WINAPI HitTest(LPPOINT lppt);
+	virtual TreeCtrlItem *GetNextItem(TreeCtrlItem *pItem);
+	virtual LPCTSTR GetItemText(TreeCtrlItem *pItem);
+	virtual void SetItemText(TreeCtrlItem *pItem, LPCTSTR lpszText);
+	virtual LPCTSTR GetItemIcon(TreeCtrlItem *pItem);
+	virtual void SetItemIcon(TreeCtrlItem *pItem, LPCTSTR lpszIcon);
+	virtual int GetItemLevel(TreeCtrlItem *pItem);
+	virtual BOOL IsExpand(TreeCtrlItem *pItem);
+	virtual void Expand(TreeCtrlItem *pItem, BOOL fExpand);
+	virtual TreeCtrlItem *GetParent(TreeCtrlItem *pItem);
+	virtual TreeCtrlItem *GetNextSibling(TreeCtrlItem *pItem);
+	virtual TreeCtrlItem *GetFirstChild(TreeCtrlItem *pItem);
+	virtual TreeCtrlItem *GetCurSelItem() { return m_pSelect; }
+	virtual void DeleteAllItems();
+	virtual INT_PTR GetItemData(TreeCtrlItem *pItem);
+	virtual BOOL SetItemData(TreeCtrlItem *pItem, INT_PTR pData);
+	virtual BOOL IsAutoShowTooltip(){return m_fAutoShowToolTip;}
+	virtual void SetAutoShowTooltip(BOOL fAutoShowTooltip);
+	virtual TreeCtrlItem * HitTest(LPPOINT lppt);
 	
 
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duTreeCtrl"); }	
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duTreeCtrl"); }	
 	
 public:
 	duTreeCtrl();

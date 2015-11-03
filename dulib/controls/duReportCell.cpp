@@ -8,7 +8,6 @@
 //  History:    Mar-08-2011   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duReportCell.h"
 #include "duReportView.h"
 

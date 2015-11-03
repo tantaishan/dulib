@@ -21,27 +21,27 @@
 class duTreeListItem : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
-	virtual void WINAPI OnMouseLDown(POINT pt);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
+	virtual void OnMouseLDown(POINT pt);
 	
-	virtual int WINAPI GetLevel();
-	virtual void WINAPI SetLevel(int nLevel);
+	virtual int GetLevel();
+	virtual void SetLevel(int nLevel);
 	
-	virtual BOOL WINAPI IsExpand();
-	virtual void WINAPI SetExpand(BOOL fExpand);
+	virtual BOOL IsExpand();
+	virtual void SetExpand(BOOL fExpand);
 	
-	virtual BOOL WINAPI IsCheckBoxShow();
-	virtual void WINAPI ShowCheckBox(BOOL fShow);
+	virtual BOOL IsCheckBoxShow();
+	virtual void ShowCheckBox(BOOL fShow);
 
-	virtual UINT WINAPI GetCheckBoxState() { return m_uCheckBoxState; }
-	virtual void WINAPI SetCheckBoxState(UINT uState) { m_uCheckBoxState = uState; }
+	virtual UINT GetCheckBoxState() { return m_uCheckBoxState; }
+	virtual void SetCheckBoxState(UINT uState) { m_uCheckBoxState = uState; }
 	
-	virtual TreeListItem *WINAPI GetTreeListItem() { return m_pTreeListItem; }
-	virtual void WINAPI SetTreeListItem(TreeListItem *pTreeListItem) { m_pTreeListItem = pTreeListItem; }
+	virtual TreeListItem *GetTreeListItem() { return m_pTreeListItem; }
+	virtual void SetTreeListItem(TreeListItem *pTreeListItem) { m_pTreeListItem = pTreeListItem; }
 	
-	virtual void WINAPI Adjust();
+	virtual void Adjust();
 	
 public:
 	duTreeListItem();

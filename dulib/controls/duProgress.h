@@ -19,33 +19,33 @@
 class duProgress : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
 
-	virtual int WINAPI GetPos() { return (int)m_flPos; }
-	virtual void WINAPI SetPos(int nPos) { m_flPos = (float)nPos; }
+	virtual int GetPos() { return (int)m_flPos; }
+	virtual void SetPos(int nPos) { m_flPos = (float)nPos; }
 	
-	virtual int WINAPI GetLeftBorder() { return m_nLeftBorder; }
-	virtual void WINAPI SetLeftBorder(int nLeftBorder) { m_nLeftBorder = nLeftBorder; }
+	virtual int GetLeftBorder() { return m_nLeftBorder; }
+	virtual void SetLeftBorder(int nLeftBorder) { m_nLeftBorder = nLeftBorder; }
 
-	virtual int WINAPI GetRightBorder() { return m_nRightBorder; }
-	virtual void WINAPI SetRightBorder(int nRightBorder) { m_nRightBorder = nRightBorder; }
+	virtual int GetRightBorder() { return m_nRightBorder; }
+	virtual void SetRightBorder(int nRightBorder) { m_nRightBorder = nRightBorder; }
 
-	virtual int WINAPI GetTopBorder() { return m_nTopBorder; }
-	virtual void WINAPI SetTopBorder(int nTopBorder) { m_nTopBorder = nTopBorder; }
+	virtual int GetTopBorder() { return m_nTopBorder; }
+	virtual void SetTopBorder(int nTopBorder) { m_nTopBorder = nTopBorder; }
 
-	virtual int WINAPI GetBottomBorder() { return m_nBottomBorder; }
-	virtual void WINAPI SetBottomBorder(int nBottomBorder) { m_nBottomBorder = nBottomBorder; }
+	virtual int GetBottomBorder() { return m_nBottomBorder; }
+	virtual void SetBottomBorder(int nBottomBorder) { m_nBottomBorder = nBottomBorder; }
 
-	virtual LPCTSTR WINAPI GetProgressStyle() { return m_szProgressStyle; }
-	virtual void WINAPI SetProgressStyle(LPCTSTR lpszStyle);
+	virtual LPCTSTR GetProgressStyle() { return m_szProgressStyle; }
+	virtual void SetProgressStyle(LPCTSTR lpszStyle);
 
-	virtual float WINAPI GetPosfloat() { return m_flPos; }
-	virtual void WINAPI SetPosfloat(float nPos) { m_flPos = nPos; }
+	virtual float GetPosfloat() { return m_flPos; }
+	virtual void SetPosfloat(float nPos) { m_flPos = nPos; }
 
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duProgress"); }	
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duProgress"); }	
 
 public:
 	duProgress();

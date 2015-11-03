@@ -8,7 +8,6 @@
 //  History:    Nov-10-2009   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duListCtrl.h"
 #include "duDrawHelper.h"
 #include "duCtrlManager.h"
@@ -34,7 +33,7 @@ duListCtrl::~duListCtrl()
 	Plugin_UnHookWindowMessage(this);
 }
 
-void WINAPI duListCtrl::RegisterControlProperty()
+void duListCtrl::RegisterControlProperty()
 {
 	//
 	RegisterProperty(_T("headerctrl"), DU_PROPERTY_STRING, m_szHeaderCtrl);
@@ -42,19 +41,19 @@ void WINAPI duListCtrl::RegisterControlProperty()
 	duScrollView::RegisterControlProperty();
 }
 
-void WINAPI duListCtrl::OnCreate()
+void duListCtrl::OnCreate()
 {
 	duScrollView::OnCreate();
 
 	Plugin_HookWindowMessage(this);
 }
 
-void WINAPI duListCtrl::DrawObject(HDC hDC)
+void duListCtrl::DrawObject(HDC hDC)
 {
 	
 }
 
-void WINAPI duListCtrl::GetViewSize(LPSIZE lpSize)
+void duListCtrl::GetViewSize(LPSIZE lpSize)
 {
 	lpSize->cx = 0;
 	duHeaderCtrl *pHeaderCtrl = (duHeaderCtrl *)GetPluginByName(m_szHeaderCtrl);
@@ -64,7 +63,7 @@ void WINAPI duListCtrl::GetViewSize(LPSIZE lpSize)
 	lpSize->cy = m_nViewCy;
 }
 
-LRESULT WINAPI duListCtrl::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT duListCtrl::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	if (!Plugin_IsVisible(this))
 	{
@@ -309,7 +308,7 @@ LRESULT WINAPI duListCtrl::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM
 	return 0;
 }
 
-void WINAPI duListCtrl::Resize(LPRECT lpRect/*=NULL*/)
+void duListCtrl::Resize(LPRECT lpRect/*=NULL*/)
 {
 	duScrollView::Resize(NULL);
 	
@@ -317,7 +316,7 @@ void WINAPI duListCtrl::Resize(LPRECT lpRect/*=NULL*/)
 		VertScroll(0);
 }
 
-void WINAPI duListCtrl::OnVScroll(ScrollBarAction sbAction, int nPos)
+void duListCtrl::OnVScroll(ScrollBarAction sbAction, int nPos)
 {
 	switch (sbAction)
 	{
@@ -349,7 +348,7 @@ void WINAPI duListCtrl::OnVScroll(ScrollBarAction sbAction, int nPos)
 	}
 }
 
-void WINAPI duListCtrl::OnHScroll(ScrollBarAction sbAction, int nPos)
+void duListCtrl::OnHScroll(ScrollBarAction sbAction, int nPos)
 {
 	switch (sbAction)
 	{
@@ -381,7 +380,7 @@ void WINAPI duListCtrl::OnHScroll(ScrollBarAction sbAction, int nPos)
 	}
 }
 
-void WINAPI duListCtrl::HorzScroll(int nPos)
+void duListCtrl::HorzScroll(int nPos)
 {
 	int i;
 	int nLineCount = m_vtLines.size();
@@ -411,7 +410,7 @@ void WINAPI duListCtrl::HorzScroll(int nPos)
 	Resize(NULL);
 }
 
-void WINAPI duListCtrl::VertScroll(int nPos)
+void duListCtrl::VertScroll(int nPos)
 {
 	int nLineCount = m_vtLines.size();
 	if (nLineCount <= 0)
@@ -495,7 +494,7 @@ void WINAPI duListCtrl::VertScroll(int nPos)
 	AdjustVisibleLine(-nFirstLineOffset);
 }
 
-duPlugin *WINAPI duListCtrl::InsertLine(int nIndex, LPCTSTR lpszTemplate)
+duPlugin *duListCtrl::InsertLine(int nIndex, LPCTSTR lpszTemplate)
 {
 	int nLineCount = m_vtLines.size();
 	if (nIndex == -1)
@@ -591,7 +590,7 @@ void duListCtrl::AdjustVisibleLine(int nTop)
 	}
 }
 
-void WINAPI duListCtrl::AdjustColumn()
+void duListCtrl::AdjustColumn()
 {
 	duHeaderCtrl *pHeaderCtrl = (duHeaderCtrl *)GetPluginByName(m_szHeaderCtrl);
 	if (pHeaderCtrl == NULL)
@@ -640,7 +639,7 @@ void WINAPI duListCtrl::AdjustColumn()
 	VertScroll(0);
 }
 
-void WINAPI duListCtrl::AdjustColumnWidth(int nCol, int nWidth)
+void duListCtrl::AdjustColumnWidth(int nCol, int nWidth)
 {
 	duHeaderCtrl *pHeaderCtrl = (duHeaderCtrl *)GetPluginByName(m_szHeaderCtrl);
 	if (pHeaderCtrl == NULL)
@@ -678,7 +677,7 @@ void WINAPI duListCtrl::AdjustColumnWidth(int nCol, int nWidth)
 	Plugin_Redraw(this, TRUE);
 }
 
-duPlugin *WINAPI duListCtrl::GetLine(int nIndex)
+duPlugin *duListCtrl::GetLine(int nIndex)
 {
 	int nLineCount = GetLineCount();
 	if (nIndex < 0 || nIndex >= nLineCount)
@@ -687,17 +686,17 @@ duPlugin *WINAPI duListCtrl::GetLine(int nIndex)
 	return m_vtLines[nIndex];
 }
 
-int WINAPI duListCtrl::GetLineCount()
+int duListCtrl::GetLineCount()
 {
 	return (int)m_vtLines.size();
 }
 
-int WINAPI duListCtrl::GetTotalHeight()
+int duListCtrl::GetTotalHeight()
 {
 	return m_nViewCy;
 }
 
-duPlugin *WINAPI duListCtrl::GetFirstVisibleLine()
+duPlugin *duListCtrl::GetFirstVisibleLine()
 {
 	int nLineCount = GetLineCount();
 	if (m_nFirstLine < 0 || m_nFirstLine >= nLineCount)
@@ -706,7 +705,7 @@ duPlugin *WINAPI duListCtrl::GetFirstVisibleLine()
 	return m_vtLines[m_nFirstLine];
 }
 
-BOOL WINAPI duListCtrl::MoveLine(int nIndex, int nNewIndex)
+BOOL duListCtrl::MoveLine(int nIndex, int nNewIndex)
 {
 	int nLineCount = GetLineCount();
 	if (nIndex < 0 || nIndex >= nLineCount)
@@ -725,7 +724,19 @@ BOOL WINAPI duListCtrl::MoveLine(int nIndex, int nNewIndex)
 	return TRUE;
 }
 
-BOOL WINAPI duListCtrl::DeleteLine(int nIndex, BOOL fAdjust)
+BOOL duListCtrl::DeleteLine(duPlugin* pItem, BOOL fAjust)
+{
+	for (unsigned int i = 0; i < m_vtLines.size(); i++)
+	{
+		if (m_vtLines[i] == pItem)
+		{
+			return DeleteLine(i, fAjust);
+		}
+	}
+	return FALSE;
+}
+
+BOOL duListCtrl::DeleteLine(int nIndex, BOOL fAdjust)
 {
 	int nLineCount = GetLineCount();
 	if (nIndex < 0 || nIndex >= nLineCount)
@@ -759,7 +770,26 @@ BOOL WINAPI duListCtrl::DeleteLine(int nIndex, BOOL fAdjust)
 	return TRUE;
 }
 
-void WINAPI duListCtrl::ResetLine()
+void duListCtrl::DeleteAll()
+{
+	for (unsigned int i = 0; i < m_vtLines.size(); i++)
+	{
+		duPlugin *pDelete = m_vtLines[i];
+		Plugin_Delete(pDelete);
+	}
+
+	m_vtLines.clear();
+
+	m_nCloneIndex = 0;
+	m_nHotLine = 0;
+	m_nFirstLine = 0;
+	m_nFLTotalHeight = 0;
+	m_nViewCy = 0;
+	m_pSel = NULL;
+	m_pHot = NULL;
+}
+
+void duListCtrl::ResetLine()
 {
 	m_nYOffset = 0;
 	m_nFirstLine = 0;
@@ -875,12 +905,12 @@ int duListCtrl::GetLinePluginIndex(duPlugin *pPlugin)
 	return -1;
 }
 
-int WINAPI duListCtrl::GetSel()
+int duListCtrl::GetSel()
 {
 	return GetLinePluginIndex(m_pSel);
 }
 
-void WINAPI duListCtrl::SetSel(int nSel)
+void duListCtrl::SetSel(int nSel)
 {
 	int nLineCount = GetLineCount();
 	if (nSel < 0 || nSel >= nLineCount)
@@ -900,7 +930,7 @@ void WINAPI duListCtrl::SetSel(int nSel)
 		Plugin_Redraw(m_pSel, TRUE);
 }
 
-void WINAPI duListCtrl::SetHeaderCtrl(LPCTSTR lpszHeader)
+void duListCtrl::SetHeaderCtrl(LPCTSTR lpszHeader)
 {
 	if (lpszHeader)
 		_tcscpy(m_szHeaderCtrl, lpszHeader);

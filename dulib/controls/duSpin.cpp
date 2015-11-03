@@ -8,7 +8,6 @@
 //  History:    Nov-17-2009   Steven Li  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duSpin.h"
 
 duSpin::duSpin() :
@@ -28,7 +27,7 @@ duSpin::~duSpin()
 {	
 }
 
-void WINAPI duSpin::RegisterControlProperty()
+void duSpin::RegisterControlProperty()
 {
 	duEdit::RegisterControlProperty();
 	
@@ -42,7 +41,7 @@ void WINAPI duSpin::RegisterControlProperty()
 	RegisterProperty(_T("downstyle"),   DU_PROPERTY_STYLEGROUP, m_szDownStyle);
 }
 
-void WINAPI duSpin::OnCreate()
+void duSpin::OnCreate()
 {
 	m_fNumber = TRUE;
 
@@ -53,7 +52,7 @@ void WINAPI duSpin::OnCreate()
 	duEdit::OnCreate();
 }
 
-void WINAPI duSpin::DrawObject(HDC hDC)
+void duSpin::DrawObject(HDC hDC)
 {
 	duRect rcEdit;
 	rcEdit.SetRectEmpty();
@@ -115,7 +114,7 @@ void WINAPI duSpin::DrawObject(HDC hDC)
 	::DeleteObject(hRgnClip);
 }
 
-void WINAPI duSpin::OnMouseLDown(POINT pt)
+void duSpin::OnMouseLDown(POINT pt)
 {
 	duPoint ptSpin(pt);
 	
@@ -150,7 +149,7 @@ void WINAPI duSpin::OnMouseLDown(POINT pt)
 	}
 }
 
-void WINAPI duSpin::OnMouseLUp(POINT pt)
+void duSpin::OnMouseLUp(POINT pt)
 {	
 	duRect rcSpin;
 	Plugin_GetRect(this, &rcSpin);
@@ -185,7 +184,7 @@ void WINAPI duSpin::OnMouseLUp(POINT pt)
 	duEdit::OnMouseLUp(pt);
 }
 
-void WINAPI duSpin::OnMouseDbClick(POINT pt)
+void duSpin::OnMouseDbClick(POINT pt)
 {
 	duPoint ptSpin(pt);
 	
@@ -197,7 +196,7 @@ void WINAPI duSpin::OnMouseDbClick(POINT pt)
 		duEdit::OnMouseLDown(pt);
 }
 
-void WINAPI duSpin::OnMouseLeave(POINT pt)
+void duSpin::OnMouseLeave(POINT pt)
 {
 	BOOL fRedraw = FALSE;
 	if (m_uUpState != DU_STATE_NORMAL)
@@ -216,12 +215,12 @@ void WINAPI duSpin::OnMouseLeave(POINT pt)
 		Plugin_Redraw(this, TRUE);
 }
 
-int WINAPI duSpin::GetValue()
+int duSpin::GetValue()
 {
 	return m_nVal;
 }
 
-void WINAPI duSpin::SetValue(int nVal)
+void duSpin::SetValue(int nVal)
 {
 	m_nVal = nVal;
 	TCHAR m_szValue[256];

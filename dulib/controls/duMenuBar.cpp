@@ -8,7 +8,6 @@
 //  History:    MAR-27-2010   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duMenuBar.h"
 
 duMenuBar::duMenuBar(void) :
@@ -30,18 +29,18 @@ duMenuBar::~duMenuBar(void)
 }
 
 //////////////////////////////////////////////////////////////////////////
-void WINAPI duMenuBar::RegisterControlProperty()
+void duMenuBar::RegisterControlProperty()
 {
 	RegisterProperty(_T("itemstyle"),    DU_PROPERTY_STYLEGROUP, m_szItemStyle);
 	RegisterProperty(_T("itemfixwidth"),  DU_PROPERTY_LONG, &m_nItemFixWidth);
 }
 
-void WINAPI duMenuBar::OnCreate()
+void duMenuBar::OnCreate()
 {
 	Plugin_HookWindowMessage(this);
 }
 
-LRESULT WINAPI duMenuBar::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT duMenuBar::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	if (uMsg == WM_ENTERIDLE)
 		OnEnterIdle((UINT)wParam, (HWND)lParam);
@@ -49,7 +48,7 @@ LRESULT WINAPI duMenuBar::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM 
 	return 0;
 }
 
-void WINAPI duMenuBar::DrawObject(HDC hDC)
+void duMenuBar::DrawObject(HDC hDC)
 {
 	duRect rectMenuBar;
 	Plugin_GetRect(this, &rectMenuBar);
@@ -83,7 +82,7 @@ void WINAPI duMenuBar::DrawObject(HDC hDC)
 	}
 }
 
-void WINAPI duMenuBar::OnMouseMove(POINT pt)
+void duMenuBar::OnMouseMove(POINT pt)
 {
 	POINT pointClient(pt);
 	duRect rectItem;
@@ -107,7 +106,7 @@ void WINAPI duMenuBar::OnMouseMove(POINT pt)
 	}
 }
 
-void WINAPI duMenuBar::OnMouseLeave(POINT pt)
+void duMenuBar::OnMouseLeave(POINT pt)
 {
 	if (m_pHotItem && !m_fMenuPopuped)
 	{
@@ -117,7 +116,7 @@ void WINAPI duMenuBar::OnMouseLeave(POINT pt)
 	}
 }
 
-void WINAPI duMenuBar::OnMouseLDown(POINT pt)
+void duMenuBar::OnMouseLDown(POINT pt)
 {
 	if (m_pHotItem == NULL)
 		return;
@@ -179,12 +178,12 @@ void duMenuBar::OnEnterIdle(UINT uWhy, HWND hWnd)
 	}
 }
 
-HMENU WINAPI duMenuBar::GetHMenu()
+HMENU duMenuBar::GetHMenu()
 {
 	return m_hMenu;
 }
 
-void  WINAPI duMenuBar::SetHMenu(HMENU hMenu)
+void  duMenuBar::SetHMenu(HMENU hMenu)
 {
 	if (m_hMenu)
 	{
@@ -196,7 +195,7 @@ void  WINAPI duMenuBar::SetHMenu(HMENU hMenu)
 	RefreshMenuBar();
 }
 
-void  WINAPI duMenuBar::RefreshMenuBar()
+void  duMenuBar::RefreshMenuBar()
 {
 	if (!::IsMenu(m_hMenu))
 		return;
@@ -301,12 +300,12 @@ duRect duMenuBar::GetItemRect(int iPosition)
 	return rectMenuItem;
 }
 
-LPCTSTR WINAPI duMenuBar::GetItemStyle()
+LPCTSTR duMenuBar::GetItemStyle()
 {
 	return m_szItemStyle;
 }
 
-void  WINAPI duMenuBar::SetItemStyle(LPCTSTR lpszItemStyle)
+void  duMenuBar::SetItemStyle(LPCTSTR lpszItemStyle)
 {
 	if (lpszItemStyle)
 		_tcsncpy(m_szItemStyle, lpszItemStyle, MAX_NAME);
@@ -314,12 +313,12 @@ void  WINAPI duMenuBar::SetItemStyle(LPCTSTR lpszItemStyle)
 		ZeroMemory(m_szItemStyle, MAX_NAME * sizeof(TCHAR));
 }
 
-int  WINAPI duMenuBar::GetItemFixWidth()
+int  duMenuBar::GetItemFixWidth()
 {
 	return m_nItemFixWidth;
 }
 
-void WINAPI duMenuBar::SetItemFixWidth(int nFixWidth)
+void duMenuBar::SetItemFixWidth(int nFixWidth)
 {
 	m_nItemFixWidth = nFixWidth;
 }

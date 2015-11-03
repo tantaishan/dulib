@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -67,7 +67,6 @@
     <ClCompile Include="duImage.cpp" />
     <ClCompile Include="dulib.cpp" />
     <ClCompile Include="duMessage.cpp" />
-    <ClCompile Include="duObject.cpp" />
     <ClCompile Include="duPlugin.cpp" />
     <ClCompile Include="duProperty.cpp" />
     <ClCompile Include="duRedrawLayer.cpp" />
@@ -75,20 +74,10 @@
     <ClCompile Include="duRgn.cpp" />
     <ClCompile Include="duStyle.cpp" />
     <ClCompile Include="duStyleGroup.cpp" />
-    <ClCompile Include="duTypeLib.cpp" />
     <ClCompile Include="duTypes.cpp" />
     <ClCompile Include="duUtility.cpp" />
     <ClCompile Include="duWindowManager.cpp" />
     <ClCompile Include="duZorderList.cpp" />
-    <ClCompile Include="InvokeVTable.c">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="ScriptObject.cpp" />
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="tinyXmlW\tinystr.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
@@ -154,7 +143,6 @@
     <ClInclude Include="controls\duTreeListItem.h" />
     <ClInclude Include="controls\duWindow.h" />
     <ClInclude Include="controls\duXmlStatic.h" />
-    <ClInclude Include="controls\Flash.h" />
     <ClInclude Include="controls\MenuPopup.h" />
     <ClInclude Include="duCtrlManager.h" />
     <ClInclude Include="duCursor.h" />
@@ -163,7 +151,6 @@
     <ClInclude Include="duImage.h" />
     <ClInclude Include="dulib.h" />
     <ClInclude Include="duMessage.h" />
-    <ClInclude Include="duObject.h" />
     <ClInclude Include="duPlugin.h" />
     <ClInclude Include="duProperty.h" />
     <ClInclude Include="duRedrawLayer.h" />
@@ -172,13 +159,10 @@
     <ClInclude Include="duRgn.h" />
     <ClInclude Include="duStyle.h" />
     <ClInclude Include="duStyleGroup.h" />
-    <ClInclude Include="duTypeLib.h" />
     <ClInclude Include="duTypes.h" />
     <ClInclude Include="duUtility.h" />
     <ClInclude Include="duWindowManager.h" />
     <ClInclude Include="duZorderList.h" />
-    <ClInclude Include="ScriptObject.h" />
-    <ClInclude Include="stdafx.h" />
     <ClInclude Include="tinyXmlW\tinystr.h" />
     <ClInclude Include="tinyXmlW\tinyxml.h" />
     <ClInclude Include="unzip.h" />
@@ -192,13 +176,15 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120_xp</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>Static</UseOfMfc>
+    <UseOfMfc>false</UseOfMfc>
+    <PlatformToolset>v120_xp</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -224,7 +210,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)controls;$(ProjectDir)</AdditionalIncludeDirectories>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -241,7 +227,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)controls;$(ProjectDir)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>

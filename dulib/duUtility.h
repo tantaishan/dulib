@@ -118,7 +118,7 @@ void MakeRect(int left, int top, int right, int bottom, int width, int height, R
 void MakeRectExt(int left, int top, int right, int bottom, int horzanchor, int vertanchor, int width, int height, RECT *lpInRect, RECT *lpOutRect);
 
 // 初始化32位图片结构
-BOOL WINAPI InitBitmapInfo(BITMAPINFO *lpBitmapInfo, int nWidth, int nHeight);
+BOOL InitBitmapInfo(BITMAPINFO *lpBitmapInfo, int nWidth, int nHeight);
 
 // XML读写
 dustring ReadXmlAttributeText(TiXmlElement *pEle, LPCTSTR keyName);
@@ -148,12 +148,12 @@ void GrayDrawByStyle(void *pStyleGroup, HDC hDC, RECT *dcRect, BYTE *pBits, RECT
 // 是否为选中状态
 BOOL IsStateChecked(int uState);
 
-duCtrlManager *WINAPI GetCtrlManager(HWND hWnd);
+duCtrlManager *GetCtrlManager(HWND hWnd);
 
-duResManager *WINAPI GetResManager(HWND hWnd);
+duResManager *GetResManager(HWND hWnd);
 
-UINT WINAPI GetUniTimer();
+UINT GetUniTimer();
 
-int WINAPI DrawText32Bpp(HDC hDC, duFont *font, COLORREF clrText, LPCTSTR lpString, int nCount, LPRECT lpRect, UINT uFormat, int nAlpha);
+int DrawText32Bpp(HDC hDC, duFont *font, COLORREF clrText, LPCTSTR lpString, int nCount, LPRECT lpRect, UINT uFormat, int nAlpha);
 
-void WINAPI DrawTextPlus(HDC hDC, HBITMAP hCurBitmap, COLORREF clrText, HFONT hFont, LPCTSTR lpString, int nCount, BOOL fSingleLine,UINT uFormat);
+void DrawTextPlus(HDC hDC, HBITMAP hCurBitmap, COLORREF clrText, HFONT hFont, LPCTSTR lpString, int nCount, BOOL fSingleLine,UINT uFormat);

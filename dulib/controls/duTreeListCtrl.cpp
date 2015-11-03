@@ -8,7 +8,6 @@
 //  History:    Nov-10-2009   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duTreeListCtrl.h"
 #include "duButton.h"
 #include "duTreeListItem.h"
@@ -24,14 +23,14 @@ duTreeListCtrl::~duTreeListCtrl()
 	
 }
 
-void WINAPI duTreeListCtrl::RegisterControlProperty()
+void duTreeListCtrl::RegisterControlProperty()
 {
 	duListCtrl::RegisterControlProperty();
 	
 
 }
 
-void WINAPI duTreeListCtrl::OnCreate()
+void duTreeListCtrl::OnCreate()
 {
 	duListCtrl::OnCreate();
 	
@@ -43,12 +42,12 @@ void WINAPI duTreeListCtrl::OnCreate()
 	m_RootItem.pFirstChild = NULL;
 }
 
-void WINAPI duTreeListCtrl::DrawObject(HDC hDC)
+void duTreeListCtrl::DrawObject(HDC hDC)
 {
 	
 }
 
-TreeListItem *WINAPI duTreeListCtrl::InsertTreeItem(TreeListItem *pParent, TreeListItem *pInsertAfter, LPCTSTR lpszTemplate)
+TreeListItem *duTreeListCtrl::InsertTreeItem(TreeListItem *pParent, TreeListItem *pInsertAfter, LPCTSTR lpszTemplate)
 {
 	if (lpszTemplate == NULL)
 		return NULL;
@@ -120,7 +119,7 @@ TreeListItem *WINAPI duTreeListCtrl::InsertTreeItem(TreeListItem *pParent, TreeL
 	return pNewItem;
 }
 
-TreeListItem *WINAPI duTreeListCtrl::GetNextItem(TreeListItem *pItem)
+TreeListItem *duTreeListCtrl::GetNextItem(TreeListItem *pItem)
 {
 	if (pItem->pFirstChild)
 		return pItem->pFirstChild;
@@ -136,7 +135,7 @@ checkNext:
 	return NULL;
 }
 
-TreeListItem *WINAPI duTreeListCtrl::GetNextVisibleItem(TreeListItem *pItem)
+TreeListItem *duTreeListCtrl::GetNextVisibleItem(TreeListItem *pItem)
 {
 	if (pItem->pFirstChild && pItem->fExpand)
 		return pItem->pFirstChild;
@@ -152,7 +151,7 @@ checkNext:
 	return NULL;
 }
 
-int WINAPI duTreeListCtrl::GetTreeItemIndex(TreeListItem *pItem)
+int duTreeListCtrl::GetTreeItemIndex(TreeListItem *pItem)
 {
 	int nIndex = 0;
 	TreeListItem *pNext = GetNextVisibleItem(&m_RootItem);
@@ -169,7 +168,7 @@ int WINAPI duTreeListCtrl::GetTreeItemIndex(TreeListItem *pItem)
 	return -1;
 }
 
-void WINAPI duTreeListCtrl::ExpandItem(TreeListItem *pItem, BOOL fExpand)
+void duTreeListCtrl::ExpandItem(TreeListItem *pItem, BOOL fExpand)
 {
 	if (pItem == NULL || pItem == &m_RootItem)
 		return;
@@ -268,7 +267,7 @@ int duTreeListCtrl::GetInsertItem(TreeListItem *pItem, vector<duPlugin *> &vtIns
 	return nIndex;
 }
 
-void WINAPI duTreeListCtrl::OnItemCheckBoxClick(TreeListItem *pItem, BOOL fChecked, BOOL fRedraw)
+void duTreeListCtrl::OnItemCheckBoxClick(TreeListItem *pItem, BOOL fChecked, BOOL fRedraw)
 {
 	if (pItem == NULL || pItem == &m_RootItem)
 		return;
@@ -435,7 +434,7 @@ BOOL duTreeListCtrl::IsTreeListItemChecked(TreeListItem *pItem)
 	return FALSE;
 }
 
-BOOL WINAPI duTreeListCtrl::DeleteItem(TreeListItem *pItem)
+BOOL duTreeListCtrl::DeleteItem(TreeListItem *pItem)
 {
 	if (pItem == TCVIL_ROOT || pItem == NULL)
 		pItem = &m_RootItem;
@@ -498,7 +497,7 @@ BOOL duTreeListCtrl::DeleteItemT(TreeListItem *pItem)
 	return TRUE;
 }
 
-TreeListItem *WINAPI duTreeListCtrl::GetSelTreeItem()
+TreeListItem *duTreeListCtrl::GetSelTreeItem()
 {
 	if (m_pSel == NULL)
 		return NULL;
@@ -515,7 +514,7 @@ TreeListItem *WINAPI duTreeListCtrl::GetSelTreeItem()
 	return NULL;
 }
 
-BOOL WINAPI duTreeListCtrl::SetSelTreeItem(TreeListItem *pItem)
+BOOL duTreeListCtrl::SetSelTreeItem(TreeListItem *pItem)
 {
 	if (pItem == &m_RootItem)
 		return FALSE;
@@ -547,7 +546,7 @@ BOOL WINAPI duTreeListCtrl::SetSelTreeItem(TreeListItem *pItem)
 	return TRUE;
 }
 
-duPlugin *WINAPI duTreeListCtrl::GetTreeItemLine(TreeListItem *pItem)
+duPlugin *duTreeListCtrl::GetTreeItemLine(TreeListItem *pItem)
 {
 	if (pItem)
 		return pItem->pPlugin;
@@ -555,7 +554,7 @@ duPlugin *WINAPI duTreeListCtrl::GetTreeItemLine(TreeListItem *pItem)
 	return NULL;
 }
 
-BOOL WINAPI duTreeListCtrl::IsTreeItemExpand(TreeListItem *pItem)
+BOOL duTreeListCtrl::IsTreeItemExpand(TreeListItem *pItem)
 {
 	if (pItem)
 		return pItem->fExpand;
@@ -563,7 +562,7 @@ BOOL WINAPI duTreeListCtrl::IsTreeItemExpand(TreeListItem *pItem)
 	return FALSE;
 }
 
-TreeListItem *WINAPI duTreeListCtrl::GetTreeItemParent(TreeListItem *pItem)
+TreeListItem *duTreeListCtrl::GetTreeItemParent(TreeListItem *pItem)
 {
 	if (pItem)
 		return pItem->pParent;
@@ -571,14 +570,14 @@ TreeListItem *WINAPI duTreeListCtrl::GetTreeItemParent(TreeListItem *pItem)
 	return NULL;
 }
 
-TreeListItem *WINAPI duTreeListCtrl::GetTreeItemNextSibling(TreeListItem *pItem)
+TreeListItem *duTreeListCtrl::GetTreeItemNextSibling(TreeListItem *pItem)
 {
 	if (pItem)
 		return pItem->pNextSibling;
 	return NULL;
 }
 
-TreeListItem *WINAPI duTreeListCtrl::GetTreeItemFirstChild(TreeListItem *pItem)
+TreeListItem *duTreeListCtrl::GetTreeItemFirstChild(TreeListItem *pItem)
 {
 	if (pItem)
 		return pItem->pFirstChild;

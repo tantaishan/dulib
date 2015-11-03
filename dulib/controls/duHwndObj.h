@@ -19,23 +19,25 @@
 class duHwndObj : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty() {}
-	virtual void WINAPI OnCreate() {}
-	virtual void WINAPI DrawObject(HDC hDC);
-	virtual void WINAPI Resize(LPRECT lpRect);
+	virtual void RegisterControlProperty() {}
+	virtual void OnCreate() {}
+	virtual void DrawObject(HDC hDC);
+	virtual void Resize(LPRECT lpRect);
 	
-	virtual BOOL WINAPI IsDisable();
-	virtual void WINAPI SetDisable(BOOL fDisable);
+	virtual void SetVisible(BOOL fVisible);
+
+	virtual BOOL IsDisable();
+	virtual void SetDisable(BOOL fDisable);
 	
-	virtual BOOL WINAPI IsFocus();
-	virtual void WINAPI SetFocus(BOOL fFocus);
+	virtual BOOL IsFocus();
+	virtual void SetFocus(BOOL fFocus);
 	
-	virtual BOOL WINAPI Attach(HWND hWnd);
-	virtual HWND WINAPI GetAttach();
-	virtual HWND WINAPI Detach();
+	virtual BOOL Attach(HWND hWnd);
+	virtual HWND GetAttach();
+	virtual HWND Detach();
 	
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duHwndObj"); }	
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duHwndObj"); }	
 
 public:
 	duHwndObj();

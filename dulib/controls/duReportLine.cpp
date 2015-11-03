@@ -8,7 +8,6 @@
 //  History:    Mar-08-2011   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duReportLine.h"
 #include "duReportView.h"
 
@@ -26,7 +25,7 @@ duReportLine::~duReportLine()
 
 }
 
-void WINAPI duReportLine::DrawLine(HDC hDC, LPRECT lprcLine, int nLine)
+void duReportLine::DrawLine(HDC hDC, LPRECT lprcLine, int nLine)
 {
 	duStyleGroup *pStyleGroup = (duStyleGroup *)m_pReportView->GetResObj(m_szStyle, DU_RES_STYLEGROUP);
 	if (pStyleGroup)

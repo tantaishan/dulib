@@ -20,21 +20,21 @@
 class duGifCtrl : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
-	virtual void WINAPI OnTimer(UINT nEventId);
-	virtual void WINAPI OnMouseLDown(POINT pt);
-	virtual void WINAPI OnMouseLUp(POINT pt);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
+	virtual void OnTimer(UINT nEventId);
+	virtual void OnMouseLDown(POINT pt);
+	virtual void OnMouseLUp(POINT pt);
 	
-	virtual void WINAPI Play();
-	virtual void WINAPI StopPlay();
+	virtual void Play();
+	virtual void StopPlay();
 	
-	virtual LPCTSTR WINAPI GetGif();
-	virtual void WINAPI SetGif(LPCTSTR lpszName);
+	virtual LPCTSTR GetGif();
+	virtual void SetGif(LPCTSTR lpszName);
 	
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duGifCtrl"); }	
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duGifCtrl"); }	
 	
 public:
 	duGifCtrl();

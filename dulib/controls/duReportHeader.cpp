@@ -8,7 +8,6 @@
 //  History:    Mar-08-2011   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duReportHeader.h"
 #include "duReportView.h"
 
@@ -55,7 +54,7 @@ ReportHeaderItem *duReportHeader::GetItem(int nIndex)
 	return m_vtHeaderItem[nIndex];
 }
 
-void WINAPI duReportHeader::DrawHeader(HDC hDC)
+void duReportHeader::DrawHeader(HDC hDC)
 {
 	duStyleGroup *pStyleGroup = (duStyleGroup *)m_pReportView->GetResObj(m_szItemStyle, DU_RES_STYLEGROUP);
 	if (pStyleGroup == NULL)
@@ -88,12 +87,12 @@ void WINAPI duReportHeader::DrawHeader(HDC hDC)
 	}
 }
 
-int WINAPI duReportHeader::GetItemCount()
+int duReportHeader::GetItemCount()
 {
 	return (int)m_vtHeaderItem.size();
 }
 
-int WINAPI duReportHeader::GetTotalWidth()
+int duReportHeader::GetTotalWidth()
 {
 	duRect rcClient = m_pReportView->_GetClientRect();
 	
@@ -113,7 +112,7 @@ int WINAPI duReportHeader::GetTotalWidth()
 	return nTotalWidth;
 }
 
-void WINAPI duReportHeader::OnMouseLDown(POINT pt)
+void duReportHeader::OnMouseLDown(POINT pt)
 {
 	if (m_nHotBorder != -1 && !m_fFixed)
 	{
@@ -128,7 +127,7 @@ void WINAPI duReportHeader::OnMouseLDown(POINT pt)
 	}
 }
 
-void WINAPI duReportHeader::OnMouseLUp(POINT pt)
+void duReportHeader::OnMouseLUp(POINT pt)
 {
 	if (m_fTracking)
 	{
@@ -139,19 +138,19 @@ void WINAPI duReportHeader::OnMouseLUp(POINT pt)
 	}
 }
 
-void WINAPI duReportHeader::OnMouseRDown(POINT pt)
+void duReportHeader::OnMouseRDown(POINT pt)
 {
 }
 
-void WINAPI duReportHeader::OnMouseRUp(POINT pt)
+void duReportHeader::OnMouseRUp(POINT pt)
 {
 }
 
-void WINAPI duReportHeader::OnMouseHover(POINT pt)
+void duReportHeader::OnMouseHover(POINT pt)
 {
 }
 
-void WINAPI duReportHeader::OnMouseMove(POINT pt)
+void duReportHeader::OnMouseMove(POINT pt)
 {
 	if (m_fTracking)
 	{
@@ -224,11 +223,11 @@ void WINAPI duReportHeader::OnMouseMove(POINT pt)
 	m_nHotBorder = -1;
 }
 
-void WINAPI duReportHeader::OnMouseDbClick(POINT pt)
+void duReportHeader::OnMouseDbClick(POINT pt)
 {
 }
 
-void WINAPI duReportHeader::OnMouseLeave()
+void duReportHeader::OnMouseLeave()
 {
 	if (m_fTracking)
 		return;
@@ -245,7 +244,7 @@ void WINAPI duReportHeader::OnMouseLeave()
 	}
 }
 
-BOOL WINAPI duReportHeader::OnSetCursor(POINT pt)
+BOOL duReportHeader::OnSetCursor(POINT pt)
 {
 	duRect rcHeader;
 	m_pReportView->GetHeaderRect(&rcHeader);
@@ -275,7 +274,7 @@ BOOL WINAPI duReportHeader::OnSetCursor(POINT pt)
 	return FALSE;
 }
 
-BOOL WINAPI duReportHeader::InsertItem(int nCol, int nWidth, LPCTSTR lpszText)
+BOOL duReportHeader::InsertItem(int nCol, int nWidth, LPCTSTR lpszText)
 {
 	int nItemCount = GetItemCount();
 	if (nCol == -1)
@@ -304,7 +303,7 @@ BOOL WINAPI duReportHeader::InsertItem(int nCol, int nWidth, LPCTSTR lpszText)
 	return nCol;
 }
 
-int WINAPI duReportHeader::GetColumnWidth(int nCol)
+int duReportHeader::GetColumnWidth(int nCol)
 {
 	ReportHeaderItem *pItem = GetItem(nCol);
 	if (pItem == NULL)
@@ -313,7 +312,7 @@ int WINAPI duReportHeader::GetColumnWidth(int nCol)
 	return pItem->nWidth;
 }
 
-BOOL WINAPI duReportHeader::DeleteColumn(int nCol)
+BOOL duReportHeader::DeleteColumn(int nCol)
 {
 	int nItemCount = GetItemCount();
 	if (nCol < 0 || nCol >= nItemCount)

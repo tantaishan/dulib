@@ -8,7 +8,6 @@
 //  History:    Nov-10-95   DavePl  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duCursor.h"
 #include "duWindowManager.h"
 
@@ -23,7 +22,7 @@ duCursor::~duCursor()
 	Destroy();
 }
 
-BOOL WINAPI duCursor::OnCreate(TiXmlElement *pElement)
+BOOL duCursor::OnCreate(TiXmlElement *pElement)
 {
 	if (pElement == NULL)
 		return FALSE;
@@ -47,7 +46,7 @@ BOOL WINAPI duCursor::OnCreate(TiXmlElement *pElement)
 	return duResBase::OnCreate(pElement);
 }
 
-void WINAPI duCursor::SetValue(LPCTSTR lpszCursor)
+void duCursor::SetValue(LPCTSTR lpszCursor)
 {
 	if (lpszCursor)
 		_tcsncpy(m_strCursor, lpszCursor, MAX_NAME);
@@ -55,13 +54,13 @@ void WINAPI duCursor::SetValue(LPCTSTR lpszCursor)
 		ZeroMemory(m_strCursor, MAX_NAME * sizeof(TCHAR));
 }
 
-void WINAPI duCursor::SetHCursor(HCURSOR hCursor)
+void duCursor::SetHCursor(HCURSOR hCursor)
 {
 	Destroy();
 	m_hCursor = hCursor;
 }
 
-HCURSOR WINAPI duCursor::LoadFromFile(LPCTSTR lpszFile)
+HCURSOR duCursor::LoadFromFile(LPCTSTR lpszFile)
 {
 	if (lpszFile == NULL)
 		return NULL;
@@ -74,7 +73,7 @@ HCURSOR WINAPI duCursor::LoadFromFile(LPCTSTR lpszFile)
 	return m_hCursor;
 }
 
-HCURSOR WINAPI duCursor::LoadFromMemory(PBYTE pData, int nSize)
+HCURSOR duCursor::LoadFromMemory(PBYTE pData, int nSize)
 {
 	if (pData == NULL || nSize <= 0)
 		return FALSE;

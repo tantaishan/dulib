@@ -27,50 +27,50 @@
 class duLayout : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
-	virtual void WINAPI Resize(LPRECT lpRect);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
+	virtual void Resize(LPRECT lpRect);
 	
-	virtual void WINAPI OnChildShow(duPlugin *pChild, BOOL fVisible);
-	virtual void WINAPI OnChildResize(duPlugin *pChild);
-	virtual LRESULT WINAPI OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	virtual void OnChildShow(duPlugin *pChild, BOOL fVisible);
+	virtual void OnChildResize(duPlugin *pChild);
+	virtual LRESULT OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-	virtual int WINAPI GetLayoutType() { return m_nLayoutType; }
-	virtual void WINAPI SetLayoutType(int nLayoutType) { m_nLayoutType = nLayoutType; }
+	virtual int GetLayoutType() { return m_nLayoutType; }
+	virtual void SetLayoutType(int nLayoutType) { m_nLayoutType = nLayoutType; }
 
-	virtual int WINAPI GetStartX() { return m_nStartX; }
-	virtual void WINAPI SetStartX(int nStartX) { m_nStartX = nStartX; }
+	virtual int GetStartX() { return m_nStartX; }
+	virtual void SetStartX(int nStartX) { m_nStartX = nStartX; }
 
-	virtual int WINAPI GetStartY() { return m_nStartY; }
-	virtual void WINAPI SetStartY(int nStartY) { m_nStartY = nStartY; }
+	virtual int GetStartY() { return m_nStartY; }
+	virtual void SetStartY(int nStartY) { m_nStartY = nStartY; }
 
-	virtual int WINAPI GetXSpace() { return m_nXSpace; }
-	virtual void WINAPI SetXSpace(int nXSpace) { m_nXSpace = nXSpace; }
+	virtual int GetXSpace() { return m_nXSpace; }
+	virtual void SetXSpace(int nXSpace) { m_nXSpace = nXSpace; }
 
-	virtual int  WINAPI GetYSpace() { return m_nYSpace; }
-	virtual void WINAPI SetYSpace(int nYSpace) { m_nYSpace = nYSpace; }
+	virtual int  GetYSpace() { return m_nYSpace; }
+	virtual void SetYSpace(int nYSpace) { m_nYSpace = nYSpace; }
 
-	virtual void WINAPI AdjustChilds();
+	virtual void AdjustChilds();
 
-	virtual BOOL WINAPI IsAlwaysHot() { return m_fAlwaysHot; }
-	virtual void WINAPI SetAlwaysHot(BOOL fAlwaysHot);
+	virtual BOOL IsAlwaysHot() { return m_fAlwaysHot; }
+	virtual void SetAlwaysHot(BOOL fAlwaysHot);
 
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duLayout"); }	
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duLayout"); }	
 
 public:
 	duLayout();
 	~duLayout();
 	
 public:
-	void WINAPI AdjustLeftRight();
-	void WINAPI AdjustRightLeft();
-	void WINAPI AdjustTopBottom();
-	void WINAPI AdjustBottomTop();
-	void WINAPI AdjustHorzBrimming();
-	void WINAPI AdjustVertBrimming();
-	void WINAPI AdjustGrid();
+	void AdjustLeftRight();
+	void AdjustRightLeft();
+	void AdjustTopBottom();
+	void AdjustBottomTop();
+	void AdjustHorzBrimming();
+	void AdjustVertBrimming();
+	void AdjustGrid();
 
 protected:
 	UINT m_nLayoutType;
@@ -81,6 +81,6 @@ protected:
 	BOOL m_fAlwaysHot;
 };
 
-duPlugin *WINAPI GetPreVisible(duPlugin *pPlugin);
-duPlugin *WINAPI GetNextVisible(duPlugin *pPlugin);
-int WINAPI GetVisibleChildCount(duPlugin *pPlugin);
+duPlugin *GetPreVisible(duPlugin *pPlugin);
+duPlugin *GetNextVisible(duPlugin *pPlugin);
+int GetVisibleChildCount(duPlugin *pPlugin);

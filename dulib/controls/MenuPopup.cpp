@@ -8,19 +8,18 @@
 //  History:    Nov-10-2009   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "MenuPopup.h"
 #include "duMenuItem.h"
 #include "duMenu.h"
 
-extern "C" duPlugin *WINAPI GetPluginByName(HWND hWnd, LPCTSTR lpszName);
-extern "C" BOOL WINAPI WindowManager_Attach(duWindowManager *pWinManager, HWND hWnd, LPCTSTR lpWindowName);
+extern "C" duPlugin *GetPluginByName(HWND hWnd, LPCTSTR lpszName);
+extern "C" BOOL WindowManager_Attach(duWindowManager *pWinManager, HWND hWnd, LPCTSTR lpWindowName);
 HWND g_hWndTopMenu = NULL;
 
 //
 // 注册菜单窗口类
 //
-ATOM WINAPI RegisterMenuClass()
+ATOM RegisterMenuClass()
 {
 	WNDCLASSEX wcex;
 
@@ -43,7 +42,7 @@ ATOM WINAPI RegisterMenuClass()
 //
 // 菜单窗口过程
 //
-LRESULT WINAPI Menu_WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT Menu_WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	DIRECTUIMENU *pMenuStruct = (DIRECTUIMENU *)GetWindowLong(hWnd, GWL_USERDATA);
 	if (pMenuStruct == NULL && uMsg == WM_NCCREATE)
@@ -98,7 +97,7 @@ LRESULT WINAPI Menu_WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 //
 // 判断窗口是否为菜单
 //
-BOOL WINAPI IsMenuWindow(HWND hWnd)
+BOOL IsMenuWindow(HWND hWnd)
 {
 	TCHAR szClassName[256];
 	ZeroMemory(szClassName, 256 * sizeof(TCHAR));
@@ -110,7 +109,7 @@ BOOL WINAPI IsMenuWindow(HWND hWnd)
 //
 // 获得最顶层菜单
 //
-duMenu *WINAPI GetRootMenu(HWND hWnd)
+duMenu *GetRootMenu(HWND hWnd)
 {
 	if (!IsMenuWindow(hWnd))
 		return NULL;
@@ -129,7 +128,7 @@ duMenu *WINAPI GetRootMenu(HWND hWnd)
 //
 // lpRect坐标转换为屏幕坐标
 //
-void WINAPI MenuClientToScreen(HWND hWnd, LPRECT lpRect)
+void MenuClientToScreen(HWND hWnd, LPRECT lpRect)
 {
 	LPPOINT lpPoint = (LPPOINT)lpRect;
 	ClientToScreen(hWnd, lpPoint);
@@ -140,7 +139,7 @@ void WINAPI MenuClientToScreen(HWND hWnd, LPRECT lpRect)
 //
 // 屏幕坐标点返回菜单对象
 //
-duMenu *WINAPI MenuFromPoint(duMenu *pMenu, POINT ptScreen)
+duMenu *MenuFromPoint(duMenu *pMenu, POINT ptScreen)
 {
 	if (pMenu == NULL)
 		return NULL;
@@ -161,7 +160,7 @@ duMenu *WINAPI MenuFromPoint(duMenu *pMenu, POINT ptScreen)
 	return NULL;
 }
 
-HWND WINAPI MenuWindowFromPoint(duMenu *pMenu, POINT ptScreen)
+HWND MenuWindowFromPoint(duMenu *pMenu, POINT ptScreen)
 {
 	if (pMenu == NULL)
 		return NULL;
@@ -184,7 +183,7 @@ HWND WINAPI MenuWindowFromPoint(duMenu *pMenu, POINT ptScreen)
 //
 // 销毁菜单及其子菜单
 //
-BOOL WINAPI MyDestroyMenu(duMenu *pMenu)
+BOOL MyDestroyMenu(duMenu *pMenu)
 {
 	if (pMenu == NULL)
 		return FALSE;
@@ -199,7 +198,7 @@ BOOL WINAPI MyDestroyMenu(duMenu *pMenu)
 //
 // 找到合适的菜单位置
 //
-void WINAPI FindMenuBestPos(int x, int y, int cx, int cy, LPRECT prcExclude, UINT wFlags, MONITORINFO *pMonitor, LPPOINT ppt)
+void FindMenuBestPos(int x, int y, int cx, int cy, LPRECT prcExclude, UINT wFlags, MONITORINFO *pMonitor, LPPOINT ppt)
 {
 	int iRect;
     int iT;
@@ -274,7 +273,7 @@ FindMenuBestPos_end:
 	ppt->y = y;
 }
 
-BOOL WINAPI TryRect(UINT wRect, int x, int y, int cx, int cy, LPRECT prcExclude, LPPOINT ppt, MONITORINFO *pMonitor)
+BOOL TryRect(UINT wRect, int x, int y, int cx, int cy, LPRECT prcExclude, LPPOINT ppt, MONITORINFO *pMonitor)
 {
     RECT rcTry;
 
@@ -316,7 +315,7 @@ BOOL WINAPI TryRect(UINT wRect, int x, int y, int cx, int cy, LPRECT prcExclude,
     return (!::IntersectRect(&rcTry, &rcTry, prcExclude));
 }
 
-BOOL WINAPI Plugin_TrackPopupMenuEx(int x, int y, UINT uFlags, DIRECTUIMENU *pMenuStruct, BOOL fTopMenu)
+BOOL Plugin_TrackPopupMenuEx(int x, int y, UINT uFlags, DIRECTUIMENU *pMenuStruct, BOOL fTopMenu)
 {
 	HINSTANCE hInstance;
 	HWND hWndMenu;
@@ -373,7 +372,7 @@ BOOL WINAPI Plugin_TrackPopupMenuEx(int x, int y, UINT uFlags, DIRECTUIMENU *pMe
 	return MenuTrackPopup(hWndMenu, GetActiveWindow());
 }
 
-extern "C" BOOL WINAPI Plugin_TrackPopupMenu(HWND hWndOwner, duWindowManager *pWinManager, LPCTSTR lpszWinName, LPCTSTR lpszMenuName, int x, int y, UINT uFlags)
+extern "C" BOOL Plugin_TrackPopupMenu(HWND hWndOwner, duWindowManager *pWinManager, LPCTSTR lpszWinName, LPCTSTR lpszMenuName, int x, int y, UINT uFlags)
 {
 	DIRECTUIMENU menuStruct;
 	
@@ -389,7 +388,7 @@ extern "C" BOOL WINAPI Plugin_TrackPopupMenu(HWND hWndOwner, duWindowManager *pW
 	return Plugin_TrackPopupMenuEx(x, y, uFlags, &menuStruct, TRUE);
 }
 
-extern "C" void WINAPI Plugin_EndMenu()
+extern "C" void Plugin_EndMenu()
 {
 	if (g_hWndTopMenu == NULL)
 		return;
@@ -405,7 +404,7 @@ extern "C" void WINAPI Plugin_EndMenu()
 //
 // 菜单消息循环
 // 
-BOOL WINAPI MenuTrackPopup(HWND hWndMenu, HWND hWndOldActive)
+BOOL MenuTrackPopup(HWND hWndMenu, HWND hWndOldActive)
 {
 	if (!::IsWindow(hWndMenu))
 		return FALSE;
@@ -456,7 +455,7 @@ BOOL WINAPI MenuTrackPopup(HWND hWndMenu, HWND hWndOldActive)
 //
 // 处理菜单消息
 //
-BOOL WINAPI HandleMenuMessage(HWND hWndMenu, LPMSG lpMsg)
+BOOL HandleMenuMessage(HWND hWndMenu, LPMSG lpMsg)
 {
 	switch (lpMsg->message)
 	{
@@ -565,7 +564,7 @@ BOOL WINAPI HandleMenuMessage(HWND hWndMenu, LPMSG lpMsg)
 //
 // 处理鼠标离开菜单事件
 //
-void WINAPI MenuItemMouseLeave(duMenu *pMenu)
+void MenuItemMouseLeave(duMenu *pMenu)
 {
 	if (pMenu == NULL)
 		return;
@@ -596,7 +595,7 @@ void WINAPI MenuItemMouseLeave(duMenu *pMenu)
 //
 // 处理WM_MOUSEMOVE消息
 //
-void WINAPI MenuItemMouseMove(duMenuItem *pMenuItem)
+void MenuItemMouseMove(duMenuItem *pMenuItem)
 {
 	if (pMenuItem == NULL)
 		return;

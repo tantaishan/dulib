@@ -9,7 +9,6 @@
 //
 //--------------------------------------------------------------------------
 
-#include "stdafx.h"
 #include "duButton.h"
 #include "duDrawHelper.h"
 #include "duCtrlManager.h"
@@ -47,7 +46,7 @@ duButton::~duButton()
 {
 }
 
-void WINAPI duButton::RegisterControlProperty()
+void duButton::RegisterControlProperty()
 {
 	RegisterProperty(_T("autosize"), DU_PROPERTY_BOOL, &m_fAutoSize);
 	RegisterProperty(_T("fixleft"), DU_PROPERTY_LONG, &m_nFixLeft);
@@ -73,7 +72,7 @@ void WINAPI duButton::RegisterControlProperty()
 	RegisterProperty(_T("graydisable"), DU_PROPERTY_BOOL, &m_fGrayDisable);
 }
 
-void WINAPI duButton::OnCreate()
+void duButton::OnCreate()
 {
 	if (m_nFadeInSpeed == 0)
 		m_nFadeInSpeed = 40;
@@ -88,7 +87,7 @@ void WINAPI duButton::OnCreate()
 		ResizeByText(GetText());
 }
 
-void WINAPI duButton::DrawObject(HDC hDC)
+void duButton::DrawObject(HDC hDC)
 {
 	duRect rcButton;
 	Plugin_GetRect(this, &rcButton);
@@ -201,7 +200,7 @@ void WINAPI duButton::DrawObject(HDC hDC)
 
 }
 
-void WINAPI duButton::OnMouseIn(POINT pt)
+void duButton::OnMouseIn(POINT pt)
 {
 	duCtrlManager *pCtrlManager = GetCtrlManager(m_hWnd);
 	if (pCtrlManager == NULL)
@@ -217,7 +216,7 @@ void WINAPI duButton::OnMouseIn(POINT pt)
 		Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duButton::OnMouseLeave(POINT pt)
+void duButton::OnMouseLeave(POINT pt)
 {
 	duCtrlManager *pCtrlManager = GetCtrlManager(m_hWnd);
 	if (pCtrlManager == NULL)
@@ -233,13 +232,13 @@ void WINAPI duButton::OnMouseLeave(POINT pt)
 		Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duButton::OnMouseLDown(POINT pt)
+void duButton::OnMouseLDown(POINT pt)
 {
 	Plugin_SetState(this, DU_STATE_PRESS);
 	Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duButton::OnMouseLUp(POINT pt)
+void duButton::OnMouseLUp(POINT pt)
 {
 	UINT uState = GetState();
 
@@ -250,7 +249,7 @@ void WINAPI duButton::OnMouseLUp(POINT pt)
 		NotifyUser(DUM_BTNCLICK, NULL, NULL);
 }
 
-void WINAPI duButton::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+void duButton::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 // ×¢ÊÍ¼üÅÌ¿ì½Ý¼ü£¬ modify by Alex Liang, 2014-10-22
 /*
@@ -259,18 +258,18 @@ void WINAPI duButton::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 */
 }
 
-void WINAPI duButton::OnMouseDbClick(POINT pt)
+void duButton::OnMouseDbClick(POINT pt)
 {
 	NotifyUser(DUM_BTNDBCLICK, NULL, NULL);
 }
 
-void WINAPI duButton::OnRedraw()
+void duButton::OnRedraw()
 {
 	m_fFadeDrawing = FALSE;
 	Plugin_KillTimer(this, m_nFadeTimer);
 }
 
-void WINAPI duButton::OnTimer(UINT nEventId)
+void duButton::OnTimer(UINT nEventId)
 {
 	if (!m_fFade || !m_fFadeDrawing)
 	{
@@ -298,7 +297,7 @@ void WINAPI duButton::OnTimer(UINT nEventId)
 	}
 }
 
-void WINAPI duButton::SetText(LPCTSTR lpszText)
+void duButton::SetText(LPCTSTR lpszText)
 {
 	if (m_fAutoSize)
 		ResizeByText(lpszText);
@@ -306,7 +305,7 @@ void WINAPI duButton::SetText(LPCTSTR lpszText)
 	duPlugin::SetText(lpszText);
 }
 
-void WINAPI duButton::SetIcon(LPCTSTR lpszIconName)
+void duButton::SetIcon(LPCTSTR lpszIconName)
 {
 	if (lpszIconName)
 		_tcsncpy(m_szIcon, lpszIconName, MAX_NAME);
@@ -385,7 +384,7 @@ void duButton::FadeRedraw(UINT uFadeInState, UINT uFadeOutState)
 	Plugin_SetTimer(this, m_nFadeTimer, 30);
 }
 
-void WINAPI duButton::SetTooltipText(LPCTSTR lpszText)
+void duButton::SetTooltipText(LPCTSTR lpszText)
 {
 	if (lpszText)
 		_tcsncpy(m_szToolTip, lpszText, MAX_NAME);
@@ -395,7 +394,7 @@ void WINAPI duButton::SetTooltipText(LPCTSTR lpszText)
 
 
 
-void WINAPI duButton::SetStatusIcon(LPCTSTR lpszStatusIconName)
+void duButton::SetStatusIcon(LPCTSTR lpszStatusIconName)
 {
 	if (lpszStatusIconName)
 		_tcsncpy(m_szStatusIcon, lpszStatusIconName, MAX_NAME);
@@ -404,12 +403,12 @@ void WINAPI duButton::SetStatusIcon(LPCTSTR lpszStatusIconName)
 }
 
 
-BOOL WINAPI duButton::IsGrayDisable()
+BOOL duButton::IsGrayDisable()
 {
 	return m_fGrayDisable;
 }
 
-void WINAPI duButton::SetGrayDisable(BOOL fGrayDisable)
+void duButton::SetGrayDisable(BOOL fGrayDisable)
 {
 	m_fGrayDisable = fGrayDisable;
 }

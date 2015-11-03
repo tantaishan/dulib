@@ -8,7 +8,6 @@
 //  History:    Jan-05-2010   Denny Chen  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duStatic.h"
 #include "duCtrlManager.h"
 
@@ -21,16 +20,16 @@ duStatic::~duStatic()
 {
 }
 
-void WINAPI duStatic::RegisterControlProperty()
+void duStatic::RegisterControlProperty()
 {
 	RegisterProperty(_T("showtooltip"), DU_PROPERTY_BOOL, &m_fShowToolTip);
 }
 
-void WINAPI duStatic::OnCreate()
+void duStatic::OnCreate()
 {
 }
 
-void WINAPI duStatic::DrawObject(HDC hDC)
+void duStatic::DrawObject(HDC hDC)
 {
 	duStyleGroup *pStyleGroup = (duStyleGroup *)GetResObj(GetStyle(), DU_RES_STYLEGROUP);
 	if (pStyleGroup == NULL)
@@ -44,7 +43,7 @@ void WINAPI duStatic::DrawObject(HDC hDC)
 	pStyleGroup->Draw(hDC, &rcCtrl, GetState(), GetText(), GetAlpha());
 }
 
-void WINAPI duStatic::OnMouseIn(POINT pt)
+void duStatic::OnMouseIn(POINT pt)
 {
 	duCtrlManager *pCtrlManager = GetCtrlManager(m_hWnd);
 	if (pCtrlManager == NULL)
@@ -100,7 +99,7 @@ void WINAPI duStatic::OnMouseIn(POINT pt)
 	}
 }
 
-void WINAPI duStatic::OnMouseLeave(POINT pt)
+void duStatic::OnMouseLeave(POINT pt)
 {
 	duCtrlManager *pCtrlManager = GetCtrlManager(m_hWnd);
 	if (pCtrlManager == NULL)

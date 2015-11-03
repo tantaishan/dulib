@@ -19,18 +19,18 @@
 class duPie : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
 
-	virtual float WINAPI GetPercent() { return m_fPercent; }
-	virtual void WINAPI SetPercent(float fPercent) { m_fPercent = fPercent; }
+	virtual float GetPercent() { return m_fPercent; }
+	virtual void SetPercent(float fPercent) { m_fPercent = fPercent; }
 	
-	virtual COLORREF WINAPI GetAllColor() { return m_clrAll; }
-	virtual void WINAPI SetAllColor(COLORREF clrAll) { m_clrAll = clrAll; }
+	virtual COLORREF GetAllColor() { return m_clrAll; }
+	virtual void SetAllColor(COLORREF clrAll) { m_clrAll = clrAll; }
 	
-	virtual COLORREF WINAPI GetPercentColor() { return m_clrPercent; }
-	virtual void WINAPI SetPercentColor(COLORREF clrPercent) { m_clrPercent = clrPercent; }
+	virtual COLORREF GetPercentColor() { return m_clrPercent; }
+	virtual void SetPercentColor(COLORREF clrPercent) { m_clrPercent = clrPercent; }
 	
 public:
 	duPie();

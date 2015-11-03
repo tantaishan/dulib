@@ -19,60 +19,60 @@
 class duPage : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
 	
-	virtual void WINAPI OnMouseMove(POINT pt);
-	virtual void WINAPI OnMouseLeave(POINT pt);
-	virtual void WINAPI OnMouseLDown(POINT pt);
-	virtual void WINAPI OnMouseLUp(POINT pt);
-	virtual void WINAPI OnMouseDbClick(POINT pt);
-	virtual void WINAPI OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
-	virtual BOOL WINAPI OnSetCursor();
+	virtual void OnMouseMove(POINT pt);
+	virtual void OnMouseLeave(POINT pt);
+	virtual void OnMouseLDown(POINT pt);
+	virtual void OnMouseLUp(POINT pt);
+	virtual void OnMouseDbClick(POINT pt);
+	virtual void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
+	virtual BOOL OnSetCursor();
 	
-	virtual int WINAPI GetPageCount();
-	virtual int WINAPI GetSel();
-	virtual void WINAPI SetSel(int nSel);
+	virtual int GetPageCount();
+	virtual int GetSel();
+	virtual void SetSel(int nSel);
 	
-	virtual int WINAPI GetTotal() { return m_nTotalCount; }
-	virtual void WINAPI SetTotal(int nTotal);
+	virtual int GetTotal() { return m_nTotalCount; }
+	virtual void SetTotal(int nTotal);
 	
-	virtual int WINAPI GetPerPage() { return m_nPerPage; }
-	virtual void WINAPI SetPerPage(int nPerPage);
+	virtual int GetPerPage() { return m_nPerPage; }
+	virtual void SetPerPage(int nPerPage);
 	
-	virtual int WINAPI GetArrowWidth() { return m_nArrowWidth; }
-	virtual void WINAPI SetArrowWidth(int nArrowWidth) { m_nArrowWidth = nArrowWidth; AutoSize(); }
+	virtual int GetArrowWidth() { return m_nArrowWidth; }
+	virtual void SetArrowWidth(int nArrowWidth) { m_nArrowWidth = nArrowWidth; AutoSize(); }
 	
-	virtual int WINAPI GetArrowHeight() { return m_nArrowHeight; }
-	virtual void WINAPI SetArrowHeight(int nArrowHeight) { m_nArrowHeight = nArrowHeight; AutoSize(); }
+	virtual int GetArrowHeight() { return m_nArrowHeight; }
+	virtual void SetArrowHeight(int nArrowHeight) { m_nArrowHeight = nArrowHeight; AutoSize(); }
 	
-	virtual int WINAPI GetArrowButtonSpace() { return m_nArrowButtonSpace; }
-	virtual void WINAPI SetArrowButtonSpace(int nSpace) { m_nArrowButtonSpace = nSpace; AutoSize(); }
+	virtual int GetArrowButtonSpace() { return m_nArrowButtonSpace; }
+	virtual void SetArrowButtonSpace(int nSpace) { m_nArrowButtonSpace = nSpace; AutoSize(); }
 	
-	virtual int WINAPI GetButtonWidth() { return m_nButtonWidth; }
-	virtual void WINAPI SetButtonWidth(int nButtonWidth) { m_nButtonWidth = nButtonWidth; AutoSize(); }
+	virtual int GetButtonWidth() { return m_nButtonWidth; }
+	virtual void SetButtonWidth(int nButtonWidth) { m_nButtonWidth = nButtonWidth; AutoSize(); }
 	
-	virtual int WINAPI GetButtonHeight() { return m_nButtonHeight; }
-	virtual void WINAPI SetButtonHeight(int nButtonHeight) { m_nButtonHeight = nButtonHeight; AutoSize(); }
+	virtual int GetButtonHeight() { return m_nButtonHeight; }
+	virtual void SetButtonHeight(int nButtonHeight) { m_nButtonHeight = nButtonHeight; AutoSize(); }
 	
-	virtual int WINAPI GetButtonSpace() { return m_nButtonSpace; }
-	virtual void WINAPI SetButtonSpace(int nSpace) { m_nButtonSpace = nSpace; AutoSize(); }
+	virtual int GetButtonSpace() { return m_nButtonSpace; }
+	virtual void SetButtonSpace(int nSpace) { m_nButtonSpace = nSpace; AutoSize(); }
 	
-	virtual LPCTSTR WINAPI GetLeftArrowStyle() { return m_szLeftArrowStyle; }
-	virtual void WINAPI SetLeftArrowStyle(LPCTSTR lpszStyle);
+	virtual LPCTSTR GetLeftArrowStyle() { return m_szLeftArrowStyle; }
+	virtual void SetLeftArrowStyle(LPCTSTR lpszStyle);
 	
-	virtual LPCTSTR WINAPI GetRightArrowStyle() { return m_szRightArrowStyle; }
-	virtual void WINAPI SetRightArrowStyle(LPCTSTR lpszStyle);
+	virtual LPCTSTR GetRightArrowStyle() { return m_szRightArrowStyle; }
+	virtual void SetRightArrowStyle(LPCTSTR lpszStyle);
 	
-	virtual LPCTSTR WINAPI GetButtonStyle() { return m_szButtonStyle; }
-	virtual void WINAPI SetButtonStyle(LPCTSTR lpszStyle);
+	virtual LPCTSTR GetButtonStyle() { return m_szButtonStyle; }
+	virtual void SetButtonStyle(LPCTSTR lpszStyle);
 	
-	virtual BOOL WINAPI MoveLeft(BOOL fRedraw);
-	virtual BOOL WINAPI MoveRight(BOOL fRedraw);
+	virtual BOOL MoveLeft(BOOL fRedraw);
+	virtual BOOL MoveRight(BOOL fRedraw);
 
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duPage"); }	
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duPage"); }	
 
 public:
 	duPage();

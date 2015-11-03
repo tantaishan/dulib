@@ -35,19 +35,19 @@ static TCHAR g_szMenuClassName[] = _T("dulibMenuClass");
 #define RECT_ONBOTTOM   3
 #define RECT_ORG        4
 
-ATOM WINAPI RegisterMenuClass();
-LRESULT WINAPI Menu_WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-BOOL WINAPI Plugin_TrackPopupMenuEx(int x, int y, UINT uFlags, DIRECTUIMENU *pMenuStruct, BOOL fTopMenu);
-extern "C" BOOL WINAPI Plugin_TrackPopupMenu(HWND hWndOwner, duWindowManager *pWinManager, LPCTSTR lpszWinName, LPCTSTR lpszMenuName, int x, int y, UINT uFlags);
-BOOL WINAPI IsMenuWindow(HWND hWnd);
-duMenu *WINAPI GetRootMenu(HWND hWnd);
-void WINAPI MenuClientToScreen(HWND hWnd, LPRECT lpRect);
-duMenu *WINAPI MenuFromPoint(duMenu *pMenu, POINT ptScreen);
-BOOL WINAPI MyDestroyMenu(duMenu *pMenu);
-void WINAPI FindMenuBestPos(int x, int y, int cx, int cy, LPRECT prcExclude, UINT wFlags, MONITORINFO *pMonitor, LPPOINT ppt);
-BOOL WINAPI TryRect(UINT wRect, int x, int y, int cx, int cy, LPRECT prcExclude, LPPOINT ppt, MONITORINFO *pMonitor);
+ATOM RegisterMenuClass();
+LRESULT Menu_WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+BOOL Plugin_TrackPopupMenuEx(int x, int y, UINT uFlags, DIRECTUIMENU *pMenuStruct, BOOL fTopMenu);
+extern "C" BOOL Plugin_TrackPopupMenu(HWND hWndOwner, duWindowManager *pWinManager, LPCTSTR lpszWinName, LPCTSTR lpszMenuName, int x, int y, UINT uFlags);
+BOOL IsMenuWindow(HWND hWnd);
+duMenu *GetRootMenu(HWND hWnd);
+void MenuClientToScreen(HWND hWnd, LPRECT lpRect);
+duMenu *MenuFromPoint(duMenu *pMenu, POINT ptScreen);
+BOOL MyDestroyMenu(duMenu *pMenu);
+void FindMenuBestPos(int x, int y, int cx, int cy, LPRECT prcExclude, UINT wFlags, MONITORINFO *pMonitor, LPPOINT ppt);
+BOOL TryRect(UINT wRect, int x, int y, int cx, int cy, LPRECT prcExclude, LPPOINT ppt, MONITORINFO *pMonitor);
 
-void WINAPI MenuItemMouseLeave(duMenu *pMenu);
-void WINAPI MenuItemMouseMove(duMenuItem *pMenuItem);
-BOOL WINAPI HandleMenuMessage(HWND hWndMenu, LPMSG lpMsg);
-BOOL WINAPI MenuTrackPopup(HWND hWndMenu, HWND hWndOldActive);
+void MenuItemMouseLeave(duMenu *pMenu);
+void MenuItemMouseMove(duMenuItem *pMenuItem);
+BOOL HandleMenuMessage(HWND hWndMenu, LPMSG lpMsg);
+BOOL MenuTrackPopup(HWND hWndMenu, HWND hWndOldActive);

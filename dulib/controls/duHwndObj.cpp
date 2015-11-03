@@ -8,7 +8,6 @@
 //  History:    Dec-09-2009   Jimmy Wu  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duHwndObj.h"
 
 duHwndObj::duHwndObj()
@@ -20,7 +19,7 @@ duHwndObj::~duHwndObj()
 {
 }
 
-BOOL WINAPI duHwndObj::Attach(HWND hWnd)
+BOOL duHwndObj::Attach(HWND hWnd)
 {
 	if (!::IsWindow(hWnd))
 		return FALSE;
@@ -38,24 +37,34 @@ BOOL WINAPI duHwndObj::Attach(HWND hWnd)
 	return TRUE;
 }
 
-HWND WINAPI duHwndObj::GetAttach()
+HWND duHwndObj::GetAttach()
 {
 	return m_hWndObject;
 }
 
-HWND WINAPI duHwndObj::Detach()
+HWND duHwndObj::Detach()
 {
 	HWND ret = m_hWndObject;
 	m_hWndObject = NULL;
 	return ret;
 }
 
-void WINAPI duHwndObj::DrawObject(HDC hDC)
+void duHwndObj::DrawObject(HDC hDC)
 {
-	InvalidateRect(m_hWndObject, NULL, TRUE);
+//	InvalidateRect(m_hWndObject, NULL, TRUE);
+
+//	duRect rcHwnd;
+// 	Plugin_GetRect(this, &rcHwnd);
+// 	int cx = rcHwnd.right - rcHwnd.left;
+// 	int cy = rcHwnd.bottom - rcHwnd.top;
+// 	POINT pt = { rcHwnd.left, rcHwnd.top };
+// 	::ClientToScreen(m_hWnd, &pt);
+// 
+// 	if (::IsWindow(m_hWndObject))
+// 		::SetWindowPos(m_hWndObject, NULL, pt.x, pt.y, cx, cy, m_fVisible ? SWP_SHOWWINDOW : SWP_HIDEWINDOW);
 }
 
-void WINAPI duHwndObj::Resize(LPRECT lpRect)
+void duHwndObj::Resize(LPRECT lpRect)
 {
 	duPlugin::Resize(lpRect);
 
@@ -66,7 +75,15 @@ void WINAPI duHwndObj::Resize(LPRECT lpRect)
 		::SetWindowPos(m_hWndObject, NULL, rcHwnd.left, rcHwnd.top, rcHwnd.Width(), rcHwnd.Height(), SWP_NOREDRAW|SWP_NOZORDER);
 }
 
-BOOL WINAPI duHwndObj::IsDisable()
+void duHwndObj::SetVisible(BOOL fVisible)
+{
+	m_fVisible = fVisible;
+	if (::IsWindow(m_hWndObject))
+		::ShowWindow(m_hWndObject, fVisible ? SW_SHOW : SW_HIDE);
+}
+
+
+BOOL duHwndObj::IsDisable()
 {
 	if (::IsWindow(m_hWndObject) && ::GetWindowLong(m_hWndObject, GWL_STYLE) & WS_DISABLED)
 		return TRUE;
@@ -74,7 +91,7 @@ BOOL WINAPI duHwndObj::IsDisable()
 	return duPlugin::IsDisable();
 }
 
-void WINAPI duHwndObj::SetDisable(BOOL fDisable)
+void duHwndObj::SetDisable(BOOL fDisable)
 {
 	if (::IsWindow(m_hWndObject))
 		::EnableWindow(m_hWndObject, !fDisable);
@@ -82,7 +99,7 @@ void WINAPI duHwndObj::SetDisable(BOOL fDisable)
 	return duPlugin::SetDisable(fDisable);
 }
 
-BOOL WINAPI duHwndObj::IsFocus()
+BOOL duHwndObj::IsFocus()
 {
 	if (::IsWindow(m_hWndObject))
 		return (::GetFocus() == m_hWndObject) ? TRUE : FALSE;
@@ -90,7 +107,7 @@ BOOL WINAPI duHwndObj::IsFocus()
 	return duPlugin::IsFocus();
 }
 
-void WINAPI duHwndObj::SetFocus(BOOL fFocus)
+void duHwndObj::SetFocus(BOOL fFocus)
 {
 	if (::IsWindow(m_hWndObject))
 		::SetFocus(fFocus ? m_hWndObject : m_hWnd);

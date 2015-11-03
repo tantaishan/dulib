@@ -19,16 +19,16 @@
 class duLEDTimer : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
-	virtual void WINAPI OnTimer(UINT nEventId);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
+	virtual void OnTimer(UINT nEventId);
 
-	virtual LPCTSTR WINAPI GetImageFont() { return m_szImageFont; }
-	virtual void WINAPI SetImageFont(LPCTSTR lpszImageFont);
+	virtual LPCTSTR GetImageFont() { return m_szImageFont; }
+	virtual void SetImageFont(LPCTSTR lpszImageFont);
 
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duLEDTimer"); }	
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duLEDTimer"); }	
 	
 public:
 	duLEDTimer();

@@ -8,7 +8,6 @@
 //  History:    Dec-21-2009   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duIMPanelNode.h"
 #include "duListBoxEx.h"
 
@@ -22,17 +21,17 @@ duIMPanelNode::~duIMPanelNode()
 {
 }
 
-void WINAPI duIMPanelNode::RegisterControlProperty()
+void duIMPanelNode::RegisterControlProperty()
 {
 	RegisterProperty(_T("level"), DU_PROPERTY_LONG, &m_nLevel);
 	RegisterProperty(_T("expand"), DU_PROPERTY_BOOL, &m_fExpand);
 }
 
-void WINAPI duIMPanelNode::OnCreate()
+void duIMPanelNode::OnCreate()
 {
 }
 
-void WINAPI duIMPanelNode::DrawObject(HDC hDC)
+void duIMPanelNode::DrawObject(HDC hDC)
 {
 	duRect rcIMPanelNode;
 	Plugin_GetRect(this, &rcIMPanelNode);
@@ -44,7 +43,7 @@ void WINAPI duIMPanelNode::DrawObject(HDC hDC)
 
 }
 
-void WINAPI duIMPanelNode::OnMouseLDown(POINT pt)
+void duIMPanelNode::OnMouseLDown(POINT pt)
 {
 	int nState = GetState();
 	if (IS_STATE_CHECKED(nState))
@@ -53,7 +52,7 @@ void WINAPI duIMPanelNode::OnMouseLDown(POINT pt)
 		SetState(DU_STATE_PRESS);
 }
 
-void WINAPI duIMPanelNode::OnMouseLUp(POINT pt)
+void duIMPanelNode::OnMouseLUp(POINT pt)
 {
 	int nState = GetState();
 
@@ -81,7 +80,7 @@ void WINAPI duIMPanelNode::OnMouseLUp(POINT pt)
 	Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duIMPanelNode::OnMouseDbClick(POINT pt)
+void duIMPanelNode::OnMouseDbClick(POINT pt)
 {
 	int nState = GetState();
 	if (IS_STATE_CHECKED(nState))
@@ -98,7 +97,7 @@ void WINAPI duIMPanelNode::OnMouseDbClick(POINT pt)
 	Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duIMPanelNode::Expand(BOOL fExpand)
+void duIMPanelNode::Expand(BOOL fExpand)
 {
 	if (fExpand)
 	{
@@ -160,12 +159,12 @@ void WINAPI duIMPanelNode::Expand(BOOL fExpand)
 	NotifyUser(DUM_IMPEXPAND, (WPARAM)fExpand, NULL);
 }
 
-BOOL WINAPI duIMPanelNode::IsExpand()
+BOOL duIMPanelNode::IsExpand()
 {
 	return m_fExpand;
 }
 
-int WINAPI duIMPanelNode::GetLevel()
+int duIMPanelNode::GetLevel()
 {
 	return m_nLevel;
 }

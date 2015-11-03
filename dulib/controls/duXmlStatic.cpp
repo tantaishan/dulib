@@ -8,7 +8,6 @@
 //  History:    Nov-10-2009   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duXmlStatic.h"
 #include "duDrawHelper.h"
 #include "duCtrlManager.h"
@@ -31,11 +30,11 @@ duXmlStatic::~duXmlStatic()
 	Destroy();
 }
 
-void WINAPI duXmlStatic::RegisterControlProperty()
+void duXmlStatic::RegisterControlProperty()
 {
 }
 
-void WINAPI duXmlStatic::OnCreate()
+void duXmlStatic::OnCreate()
 {
 	ParseTextParam();
 //#ifdef _DEBUG
@@ -43,7 +42,7 @@ void WINAPI duXmlStatic::OnCreate()
 //#endif
 }
 
-void WINAPI duXmlStatic::DrawObject(HDC hDC)
+void duXmlStatic::DrawObject(HDC hDC)
 {
 	duRect rectStatic;
 	Plugin_GetRect(this, &rectStatic);
@@ -148,7 +147,7 @@ void duXmlStatic::PaintSegMent(HDC hDC, XMLSTATICLINESEGMENT *pSegment, duRect &
 	delete [] lpString;
 }
 
-void WINAPI duXmlStatic::OnMouseMove(POINT pt)
+void duXmlStatic::OnMouseMove(POINT pt)
 {
 	duRect rectStatic;
 	Plugin_GetRect(this, &rectStatic);
@@ -215,7 +214,7 @@ void WINAPI duXmlStatic::OnMouseMove(POINT pt)
 		m_pHotSegMent = NULL;
 }
 
-BOOL WINAPI duXmlStatic::OnSetCursor()
+BOOL duXmlStatic::OnSetCursor()
 {
 	if (IsHrefSegment(m_pHotSegMent))
 		return duPlugin::OnSetCursor();
@@ -224,7 +223,7 @@ BOOL WINAPI duXmlStatic::OnSetCursor()
 	return TRUE;
 }
 
-void WINAPI duXmlStatic::OnMouseLeave(POINT pt)
+void duXmlStatic::OnMouseLeave(POINT pt)
 {
 	if (IsHrefSegment(m_pHotSegMent))
 	{
@@ -235,7 +234,7 @@ void WINAPI duXmlStatic::OnMouseLeave(POINT pt)
 	m_pHotSegMent = NULL;
 }
 
-void WINAPI duXmlStatic::OnMouseLDown(POINT pt)
+void duXmlStatic::OnMouseLDown(POINT pt)
 {
 	if (IsHrefSegment(m_pHotSegMent))
 	{
@@ -258,17 +257,17 @@ void WINAPI duXmlStatic::OnMouseLDown(POINT pt)
 	}
 }
 
-void WINAPI duXmlStatic::OnMouseLUp(POINT pt)
+void duXmlStatic::OnMouseLUp(POINT pt)
 {
 }
 
-void WINAPI duXmlStatic::SetText(LPCTSTR lpszText)
+void duXmlStatic::SetText(LPCTSTR lpszText)
 {
 	duPlugin::SetText(lpszText);
 	ParseTextParam();
 }
 
-void WINAPI duXmlStatic::Resize(LPRECT lpRect/*=NULL*/)
+void duXmlStatic::Resize(LPRECT lpRect/*=NULL*/)
 {
 	duPlugin::Resize(lpRect);
 	ParseTextParam();

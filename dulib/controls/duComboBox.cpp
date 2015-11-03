@@ -8,7 +8,6 @@
 //  History:    Nov-17-2009   Steven Li  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duComboBox.h"
 #include "duCtrlManager.h"
 
@@ -17,7 +16,7 @@
 LPCTSTR lpszComboxClassName = _T("DUCOMBOXLISTBOXWND");
 ATOM RegisterComboListClass();
 void TrackPopup(duComboBox *pComboBox, HWND hwndOwner, HWND hwndListBox);
-extern "C" BOOL WINAPI WindowManager_Attach(duWindowManager *pWinManager, HWND hWnd, LPCTSTR lpWindowName);
+extern "C" BOOL WindowManager_Attach(duWindowManager *pWinManager, HWND hWnd, LPCTSTR lpWindowName);
 
 duComboBox::duComboBox() :
 	 m_nWindowHeight(0)
@@ -61,7 +60,7 @@ void duComboBox::Destroy()
 	m_nCurSel = -1;
 }
 
-void WINAPI duComboBox::RegisterControlProperty()
+void duComboBox::RegisterControlProperty()
 {
 	duEdit::RegisterControlProperty();
 	
@@ -70,7 +69,7 @@ void WINAPI duComboBox::RegisterControlProperty()
 	RegisterProperty(_T("listbox"),   DU_PROPERTY_STRING, m_szListBox);
 }
 
-void WINAPI duComboBox::OnCreate()
+void duComboBox::OnCreate()
 {
 	duEdit::OnCreate();
 
@@ -85,7 +84,7 @@ void WINAPI duComboBox::OnCreate()
 	//SetItemIconX(7, 10);
 }
 
-void WINAPI duComboBox::OnMouseLDown(POINT pt)
+void duComboBox::OnMouseLDown(POINT pt)
 {
 	duPoint ptCombo(pt);
 	
@@ -155,7 +154,7 @@ void WINAPI duComboBox::OnMouseLDown(POINT pt)
 	}
 }
 
-BOOL WINAPI duComboBox::OnSetFocus(duPlugin *pOldFocus)
+BOOL duComboBox::OnSetFocus(duPlugin *pOldFocus)
 {
 	if (m_fReadOnly)
 		return duPlugin::OnSetFocus(pOldFocus);
@@ -163,7 +162,7 @@ BOOL WINAPI duComboBox::OnSetFocus(duPlugin *pOldFocus)
 	return duEdit::OnSetFocus(pOldFocus);
 }
 
-void WINAPI duComboBox::OnKeyDown(UINT key, UINT nRepCnt, UINT nFlags)
+void duComboBox::OnKeyDown(UINT key, UINT nRepCnt, UINT nFlags)
 {
 	int nItemCount = GetItemCount();
 	if (key == VK_UP)
@@ -197,7 +196,7 @@ void WINAPI duComboBox::OnKeyDown(UINT key, UINT nRepCnt, UINT nFlags)
 		duEdit::OnKeyDown(key, nRepCnt, nFlags);
 }
 
-BOOL WINAPI duComboBox::OnSetCursor()
+BOOL duComboBox::OnSetCursor()
 {
 	if (m_fReadOnly)
 		return duPlugin::OnSetCursor();
@@ -205,7 +204,7 @@ BOOL WINAPI duComboBox::OnSetCursor()
 	return duEdit::OnSetCursor();
 }
 
-void WINAPI duComboBox::OnMouseDbClick(POINT pt)
+void duComboBox::OnMouseDbClick(POINT pt)
 {
 	if (m_fReadOnly)
 		return;
@@ -213,7 +212,7 @@ void WINAPI duComboBox::OnMouseDbClick(POINT pt)
 	return duEdit::OnMouseDbClick(pt);
 }
 
-BOOL WINAPI duComboBox::InsertItem(int nIndex, LPCTSTR lpszText, LPCTSTR lpszIcon)
+BOOL duComboBox::InsertItem(int nIndex, LPCTSTR lpszText, LPCTSTR lpszIcon)
 {
 	int nItemCount = GetItemCount();
 	if (nIndex == -1)
@@ -244,7 +243,7 @@ BOOL WINAPI duComboBox::InsertItem(int nIndex, LPCTSTR lpszText, LPCTSTR lpszIco
 	return TRUE;
 }
 
-BOOL WINAPI duComboBox::DeleteItem(int nIndex)
+BOOL duComboBox::DeleteItem(int nIndex)
 {
 	int nItemCount = GetItemCount();
 	if (nIndex < 0 || nIndex >= nItemCount)
@@ -257,12 +256,12 @@ BOOL WINAPI duComboBox::DeleteItem(int nIndex)
 	return TRUE;
 }
 
-void WINAPI duComboBox::DeleteAll()
+void duComboBox::DeleteAll()
 {
 	Destroy();
 }
 
-LPCTSTR WINAPI duComboBox::GetItemText(int nIndex)
+LPCTSTR duComboBox::GetItemText(int nIndex)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -271,7 +270,7 @@ LPCTSTR WINAPI duComboBox::GetItemText(int nIndex)
 	return pItem->szText.c_str();
 }
 
-BOOL WINAPI duComboBox::SetItemText(int nIndex, LPCTSTR lpszText)
+BOOL duComboBox::SetItemText(int nIndex, LPCTSTR lpszText)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -284,7 +283,7 @@ BOOL WINAPI duComboBox::SetItemText(int nIndex, LPCTSTR lpszText)
 	return TRUE;
 }
 
-LPCTSTR WINAPI duComboBox::GetItemIcon(int nIndex)
+LPCTSTR duComboBox::GetItemIcon(int nIndex)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -293,7 +292,7 @@ LPCTSTR WINAPI duComboBox::GetItemIcon(int nIndex)
 	return pItem->szIcon.c_str();
 }
 
-BOOL WINAPI duComboBox::SetItemIcon(int nIndex, LPCTSTR lpszIcon)
+BOOL duComboBox::SetItemIcon(int nIndex, LPCTSTR lpszIcon)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -306,7 +305,7 @@ BOOL WINAPI duComboBox::SetItemIcon(int nIndex, LPCTSTR lpszIcon)
 	return TRUE;
 }
 
-UINT WINAPI duComboBox::GetItemIconX(int nIndex)
+UINT duComboBox::GetItemIconX(int nIndex)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -315,7 +314,7 @@ UINT WINAPI duComboBox::GetItemIconX(int nIndex)
 	return pItem->uIconX;
 }
 
-BOOL WINAPI duComboBox::SetItemIconX(int nIndex, UINT uIconX)
+BOOL duComboBox::SetItemIconX(int nIndex, UINT uIconX)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -325,7 +324,7 @@ BOOL WINAPI duComboBox::SetItemIconX(int nIndex, UINT uIconX)
 	return TRUE;
 }
 
-UINT WINAPI duComboBox::GetItemIconY(int nIndex)
+UINT duComboBox::GetItemIconY(int nIndex)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -334,7 +333,7 @@ UINT WINAPI duComboBox::GetItemIconY(int nIndex)
 	return pItem->uIconY;
 }
 
-BOOL WINAPI duComboBox::SetItemIconY(int nIndex, UINT uIconY)
+BOOL duComboBox::SetItemIconY(int nIndex, UINT uIconY)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -344,7 +343,7 @@ BOOL WINAPI duComboBox::SetItemIconY(int nIndex, UINT uIconY)
 	return TRUE;
 }
 
-UINT WINAPI duComboBox::GetItemIconWidth(int nIndex)
+UINT duComboBox::GetItemIconWidth(int nIndex)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -353,7 +352,7 @@ UINT WINAPI duComboBox::GetItemIconWidth(int nIndex)
 	return pItem->uIconWidth;
 }
 
-BOOL WINAPI duComboBox::SetItemIconWidth(int nIndex, UINT uIconWidth)
+BOOL duComboBox::SetItemIconWidth(int nIndex, UINT uIconWidth)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -363,7 +362,7 @@ BOOL WINAPI duComboBox::SetItemIconWidth(int nIndex, UINT uIconWidth)
 	return TRUE;
 }
 
-UINT WINAPI duComboBox::GetItemIconHeight(int nIndex)
+UINT duComboBox::GetItemIconHeight(int nIndex)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -372,7 +371,7 @@ UINT WINAPI duComboBox::GetItemIconHeight(int nIndex)
 	return pItem->uIconHeight;
 }
 
-BOOL WINAPI duComboBox::SetItemIconHeight(int nIndex, UINT uIconHeight)
+BOOL duComboBox::SetItemIconHeight(int nIndex, UINT uIconHeight)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -382,12 +381,12 @@ BOOL WINAPI duComboBox::SetItemIconHeight(int nIndex, UINT uIconHeight)
 	return TRUE;
 }
 
-int WINAPI duComboBox::GetCurSel()
+int duComboBox::GetCurSel()
 {
 	return m_nCurSel;
 }
 
-void WINAPI duComboBox::SetCurSel(int nIndex)
+void duComboBox::SetCurSel(int nIndex)
 {
 	int nItemCount = (int)m_vtItem.size();
 	if (nIndex < -1 || nIndex >= nItemCount)
@@ -404,7 +403,7 @@ void WINAPI duComboBox::SetCurSel(int nIndex)
 	}
 }
 
-INT_PTR WINAPI duComboBox::GetItemData(int nIndex)
+INT_PTR duComboBox::GetItemData(int nIndex)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem)
@@ -413,7 +412,7 @@ INT_PTR WINAPI duComboBox::GetItemData(int nIndex)
 	return NULL;
 }
 
-void WINAPI duComboBox::SetItemData(int nIndex, INT_PTR pData)
+void duComboBox::SetItemData(int nIndex, INT_PTR pData)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem)
@@ -429,7 +428,7 @@ ListBoxItem *duComboBox::GetItem(int nIndex)
 	return m_vtItem[nIndex];
 }
 
-int WINAPI duComboBox::AddItem(LPCTSTR lpszText, LPCTSTR lpszIcon)
+int duComboBox::AddItem(LPCTSTR lpszText, LPCTSTR lpszIcon)
 {
 	if (InsertItem(-1, lpszText, lpszIcon))
 		return GetItemCount();
@@ -437,7 +436,7 @@ int WINAPI duComboBox::AddItem(LPCTSTR lpszText, LPCTSTR lpszIcon)
 	return -1;
 }
 
-int WINAPI duComboBox::FindItem(LPCTSTR lpszText)
+int duComboBox::FindItem(LPCTSTR lpszText)
 {
 	if (lpszText == NULL)
 		return -1;
@@ -494,7 +493,7 @@ int duComboBox::CalcListBoxHeight()
 	return (nHeight > m_nWindowHeight) ? m_nWindowHeight : nHeight;
 }
 
-BOOL WINAPI duComboBox::IsItemDisable(int nIndex)
+BOOL duComboBox::IsItemDisable(int nIndex)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -503,7 +502,7 @@ BOOL WINAPI duComboBox::IsItemDisable(int nIndex)
 	return pItem->fDisable;
 }
 
-BOOL WINAPI duComboBox::SetItemDisable(int nIndex, BOOL fDisable)
+BOOL duComboBox::SetItemDisable(int nIndex, BOOL fDisable)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -618,7 +617,7 @@ ATOM RegisterComboListClass()
 	return RegisterClassEx(&wcex);
 }
 
-static LRESULT WINAPI ComboListBox_WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+static LRESULT ComboListBox_WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	duComboBox *pComboBox = NULL;
 	

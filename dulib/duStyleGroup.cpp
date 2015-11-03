@@ -8,7 +8,6 @@
 //  History:    Nov-10-95   DavePl  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duStyleGroup.h"
 #include "duWindowManager.h"
 
@@ -37,7 +36,7 @@ void duStyleGroup::Destroy()
 	m_vtStylelist.clear();
 }
 
-BOOL WINAPI duStyleGroup::OnCreate(TiXmlElement *pElement)
+BOOL duStyleGroup::OnCreate(TiXmlElement *pElement)
 {
 	if (!duResBase::OnCreate(pElement))
 		return FALSE;
@@ -51,7 +50,6 @@ BOOL WINAPI duStyleGroup::OnCreate(TiXmlElement *pElement)
 		{
 			pNewStyle->SetResManager(GetResManager());
 			duWindowManager *pWinManager = GetResManager()->GetWindowManager();
-			pNewStyle->SetTypeInfo(pWinManager->GetTypeInfoByName(pNewStyle->GetTypeInfoName()));
 
 			AddStyle(pNewStyle);
 			pNewStyle->OnCreate(pChildElement);
@@ -61,7 +59,7 @@ BOOL WINAPI duStyleGroup::OnCreate(TiXmlElement *pElement)
 	return TRUE;
 }
 
-void WINAPI duStyleGroup::Draw(HDC hDC, LPRECT lpDstRect, UINT uState, LPCTSTR lpszText, int nAlpha)
+void duStyleGroup::Draw(HDC hDC, LPRECT lpDstRect, UINT uState, LPCTSTR lpszText, int nAlpha)
 {
 	int nStyleCount = GetStyleCount();
 	int i;
@@ -73,7 +71,7 @@ void WINAPI duStyleGroup::Draw(HDC hDC, LPRECT lpDstRect, UINT uState, LPCTSTR l
 	}
 }
 
-void WINAPI duStyleGroup::DrawNotText(HDC hDC, LPRECT lpDstRect, UINT uState, LPCTSTR lpszText, int nAlpha)
+void duStyleGroup::DrawNotText(HDC hDC, LPRECT lpDstRect, UINT uState, LPCTSTR lpszText, int nAlpha)
 {
 	int nStyleCount = GetStyleCount();
 	int i;
@@ -88,7 +86,7 @@ void WINAPI duStyleGroup::DrawNotText(HDC hDC, LPRECT lpDstRect, UINT uState, LP
 	}
 }
 
-void WINAPI duStyleGroup::DrawOnlyText(HDC hDC, LPRECT lpDstRect, UINT uState, LPCTSTR lpszText, int nAlpha)
+void duStyleGroup::DrawOnlyText(HDC hDC, LPRECT lpDstRect, UINT uState, LPCTSTR lpszText, int nAlpha)
 {
 	int nStyleCount = GetStyleCount();
 	int i;
@@ -103,7 +101,7 @@ void WINAPI duStyleGroup::DrawOnlyText(HDC hDC, LPRECT lpDstRect, UINT uState, L
 	}
 }
 
-void WINAPI duStyleGroup::GrayDrawByStyle(HDC hDC, LPRECT lpDstRect, UINT uState, LPCTSTR lpszText, int nAlpha)
+void duStyleGroup::GrayDrawByStyle(HDC hDC, LPRECT lpDstRect, UINT uState, LPCTSTR lpszText, int nAlpha)
 {
 	BYTE r,g,b,gray;
 	int styleCount = GetStyleCount();
@@ -230,12 +228,12 @@ void WINAPI duStyleGroup::GrayDrawByStyle(HDC hDC, LPRECT lpDstRect, UINT uState
 	}
 }
 
-int WINAPI duStyleGroup::GetStyleCount()
+int duStyleGroup::GetStyleCount()
 {
 	return (int)m_vtStylelist.size();
 }
 
-duStyleBase *WINAPI duStyleGroup::GetStyle(int nIndex)
+duStyleBase *duStyleGroup::GetStyle(int nIndex)
 {
 	int nStyleCount = GetStyleCount();
 	if (nIndex < 0 || nIndex >= nStyleCount)
@@ -244,12 +242,12 @@ duStyleBase *WINAPI duStyleGroup::GetStyle(int nIndex)
 	return m_vtStylelist[nIndex];
 }
 
-void WINAPI duStyleGroup::AddStyle(duStyleBase *pStyleBase)
+void duStyleGroup::AddStyle(duStyleBase *pStyleBase)
 {
 	m_vtStylelist.push_back(pStyleBase);
 }
 
-void WINAPI duStyleGroup::CalcTextRect(UINT uState, LPCTSTR lpszText, LPSIZE lpOutSize)
+void duStyleGroup::CalcTextRect(UINT uState, LPCTSTR lpszText, LPSIZE lpOutSize)
 {
 	if (lpOutSize == NULL || lpszText == NULL)
 		return;
@@ -269,7 +267,7 @@ void WINAPI duStyleGroup::CalcTextRect(UINT uState, LPCTSTR lpszText, LPSIZE lpO
 	}
 }
 
-BOOL WINAPI duStyleGroup::RemoveStyle(int nIndex)
+BOOL duStyleGroup::RemoveStyle(int nIndex)
 {
 	int nStyleCount = GetStyleCount();
 	if (nIndex < 0 || nIndex >= nStyleCount)
@@ -300,7 +298,7 @@ BOOL WINAPI duStyleGroup::RemoveStyle(int nIndex)
 }
 
 
-BOOL WINAPI duStyleGroup::MoveUp(int nIndex)
+BOOL duStyleGroup::MoveUp(int nIndex)
 {
 	int nStyleCount = GetStyleCount();
 	if (nIndex >= nStyleCount || nIndex <= 0)
@@ -312,7 +310,7 @@ BOOL WINAPI duStyleGroup::MoveUp(int nIndex)
 	return TRUE;
 }
 
-BOOL WINAPI duStyleGroup::MoveDown(int nIndex)
+BOOL duStyleGroup::MoveDown(int nIndex)
 {
 	int nStyleCount = GetStyleCount();
 	if (nIndex >= nStyleCount || nIndex < 0)
@@ -324,7 +322,7 @@ BOOL WINAPI duStyleGroup::MoveDown(int nIndex)
 	return TRUE;
 }
 
-duStyleBase *WINAPI CreateChildStyle(LPCTSTR lpszType)
+duStyleBase *CreateChildStyle(LPCTSTR lpszType)
 {
 	if (lpszType == NULL)
 		return NULL;

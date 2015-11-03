@@ -8,7 +8,6 @@
 //  History:    Jun-20-11   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duOutlookBar.h"
 
 duOutlookBar::duOutlookBar() :
@@ -32,17 +31,17 @@ duOutlookBar::~duOutlookBar()
 	m_vtItems.clear();
 }
 
-void WINAPI duOutlookBar::RegisterControlProperty()
+void duOutlookBar::RegisterControlProperty()
 {
 	RegisterProperty(_T("itemstyle"), DU_PROPERTY_STYLEGROUP, m_szItemStyle);
 	RegisterProperty(_T("itemheight"), DU_PROPERTY_LONG, &m_nItemHeight);
 }
 
-void WINAPI duOutlookBar::OnCreate()
+void duOutlookBar::OnCreate()
 {
 }
 
-void WINAPI duOutlookBar::DrawObject(HDC hDC)
+void duOutlookBar::DrawObject(HDC hDC)
 {
 	duRect rect;
 	GetRect(&rect);
@@ -77,7 +76,7 @@ void WINAPI duOutlookBar::DrawObject(HDC hDC)
 	}
 }
 
-void WINAPI duOutlookBar::OnMouseLeave(POINT pt)
+void duOutlookBar::OnMouseLeave(POINT pt)
 {
 	int i;
 	OutlookBarItem *pOutlookBarItem = NULL;
@@ -99,7 +98,7 @@ void WINAPI duOutlookBar::OnMouseLeave(POINT pt)
 		Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duOutlookBar::OnMouseLDown(POINT pt)
+void duOutlookBar::OnMouseLDown(POINT pt)
 {
 	duRect rect;
 	GetRect(&rect);
@@ -139,7 +138,7 @@ void WINAPI duOutlookBar::OnMouseLDown(POINT pt)
 
 }
 
-void WINAPI duOutlookBar::OnMouseLUp(POINT pt)
+void duOutlookBar::OnMouseLUp(POINT pt)
 {
 	duRect rect;
 	GetRect(&rect);
@@ -182,7 +181,7 @@ void WINAPI duOutlookBar::OnMouseLUp(POINT pt)
 
 }
 
-void WINAPI duOutlookBar::OnMouseMove(POINT pt)
+void duOutlookBar::OnMouseMove(POINT pt)
 {
 	duRect rect;
 	GetRect(&rect);
@@ -230,12 +229,12 @@ void WINAPI duOutlookBar::OnMouseMove(POINT pt)
 
 }
 
-int WINAPI duOutlookBar::GetItemCount()
+int duOutlookBar::GetItemCount()
 {
 	return (int)m_vtItems.size();
 }
 
-BOOL WINAPI duOutlookBar::InsertItem(int nIndex, LPCTSTR lpszText, duPlugin *pChild)
+BOOL duOutlookBar::InsertItem(int nIndex, LPCTSTR lpszText, duPlugin *pChild)
 {
 	int nItemCount = GetItemCount();
 	if (nIndex < 0 || nIndex > nItemCount)
@@ -253,7 +252,7 @@ BOOL WINAPI duOutlookBar::InsertItem(int nIndex, LPCTSTR lpszText, duPlugin *pCh
 	return TRUE;
 }
 
-LPCTSTR WINAPI duOutlookBar::GetItemText(int nIndex)
+LPCTSTR duOutlookBar::GetItemText(int nIndex)
 {
 	if (nIndex < 0 || nIndex >= GetItemCount())
 		return NULL;
@@ -265,7 +264,7 @@ LPCTSTR WINAPI duOutlookBar::GetItemText(int nIndex)
 	return NULL;
 }
 
-void WINAPI duOutlookBar::SetItemText(int nIndex, LPCTSTR lpszText)
+void duOutlookBar::SetItemText(int nIndex, LPCTSTR lpszText)
 {
 	if (nIndex < 0 || nIndex >= GetItemCount())
 		return;
@@ -275,7 +274,7 @@ void WINAPI duOutlookBar::SetItemText(int nIndex, LPCTSTR lpszText)
 		pOutlookBarItem->strText = lpszText;
 }
 
-duPlugin *WINAPI duOutlookBar::GetItem(int nIndex)
+duPlugin *duOutlookBar::GetItem(int nIndex)
 {
 	if (nIndex < 0 || nIndex >= GetItemCount())
 		return NULL;
@@ -287,7 +286,7 @@ duPlugin *WINAPI duOutlookBar::GetItem(int nIndex)
 	return NULL;
 }
 
-void WINAPI duOutlookBar::SetItem(int nIndex, duPlugin *pChild)
+void duOutlookBar::SetItem(int nIndex, duPlugin *pChild)
 {
 	if (nIndex < 0 || nIndex >= GetItemCount())
 		return;
@@ -297,7 +296,7 @@ void WINAPI duOutlookBar::SetItem(int nIndex, duPlugin *pChild)
 		pOutlookBarItem->pChild = pChild;
 }
 
-BOOL WINAPI duOutlookBar::DeleteItem(int nIndex)
+BOOL duOutlookBar::DeleteItem(int nIndex)
 {
 	if (nIndex < 0 || nIndex >= GetItemCount())
 		return FALSE;
@@ -320,7 +319,7 @@ BOOL WINAPI duOutlookBar::DeleteItem(int nIndex)
 	return FALSE;
 }
 
-int WINAPI duOutlookBar::GetSelectedItem()
+int duOutlookBar::GetSelectedItem()
 {
 	int i;
 	for (i = 0; i < (int)m_vtItems.size(); i++)
@@ -332,7 +331,7 @@ int WINAPI duOutlookBar::GetSelectedItem()
 	return -1;
 }
 
-void WINAPI duOutlookBar::SetSelectedItem(int nIndex)
+void duOutlookBar::SetSelectedItem(int nIndex)
 {
 	duRect rect;
 	GetRect(&rect);

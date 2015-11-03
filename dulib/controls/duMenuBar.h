@@ -25,30 +25,30 @@ typedef struct tagMENUBARITEM {
 class duMenuBar : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual LRESULT WINAPI OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-	virtual void WINAPI DrawObject(HDC hDC);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual LRESULT OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	virtual void DrawObject(HDC hDC);
 
-	virtual void WINAPI OnMouseMove(POINT pt);
-	virtual void WINAPI OnMouseLeave(POINT pt);
-	virtual void WINAPI OnMouseLDown(POINT pt);
+	virtual void OnMouseMove(POINT pt);
+	virtual void OnMouseLeave(POINT pt);
+	virtual void OnMouseLDown(POINT pt);
 
-	virtual LPCTSTR WINAPI GetItemStyle();
-	virtual void WINAPI SetItemStyle(LPCTSTR lpszItemStyle);
+	virtual LPCTSTR GetItemStyle();
+	virtual void SetItemStyle(LPCTSTR lpszItemStyle);
 
-	virtual int WINAPI GetItemFixWidth();
-	virtual void WINAPI SetItemFixWidth(int nFixWidth);
+	virtual int GetItemFixWidth();
+	virtual void SetItemFixWidth(int nFixWidth);
 
-	virtual HMENU WINAPI GetHMenu();
-	virtual void WINAPI SetHMenu(HMENU hMenu);
+	virtual HMENU GetHMenu();
+	virtual void SetHMenu(HMENU hMenu);
 	
-	virtual int WINAPI GetMenuItemCount() { return (int)m_vtMenuItem.size(); }
+	virtual int GetMenuItemCount() { return (int)m_vtMenuItem.size(); }
 
-	virtual void  WINAPI RefreshMenuBar();
+	virtual void  RefreshMenuBar();
 
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duMenuBar"); }
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duMenuBar"); }
 
 public:
 	duMenuBar(void);

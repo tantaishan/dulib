@@ -8,7 +8,6 @@
 //  History:    Nov-10-2009   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duAnimation.h"
 #include "duCtrlManager.h"
 #include "duDrawHelper.h"
@@ -39,7 +38,7 @@ duAnimation::~duAnimation()
 	Plugin_UnHookWindowMessage(this);
 }
 
-void WINAPI duAnimation::RegisterControlProperty()
+void duAnimation::RegisterControlProperty()
 {
 	//RegisterProperty(_T("acceleration"), DU_PROPERTY_LONG,&m_nAcceleration);
 	RegisterProperty(_T("frame"), DU_PROPERTY_LONG, &m_nFrameCount);
@@ -66,7 +65,7 @@ DWORD WINAPI AnimationThread(LPVOID pvParam)
 	}
 }
 
-void WINAPI duAnimation::OnCreate()
+void duAnimation::OnCreate()
 {	
 	m_hTimerEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
 	m_hExitEvent = CreateEvent(NULL, TRUE, FALSE, NULL);
@@ -74,7 +73,7 @@ void WINAPI duAnimation::OnCreate()
 	Plugin_HookWindowMessage(this);
 }
 
-void WINAPI duAnimation::DrawObject(HDC hDC)
+void duAnimation::DrawObject(HDC hDC)
 {
 	duImage *pImage = (duImage *)GetResObj(m_szAnimation, DU_RES_IMAGE);
 	if (pImage == NULL)
@@ -85,7 +84,7 @@ void WINAPI duAnimation::DrawObject(HDC hDC)
 	DrawNormal(hDC, 0, 0, pImage->GetWidth() / m_nFrameCount, pImage->GetHeight(), pImage, left, 0, GetAlpha());
 }
 
-LRESULT WINAPI duAnimation::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT duAnimation::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	if (!Plugin_IsVisible(this))
 		return 0;
@@ -101,7 +100,7 @@ LRESULT WINAPI duAnimation::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARA
 	return 0;
 }
 
-void WINAPI duAnimation::Play()
+void duAnimation::Play()
  {
 	duImage *pImage = (duImage *)GetResObj(m_szAnimation, DU_RES_IMAGE);
 	if (pImage == NULL)
@@ -116,7 +115,7 @@ void WINAPI duAnimation::Play()
 	m_hThread = CreateThread(NULL, 0, AnimationThread, this, 0, &dwThreadId);
 }
 
-void WINAPI duAnimation::SetAnimation(LPCTSTR lpszName)
+void duAnimation::SetAnimation(LPCTSTR lpszName)
 {
 	if (lpszName)
 		_tcscpy(m_szAnimation, lpszName);
@@ -124,7 +123,7 @@ void WINAPI duAnimation::SetAnimation(LPCTSTR lpszName)
 		ZeroMemory(m_szAnimation, sizeof(TCHAR) * MAX_NAME);
 }
 
-void WINAPI duAnimation::StopPlay()
+void duAnimation::StopPlay()
 {
 	if (m_hThread)
 	{

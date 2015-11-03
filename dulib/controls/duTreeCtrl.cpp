@@ -8,7 +8,6 @@
 //  History:    Feb-21-2011   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duTreeCtrl.h"
 #include "duDrawHelper.h"
 #include "duCtrlManager.h"
@@ -54,7 +53,7 @@ duTreeCtrl::~duTreeCtrl()
 	}
 }
 
-void WINAPI duTreeCtrl::RegisterControlProperty()
+void duTreeCtrl::RegisterControlProperty()
 {
 	RegisterProperty(_T("itemstyle"), DU_PROPERTY_STYLEGROUP, m_szItemStyle);
 	RegisterProperty(_T("font"), DU_PROPERTY_FONT, m_szFont);
@@ -71,12 +70,12 @@ void WINAPI duTreeCtrl::RegisterControlProperty()
 	duScrollView::RegisterControlProperty();
 }
 
-void WINAPI duTreeCtrl::OnCreate()
+void duTreeCtrl::OnCreate()
 {
 	duScrollView::OnCreate();
 }
 
-void WINAPI duTreeCtrl::DrawObject(HDC hDC)
+void duTreeCtrl::DrawObject(HDC hDC)
 {
 	duRect rcTreeCtrl;
 	Plugin_GetRect(this, &rcTreeCtrl);
@@ -169,7 +168,7 @@ void WINAPI duTreeCtrl::DrawObject(HDC hDC)
 	::DeleteDC(hMemDC);
 }
 
-void WINAPI duTreeCtrl::OnMouseMove(POINT pt)
+void duTreeCtrl::OnMouseMove(POINT pt)
 {
 	duCtrlManager *pCtrlManager = GetCtrlManager(m_hWnd);
 	duRect rcTreeCtrl;
@@ -223,7 +222,7 @@ void WINAPI duTreeCtrl::OnMouseMove(POINT pt)
 	}
 }
 
-void WINAPI duTreeCtrl::OnMouseLeave(POINT pt)
+void duTreeCtrl::OnMouseLeave(POINT pt)
 {
 	if (m_pHot)
 	{
@@ -234,7 +233,7 @@ void WINAPI duTreeCtrl::OnMouseLeave(POINT pt)
 	m_hitCode = tc_hit_empty;
 }
 
-void WINAPI duTreeCtrl::OnMouseHover(POINT pt)
+void duTreeCtrl::OnMouseHover(POINT pt)
 {
 	if(m_pHot)
 	{
@@ -253,7 +252,7 @@ void WINAPI duTreeCtrl::OnMouseHover(POINT pt)
 	}
 }
 
-void WINAPI duTreeCtrl::OnMouseLDown(POINT pt)
+void duTreeCtrl::OnMouseLDown(POINT pt)
 {
 	BOOL fRedraw = FALSE;
 
@@ -277,11 +276,11 @@ void WINAPI duTreeCtrl::OnMouseLDown(POINT pt)
 		Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duTreeCtrl::OnMouseLUp(POINT pt)
+void duTreeCtrl::OnMouseLUp(POINT pt)
 {
 }
 
-void WINAPI duTreeCtrl::OnMouseRDown(POINT pt)
+void duTreeCtrl::OnMouseRDown(POINT pt)
 {
 	BOOL fRedraw = FALSE;
 	if ((m_pHot) && (m_hitCode == tc_hit_indent))
@@ -304,11 +303,11 @@ void WINAPI duTreeCtrl::OnMouseRDown(POINT pt)
 		Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duTreeCtrl::OnMouseRUp(POINT pt)
+void duTreeCtrl::OnMouseRUp(POINT pt)
 {
 }
 
-void WINAPI duTreeCtrl::OnMouseDbClick(POINT pt)
+void duTreeCtrl::OnMouseDbClick(POINT pt)
 {
 	BOOL fRedraw = FALSE;
 
@@ -331,15 +330,15 @@ void WINAPI duTreeCtrl::OnMouseDbClick(POINT pt)
 		Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duTreeCtrl::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+void duTreeCtrl::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 }
 
-void WINAPI duTreeCtrl::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
+void duTreeCtrl::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 }
 
-void WINAPI duTreeCtrl::GetViewSize(LPSIZE lpSize)
+void duTreeCtrl::GetViewSize(LPSIZE lpSize)
 {
 	if (lpSize == NULL)
 		return;
@@ -361,7 +360,7 @@ void WINAPI duTreeCtrl::GetViewSize(LPSIZE lpSize)
 	lpSize->cy = nTotalHeight;
 }
 
-TreeCtrlItem *WINAPI duTreeCtrl::InsertItem(LPCTSTR lpszText, LPCTSTR lpszImage, TreeCtrlItem *pParent, TreeCtrlItem *pInsertAfter)
+TreeCtrlItem *duTreeCtrl::InsertItem(LPCTSTR lpszText, LPCTSTR lpszImage, TreeCtrlItem *pParent, TreeCtrlItem *pInsertAfter)
 {
 	TreeCtrlItem *pNewItem = new TreeCtrlItem;
 	pNewItem->strText = lpszText;
@@ -413,7 +412,7 @@ TreeCtrlItem *WINAPI duTreeCtrl::InsertItem(LPCTSTR lpszText, LPCTSTR lpszImage,
 	return pNewItem;
 }
 
-BOOL WINAPI duTreeCtrl::DeleteItem(TreeCtrlItem *pItem)
+BOOL duTreeCtrl::DeleteItem(TreeCtrlItem *pItem)
 {
 	if (pItem == TCVI_ROOT || !pItem)
 		pItem = m_pRoot;
@@ -471,7 +470,7 @@ BOOL duTreeCtrl::DeleteItemT(TreeCtrlItem *pItem)
 	return TRUE;
 }
 
-BOOL WINAPI duTreeCtrl::ItemHasChildren(TreeCtrlItem *pItem)
+BOOL duTreeCtrl::ItemHasChildren(TreeCtrlItem *pItem)
 {
 	if (pItem == NULL || pItem == TCVI_ROOT)
 		pItem = m_pRoot;
@@ -595,7 +594,7 @@ TreeCtrlItem *duTreeCtrl::yHitTest(const duRect &rcTreeCtrl, const POINT pt, duR
 	return NULL;
 }
 
-void WINAPI duTreeCtrl::SetItemStyle(LPCTSTR lpszStyle)
+void duTreeCtrl::SetItemStyle(LPCTSTR lpszStyle)
 {
 	if (lpszStyle)
 		_tcsncpy(m_szItemStyle, lpszStyle, MAX_NAME);
@@ -603,7 +602,7 @@ void WINAPI duTreeCtrl::SetItemStyle(LPCTSTR lpszStyle)
 		ZeroMemory(m_szItemStyle, MAX_NAME * sizeof(TCHAR));
 }
 
-void WINAPI duTreeCtrl::SetIndentStyle(LPCTSTR lpszStyle)
+void duTreeCtrl::SetIndentStyle(LPCTSTR lpszStyle)
 {
 	if (lpszStyle)
 		_tcsncpy(m_szIndentStyle, lpszStyle, MAX_NAME);
@@ -611,7 +610,7 @@ void WINAPI duTreeCtrl::SetIndentStyle(LPCTSTR lpszStyle)
 		ZeroMemory(m_szIndentStyle, MAX_NAME * sizeof(TCHAR));
 }
 
-void WINAPI duTreeCtrl::SetFont(LPCTSTR lpszFont)
+void duTreeCtrl::SetFont(LPCTSTR lpszFont)
 {
 	if (lpszFont)
 	{
@@ -631,7 +630,7 @@ void WINAPI duTreeCtrl::SetFont(LPCTSTR lpszFont)
 	}
 }
 
-void WINAPI duTreeCtrl::SetItemHeight(int nItemHeight)
+void duTreeCtrl::SetItemHeight(int nItemHeight)
 {
 	if (nItemHeight > 0)
 	{
@@ -641,7 +640,7 @@ void WINAPI duTreeCtrl::SetItemHeight(int nItemHeight)
 	}
 }
 
-TreeCtrlItem *WINAPI duTreeCtrl::GetNextItem(TreeCtrlItem *pItem)
+TreeCtrlItem *duTreeCtrl::GetNextItem(TreeCtrlItem *pItem)
 {
 	if (pItem->pFirstChild)
 		return pItem->pFirstChild;
@@ -657,7 +656,7 @@ checkNext:
 	return NULL;
 }
 
-LPCTSTR WINAPI duTreeCtrl::GetItemText(TreeCtrlItem *pItem)
+LPCTSTR duTreeCtrl::GetItemText(TreeCtrlItem *pItem)
 {
 	if (pItem == NULL)
 		return NULL;
@@ -665,7 +664,7 @@ LPCTSTR WINAPI duTreeCtrl::GetItemText(TreeCtrlItem *pItem)
 	return pItem->strText.c_str();
 }
 
-void WINAPI duTreeCtrl::SetItemText(TreeCtrlItem *pItem, LPCTSTR lpszText)
+void duTreeCtrl::SetItemText(TreeCtrlItem *pItem, LPCTSTR lpszText)
 {
 	if (pItem == NULL)
 		return;
@@ -673,7 +672,7 @@ void WINAPI duTreeCtrl::SetItemText(TreeCtrlItem *pItem, LPCTSTR lpszText)
 	pItem->strText = lpszText;
 }
 
-LPCTSTR WINAPI duTreeCtrl::GetItemIcon(TreeCtrlItem *pItem)
+LPCTSTR duTreeCtrl::GetItemIcon(TreeCtrlItem *pItem)
 {
 	if (pItem == NULL)
 		return NULL;
@@ -681,7 +680,7 @@ LPCTSTR WINAPI duTreeCtrl::GetItemIcon(TreeCtrlItem *pItem)
 	return pItem->strImage.c_str();
 }
 
-void WINAPI duTreeCtrl::SetItemIcon(TreeCtrlItem *pItem, LPCTSTR lpszIcon)
+void duTreeCtrl::SetItemIcon(TreeCtrlItem *pItem, LPCTSTR lpszIcon)
 {
 	if (pItem == NULL)
 		return;
@@ -689,7 +688,7 @@ void WINAPI duTreeCtrl::SetItemIcon(TreeCtrlItem *pItem, LPCTSTR lpszIcon)
 	pItem->strImage = lpszIcon;
 }
 
-int WINAPI duTreeCtrl::GetItemLevel(TreeCtrlItem *pItem)
+int duTreeCtrl::GetItemLevel(TreeCtrlItem *pItem)
 {
 	if (pItem == NULL)
 		return -1;
@@ -697,7 +696,7 @@ int WINAPI duTreeCtrl::GetItemLevel(TreeCtrlItem *pItem)
 	return pItem->nLevel;
 }
 
-BOOL WINAPI duTreeCtrl::IsExpand(TreeCtrlItem *pItem)
+BOOL duTreeCtrl::IsExpand(TreeCtrlItem *pItem)
 {
 	if (pItem == NULL)
 		return FALSE;
@@ -705,7 +704,7 @@ BOOL WINAPI duTreeCtrl::IsExpand(TreeCtrlItem *pItem)
 	return pItem->fExpand;
 }
 
-void WINAPI duTreeCtrl::Expand(TreeCtrlItem *pItem, BOOL fExpand)
+void duTreeCtrl::Expand(TreeCtrlItem *pItem, BOOL fExpand)
 {
 	if (pItem == NULL || pItem->fExpand == fExpand)
 		return;
@@ -714,7 +713,7 @@ void WINAPI duTreeCtrl::Expand(TreeCtrlItem *pItem, BOOL fExpand)
 	UpdateScroll();
 }
 
-TreeCtrlItem *WINAPI duTreeCtrl::GetParent(TreeCtrlItem *pItem)
+TreeCtrlItem *duTreeCtrl::GetParent(TreeCtrlItem *pItem)
 {
 	if (pItem == NULL)
 		return NULL;
@@ -722,7 +721,7 @@ TreeCtrlItem *WINAPI duTreeCtrl::GetParent(TreeCtrlItem *pItem)
 	return pItem->pParent;
 }
 
-TreeCtrlItem *WINAPI duTreeCtrl::GetNextSibling(TreeCtrlItem *pItem)
+TreeCtrlItem *duTreeCtrl::GetNextSibling(TreeCtrlItem *pItem)
 {
 	if (pItem == NULL)
 		return NULL;
@@ -730,7 +729,7 @@ TreeCtrlItem *WINAPI duTreeCtrl::GetNextSibling(TreeCtrlItem *pItem)
 	return pItem->pNextSibling;
 }
 
-TreeCtrlItem *WINAPI duTreeCtrl::GetFirstChild(TreeCtrlItem *pItem)
+TreeCtrlItem *duTreeCtrl::GetFirstChild(TreeCtrlItem *pItem)
 {
 	if (pItem == NULL)
 		return NULL;
@@ -738,19 +737,19 @@ TreeCtrlItem *WINAPI duTreeCtrl::GetFirstChild(TreeCtrlItem *pItem)
 	return pItem->pFirstChild;
 }
 
-void WINAPI duTreeCtrl::DeleteAllItems()
+void duTreeCtrl::DeleteAllItems()
 {
 	DeleteItem(m_pRoot);
 }
 
-INT_PTR WINAPI duTreeCtrl::GetItemData(TreeCtrlItem *pItem)
+INT_PTR duTreeCtrl::GetItemData(TreeCtrlItem *pItem)
 {
 	if(pItem)
 		return pItem->lParam;
 	return NULL;
 }
 
-BOOL WINAPI duTreeCtrl::SetItemData(TreeCtrlItem *pItem, INT_PTR pData)
+BOOL duTreeCtrl::SetItemData(TreeCtrlItem *pItem, INT_PTR pData)
 {
 	if(pItem)
 	{
@@ -760,7 +759,7 @@ BOOL WINAPI duTreeCtrl::SetItemData(TreeCtrlItem *pItem, INT_PTR pData)
 	return FALSE;
 }
 
-void WINAPI duTreeCtrl::SetAutoShowTooltip(BOOL fAutoShowTooltip)
+void duTreeCtrl::SetAutoShowTooltip(BOOL fAutoShowTooltip)
 {
 	m_fAutoShowToolTip = fAutoShowTooltip;
 	if(m_fAutoShowToolTip)
@@ -774,7 +773,7 @@ void WINAPI duTreeCtrl::SetAutoShowTooltip(BOOL fAutoShowTooltip)
 	}
 }
 
-TreeCtrlItem * WINAPI duTreeCtrl::HitTest(LPPOINT lppt)
+TreeCtrlItem * duTreeCtrl::HitTest(LPPOINT lppt)
 {
 	duRect rcTreeCtrl;
 	Plugin_GetRect(this, &rcTreeCtrl);

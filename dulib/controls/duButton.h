@@ -19,78 +19,78 @@
 class duButton : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
-	virtual void WINAPI OnMouseIn(POINT pt);
-	virtual void WINAPI OnMouseLeave(POINT pt);
-	virtual void WINAPI OnMouseLDown(POINT pt);
-	virtual void WINAPI OnMouseLUp(POINT pt);
-	virtual void WINAPI OnMouseDbClick(POINT pt);
-	virtual void WINAPI OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
-	virtual void WINAPI OnRedraw();
-	virtual void WINAPI OnTimer(UINT nEventId);
-	virtual BOOL WINAPI OnKillFocus(duPlugin *pNewFocus) { return TRUE; }
-	virtual BOOL WINAPI OnSetFocus(duPlugin *pOldFocus) { return TRUE; }
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
+	virtual void OnMouseIn(POINT pt);
+	virtual void OnMouseLeave(POINT pt);
+	virtual void OnMouseLDown(POINT pt);
+	virtual void OnMouseLUp(POINT pt);
+	virtual void OnMouseDbClick(POINT pt);
+	virtual void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
+	virtual void OnRedraw();
+	virtual void OnTimer(UINT nEventId);
+	virtual BOOL OnKillFocus(duPlugin *pNewFocus) { return TRUE; }
+	virtual BOOL OnSetFocus(duPlugin *pOldFocus) { return TRUE; }
 	
-	virtual void WINAPI SetText(LPCTSTR lpszText);
+	virtual void SetText(LPCTSTR lpszText);
 	
-	virtual BOOL WINAPI IsAutoSize() { return m_fAutoSize; }
-	virtual void WINAPI SetAutoSize(BOOL fAutoSize) { m_fAutoSize = fAutoSize; }
+	virtual BOOL IsAutoSize() { return m_fAutoSize; }
+	virtual void SetAutoSize(BOOL fAutoSize) { m_fAutoSize = fAutoSize; }
 
-	virtual int WINAPI GetFixLeft() { return m_nFixLeft; } 
-	virtual void WINAPI SetFixLeft(int nFixLeft) { m_nFixLeft = nFixLeft; }
+	virtual int GetFixLeft() { return m_nFixLeft; } 
+	virtual void SetFixLeft(int nFixLeft) { m_nFixLeft = nFixLeft; }
 
-	virtual int WINAPI GetFixRight() { return m_nFixRight; }
-	virtual void WINAPI SetFixRight(int nFixRight) { m_nFixRight = nFixRight; }
+	virtual int GetFixRight() { return m_nFixRight; }
+	virtual void SetFixRight(int nFixRight) { m_nFixRight = nFixRight; }
 
-	virtual int WINAPI GetIconX() { return m_nIconX; }
-	virtual void WINAPI SetIconX(int nIconX) { m_nIconX = nIconX; }
+	virtual int GetIconX() { return m_nIconX; }
+	virtual void SetIconX(int nIconX) { m_nIconX = nIconX; }
 
-	virtual int WINAPI GetIconY() { return m_nIconY; }
-	virtual void WINAPI SetIconY(int nIconY) { m_nIconY = nIconY; }
+	virtual int GetIconY() { return m_nIconY; }
+	virtual void SetIconY(int nIconY) { m_nIconY = nIconY; }
 
-	virtual int WINAPI GetIconWidth() { return m_nIconWidth; }
-	virtual void WINAPI SetIconWidth(int nIconWidth) { m_nIconWidth = nIconWidth; }
+	virtual int GetIconWidth() { return m_nIconWidth; }
+	virtual void SetIconWidth(int nIconWidth) { m_nIconWidth = nIconWidth; }
 
-	virtual int WINAPI GetIconHeight() { return m_nIconHeight; }
-	virtual void WINAPI SetIconHeight(int nIconHeight) { m_nIconHeight = nIconHeight; }
+	virtual int GetIconHeight() { return m_nIconHeight; }
+	virtual void SetIconHeight(int nIconHeight) { m_nIconHeight = nIconHeight; }
 
-	virtual LPCTSTR WINAPI GetIcon() { return m_szIcon; }
-	virtual void WINAPI SetIcon(LPCTSTR lpszIconName);
+	virtual LPCTSTR GetIcon() { return m_szIcon; }
+	virtual void SetIcon(LPCTSTR lpszIconName);
 
-	virtual BOOL WINAPI IsFade() { return m_fFade; }
-	virtual void WINAPI SetFade(BOOL fFade) { m_fFade = fFade; }
+	virtual BOOL IsFade() { return m_fFade; }
+	virtual void SetFade(BOOL fFade) { m_fFade = fFade; }
 
-	virtual int WINAPI GetFadeInSpeed() { return m_nFadeInSpeed; }
-	virtual void WINAPI SetFadeInSpeed(int nFadeInSpeed) { m_nFadeInSpeed = nFadeInSpeed; }
+	virtual int GetFadeInSpeed() { return m_nFadeInSpeed; }
+	virtual void SetFadeInSpeed(int nFadeInSpeed) { m_nFadeInSpeed = nFadeInSpeed; }
 
-	virtual int WINAPI GetFadeOutSpeed() { return m_nFadeOutSpeed; }
-	virtual void WINAPI SetFadeOutSpeed(int nFadeOutSpeed) { m_nFadeOutSpeed = nFadeOutSpeed; }
+	virtual int GetFadeOutSpeed() { return m_nFadeOutSpeed; }
+	virtual void SetFadeOutSpeed(int nFadeOutSpeed) { m_nFadeOutSpeed = nFadeOutSpeed; }
 
-	virtual LPCTSTR WINAPI GetTooltipText(){return (LPCTSTR)m_szToolTip;}
-	virtual void WINAPI SetTooltipText(LPCTSTR lpszText);
+	virtual LPCTSTR GetTooltipText(){return (LPCTSTR)m_szToolTip;}
+	virtual void SetTooltipText(LPCTSTR lpszText);
 
-	virtual int WINAPI GetStatusIconX() { return m_nStatusIconX; }
-	virtual void WINAPI SetStatusIconX(int nStatusIconX) { m_nStatusIconX = nStatusIconX; }
+	virtual int GetStatusIconX() { return m_nStatusIconX; }
+	virtual void SetStatusIconX(int nStatusIconX) { m_nStatusIconX = nStatusIconX; }
 
-	virtual int WINAPI GetStatusIconY() { return m_nStatusIconY; }
-	virtual void WINAPI SetStatusIconY(int nStatusIconY) { m_nStatusIconY = nStatusIconY; }
+	virtual int GetStatusIconY() { return m_nStatusIconY; }
+	virtual void SetStatusIconY(int nStatusIconY) { m_nStatusIconY = nStatusIconY; }
 
-	virtual int WINAPI GetStatusIconWidth() { return m_nStatusIconWidth; }
-	virtual void WINAPI SetStatusIconWidth(int nStatusIconWidth) { m_nStatusIconWidth = nStatusIconWidth; }
+	virtual int GetStatusIconWidth() { return m_nStatusIconWidth; }
+	virtual void SetStatusIconWidth(int nStatusIconWidth) { m_nStatusIconWidth = nStatusIconWidth; }
 
-	virtual int WINAPI GetStatusIconHeight() { return m_nStatusIconHeight; }
-	virtual void WINAPI SeStatustIconHeight(int nStatusIconHeight) { m_nStatusIconHeight = nStatusIconHeight; }
+	virtual int GetStatusIconHeight() { return m_nStatusIconHeight; }
+	virtual void SeStatustIconHeight(int nStatusIconHeight) { m_nStatusIconHeight = nStatusIconHeight; }
 
-	virtual LPCTSTR WINAPI GetStatusIcon() { return m_szStatusIcon; }
-	virtual void WINAPI SetStatusIcon(LPCTSTR lpszStatusIconName);
+	virtual LPCTSTR GetStatusIcon() { return m_szStatusIcon; }
+	virtual void SetStatusIcon(LPCTSTR lpszStatusIconName);
 
-	virtual BOOL WINAPI IsGrayDisable();
-	virtual void WINAPI SetGrayDisable(BOOL fGrayDisable);
+	virtual BOOL IsGrayDisable();
+	virtual void SetGrayDisable(BOOL fGrayDisable);
 
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duButton"); }	
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duButton"); }	
 
 public:
 	duButton();

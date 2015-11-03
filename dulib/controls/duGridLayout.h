@@ -20,34 +20,34 @@
 class duGridLayout : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
 	
-	virtual BOOL WINAPI IsGridLayout() { return m_fGrid; }
-	virtual void WINAPI SetGridLayout(BOOL fGrid) { m_fGrid = fGrid; }
+	virtual BOOL IsGridLayout() { return m_fGrid; }
+	virtual void SetGridLayout(BOOL fGrid) { m_fGrid = fGrid; }
 
-	virtual int WINAPI GetStartX() { return m_nStartX; }
-	virtual void WINAPI SetStartX(int nStartX) { m_nStartX = nStartX; }
+	virtual int GetStartX() { return m_nStartX; }
+	virtual void SetStartX(int nStartX) { m_nStartX = nStartX; }
 
-	virtual int WINAPI GetStartY() { return m_nStartY; }
-	virtual void WINAPI SetStartY(int nStartY) { m_nStartY = nStartY; }
+	virtual int GetStartY() { return m_nStartY; }
+	virtual void SetStartY(int nStartY) { m_nStartY = nStartY; }
 
-	virtual int WINAPI GetXSpace() { return m_nXSpace; }
-	virtual void WINAPI SetXSpace(int nXSpace) { m_nXSpace = nXSpace; }
+	virtual int GetXSpace() { return m_nXSpace; }
+	virtual void SetXSpace(int nXSpace) { m_nXSpace = nXSpace; }
 
-	virtual int WINAPI GetYSpace() { return m_nYSpace; }
-	virtual void WINAPI SetYSpace(int nYSpace) { m_nYSpace = nYSpace; }
+	virtual int GetYSpace() { return m_nYSpace; }
+	virtual void SetYSpace(int nYSpace) { m_nYSpace = nYSpace; }
 
-	virtual int WINAPI GetMaxCount() { return m_nMaxCount; }
+	virtual int GetMaxCount() { return m_nMaxCount; }
 
-	virtual int WINAPI GetItemWidth() { return m_nItemWidth; }
-	virtual void WINAPI SetItemWidth(int nItemWidth) { m_nItemWidth = nItemWidth; }
+	virtual int GetItemWidth() { return m_nItemWidth; }
+	virtual void SetItemWidth(int nItemWidth) { m_nItemWidth = nItemWidth; }
 
-	virtual int WINAPI GetItemHeight() { return m_nItemHeight; }
-	virtual void WINAPI SetItemHeight(int nItemHeight) { m_nItemHeight = nItemHeight; }
+	virtual int GetItemHeight() { return m_nItemHeight; }
+	virtual void SetItemHeight(int nItemHeight) { m_nItemHeight = nItemHeight; }
 
-	virtual void WINAPI AdjustGrid();
+	virtual void AdjustGrid();
 	
 public:
 	duGridLayout();

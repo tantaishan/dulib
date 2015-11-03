@@ -20,33 +20,33 @@
 class duListBoxEx : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
 
-	virtual void WINAPI Resize(LPRECT lpRect);
-	virtual void WINAPI OnVScroll(ScrollBarAction sbAction, int nPos);
-	virtual void WINAPI OnChildShow(duPlugin *pChild, BOOL fVisible);
-	virtual LRESULT WINAPI OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-	virtual void WINAPI OnChildDelete(duPlugin *pChild);
+	virtual void Resize(LPRECT lpRect);
+	virtual void OnVScroll(ScrollBarAction sbAction, int nPos);
+	virtual void OnChildShow(duPlugin *pChild, BOOL fVisible);
+	virtual LRESULT OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	virtual void OnChildDelete(duPlugin *pChild);
 
-	virtual LPCTSTR WINAPI GetItemStyle();
-	virtual void WINAPI SetItemStyle(LPCTSTR pStyle);
+	virtual LPCTSTR GetItemStyle();
+	virtual void SetItemStyle(LPCTSTR pStyle);
 
-	virtual duScroll *WINAPI GetVertScrollBar();
-	virtual duPlugin *WINAPI GetHotItem() { return m_pHotItem; }
-	virtual duPlugin *WINAPI GetSelItem() { return m_pSelItem; }
-	virtual duPlugin *WINAPI GetPressItem() { return m_pPressItem; }
+	virtual duScroll *GetVertScrollBar();
+	virtual duPlugin *GetHotItem() { return m_pHotItem; }
+	virtual duPlugin *GetSelItem() { return m_pSelItem; }
+	virtual duPlugin *GetPressItem() { return m_pPressItem; }
 
-	virtual void WINAPI SetHotItem(duPlugin *pPlugin) { m_pHotItem = pPlugin; }
-	virtual void WINAPI SetSelItem(duPlugin *pPlugin) { m_pSelItem = pPlugin; }
-	virtual void WINAPI SetPressItem(duPlugin *pPlugin) { m_pPressItem = pPlugin; }
+	virtual void SetHotItem(duPlugin *pPlugin) { m_pHotItem = pPlugin; }
+	virtual void SetSelItem(duPlugin *pPlugin) { m_pSelItem = pPlugin; }
+	virtual void SetPressItem(duPlugin *pPlugin) { m_pPressItem = pPlugin; }
 
-	virtual void WINAPI RefreshPane();
-	virtual void WINAPI SetVertScrollBar(LPCTSTR lpszScroll);
+	virtual void RefreshPane();
+	virtual void SetVertScrollBar(LPCTSTR lpszScroll);
 	
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duListBoxEx"); }	
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duListBoxEx"); }	
 
 public:
 	duListBoxEx();

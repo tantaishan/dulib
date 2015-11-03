@@ -8,7 +8,6 @@
 //  History:    Nov-10-95   DavePl  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duResManager.h"
 #include "duImage.h"
 #include "duFont.h"
@@ -110,7 +109,7 @@ BOOL duResManager::LoadResObj(TiXmlElement *pElement, UINT uResType)
 	return TRUE;
 }
 
-BOOL WINAPI duResManager::AddResObj(duResBase *pNewResBase)
+BOOL duResManager::AddResObj(duResBase *pNewResBase)
 {
 	if (pNewResBase == NULL)
 		return FALSE;
@@ -133,7 +132,7 @@ BOOL WINAPI duResManager::AddResObj(duResBase *pNewResBase)
 	return TRUE;
 }
 
-duResBase *WINAPI duResManager::GetResObj(LPCTSTR lpszResName, UINT uResType)
+duResBase *duResManager::GetResObj(LPCTSTR lpszResName, UINT uResType)
 {
 	if (lpszResName == NULL)
 		return NULL;
@@ -151,7 +150,7 @@ duResBase *WINAPI duResManager::GetResObj(LPCTSTR lpszResName, UINT uResType)
 	return pResObj;
 }
 
-BOOL WINAPI duResManager::DeleteResObj(LPCTSTR lpszResName, UINT uResType)
+BOOL duResManager::DeleteResObj(LPCTSTR lpszResName, UINT uResType)
 {
 	if (lpszResName == NULL)
 		return FALSE;
@@ -173,7 +172,7 @@ BOOL WINAPI duResManager::DeleteResObj(LPCTSTR lpszResName, UINT uResType)
 	return FALSE;
 }
 
-BOOL WINAPI duResManager::EraseResObjFromMap(LPCTSTR lpszResName, UINT uResType)
+BOOL duResManager::EraseResObjFromMap(LPCTSTR lpszResName, UINT uResType)
 {
 	if (lpszResName == NULL)
 		return FALSE;
@@ -194,7 +193,7 @@ BOOL WINAPI duResManager::EraseResObjFromMap(LPCTSTR lpszResName, UINT uResType)
 	return FALSE;
 }
 
-BOOL WINAPI duResManager::ResRename(LPCTSTR lpszResName, UINT uResType, LPCTSTR lpszResNewName)
+BOOL duResManager::ResRename(LPCTSTR lpszResName, UINT uResType, LPCTSTR lpszResNewName)
 {
 	if (lpszResName == NULL || lpszResNewName == NULL)
 		return FALSE;
@@ -223,7 +222,7 @@ BOOL WINAPI duResManager::ResRename(LPCTSTR lpszResName, UINT uResType, LPCTSTR 
 	return FALSE;
 }
 
-duResBase *WINAPI duResManager::CreateResObj(LPCTSTR lpszResName, UINT uResType)
+duResBase *duResManager::CreateResObj(LPCTSTR lpszResName, UINT uResType)
 {
 	if (lpszResName == NULL)
 		return FALSE;
@@ -253,7 +252,6 @@ duResBase *WINAPI duResManager::CreateResObj(LPCTSTR lpszResName, UINT uResType)
 
 	if (pResObj)
 	{
-		pResObj->SetTypeInfo(m_pWindowManager->GetTypeInfoByName(pResObj->GetTypeInfoName()));
 		pResObj->SetResManager(this);
 		pResObj->SetName(lpszResName);
 	}
@@ -261,7 +259,7 @@ duResBase *WINAPI duResManager::CreateResObj(LPCTSTR lpszResName, UINT uResType)
 	return pResObj;
 }
 
-duStyleBase *WINAPI duResManager::CreateStyle(UINT uStyleType)
+duStyleBase *duResManager::CreateStyle(UINT uStyleType)
 {
 	duStyleBase *pStyleBase = NULL;
 	switch (uStyleType)
@@ -284,14 +282,13 @@ duStyleBase *WINAPI duResManager::CreateStyle(UINT uStyleType)
 	
 	if (pStyleBase)
 	{
-		pStyleBase->SetTypeInfo(m_pWindowManager->GetTypeInfoByName(pStyleBase->GetTypeInfoName()));
 		pStyleBase->SetResManager(this);
 	}
 
 	return pStyleBase;
 }
 
-int WINAPI duResManager::GetResObjCount(UINT uResType)
+int duResManager::GetResObjCount(UINT uResType)
 {
 	map_ResBase *pMapResBase = m_pMapResBase[uResType-1];
 	if (pMapResBase)
@@ -300,7 +297,7 @@ int WINAPI duResManager::GetResObjCount(UINT uResType)
 	return 0;
 }
 
-duResBase *WINAPI duResManager::GetResObjByIndex(int iIndex, UINT uResType)
+duResBase *duResManager::GetResObjByIndex(int iIndex, UINT uResType)
 {
 	map_ResBase *pMapResBase = m_pMapResBase[uResType-1];
 	if (pMapResBase)
@@ -318,7 +315,7 @@ duResBase *WINAPI duResManager::GetResObjByIndex(int iIndex, UINT uResType)
 	return NULL;
 }
 
-duStyleBase *WINAPI duResManager::CloneChildStyle(duStyleBase *pStyleBase)
+duStyleBase *duResManager::CloneChildStyle(duStyleBase *pStyleBase)
 {
 	if (pStyleBase == NULL)
 		return NULL;
@@ -403,7 +400,7 @@ duStyleBase *WINAPI duResManager::CloneChildStyle(duStyleBase *pStyleBase)
 	return NULL;
 }
 
-duStyleGroup *WINAPI duResManager::CloneStyle(duStyleGroup *pStyleGroup, LPCTSTR lpszResName)
+duStyleGroup *duResManager::CloneStyle(duStyleGroup *pStyleGroup, LPCTSTR lpszResName)
 {
 	if (lpszResName == NULL || *lpszResName == NULL)
 		return NULL;

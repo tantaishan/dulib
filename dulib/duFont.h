@@ -28,28 +28,28 @@
 class duFont : public duResBase
 {
 public:
-	virtual UINT WINAPI GetType() { return DU_RES_FONT; }
-	virtual BOOL WINAPI OnCreate(TiXmlElement *pElement);
+	virtual UINT GetType() { return DU_RES_FONT; }
+	virtual BOOL OnCreate(TiXmlElement *pElement);
 	
-	virtual int WINAPI GetHeight() { return m_nHeight; }
-	virtual void WINAPI SetHeight(int nHeight) { m_nHeight = nHeight; }
-	virtual int WINAPI GetWeight() { return m_nWeight; }
-	virtual void WINAPI SetWeight(int nWeight) { m_nWeight = nWeight; }
-	virtual BOOL WINAPI IsItalic() { return m_fItalic; }
-	virtual void WINAPI SetItalic(BOOL fItalic) { m_fItalic = fItalic; }
-	virtual BOOL WINAPI IsUnderline() { return m_fUnderline; } 
-	virtual void WINAPI SetUnderline(BOOL fUnderline) { m_fUnderline = fUnderline; }
-	virtual BOOL WINAPI IsStrikeOut() { return m_fStrikeOut; }
-	virtual void WINAPI SetStrikeOut(BOOL fStrikeOut) { m_fStrikeOut = fStrikeOut; }
-	virtual LPCTSTR WINAPI GetFontFace() { return m_szFace; }
-	virtual void WINAPI SetFontFace(LPCTSTR lpszFace);
-	virtual HFONT WINAPI GetHFont() { return m_hFont; }
-	virtual void WINAPI SetHFont(HFONT hFont) { m_hFont = hFont; }
+	virtual int GetHeight() { return m_nHeight; }
+	virtual void SetHeight(int nHeight) { m_nHeight = nHeight; }
+	virtual int GetWeight() { return m_nWeight; }
+	virtual void SetWeight(int nWeight) { m_nWeight = nWeight; }
+	virtual BOOL IsItalic() { return m_fItalic; }
+	virtual void SetItalic(BOOL fItalic) { m_fItalic = fItalic; }
+	virtual BOOL IsUnderline() { return m_fUnderline; } 
+	virtual void SetUnderline(BOOL fUnderline) { m_fUnderline = fUnderline; }
+	virtual BOOL IsStrikeOut() { return m_fStrikeOut; }
+	virtual void SetStrikeOut(BOOL fStrikeOut) { m_fStrikeOut = fStrikeOut; }
+	virtual LPCTSTR GetFontFace() { return m_szFace; }
+	virtual void SetFontFace(LPCTSTR lpszFace);
+	virtual HFONT GetHFont() { return m_hFont; }
+	virtual void SetHFont(HFONT hFont) { m_hFont = hFont; }
 	
-	virtual HFONT WINAPI CreateFont();
+	virtual HFONT CreateFont();
 
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duFont"); }
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duFont"); }
 
 public:
 	duFont();

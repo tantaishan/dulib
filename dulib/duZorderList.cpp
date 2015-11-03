@@ -8,7 +8,6 @@
 //  History:    Apl-12-11   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duZorderList.h"
 #include "duCtrlManager.h"
 

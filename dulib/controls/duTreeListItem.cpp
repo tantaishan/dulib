@@ -8,7 +8,6 @@
 //  History:    Nov-10-2009   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duTreeListItem.h"
 #include "duHeaderCtrl.h"
 
@@ -37,7 +36,7 @@ duTreeListItem::~duTreeListItem()
 
 }
 
-void WINAPI duTreeListItem::RegisterControlProperty()
+void duTreeListItem::RegisterControlProperty()
 {
 	RegisterProperty(_T("indentx"), DU_PROPERTY_LONG, &m_nIndentStart);
 
@@ -55,12 +54,12 @@ void WINAPI duTreeListItem::RegisterControlProperty()
 	RegisterProperty(_T("expandspace"), DU_PROPERTY_LONG, &m_nExpandSpace);	
 }
 
-void WINAPI duTreeListItem::OnCreate()
+void duTreeListItem::OnCreate()
 {
 	
 }
 
-void WINAPI duTreeListItem::DrawObject(HDC hDC)
+void duTreeListItem::DrawObject(HDC hDC)
 {
 	duRect rcTreeListItem;
 	GetRect(&rcTreeListItem);
@@ -103,7 +102,7 @@ void WINAPI duTreeListItem::DrawObject(HDC hDC)
 	}
 }
 
-void WINAPI duTreeListItem::OnMouseLDown(POINT pt)
+void duTreeListItem::OnMouseLDown(POINT pt)
 {
 	if (m_pTreeListItem == NULL)
 		return;
@@ -154,37 +153,37 @@ void WINAPI duTreeListItem::OnMouseLDown(POINT pt)
 	}
 }
 
-int WINAPI duTreeListItem::GetLevel()
+int duTreeListItem::GetLevel()
 {
 	return m_nLevel;
 }
 
-void WINAPI duTreeListItem::SetLevel(int nLevel)
+void duTreeListItem::SetLevel(int nLevel)
 {
 	m_nLevel = nLevel;
 }
 
-BOOL WINAPI duTreeListItem::IsExpand()
+BOOL duTreeListItem::IsExpand()
 {
 	return m_fExpand;
 }
 
-void WINAPI duTreeListItem::SetExpand(BOOL fExpand)
+void duTreeListItem::SetExpand(BOOL fExpand)
 {
 	m_fExpand = fExpand;
 }
 	
-BOOL WINAPI duTreeListItem::IsCheckBoxShow()
+BOOL duTreeListItem::IsCheckBoxShow()
 {
 	return m_fShowCheckBox;
 }
 
-void WINAPI duTreeListItem::ShowCheckBox(BOOL fShow)
+void duTreeListItem::ShowCheckBox(BOOL fShow)
 {
 	m_fShowCheckBox = fShow;
 }
 
-void WINAPI duTreeListItem::Adjust()
+void duTreeListItem::Adjust()
 {
 	duPlugin *pPlugin = GetFirstChild();
 	if (pPlugin == NULL)

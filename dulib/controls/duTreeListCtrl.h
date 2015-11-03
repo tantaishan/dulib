@@ -35,26 +35,26 @@ typedef struct tagTreeListItem
 class duTreeListCtrl : public duListCtrl
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
 	
-	virtual TreeListItem *WINAPI GetRoot() { return &m_RootItem; }
-	virtual TreeListItem *WINAPI InsertTreeItem(TreeListItem *pParent, TreeListItem *pInsertAfter, LPCTSTR lpszTemplate);
-	virtual BOOL WINAPI DeleteItem(TreeListItem *pItem);
-	virtual int WINAPI GetTreeItemIndex(TreeListItem *pItem);
-	virtual TreeListItem *WINAPI GetNextItem(TreeListItem *pItem);
-	virtual void WINAPI ExpandItem(TreeListItem *pItem, BOOL fExpand);
-	virtual TreeListItem *WINAPI GetNextVisibleItem(TreeListItem *pItem);
-	virtual TreeListItem *WINAPI GetSelTreeItem();
-	virtual BOOL WINAPI SetSelTreeItem(TreeListItem *pItem);
+	virtual TreeListItem *GetRoot() { return &m_RootItem; }
+	virtual TreeListItem *InsertTreeItem(TreeListItem *pParent, TreeListItem *pInsertAfter, LPCTSTR lpszTemplate);
+	virtual BOOL DeleteItem(TreeListItem *pItem);
+	virtual int GetTreeItemIndex(TreeListItem *pItem);
+	virtual TreeListItem *GetNextItem(TreeListItem *pItem);
+	virtual void ExpandItem(TreeListItem *pItem, BOOL fExpand);
+	virtual TreeListItem *GetNextVisibleItem(TreeListItem *pItem);
+	virtual TreeListItem *GetSelTreeItem();
+	virtual BOOL SetSelTreeItem(TreeListItem *pItem);
 
-	virtual duPlugin *WINAPI GetTreeItemLine(TreeListItem *pItem);
-	virtual BOOL WINAPI IsTreeItemExpand(TreeListItem *pItem);
-	virtual TreeListItem *WINAPI GetTreeItemParent(TreeListItem *pItem);
-	virtual TreeListItem *WINAPI GetTreeItemNextSibling(TreeListItem *pItem);
-	virtual TreeListItem *WINAPI GetTreeItemFirstChild(TreeListItem *pItem);
-	virtual void WINAPI OnItemCheckBoxClick(TreeListItem *pItem, BOOL fChecked, BOOL fRedraw);
+	virtual duPlugin *GetTreeItemLine(TreeListItem *pItem);
+	virtual BOOL IsTreeItemExpand(TreeListItem *pItem);
+	virtual TreeListItem *GetTreeItemParent(TreeListItem *pItem);
+	virtual TreeListItem *GetTreeItemNextSibling(TreeListItem *pItem);
+	virtual TreeListItem *GetTreeItemFirstChild(TreeListItem *pItem);
+	virtual void OnItemCheckBoxClick(TreeListItem *pItem, BOOL fChecked, BOOL fRedraw);
 
 public:
 	duTreeListCtrl();

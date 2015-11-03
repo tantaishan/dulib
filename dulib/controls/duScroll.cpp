@@ -8,7 +8,6 @@
 //  History:    Dec-13-2009   Steven Li  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duScroll.h"
 
 #define DEFAULT_MIN_THUMB_SIZE 10
@@ -48,7 +47,7 @@ duScroll::~duScroll(void)
 }
 
 //////////////////////////////////////////////////////////////////////////
-void WINAPI duScroll::RegisterControlProperty()
+void duScroll::RegisterControlProperty()
 {
 	RegisterProperty(_T("maxpos"), DU_PROPERTY_LONG, &m_nMaxPos);
 	RegisterProperty(_T("pos"), DU_PROPERTY_LONG, &m_nPos);
@@ -62,7 +61,7 @@ void WINAPI duScroll::RegisterControlProperty()
 	RegisterProperty(_T("minthumbsize"), DU_PROPERTY_LONG, &m_nMinThumbSize);
 }
 
-void WINAPI duScroll::OnCreate()
+void duScroll::OnCreate()
 {
 	m_nOldPos = m_nPos;
 	RefreshScrollBar();
@@ -72,28 +71,28 @@ void WINAPI duScroll::OnCreate()
 		m_nMinThumbSize = DEFAULT_MIN_THUMB_SIZE;
 }
 
-void WINAPI duScroll::OnTimer(UINT nEventId)
+void duScroll::OnTimer(UINT nEventId)
 {
 	if (m_nTimerid == nEventId)
 		_OnTimer();
 }
 
-void WINAPI duScroll::OnMouseMove(POINT pt)
+void duScroll::OnMouseMove(POINT pt)
 {
 	_MouseMove(pt);
 }
 
-void WINAPI duScroll::OnMouseLDown(POINT pt)
+void duScroll::OnMouseLDown(POINT pt)
 {
 	_MouseDown(pt);
 }
 
-void WINAPI duScroll::OnMouseLUp(POINT pt)
+void duScroll::OnMouseLUp(POINT pt)
 {
 	_MouseUp(pt);
 }
 
-void WINAPI duScroll::OnMouseLeave(POINT pt)
+void duScroll::OnMouseLeave(POINT pt)
 {
 	Plugin_KillTimer(this, m_nTimerid);
 
@@ -106,12 +105,12 @@ void WINAPI duScroll::OnMouseLeave(POINT pt)
 	}
 }
 
-void WINAPI duScroll::OnMouseWheel(UINT fwKeys, int zDelta, POINT pt)
+void duScroll::OnMouseWheel(UINT fwKeys, int zDelta, POINT pt)
 {
 	_MouseWheel(zDelta);
 }
 
-void WINAPI duScroll::DrawObject(HDC hDC)
+void duScroll::DrawObject(HDC hDC)
 {	
 	duRect rcScroll;
 	rcScroll.SetRectEmpty();
@@ -129,13 +128,13 @@ void WINAPI duScroll::DrawObject(HDC hDC)
 	DrawByStyle(this, m_szThumbStyle, hDC, &rcThumb, m_uThumbState, NULL, GetAlpha());
 }
 
-void WINAPI duScroll::Resize(LPRECT lpNewRect)
+void duScroll::Resize(LPRECT lpNewRect)
 {
 	duPlugin::Resize(lpNewRect);
 	RefreshScrollBar();
 }
 
-void WINAPI duScroll::RefreshScrollBar()
+void duScroll::RefreshScrollBar()
 {
 	duRect rcScroll;
 	rcScroll.SetRectEmpty();
@@ -590,7 +589,7 @@ void duScroll::NotifyParent(UINT uMsg, ScrollBarAction sbAction, int nPos)
 		pParent->OnHScroll(sbAction, nPos);
 }
 
-void WINAPI duScroll::SetMaxPos(int nMaxPos)
+void duScroll::SetMaxPos(int nMaxPos)
 {
 	if (nMaxPos < 0)
 		return;
@@ -599,7 +598,7 @@ void WINAPI duScroll::SetMaxPos(int nMaxPos)
 	RefreshScrollBar();
 }
 
-void WINAPI duScroll::SetPos(int nPos)
+void duScroll::SetPos(int nPos)
 {
 	if (nPos < 0)
 		return;
@@ -608,7 +607,7 @@ void WINAPI duScroll::SetPos(int nPos)
 	RefreshScrollBar();
 }
 
-void WINAPI duScroll::SetPage(int nPage)
+void duScroll::SetPage(int nPage)
 {
 	if (nPage < 0)
 		return;
@@ -617,7 +616,7 @@ void WINAPI duScroll::SetPage(int nPage)
 	RefreshScrollBar();
 }
 
-void WINAPI duScroll::SetArrowHeight(int nArrowHeight)
+void duScroll::SetArrowHeight(int nArrowHeight)
 {
 	if (nArrowHeight < 0)
 		return;
@@ -626,13 +625,13 @@ void WINAPI duScroll::SetArrowHeight(int nArrowHeight)
 	RefreshScrollBar();
 }
 
-void WINAPI duScroll::SetVert(BOOL bVert)
+void duScroll::SetVert(BOOL bVert)
 {
 	m_fVert = bVert;
 	RefreshScrollBar();
 }
 
-void WINAPI duScroll::SetStep(int nStep)
+void duScroll::SetStep(int nStep)
 {
 	if (nStep < 0)
 		return;
@@ -640,7 +639,7 @@ void WINAPI duScroll::SetStep(int nStep)
 	m_nStep = nStep;
 }
 
-void WINAPI duScroll::SetUpStyle(LPCTSTR lpszStyle)
+void duScroll::SetUpStyle(LPCTSTR lpszStyle)
 {
 	if (lpszStyle)
 		_tcsncpy(m_szUpStyle, lpszStyle, MAX_NAME);
@@ -648,7 +647,7 @@ void WINAPI duScroll::SetUpStyle(LPCTSTR lpszStyle)
 		ZeroMemory(m_szUpStyle, MAX_NAME * sizeof(TCHAR));
 }
 
-void WINAPI duScroll::SetDownStyle(LPCTSTR lpszStyle)
+void duScroll::SetDownStyle(LPCTSTR lpszStyle)
 {
 	if (lpszStyle)
 		_tcsncpy(m_szDownStyle, lpszStyle, MAX_NAME);
@@ -656,7 +655,7 @@ void WINAPI duScroll::SetDownStyle(LPCTSTR lpszStyle)
 		ZeroMemory(m_szDownStyle, MAX_NAME * sizeof(TCHAR));
 }
 
-void WINAPI duScroll::SetThumbStyle(LPCTSTR lpszStyle)
+void duScroll::SetThumbStyle(LPCTSTR lpszStyle)
 {
 	if (lpszStyle)
 		_tcsncpy(m_szThumbStyle, lpszStyle, MAX_NAME);

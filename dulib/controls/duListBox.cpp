@@ -8,7 +8,6 @@
 //  History:    MAR-03-2010   Denny Chen  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duListBox.h"
 
 duListBox::duListBox() :
@@ -53,13 +52,13 @@ void duListBox::Destroy()
 	m_pSelItem = NULL;
 }
 
-void WINAPI duListBox::OnCreate()
+void duListBox::OnCreate()
 {
 	m_nTimerFadeIn = GetUniTimer();
 	UpdateScroll();
 }
 
-void WINAPI duListBox::RegisterControlProperty()
+void duListBox::RegisterControlProperty()
 {
 	RegisterProperty(_T("vertscrollbar"),  DU_PROPERTY_STRING, m_szVertScroll);
 	RegisterProperty(_T("itemheight"), DU_PROPERTY_LONG,  &m_nItemHeight);
@@ -71,7 +70,7 @@ void WINAPI duListBox::RegisterControlProperty()
 	RegisterProperty(_T("fade"), DU_PROPERTY_BOOL, &m_fFade);
 }
 
-void WINAPI duListBox::DrawObject(HDC hDC)
+void duListBox::DrawObject(HDC hDC)
 {
 	duRect rcListBox;
 	Plugin_GetRect(this, &rcListBox);
@@ -149,7 +148,7 @@ void duListBox::DrawItem(ListBoxItem *pItem, HDC hDC, duStyleGroup *pStyleGroup,
 	pIconImage, 0, 0, pIconImage->GetWidth(), pIconImage->GetHeight(), nAlpha);
 }
 
-void WINAPI duListBox::OnVScroll(ScrollBarAction sbAction, int nPos)
+void duListBox::OnVScroll(ScrollBarAction sbAction, int nPos)
 {
 	switch (sbAction)
 	{
@@ -179,7 +178,7 @@ void WINAPI duListBox::OnVScroll(ScrollBarAction sbAction, int nPos)
 	}
 }
 
-BOOL WINAPI duListBox::UpdateScroll()
+BOOL duListBox::UpdateScroll()
 {
 	duScroll *pVScroll = (duScroll *)GetPluginByName(m_szVertScroll);
 	if (pVScroll == NULL)
@@ -219,13 +218,13 @@ BOOL WINAPI duListBox::UpdateScroll()
 	return TRUE;
 }
 
-void WINAPI duListBox::Resize(LPRECT lpRect/*=NULL*/)
+void duListBox::Resize(LPRECT lpRect/*=NULL*/)
 {
 	duPlugin::Resize(lpRect);
 	UpdateScroll();
 }
 
-void WINAPI duListBox::OnMouseWheel(UINT fwKeys, int zDelta, POINT pt)
+void duListBox::OnMouseWheel(UINT fwKeys, int zDelta, POINT pt)
 {
 	duScroll *pVScroll = (duScroll *)GetPluginByName(m_szVertScroll);
 	if (pVScroll == NULL)
@@ -235,7 +234,7 @@ void WINAPI duListBox::OnMouseWheel(UINT fwKeys, int zDelta, POINT pt)
 		pVScroll->OnMouseWheel(fwKeys, zDelta, pt);
 }
 
-void WINAPI duListBox::OnMouseLeave(POINT pt)
+void duListBox::OnMouseLeave(POINT pt)
 {
 	if (m_pHotItem)
 	{
@@ -244,7 +243,7 @@ void WINAPI duListBox::OnMouseLeave(POINT pt)
 	}
 }
 
-void WINAPI duListBox::OnMouseLDown(POINT pt)
+void duListBox::OnMouseLDown(POINT pt)
 {
 	if (m_pHotItem != m_pSelItem)
 	{
@@ -258,11 +257,11 @@ void WINAPI duListBox::OnMouseLDown(POINT pt)
 	}
 }
 
-void WINAPI duListBox::OnMouseLUp(POINT pt)
+void duListBox::OnMouseLUp(POINT pt)
 {
 }
 
-void WINAPI duListBox::OnMouseRDown(POINT pt)
+void duListBox::OnMouseRDown(POINT pt)
 {
 	if (m_pHotItem)
 	{
@@ -271,11 +270,11 @@ void WINAPI duListBox::OnMouseRDown(POINT pt)
 	}
 }
 
-void WINAPI duListBox::OnMouseRUp(POINT pt)
+void duListBox::OnMouseRUp(POINT pt)
 {
 }
 
-void WINAPI duListBox::OnMouseHover(POINT pt)
+void duListBox::OnMouseHover(POINT pt)
 {
 	if (m_pHotItem)
 	{
@@ -284,7 +283,7 @@ void WINAPI duListBox::OnMouseHover(POINT pt)
 	}
 }
 
-void WINAPI duListBox::OnMouseMove(POINT pt)
+void duListBox::OnMouseMove(POINT pt)
 {
 	duRect rcListBox;
 	Plugin_GetRect(this, &rcListBox);
@@ -331,7 +330,7 @@ void WINAPI duListBox::OnMouseMove(POINT pt)
 	}
 }
 
-void WINAPI duListBox::OnMouseDbClick(POINT pt)
+void duListBox::OnMouseDbClick(POINT pt)
 {
 	if (m_pHotItem)
 	{
@@ -340,7 +339,7 @@ void WINAPI duListBox::OnMouseDbClick(POINT pt)
 	}
 }
 
-void WINAPI duListBox::OnTimer(UINT nEventId)
+void duListBox::OnTimer(UINT nEventId)
 {
 	if (nEventId == m_nTimerFadeIn)
 	{
@@ -358,7 +357,7 @@ void WINAPI duListBox::OnTimer(UINT nEventId)
 	}
 }
 
-void WINAPI duListBox::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+void duListBox::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 	int nItemCount = GetItemCount();
 	if (nItemCount == 0)
@@ -417,12 +416,12 @@ void WINAPI duListBox::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	}
 }
 
-int WINAPI duListBox::GetItemCount()
+int duListBox::GetItemCount()
 {
 	return (int)m_vtItem.size();
 }
 
-BOOL WINAPI duListBox::InsertItem(int nIndex, LPCTSTR lpszText, LPCTSTR lpszIcon)
+BOOL duListBox::InsertItem(int nIndex, LPCTSTR lpszText, LPCTSTR lpszIcon)
 {
 	int nItemCount = GetItemCount();
 	if (nIndex == -1)
@@ -454,7 +453,7 @@ BOOL WINAPI duListBox::InsertItem(int nIndex, LPCTSTR lpszText, LPCTSTR lpszIcon
 	return TRUE;
 }
 
-BOOL WINAPI duListBox::DeleteItem(int nIndex)
+BOOL duListBox::DeleteItem(int nIndex)
 {
 	int nItemCount = GetItemCount();
 	if (nIndex < 0 || nIndex >= nItemCount)
@@ -474,13 +473,13 @@ BOOL WINAPI duListBox::DeleteItem(int nIndex)
 	return TRUE;
 }
 
-void WINAPI duListBox::DeleteAll()
+void duListBox::DeleteAll()
 {
 	Destroy();
 	UpdateScroll();
 }
 
-LPCTSTR WINAPI duListBox::GetItemText(int nIndex)
+LPCTSTR duListBox::GetItemText(int nIndex)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -489,7 +488,7 @@ LPCTSTR WINAPI duListBox::GetItemText(int nIndex)
 	return pItem->szText.c_str();
 }
 
-BOOL WINAPI duListBox::SetItemText(int nIndex, LPCTSTR lpszText)
+BOOL duListBox::SetItemText(int nIndex, LPCTSTR lpszText)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -502,7 +501,7 @@ BOOL WINAPI duListBox::SetItemText(int nIndex, LPCTSTR lpszText)
 	return TRUE;
 }
 
-LPCTSTR WINAPI duListBox::GetItemIcon(int nIndex)
+LPCTSTR duListBox::GetItemIcon(int nIndex)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -511,7 +510,7 @@ LPCTSTR WINAPI duListBox::GetItemIcon(int nIndex)
 	return pItem->szText.c_str();
 }
 
-BOOL WINAPI duListBox::SetItemIcon(int nIndex, LPCTSTR lpszIcon)
+BOOL duListBox::SetItemIcon(int nIndex, LPCTSTR lpszIcon)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -524,7 +523,7 @@ BOOL WINAPI duListBox::SetItemIcon(int nIndex, LPCTSTR lpszIcon)
 	return TRUE;
 }
 
-UINT WINAPI duListBox::GetItemIconX(int nIndex)
+UINT duListBox::GetItemIconX(int nIndex)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -533,7 +532,7 @@ UINT WINAPI duListBox::GetItemIconX(int nIndex)
 	return pItem->uIconX;
 }
 
-BOOL WINAPI duListBox::SetItemIconX(int nIndex, UINT uIconX)
+BOOL duListBox::SetItemIconX(int nIndex, UINT uIconX)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -543,7 +542,7 @@ BOOL WINAPI duListBox::SetItemIconX(int nIndex, UINT uIconX)
 	return TRUE;
 }
 
-UINT WINAPI duListBox::GetItemIconY(int nIndex)
+UINT duListBox::GetItemIconY(int nIndex)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -552,7 +551,7 @@ UINT WINAPI duListBox::GetItemIconY(int nIndex)
 	return pItem->uIconY;
 }
 
-BOOL WINAPI duListBox::SetItemIconY(int nIndex, UINT uIconY)
+BOOL duListBox::SetItemIconY(int nIndex, UINT uIconY)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -562,7 +561,7 @@ BOOL WINAPI duListBox::SetItemIconY(int nIndex, UINT uIconY)
 	return TRUE;
 }
 
-UINT WINAPI duListBox::GetItemIconWidth(int nIndex)
+UINT duListBox::GetItemIconWidth(int nIndex)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -571,7 +570,7 @@ UINT WINAPI duListBox::GetItemIconWidth(int nIndex)
 	return pItem->uIconWidth;
 }
 
-BOOL WINAPI duListBox::SetItemIconWidth(int nIndex, UINT uIconWidth)
+BOOL duListBox::SetItemIconWidth(int nIndex, UINT uIconWidth)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -581,7 +580,7 @@ BOOL WINAPI duListBox::SetItemIconWidth(int nIndex, UINT uIconWidth)
 	return TRUE;
 }
 
-UINT WINAPI duListBox::GetItemIconHeight(int nIndex)
+UINT duListBox::GetItemIconHeight(int nIndex)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -590,7 +589,7 @@ UINT WINAPI duListBox::GetItemIconHeight(int nIndex)
 	return pItem->uIconHeight;
 }
 
-BOOL WINAPI duListBox::SetItemIconHeight(int nIndex, UINT uIconHeight)
+BOOL duListBox::SetItemIconHeight(int nIndex, UINT uIconHeight)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -600,7 +599,7 @@ BOOL WINAPI duListBox::SetItemIconHeight(int nIndex, UINT uIconHeight)
 	return TRUE;
 }
 
-duScroll *WINAPI duListBox::GetVertScrollBar()
+duScroll *duListBox::GetVertScrollBar()
 {
 	return (duScroll *)GetPluginByName(m_szVertScroll);
 }
@@ -650,7 +649,7 @@ int duListBox::GetItemIndex(ListBoxItem *pItem)
 	return -1;
 }
 
-int WINAPI duListBox::GetSel()
+int duListBox::GetSel()
 {
 	if (!m_fCombobox)
 	{
@@ -668,7 +667,7 @@ int WINAPI duListBox::GetSel()
 	}
 }
 
-void WINAPI duListBox::SetSel(int nIndex)
+void duListBox::SetSel(int nIndex)
 {
 	if (!m_fCombobox)
 	{
@@ -688,7 +687,7 @@ void WINAPI duListBox::SetSel(int nIndex)
 	}
 }
 
-void WINAPI duListBox::SetVertScrollBar(LPCTSTR lpszScroll)
+void duListBox::SetVertScrollBar(LPCTSTR lpszScroll)
 {
 	if (lpszScroll)
 		_tcsncpy(m_szVertScroll, lpszScroll, MAX_NAME);
@@ -696,7 +695,7 @@ void WINAPI duListBox::SetVertScrollBar(LPCTSTR lpszScroll)
 		ZeroMemory(m_szVertScroll, sizeof(TCHAR) * MAX_NAME);
 }
 
-BOOL WINAPI duListBox::IsItemDisable(int nIndex)
+BOOL duListBox::IsItemDisable(int nIndex)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -705,7 +704,7 @@ BOOL WINAPI duListBox::IsItemDisable(int nIndex)
 	return pItem->fDisable;
 }
 
-BOOL WINAPI duListBox::SetItemDisable(int nIndex, BOOL fDisable)
+BOOL duListBox::SetItemDisable(int nIndex, BOOL fDisable)
 {
 	ListBoxItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)

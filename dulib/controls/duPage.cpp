@@ -8,7 +8,6 @@
 //  History:    Nov-10-2009   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duPage.h"
 
 duPage::duPage() :
@@ -37,7 +36,7 @@ duPage::~duPage()
 	m_vtButtonState.clear();	
 }
 
-void WINAPI duPage::RegisterControlProperty()
+void duPage::RegisterControlProperty()
 {
 	RegisterProperty(_T("total"), DU_PROPERTY_LONG, &m_nTotalCount);
 	RegisterProperty(_T("page"), DU_PROPERTY_LONG, &m_nPerPage);
@@ -55,7 +54,7 @@ void WINAPI duPage::RegisterControlProperty()
 	RegisterProperty(_T("buttonstyle"), DU_PROPERTY_STYLEGROUP, m_szButtonStyle);
 }
 
-void WINAPI duPage::OnCreate()
+void duPage::OnCreate()
 {
 	if (m_nPerPage)
 	{
@@ -68,7 +67,7 @@ void WINAPI duPage::OnCreate()
 	AutoSize();
 }
 
-void WINAPI duPage::DrawObject(HDC hDC)
+void duPage::DrawObject(HDC hDC)
 {
 	duRect rcPage;
 	Plugin_GetRect(this, &rcPage);
@@ -133,7 +132,7 @@ void WINAPI duPage::DrawObject(HDC hDC)
 		pRightArrowStyle->Draw(hDC, &rcRightArrow, m_uRightArrowState, NULL, GetAlpha());
 }
 
-void WINAPI duPage::OnMouseMove(POINT point)
+void duPage::OnMouseMove(POINT point)
 {
 	BOOL fNeedRedraw = FALSE;
 	duRect rcButton;
@@ -255,7 +254,7 @@ PageMouseMove_end:
 		Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duPage::OnMouseLeave(POINT pt)
+void duPage::OnMouseLeave(POINT pt)
 {
 	BOOL fNeedRedraw = FALSE;
 	
@@ -282,7 +281,7 @@ void WINAPI duPage::OnMouseLeave(POINT pt)
 		Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duPage::OnMouseLDown(POINT pt)
+void duPage::OnMouseLDown(POINT pt)
 {
 	BOOL fNeedRedraw = FALSE;
 	duRect rcRect;
@@ -331,7 +330,7 @@ void WINAPI duPage::OnMouseLDown(POINT pt)
 		Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duPage::OnMouseLUp(POINT pt)
+void duPage::OnMouseLUp(POINT pt)
 {
 	BOOL fNeedRedraw = FALSE;
 	
@@ -386,12 +385,12 @@ void WINAPI duPage::OnMouseLUp(POINT pt)
 		Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duPage::OnMouseDbClick(POINT pt)
+void duPage::OnMouseDbClick(POINT pt)
 {
 	
 }
 
-void WINAPI duPage::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+void duPage::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 /*
 	switch (nChar)
@@ -410,7 +409,7 @@ void WINAPI duPage::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 */
 }
 
-BOOL WINAPI duPage::OnSetCursor()
+BOOL duPage::OnSetCursor()
 {
 	duPoint pt;
 	GetCursorPos(&pt);
@@ -461,7 +460,7 @@ int duPage::CalcPageWidth()
 	return nWidth;
 }
 
-BOOL WINAPI duPage::MoveLeft(BOOL fRedraw)
+BOOL duPage::MoveLeft(BOOL fRedraw)
 {
 	int i;
 	int nButtonCount = m_vtButtonState.size();
@@ -495,7 +494,7 @@ BOOL WINAPI duPage::MoveLeft(BOOL fRedraw)
 	return TRUE;
 }
 
-BOOL WINAPI duPage::MoveRight(BOOL fRedraw)
+BOOL duPage::MoveRight(BOOL fRedraw)
 {
 	int i;
 	int nButtonCount = m_vtButtonState.size();
@@ -529,7 +528,7 @@ BOOL WINAPI duPage::MoveRight(BOOL fRedraw)
 	return TRUE;
 }
 
-int WINAPI duPage::GetPageCount()
+int duPage::GetPageCount()
 {
 	if (!m_nPerPage || !m_nTotalCount)
 		return 0;
@@ -537,7 +536,7 @@ int WINAPI duPage::GetPageCount()
 	return (m_nTotalCount / m_nPerPage) + ((m_nTotalCount % m_nPerPage) ? 1 : 0);
 }
 
-int WINAPI duPage::GetSel()
+int duPage::GetSel()
 {
 	int i;
 	int nButtonCount = m_vtButtonState.size();
@@ -550,7 +549,7 @@ int WINAPI duPage::GetSel()
 	return -1;
 }
 
-void WINAPI duPage::SetSel(int nSel)
+void duPage::SetSel(int nSel)
 {
 	int i;
 	int nButtonCount = m_vtButtonState.size();
@@ -576,7 +575,7 @@ void WINAPI duPage::SetSel(int nSel)
 	NotifyUser(DUM_PAGECHANGED, -1, nSel);
 }
 
-void WINAPI duPage::SetTotal(int nTotal)
+void duPage::SetTotal(int nTotal)
 {
 	m_nTotalCount = nTotal;
 	m_vtButtonState.clear();
@@ -588,7 +587,7 @@ void WINAPI duPage::SetTotal(int nTotal)
 	AutoSize();
 }
 
-void WINAPI duPage::SetPerPage(int nPerPage)
+void duPage::SetPerPage(int nPerPage)
 {
 	if (nPerPage < 0)
 		return;
@@ -603,7 +602,7 @@ void WINAPI duPage::SetPerPage(int nPerPage)
 	AutoSize();
 }
 
-void WINAPI duPage::SetLeftArrowStyle(LPCTSTR lpszStyle)
+void duPage::SetLeftArrowStyle(LPCTSTR lpszStyle)
 {
 	if (lpszStyle)
 		_tcsncpy(m_szLeftArrowStyle, lpszStyle, MAX_NAME);
@@ -611,7 +610,7 @@ void WINAPI duPage::SetLeftArrowStyle(LPCTSTR lpszStyle)
 		ZeroMemory(m_szLeftArrowStyle, MAX_NAME * sizeof(TCHAR));
 }
 
-void WINAPI duPage::SetRightArrowStyle(LPCTSTR lpszStyle)
+void duPage::SetRightArrowStyle(LPCTSTR lpszStyle)
 {
 	if (lpszStyle)
 		_tcsncpy(m_szRightArrowStyle, lpszStyle, MAX_NAME);
@@ -619,7 +618,7 @@ void WINAPI duPage::SetRightArrowStyle(LPCTSTR lpszStyle)
 		ZeroMemory(m_szRightArrowStyle, MAX_NAME * sizeof(TCHAR));	
 }
 
-void WINAPI duPage::SetButtonStyle(LPCTSTR lpszStyle)
+void duPage::SetButtonStyle(LPCTSTR lpszStyle)
 {
 	if (lpszStyle)
 		_tcsncpy(m_szButtonStyle, lpszStyle, MAX_NAME);

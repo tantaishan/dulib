@@ -7,7 +7,6 @@
 //  History:    Nov-23-2009   Steven Li  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duMLEdit.h"
 #include "duCtrlManager.h"
 #include "duEdit.h"
@@ -224,7 +223,7 @@ cleanup:
 		LocalFree(m_hLoc32W);
 }
 
-void WINAPI duMLEdit::RegisterControlProperty()
+void duMLEdit::RegisterControlProperty()
 {
 	RegisterProperty(_T("vertscrollbar"),  DU_PROPERTY_STRING, m_szVertScroll);
 	RegisterProperty(_T("horzscrollbar"),  DU_PROPERTY_STRING, m_szHorzScroll);
@@ -234,7 +233,7 @@ void WINAPI duMLEdit::RegisterControlProperty()
 	RegisterProperty(_T("selecttextcolor"), DU_PROPERTY_COLOR, &m_clrSelectText);
 }
 
-void WINAPI duMLEdit::OnCreate()
+void duMLEdit::OnCreate()
 {
 	Init(TRUE);
 
@@ -319,7 +318,7 @@ void WINAPI duMLEdit::OnCreate()
 	UpdateScrollInfo();
 }
 
-void WINAPI duMLEdit::DrawObject(HDC hDC)
+void duMLEdit::DrawObject(HDC hDC)
 {
 	INT i;
 	HFONT old_font = 0;
@@ -412,7 +411,7 @@ INT duMLEdit::PaintText(HDC dc, INT x, INT y, INT line, INT col, INT count, BOOL
 	return ret;
 }
 
-LRESULT WINAPI duMLEdit::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT duMLEdit::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	//if (uMsg == WM_MOUSEMOVE)
 	//{
@@ -473,7 +472,7 @@ LRESULT WINAPI duMLEdit::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 	return 0;
 }
 
-void WINAPI duMLEdit::OnVScroll(ScrollBarAction sbAction, int nPos)
+void duMLEdit::OnVScroll(ScrollBarAction sbAction, int nPos)
 {
 	switch (sbAction)
 	{
@@ -502,7 +501,7 @@ void WINAPI duMLEdit::OnVScroll(ScrollBarAction sbAction, int nPos)
 	}
 }
 
-void WINAPI duMLEdit::OnHScroll(ScrollBarAction sbAction, int nPos)
+void duMLEdit::OnHScroll(ScrollBarAction sbAction, int nPos)
 {
 	switch (sbAction)
 	{
@@ -531,7 +530,7 @@ void WINAPI duMLEdit::OnHScroll(ScrollBarAction sbAction, int nPos)
 	}
 }
 
-void WINAPI duMLEdit::OnKeyDown(UINT key, UINT nRepCnt, UINT nFlags)
+void duMLEdit::OnKeyDown(UINT key, UINT nRepCnt, UINT nFlags)
 {
 	BOOL shift;
 	BOOL control;
@@ -701,7 +700,7 @@ void WINAPI duMLEdit::OnKeyDown(UINT key, UINT nRepCnt, UINT nFlags)
 	}
 }
 
-BOOL WINAPI duMLEdit::OnKillFocus(duPlugin *pNewFocus)
+BOOL duMLEdit::OnKillFocus(duPlugin *pNewFocus)
 {
 	m_nFlags &= ~EF_FOCUSED;
 
@@ -718,7 +717,7 @@ BOOL WINAPI duMLEdit::OnKillFocus(duPlugin *pNewFocus)
 	return FALSE;
 }
 
-BOOL WINAPI duMLEdit::OnSetFocus(duPlugin *pOldFocus)
+BOOL duMLEdit::OnSetFocus(duPlugin *pOldFocus)
 {
 	m_fShowCaret = TRUE;
 	m_nFlags |= EF_FOCUSED;
@@ -733,7 +732,7 @@ BOOL WINAPI duMLEdit::OnSetFocus(duPlugin *pOldFocus)
 	return TRUE;
 }
 
-void WINAPI duMLEdit::OnMouseMove(POINT pt)
+void duMLEdit::OnMouseMove(POINT pt)
 {
 	duRect rcEdit;
 	rcEdit.SetRectEmpty();
@@ -759,7 +758,7 @@ void WINAPI duMLEdit::OnMouseMove(POINT pt)
 	Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duMLEdit::OnMouseDbClick(POINT pt)
+void duMLEdit::OnMouseDbClick(POINT pt)
 {
 	//INT s;
 	//INT e = m_nSelectionEnd;
@@ -782,7 +781,7 @@ void WINAPI duMLEdit::OnMouseDbClick(POINT pt)
 	//Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duMLEdit::OnMouseLDown(POINT pt)
+void duMLEdit::OnMouseLDown(POINT pt)
 {
 	duRect rcEdit;
 	rcEdit.SetRectEmpty();
@@ -821,7 +820,7 @@ void WINAPI duMLEdit::OnMouseLDown(POINT pt)
 	Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duMLEdit::OnMouseLUp(POINT pt)
+void duMLEdit::OnMouseLUp(POINT pt)
 {
 	if (m_fCaptureState)
 	{
@@ -833,7 +832,7 @@ void WINAPI duMLEdit::OnMouseLUp(POINT pt)
 	Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duMLEdit::OnMouseRDown(POINT pt)
+void duMLEdit::OnMouseRDown(POINT pt)
 {
 	if (!(m_nFlags & EF_FOCUSED))
 		::SetFocus(m_hWnd);
@@ -851,11 +850,11 @@ void WINAPI duMLEdit::OnMouseRDown(POINT pt)
 	}
 }
 
-void WINAPI duMLEdit::OnMouseRUp(POINT pt)
+void duMLEdit::OnMouseRUp(POINT pt)
 {
 }
 
-void WINAPI duMLEdit::OnTimer(UINT nEventId)
+void duMLEdit::OnTimer(UINT nEventId)
 {
 	if (nEventId != m_lTimerId)
 		return;
@@ -866,14 +865,14 @@ void WINAPI duMLEdit::OnTimer(UINT nEventId)
 		MoveForward(TRUE);
 }
 
-void WINAPI duMLEdit::OnMouseWheel(UINT fwKeys, int zDelta, POINT pt)
+void duMLEdit::OnMouseWheel(UINT fwKeys, int zDelta, POINT pt)
 {
 	duScroll *pVertScroll = (duScroll *)GetPluginByName(m_szVertScroll);
 	if (pVertScroll)
 		pVertScroll->OnMouseWheel(fwKeys, zDelta, pt);
 }
 
-BOOL WINAPI duMLEdit::OnSetCursor()
+BOOL duMLEdit::OnSetCursor()
 {
 	duPoint pt;
 	::GetCursorPos(&pt);
@@ -2943,7 +2942,7 @@ void duMLEdit::_RedrawEdit()
 		pCtrlManager->_ShowCaret();
 }
 
-void WINAPI duMLEdit::SetText(LPCTSTR lpszText)
+void duMLEdit::SetText(LPCTSTR lpszText)
 {
     SetSel(0, (UINT)-1, FALSE);
     if (lpszText)

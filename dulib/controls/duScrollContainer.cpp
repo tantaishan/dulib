@@ -8,7 +8,6 @@
 //  History:    Mar-08-2011   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duScrollContainer.h"
 
 duScrollContainer::duScrollContainer(void) :
@@ -29,14 +28,14 @@ duScrollContainer::~duScrollContainer(void)
 	Plugin_UnHookWindowMessage(this);
 }
 
-void WINAPI duScrollContainer::RegisterControlProperty()
+void duScrollContainer::RegisterControlProperty()
 {
 	RegisterProperty(_T("vertscrollbar"),  DU_PROPERTY_STRING, m_szVertScroll);
 	RegisterProperty(_T("horzscrollbar"),  DU_PROPERTY_STRING, m_szHorzScroll);
 	RegisterProperty(_T("view"),  DU_PROPERTY_STRING, m_szView);
 }
 
-void WINAPI duScrollContainer::OnCreate()
+void duScrollContainer::OnCreate()
 {
 	duPlugin *pPlugin = GetPluginByName(m_szView);
 	if (Plugin_IsValid(pPlugin))
@@ -53,7 +52,7 @@ void WINAPI duScrollContainer::OnCreate()
 	Plugin_HookWindowMessage(this);
 }
 
-void WINAPI duScrollContainer::DrawObject(HDC hDC)
+void duScrollContainer::DrawObject(HDC hDC)
 {
 	duRect rcCtrl;
 	Plugin_GetRect(this, &rcCtrl);
@@ -64,7 +63,7 @@ void WINAPI duScrollContainer::DrawObject(HDC hDC)
 		pStyleGroup->Draw(hDC, &rcCtrl, GetState(), GetText(), GetAlpha());	
 }
 
-void WINAPI duScrollContainer::Resize(LPRECT lpRect/*=NULL*/)
+void duScrollContainer::Resize(LPRECT lpRect/*=NULL*/)
 {
 	duPlugin::Resize(lpRect);
 	//UpdateScroll();
@@ -73,7 +72,7 @@ void WINAPI duScrollContainer::Resize(LPRECT lpRect/*=NULL*/)
 	NotifyUser(DUM_SCROLLCONTAINTERSIZE, rcScrollContainer.Width(), rcScrollContainer.Height());
 }
 
-LRESULT WINAPI duScrollContainer::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT duScrollContainer::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	if (!Plugin_IsVisible(this))
 	{
@@ -148,7 +147,7 @@ LRESULT WINAPI duScrollContainer::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam,
 	return 0;
 }
 
-void WINAPI duScrollContainer::OnMouseWheel(UINT fwKeys, int zDelta, POINT pt)
+void duScrollContainer::OnMouseWheel(UINT fwKeys, int zDelta, POINT pt)
 {
 //	duScroll *pVScroll = (duScroll *)GetPluginByName(m_szVertScroll);
 //	if (pVScroll == NULL)
@@ -158,7 +157,7 @@ void WINAPI duScrollContainer::OnMouseWheel(UINT fwKeys, int zDelta, POINT pt)
 //		pVScroll->OnMouseWheel(fwKeys, zDelta, pt);
 }
 
-void WINAPI duScrollContainer::OnVScroll(ScrollBarAction sbAction, int nPos)
+void duScrollContainer::OnVScroll(ScrollBarAction sbAction, int nPos)
 {
 	switch (sbAction)
 	{
@@ -189,7 +188,7 @@ void WINAPI duScrollContainer::OnVScroll(ScrollBarAction sbAction, int nPos)
 	}
 }
 
-void WINAPI duScrollContainer::OnHScroll(ScrollBarAction sbAction, int nPos)
+void duScrollContainer::OnHScroll(ScrollBarAction sbAction, int nPos)
 {
 	switch (sbAction)
 	{
@@ -219,7 +218,7 @@ void WINAPI duScrollContainer::OnHScroll(ScrollBarAction sbAction, int nPos)
 	}
 }
 /*
-void WINAPI duScrollContainer::OnChildShow(duPlugin *pChild, BOOL fVisible)
+void duScrollContainer::OnChildShow(duPlugin *pChild, BOOL fVisible)
 {
 	if (!Plugin_IsValid(pChild))
 		return;
@@ -234,7 +233,7 @@ void WINAPI duScrollContainer::OnChildShow(duPlugin *pChild, BOOL fVisible)
 	}
 }
 */
-void WINAPI duScrollContainer::GetViewSize(LPSIZE lpSize)
+void duScrollContainer::GetViewSize(LPSIZE lpSize)
 {
 	if (lpSize == NULL)
 		return;
@@ -251,13 +250,13 @@ void WINAPI duScrollContainer::GetViewSize(LPSIZE lpSize)
 	lpSize->cy = rcView.Height();
 }
 
-POINT WINAPI duScrollContainer::GetViewPoint()
+POINT duScrollContainer::GetViewPoint()
 {
 	POINT pt = {m_nXOffset, m_nYOffset};
 	return pt;
 }
 
-BOOL WINAPI duScrollContainer::UpdateScroll()
+BOOL duScrollContainer::UpdateScroll()
 {	
 	duScroll *pVScroll = (duScroll *)GetPluginByName(m_szVertScroll);
 	duScroll *pHScroll = (duScroll *)GetPluginByName(m_szHorzScroll);
@@ -412,7 +411,7 @@ void duScrollContainer::SetViewLeft(int nLeft)
 	pPlugin->Resize(NULL);
 }
 
-void WINAPI duScrollContainer::SetHorzScrollBar(LPCTSTR lpszScroll)
+void duScrollContainer::SetHorzScrollBar(LPCTSTR lpszScroll)
 {
 	if (lpszScroll)
 		_tcsncpy(m_szHorzScroll, lpszScroll, MAX_NAME);
@@ -420,7 +419,7 @@ void WINAPI duScrollContainer::SetHorzScrollBar(LPCTSTR lpszScroll)
 		ZeroMemory(m_szHorzScroll, sizeof(TCHAR) * MAX_NAME);
 }
 
-void WINAPI duScrollContainer::SetVertScrollBar(LPCTSTR lpszScroll)
+void duScrollContainer::SetVertScrollBar(LPCTSTR lpszScroll)
 {
 	if (lpszScroll)
 		_tcsncpy(m_szVertScroll, lpszScroll, MAX_NAME);
@@ -428,7 +427,7 @@ void WINAPI duScrollContainer::SetVertScrollBar(LPCTSTR lpszScroll)
 		ZeroMemory(m_szVertScroll, sizeof(TCHAR) * MAX_NAME);
 }
 
-void WINAPI duScrollContainer::SetView(LPCTSTR lpszView)
+void duScrollContainer::SetView(LPCTSTR lpszView)
 {
 	if (lpszView)
 		_tcsncpy(m_szView, lpszView, MAX_NAME);

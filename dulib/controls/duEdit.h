@@ -69,64 +69,64 @@ static const WCHAR empty_stringW[] = {0};
 class duEdit : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
-	virtual LRESULT WINAPI OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-	virtual void WINAPI OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
-	virtual BOOL WINAPI OnKillFocus(duPlugin *pNewFocus);
-	virtual BOOL WINAPI OnSetFocus(duPlugin *pOldFocus);
-	virtual void WINAPI OnMouseMove(POINT pt);
-	virtual void WINAPI OnMouseDbClick(POINT pt);
-	virtual void WINAPI OnMouseLDown(POINT pt);
-	virtual void WINAPI OnMouseLUp(POINT pt);
-	virtual void WINAPI OnMouseRDown(POINT pt);
-	virtual void WINAPI OnMouseRUp(POINT pt);
-	virtual void WINAPI OnTimer(UINT nEventId);
-	virtual BOOL WINAPI OnSetCursor();
-	virtual void WINAPI Resize(LPRECT lpRect/*=NULL*/);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
+	virtual LRESULT OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	virtual void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
+	virtual BOOL OnKillFocus(duPlugin *pNewFocus);
+	virtual BOOL OnSetFocus(duPlugin *pOldFocus);
+	virtual void OnMouseMove(POINT pt);
+	virtual void OnMouseDbClick(POINT pt);
+	virtual void OnMouseLDown(POINT pt);
+	virtual void OnMouseLUp(POINT pt);
+	virtual void OnMouseRDown(POINT pt);
+	virtual void OnMouseRUp(POINT pt);
+	virtual void OnTimer(UINT nEventId);
+	virtual BOOL OnSetCursor();
+	virtual void Resize(LPRECT lpRect/*=NULL*/);
 
-	virtual void WINAPI SetText(LPCTSTR lpszText);
-	virtual LPCTSTR WINAPI GetText() { return m_lpszText; }
+	virtual void SetText(LPCTSTR lpszText);
+	virtual LPCTSTR GetText() { return m_lpszText; }
 	
-	virtual int WINAPI CharFromPos(int x, int y);
-	virtual UINT WINAPI GetLimitText() { return m_uBufferLimit; }
-	virtual TCHAR WINAPI GetPasswordChar() { return m_chPassword; }
-	virtual DWORD WINAPI GetSel();
-	virtual void WINAPI PosFromChar(int nIndex, LPPOINT lppt);
-	virtual void WINAPI SetLimitText(UINT uMax);
-	virtual void WINAPI ReplaceSel(LPCTSTR lpszNewText, BOOL fCanUndo);
-	virtual BOOL WINAPI IsReadOnly() { return m_fReadOnly; }
-	virtual BOOL WINAPI IsPassword() { return m_fPassword; }
-	virtual BOOL WINAPI IsNumber() { return m_fNumber; }
-	virtual void WINAPI SetSel(int nStartChar, int nEndChar);
-	virtual void WINAPI OnPaste();
-	virtual void WINAPI OnCopy();
-	virtual void WINAPI OnClear();
-	virtual void WINAPI OnCut();
-	virtual void WINAPI SetReadOnly(BOOL fReadOnly);
-	virtual void WINAPI SetPassword(BOOL fPassword);
-	virtual void WINAPI SetNumber(BOOL fNumber);
-	virtual LPCTSTR WINAPI GetFont(){return m_szFont;}
-	virtual void WINAPI SetFont(LPCTSTR lpszFont);
-	virtual COLORREF WINAPI GetTextColor(){return m_clrText;}
-	virtual void WINAPI SetTextColor(COLORREF clrText);
-	virtual COLORREF WINAPI GetSelectTextColor(){return m_clrSelectText;}
-	virtual void WINAPI SetSelectTextColor(COLORREF clrSelectText);
-	virtual COLORREF WINAPI GetSelectColor(){return m_clrSelect;}
-	virtual void WINAPI SetSelectColor(COLORREF clrSelect);
-	virtual int WINAPI GetLeftBorder(){return m_nLeftBorder;}
-	virtual void WINAPI SetLeftBorder(int nLeftBorder);
-	virtual int WINAPI GetTopBorder(){return m_nTopBorder;}
-	virtual void WINAPI SetTopBorder(int nTopBorder);
-	virtual int WINAPI GetRightBorder(){return m_nRightBorder;}
-	virtual void WINAPI SetRightBorder(int nRightBorder);
-	virtual int WINAPI GetBottomBorder(){return m_nBottomBorder;}
-	virtual void WINAPI SetBottomBorder(int nBottomBorder);
+	virtual int CharFromPos(int x, int y);
+	virtual UINT GetLimitText() { return m_uBufferLimit; }
+	virtual TCHAR GetPasswordChar() { return m_chPassword; }
+	virtual DWORD GetSel();
+	virtual void PosFromChar(int nIndex, LPPOINT lppt);
+	virtual void SetLimitText(UINT uMax);
+	virtual void ReplaceSel(LPCTSTR lpszNewText, BOOL fCanUndo);
+	virtual BOOL IsReadOnly() { return m_fReadOnly; }
+	virtual BOOL IsPassword() { return m_fPassword; }
+	virtual BOOL IsNumber() { return m_fNumber; }
+	virtual void SetSel(int nStartChar, int nEndChar);
+	virtual void OnPaste();
+	virtual void OnCopy();
+	virtual void OnClear();
+	virtual void OnCut();
+	virtual void SetReadOnly(BOOL fReadOnly);
+	virtual void SetPassword(BOOL fPassword);
+	virtual void SetNumber(BOOL fNumber);
+	virtual LPCTSTR GetFont(){return m_szFont;}
+	virtual void SetFont(LPCTSTR lpszFont);
+	virtual COLORREF GetTextColor(){return m_clrText;}
+	virtual void SetTextColor(COLORREF clrText);
+	virtual COLORREF GetSelectTextColor(){return m_clrSelectText;}
+	virtual void SetSelectTextColor(COLORREF clrSelectText);
+	virtual COLORREF GetSelectColor(){return m_clrSelect;}
+	virtual void SetSelectColor(COLORREF clrSelect);
+	virtual int GetLeftBorder(){return m_nLeftBorder;}
+	virtual void SetLeftBorder(int nLeftBorder);
+	virtual int GetTopBorder(){return m_nTopBorder;}
+	virtual void SetTopBorder(int nTopBorder);
+	virtual int GetRightBorder(){return m_nRightBorder;}
+	virtual void SetRightBorder(int nRightBorder);
+	virtual int GetBottomBorder(){return m_nBottomBorder;}
+	virtual void SetBottomBorder(int nBottomBorder);
 
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duEdit"); }	
-	virtual void WINAPI EMSetSel(UINT start, UINT end);
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duEdit"); }	
+	virtual void EMSetSel(UINT start, UINT end);
 
 public:
 	BOOL OnEMCanUndo();
@@ -180,7 +180,7 @@ public:
 	//÷ÿ–¬…Ë÷√m_hFont
 	void ResetHFont();
 	
-	LRESULT WINAPI EditWndProc_common( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam, BOOL unicode);
+	LRESULT EditWndProc_common( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam, BOOL unicode);
 
 protected:
 	void Init(BOOL fUnicode);

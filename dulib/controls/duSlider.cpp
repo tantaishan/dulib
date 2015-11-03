@@ -8,7 +8,6 @@
 //  History:    Dec-29-2009   Steven Li  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duSlider.h"
 
 
@@ -34,7 +33,7 @@ duSlider::~duSlider()
 {
 }
 
-void WINAPI duSlider::RegisterControlProperty()
+void duSlider::RegisterControlProperty()
 {
 	RegisterProperty(_T("maxpos"),        DU_PROPERTY_LONG,       &m_nMaxPos);
 	RegisterProperty(_T("pos"),           DU_PROPERTY_LONG,       &m_nPos);
@@ -45,7 +44,7 @@ void WINAPI duSlider::RegisterControlProperty()
 	RegisterProperty(_T("vert"),          DU_PROPERTY_BOOL,       &m_fVert);
 }
 
-void WINAPI duSlider::OnCreate()
+void duSlider::OnCreate()
 {
 	duRect rectSlider;
 	Plugin_GetRect(this, &rectSlider);
@@ -58,7 +57,7 @@ void WINAPI duSlider::OnCreate()
 	calcRect(rectSlider);
 }
 
-void WINAPI duSlider::DrawObject(HDC hDC)
+void duSlider::DrawObject(HDC hDC)
 {
 	duRect rectSlider;
 	Plugin_GetRect(this, &rectSlider);
@@ -69,13 +68,13 @@ void WINAPI duSlider::DrawObject(HDC hDC)
 	DrawByStyle(this, m_szThumbStyle, hDC, &m_rcThumb, m_uThumbState, NULL, GetAlpha());
 }
 
-void WINAPI duSlider::OnMouseLeave(POINT pt)
+void duSlider::OnMouseLeave(POINT pt)
 {
 	m_uThumbState = DU_STATE_NORMAL;
 	Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duSlider::OnMouseLDown(POINT pt)
+void duSlider::OnMouseLDown(POINT pt)
 {
 	duRect rectSlider;
 	Plugin_GetRect(this, &rectSlider);
@@ -99,7 +98,7 @@ void WINAPI duSlider::OnMouseLDown(POINT pt)
 	}
 }
 
-void WINAPI duSlider::OnMouseLUp(POINT pt)
+void duSlider::OnMouseLUp(POINT pt)
 {
 	if (m_fTracking)
 	{
@@ -110,7 +109,7 @@ void WINAPI duSlider::OnMouseLUp(POINT pt)
 	}
 }
 
-void WINAPI duSlider::OnMouseMove(POINT pt)
+void duSlider::OnMouseMove(POINT pt)
 {
 	duRect rectSlider;
 	Plugin_GetRect(this, &rectSlider);
@@ -149,7 +148,7 @@ void WINAPI duSlider::OnMouseMove(POINT pt)
 	}
 }
 
-void WINAPI duSlider::Resize(LPRECT lpRect)
+void duSlider::Resize(LPRECT lpRect)
 {
 	duPlugin::Resize(lpRect);
 
@@ -231,7 +230,7 @@ void duSlider::calcRectByPt(POINT &pt, duRect &rectSlider)
 	NotifyUser(DUM_SLIDERCHANGED, m_nPos, m_nMaxPos);
 }
 
-int WINAPI duSlider::GetPos()
+int duSlider::GetPos()
 {
 	if (m_fMaxPos == 0)
 		return 0;
@@ -239,7 +238,7 @@ int WINAPI duSlider::GetPos()
 	return (int)((m_fPos / m_fMaxPos * m_nMaxPos) + 0.5);
 }
 
-void WINAPI duSlider::SetPos(int nPos)
+void duSlider::SetPos(int nPos)
 {
 	if (nPos > m_nMaxPos || m_nMaxPos == 0)
 		return;
@@ -252,12 +251,12 @@ void WINAPI duSlider::SetPos(int nPos)
 	calcRect(rectSlider);
 }
 
-int WINAPI duSlider::GetMaxPos()
+int duSlider::GetMaxPos()
 {
 	return m_nMaxPos;
 }
 
-void WINAPI duSlider::SetMaxPos(int nMaxPos)
+void duSlider::SetMaxPos(int nMaxPos)
 {
 	m_nMaxPos = nMaxPos;
 
@@ -267,12 +266,12 @@ void WINAPI duSlider::SetMaxPos(int nMaxPos)
 	calcRect(rectSlider);
 }
 
-int WINAPI duSlider::GetThumbWidth()
+int duSlider::GetThumbWidth()
 {
 	return m_nThumbWidth;
 }
 
-void WINAPI duSlider::SetThumbWidth(int nWidth)
+void duSlider::SetThumbWidth(int nWidth)
 {
 	m_nThumbWidth = nWidth;
 
@@ -282,12 +281,12 @@ void WINAPI duSlider::SetThumbWidth(int nWidth)
 	calcRect(rectSlider);
 }
 
-int WINAPI duSlider::GetThumbHeight()
+int duSlider::GetThumbHeight()
 {
 	return m_nThumbHeight;
 }
 
-void WINAPI duSlider::SetThumbHeight(int nHeight)
+void duSlider::SetThumbHeight(int nHeight)
 {
 	m_nThumbHeight = nHeight;
 
@@ -297,12 +296,12 @@ void WINAPI duSlider::SetThumbHeight(int nHeight)
 	calcRect(rectSlider);
 }
 
-BOOL WINAPI duSlider::IsVert()
+BOOL duSlider::IsVert()
 {
 	return m_fVert;
 }
 
-void  WINAPI duSlider::SetVert(BOOL fVert)
+void  duSlider::SetVert(BOOL fVert)
 {
 	m_fVert = fVert;
 
@@ -312,12 +311,12 @@ void  WINAPI duSlider::SetVert(BOOL fVert)
 	calcRect(rectSlider);
 }
 
-LPCTSTR WINAPI duSlider::GetForeStyle()
+LPCTSTR duSlider::GetForeStyle()
 {
 	return m_szForeStyle;
 }
 
-void WINAPI duSlider::SetForeStyle(LPCTSTR lpszStyle)
+void duSlider::SetForeStyle(LPCTSTR lpszStyle)
 {
 	if (lpszStyle)
 		_tcsncpy(m_szForeStyle, lpszStyle, MAX_NAME);
@@ -325,12 +324,12 @@ void WINAPI duSlider::SetForeStyle(LPCTSTR lpszStyle)
 		ZeroMemory(m_szForeStyle, MAX_NAME * sizeof(TCHAR));
 }
 
-LPCTSTR WINAPI duSlider::GetThumbStyle()
+LPCTSTR duSlider::GetThumbStyle()
 {
 	return m_szThumbStyle;
 }
 
-void WINAPI duSlider::SetThumbStyle(LPCTSTR lpszStyle)
+void duSlider::SetThumbStyle(LPCTSTR lpszStyle)
 {
 	if (lpszStyle)
 		_tcsncpy(m_szThumbStyle, lpszStyle, MAX_NAME);

@@ -8,7 +8,6 @@
 //  History:    May-20-2011   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duStaticEx.h"
 
 duStaticEx::duStaticEx()
@@ -25,7 +24,7 @@ duStaticEx::~duStaticEx()
 	ClearTextCache();
 }
 
-void WINAPI duStaticEx::RegisterControlProperty()
+void duStaticEx::RegisterControlProperty()
 {
 	RegisterProperty(_T("font"), DU_PROPERTY_FONT, m_szFont);
 	RegisterProperty(_T("linespace"), DU_PROPERTY_LONG, &m_nLineSpace);
@@ -33,11 +32,11 @@ void WINAPI duStaticEx::RegisterControlProperty()
 	RegisterProperty(_T("autosize"), DU_PROPERTY_BOOL, &m_fAutoSize);
 }
 
-void WINAPI duStaticEx::OnCreate()
+void duStaticEx::OnCreate()
 {
 }
 
-void WINAPI duStaticEx::DrawObject(HDC hDC)
+void duStaticEx::DrawObject(HDC hDC)
 {
 	duRect rectStaticEx;
 	Plugin_GetRect(this, &rectStaticEx);
@@ -50,13 +49,13 @@ void WINAPI duStaticEx::DrawObject(HDC hDC)
 	StDrawText(hDC, (LPTSTR)GetText(), _tcslen(GetText()));
 }
 
-void WINAPI duStaticEx::SetText(LPCTSTR lpszText)
+void duStaticEx::SetText(LPCTSTR lpszText)
 {
 	duPlugin::SetText(lpszText);
 	ClearTextCache();
 }
 
-void WINAPI duStaticEx::Resize(LPRECT lpRect)
+void duStaticEx::Resize(LPRECT lpRect)
 {
 	RECT rcOld;
 	SetRectEmpty(&rcOld);
@@ -112,7 +111,7 @@ void duStaticEx::StDrawText(HDC hDC, LPTSTR lpszText, int len)
 	}
 }
 
-int WINAPI duStaticEx::CalcTextCache()
+int duStaticEx::CalcTextCache()
 {
 	LPTSTR lpszText = (LPTSTR)GetText();
 	int len = lstrlen(lpszText);
@@ -243,12 +242,12 @@ void duStaticEx::ClearTextCache()
 	m_vtTextCache.clear();
 }
 
-LPCTSTR WINAPI duStaticEx::GetFont()
+LPCTSTR duStaticEx::GetFont()
 {
 	return m_szFont;
 }
 
-void WINAPI duStaticEx::SetFont(LPCTSTR lpszFont)
+void duStaticEx::SetFont(LPCTSTR lpszFont)
 {
 	if (lpszFont)
 		_tcsncpy(m_szFont, lpszFont, MAX_NAME);
@@ -256,27 +255,27 @@ void WINAPI duStaticEx::SetFont(LPCTSTR lpszFont)
 		ZeroMemory(m_szFont, sizeof(TCHAR) *MAX_NAME);
 }
 
-COLORREF WINAPI duStaticEx::GetTextColor()
+COLORREF duStaticEx::GetTextColor()
 {
 	return m_clrText;
 }
 
-void WINAPI duStaticEx::SetTextColor(COLORREF clrText)
+void duStaticEx::SetTextColor(COLORREF clrText)
 {
 	m_clrText = clrText;
 }
 
-int WINAPI duStaticEx::GetLineSpace()
+int duStaticEx::GetLineSpace()
 {
 	return m_nLineSpace;
 }
 
-void WINAPI duStaticEx::SetLineSpace(int nLineSpace)
+void duStaticEx::SetLineSpace(int nLineSpace)
 {
 	m_nLineSpace = nLineSpace;
 }
 
-LPCTSTR WINAPI duStaticEx::GetLineText(int index)
+LPCTSTR duStaticEx::GetLineText(int index)
 {
 	if (index <= 0 || index > GetLineCount())
 		return NULL;
@@ -285,7 +284,7 @@ LPCTSTR WINAPI duStaticEx::GetLineText(int index)
 	return (LPCTSTR)pStaticTextInfoLine->strText.c_str();
 }
 
-void WINAPI duStaticEx::GetLineTextRect(int index, LPSIZE lpOutSize)
+void duStaticEx::GetLineTextRect(int index, LPSIZE lpOutSize)
 {
 	LPCTSTR pLineText = GetLineText(index);
 	if (index == NULL|| pLineText == NULL || lpOutSize == NULL)

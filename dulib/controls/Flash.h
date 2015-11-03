@@ -267,17 +267,17 @@ IShockwaveFlash : IDispatch
         /*[in]*/ BSTR pVal ) = 0;
 };
 
-struct __declspec(uuid("c5598e60-b307-11d1-b27d-006008c3fbfb"))
-ICanHandleException : IUnknown
-{
-    //
-    // Raw methods provided by interface
-    //
-
-      virtual HRESULT __stdcall CanHandleException (
-        /*[in]*/ struct EXCEPINFO * pExcepInfo,
-        /*[in]*/ VARIANT * pvar ) = 0;
-};
+// struct __declspec(uuid("c5598e60-b307-11d1-b27d-006008c3fbfb"))
+// ICanHandleException : IUnknown
+// {
+//     //
+//     // Raw methods provided by interface
+//     //
+// 
+//       virtual HRESULT __stdcall CanHandleException (
+//         /*[in]*/ struct EXCEPINFO * pExcepInfo,
+//         /*[in]*/ VARIANT * pvar ) = 0;
+// };
 
 struct __declspec(uuid("d27cdb6d-ae6d-11cf-96b8-444553540000"))
 _IShockwaveFlashEvents : IDispatch

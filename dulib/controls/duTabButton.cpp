@@ -8,7 +8,6 @@
 //  History:    Apr-03-2010   Denny Chen  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duTabButton.h"
 #include "duDrawHelper.h"
 #include "duCtrlManager.h"
@@ -41,7 +40,7 @@ duTabButton::~duTabButton()
 {
 }
 
-void WINAPI duTabButton::RegisterControlProperty()
+void duTabButton::RegisterControlProperty()
 {
 	RegisterProperty(_T("autosize"), DU_PROPERTY_BOOL, &m_fAutoSize);
 	RegisterProperty(_T("fixleft"),  DU_PROPERTY_LONG, &m_nFixLeft);
@@ -63,7 +62,7 @@ void WINAPI duTabButton::RegisterControlProperty()
 	RegisterProperty(_T("tooltip"), DU_PROPERTY_STRING, m_szToolTip);
 }
 
-void WINAPI duTabButton::OnCreate()
+void duTabButton::OnCreate()
 {
 	//
 	//防止克隆的时候,m_szTabPage为NULL，控件的长度等都不会被计算，所以提到前面
@@ -93,7 +92,7 @@ void WINAPI duTabButton::OnCreate()
 		Plugin_SetVisible(pTabPage, FALSE);
 }
 
-void WINAPI duTabButton::DrawObject(HDC hDC)
+void duTabButton::DrawObject(HDC hDC)
 {
 	duRect rectTabButton;
 	Plugin_GetRect(this, &rectTabButton);
@@ -144,7 +143,7 @@ void duTabButton::GetIconRect(duRect &rcIcon)
 	rcIcon.bottom = rcIcon.top + m_nIconHeight;
 }
 
-void WINAPI duTabButton::OnMouseIn(POINT pt)
+void duTabButton::OnMouseIn(POINT pt)
 {
 	duCtrlManager *pCtrlManager = GetCtrlManager(m_hWnd);
 	if (pCtrlManager == NULL)
@@ -169,7 +168,7 @@ void WINAPI duTabButton::OnMouseIn(POINT pt)
 		Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duTabButton::OnMouseLeave(POINT pt)
+void duTabButton::OnMouseLeave(POINT pt)
 {
 	duCtrlManager *pCtrlManager = GetCtrlManager(m_hWnd);
 	if (pCtrlManager == NULL)
@@ -193,7 +192,7 @@ void WINAPI duTabButton::OnMouseLeave(POINT pt)
 		Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duTabButton::OnMouseLDown(POINT pt)
+void duTabButton::OnMouseLDown(POINT pt)
 {
 	if (m_fSelected)
 		Plugin_SetState(this, DU_STATE_CHECKEDPRESS);
@@ -203,7 +202,7 @@ void WINAPI duTabButton::OnMouseLDown(POINT pt)
 	Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duTabButton::OnMouseLUp(POINT pt)
+void duTabButton::OnMouseLUp(POINT pt)
 {
 	if (m_fSelected)
 		return;
@@ -260,7 +259,7 @@ void WINAPI duTabButton::OnMouseLUp(POINT pt)
 	}
 }
 
-void WINAPI duTabButton::OnKeyDown(UINT key, UINT nRepCnt, UINT nFlags)
+void duTabButton::OnKeyDown(UINT key, UINT nRepCnt, UINT nFlags)
 {
 // 注释键盘快捷键， modify by Alex Liang, 2014-10-22
 /*
@@ -335,12 +334,12 @@ void WINAPI duTabButton::OnKeyDown(UINT key, UINT nRepCnt, UINT nFlags)
 */
 }
 
-BOOL WINAPI duTabButton::IsSelected()
+BOOL duTabButton::IsSelected()
 {
 	return m_fSelected;
 }
 
-void WINAPI duTabButton::SetSelected(BOOL fSel)
+void duTabButton::SetSelected(BOOL fSel)
 {
 	duPlugin *pParent = GetParent();
 	if (!Plugin_IsValid(pParent))
@@ -372,13 +371,13 @@ void WINAPI duTabButton::SetSelected(BOOL fSel)
 	//::InvalidateRect(m_hWnd, NULL, TRUE);
 }
 
-void WINAPI duTabButton::OnRedraw()
+void duTabButton::OnRedraw()
 {
 	m_fFadeDrawing = FALSE;
 	Plugin_KillTimer(this, m_nFadeTimer);
 }
 
-void WINAPI duTabButton::OnTimer(UINT nEventId)
+void duTabButton::OnTimer(UINT nEventId)
 {
 	if (!m_fFade || !m_fFadeDrawing)
 	{
@@ -447,7 +446,7 @@ void duTabButton::FadeRedraw(UINT uFadeInState, UINT uFadeOutState)
 	Plugin_SetTimer(this, m_nFadeTimer, 30);
 }
 
-void WINAPI duTabButton::SetTooltipText(LPCTSTR lpszText)
+void duTabButton::SetTooltipText(LPCTSTR lpszText)
 {
 	if (lpszText)
 		_tcsncpy(m_szToolTip, lpszText, MAX_NAME);
@@ -455,7 +454,7 @@ void WINAPI duTabButton::SetTooltipText(LPCTSTR lpszText)
 		ZeroMemory(m_szToolTip, MAX_NAME * sizeof(TCHAR));
 }
 
-void WINAPI duTabButton::SetIcon(LPCTSTR lpszIconName)
+void duTabButton::SetIcon(LPCTSTR lpszIconName)
 {
 	if (lpszIconName)
 		_tcsncpy(m_szIcon, lpszIconName, MAX_NAME);
@@ -463,7 +462,7 @@ void WINAPI duTabButton::SetIcon(LPCTSTR lpszIconName)
 		ZeroMemory(m_szIcon, sizeof(TCHAR) * MAX_NAME);
 }
 
-void WINAPI duTabButton::SetTabPage(LPCTSTR lpszTabPage)
+void duTabButton::SetTabPage(LPCTSTR lpszTabPage)
 {
 	if (lpszTabPage)
 		_tcsncpy(m_szTabPage, lpszTabPage, MAX_NAME);

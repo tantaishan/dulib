@@ -19,20 +19,20 @@
 class duSplitter : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
 
-	virtual void WINAPI OnMouseLeave(POINT pt);
-	virtual void WINAPI OnMouseLDown(POINT pt);
-	virtual void WINAPI OnMouseLUp(POINT pt);
-	virtual void WINAPI OnMouseMove(POINT pt);
+	virtual void OnMouseLeave(POINT pt);
+	virtual void OnMouseLDown(POINT pt);
+	virtual void OnMouseLUp(POINT pt);
+	virtual void OnMouseMove(POINT pt);
 
-	virtual void WINAPI MoveHorz(int nDistance);
-	virtual void WINAPI MoveVert(int nDistance);
+	virtual void MoveHorz(int nDistance);
+	virtual void MoveVert(int nDistance);
 
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duSplitter"); }	
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duSplitter"); }	
 
 public:
 	duSplitter();

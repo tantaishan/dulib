@@ -8,7 +8,6 @@
 //  History:    Nov-10-95   DavePl  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duRgn.h"
 #include "duStyleGroup.h"
 #include "duImage.h"
@@ -29,7 +28,7 @@ duRgn::~duRgn()
 	SAFE_DELETE_OBJECT(m_hRgn);
 }
 
-BOOL WINAPI duRgn::OnCreate(TiXmlElement *pElement)
+BOOL duRgn::OnCreate(TiXmlElement *pElement)
 {
 	m_nRoundX = ReadXmlAttributeInt(pElement, _T("roundx"));
 	m_nRoundY = ReadXmlAttributeInt(pElement, _T("roundy"));
@@ -39,7 +38,7 @@ BOOL WINAPI duRgn::OnCreate(TiXmlElement *pElement)
 	return duResBase::OnCreate(pElement);
 }
 
-void WINAPI duRgn::SetRgnType(LPCTSTR lpszType)
+void duRgn::SetRgnType(LPCTSTR lpszType)
 {
 	if (lpszType)
 		_tcsncpy(m_szType, lpszType, MAX_NAME);
@@ -47,7 +46,7 @@ void WINAPI duRgn::SetRgnType(LPCTSTR lpszType)
 		ZeroMemory(m_szType, MAX_NAME * sizeof(TCHAR));
 }
 
-void WINAPI duRgn::SetStyle(LPCTSTR lpszStyle)
+void duRgn::SetStyle(LPCTSTR lpszStyle)
 {
 	if(lpszStyle)
 		_tcsncpy(m_szStyle, lpszStyle, MAX_NAME);
@@ -56,7 +55,7 @@ void WINAPI duRgn::SetStyle(LPCTSTR lpszStyle)
 
 }
 
-HRGN WINAPI duRgn::GetHRgn(int nWidth, int nHeight)
+HRGN duRgn::GetHRgn(int nWidth, int nHeight)
 {
 	duRect rectNew;
 	rectNew.SetRect(0, 0, nWidth+1, nHeight+1);
@@ -104,7 +103,7 @@ HRGN WINAPI duRgn::GetHRgn(int nWidth, int nHeight)
 	return m_hRgn;
 }
 
-HRGN WINAPI duRgn::GetStyleHRgn(int nWidth, int nHeight)
+HRGN duRgn::GetStyleHRgn(int nWidth, int nHeight)
 {
 	duStyleGroup *pStyleGroup = (duStyleGroup *)m_pResManager->GetResObj(m_szStyle, DU_RES_STYLEGROUP);
 	if (pStyleGroup == NULL)
@@ -142,7 +141,7 @@ HRGN WINAPI duRgn::GetStyleHRgn(int nWidth, int nHeight)
 	return hRgn;
 }
 
-HRGN WINAPI duRgn::GetNormalStyleHRgn(duImageStyle *pStyle, int nWidth, int nHeight)
+HRGN duRgn::GetNormalStyleHRgn(duImageStyle *pStyle, int nWidth, int nHeight)
 {
 GetNormalStyleHRgn_start:
 	if (m_hRgn == NULL)
@@ -194,7 +193,7 @@ GetNormalStyleHRgn_start:
 	return NULL;
 }
 
-HRGN WINAPI duRgn::GetStretchStyleHRgn(duImageStyle *pStyle, int nWidth, int nHeight)
+HRGN duRgn::GetStretchStyleHRgn(duImageStyle *pStyle, int nWidth, int nHeight)
 {
 	if (m_hRgn == NULL)
 		GetNormalStyleHRgn(pStyle, nWidth, nHeight);
@@ -223,7 +222,7 @@ HRGN WINAPI duRgn::GetStretchStyleHRgn(duImageStyle *pStyle, int nWidth, int nHe
 	return hRgn;
 }
 
-HRGN WINAPI duRgn::GetStretchVertStyleHRgn(duImageStyle *pStyle, int nWidth, int nHeight)
+HRGN duRgn::GetStretchVertStyleHRgn(duImageStyle *pStyle, int nWidth, int nHeight)
 {
 	if (m_hRgn == NULL)
 		GetNormalStyleHRgn(pStyle, nWidth, nHeight);
@@ -270,7 +269,7 @@ HRGN WINAPI duRgn::GetStretchVertStyleHRgn(duImageStyle *pStyle, int nWidth, int
 	return hRgn;
 }
 
-HRGN WINAPI duRgn::GetStretchHorzStyleHRgn(duImageStyle *pStyle, int nWidth, int nHeight)
+HRGN duRgn::GetStretchHorzStyleHRgn(duImageStyle *pStyle, int nWidth, int nHeight)
 {
 	if (m_hRgn == NULL)
 		GetNormalStyleHRgn(pStyle, nWidth, nHeight);
@@ -318,7 +317,7 @@ HRGN WINAPI duRgn::GetStretchHorzStyleHRgn(duImageStyle *pStyle, int nWidth, int
 	return hRgn;
 }
 
-HRGN WINAPI duRgn::GetStretchPartAllStyleHRgn(duImageStyle *pStyle, int nWidth, int nHeight)
+HRGN duRgn::GetStretchPartAllStyleHRgn(duImageStyle *pStyle, int nWidth, int nHeight)
 {
 	if (m_hRgn == NULL)
 		GetNormalStyleHRgn(pStyle, nWidth, nHeight);

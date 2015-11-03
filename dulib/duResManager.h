@@ -28,24 +28,24 @@ class duStyleGroup;
 // duReManager
 //
 //
-class duResManager : public duObject
+class duResManager
 {
 public:
-	virtual BOOL WINAPI AddResObj(duResBase *pNewRes);
-	virtual BOOL WINAPI DeleteResObj(LPCTSTR lpszResName, UINT uResType);
+	virtual BOOL AddResObj(duResBase *pNewRes);
+	virtual BOOL DeleteResObj(LPCTSTR lpszResName, UINT uResType);
 	
-	virtual duResBase *WINAPI GetResObj(LPCTSTR lpszResName, UINT uResType);
-	virtual duResBase *WINAPI CreateResObj(LPCTSTR lpszResName, UINT uResType);
-	virtual duStyleBase *WINAPI CreateStyle(UINT uStyleType);
-	virtual int WINAPI GetResObjCount(UINT uResType);
-	virtual duResBase *WINAPI GetResObjByIndex(int iIndex, UINT uResType);
-	virtual BOOL WINAPI ResRename(LPCTSTR lpszResName, UINT uResType, LPCTSTR lpszResNewName);
-	virtual BOOL WINAPI EraseResObjFromMap(LPCTSTR lpszResName, UINT uResType);
-	virtual duStyleBase *WINAPI CloneChildStyle(duStyleBase *pStyleBase);
-	virtual duStyleGroup *WINAPI CloneStyle(duStyleGroup *pStyleGroup, LPCTSTR lpszResName);
+	virtual duResBase *GetResObj(LPCTSTR lpszResName, UINT uResType);
+	virtual duResBase *CreateResObj(LPCTSTR lpszResName, UINT uResType);
+	virtual duStyleBase *CreateStyle(UINT uStyleType);
+	virtual int GetResObjCount(UINT uResType);
+	virtual duResBase *GetResObjByIndex(int iIndex, UINT uResType);
+	virtual BOOL ResRename(LPCTSTR lpszResName, UINT uResType, LPCTSTR lpszResNewName);
+	virtual BOOL EraseResObjFromMap(LPCTSTR lpszResName, UINT uResType);
+	virtual duStyleBase *CloneChildStyle(duStyleBase *pStyleBase);
+	virtual duStyleGroup *CloneStyle(duStyleGroup *pStyleGroup, LPCTSTR lpszResName);
 
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duResManager"); }
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duResManager"); }
 
 public:
 	duResManager();

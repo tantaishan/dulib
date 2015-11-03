@@ -8,7 +8,6 @@
 //  History:    Nov-10-2009   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duMenuItem.h"
 #include "duDrawHelper.h"
 #include "duCtrlManager.h"
@@ -35,7 +34,7 @@ duMenuItem::~duMenuItem()
 	
 }
 
-void WINAPI duMenuItem::RegisterControlProperty()
+void duMenuItem::RegisterControlProperty()
 {
 	RegisterProperty(_T("icon"), DU_PROPERTY_STRING, m_szIcon);
 	RegisterProperty(_T("iconx"), DU_PROPERTY_LONG, &m_nIconX);
@@ -50,12 +49,12 @@ void WINAPI duMenuItem::RegisterControlProperty()
 	RegisterProperty(_T("window"), DU_PROPERTY_STRING, m_szPopupWindow);
 }
 
-void WINAPI duMenuItem::OnCreate()
+void duMenuItem::OnCreate()
 {
 	
 }
 
-void WINAPI duMenuItem::DrawObject(HDC hDC)
+void duMenuItem::DrawObject(HDC hDC)
 {
 	duRect rcMenuItem;
 	Plugin_GetRect(this, &rcMenuItem);
@@ -119,13 +118,13 @@ void WINAPI duMenuItem::DrawObject(HDC hDC)
 	}
 }
 
-void WINAPI duMenuItem::OnMouseIn(POINT pt)
+void duMenuItem::OnMouseIn(POINT pt)
 {
 	//Plugin_SetState(this, DU_STATE_OVER);
 	//Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duMenuItem::OnMouseLeave(POINT pt)
+void duMenuItem::OnMouseLeave(POINT pt)
 {
 	//if (!m_pPopupMenu)
 	//{
@@ -134,12 +133,12 @@ void WINAPI duMenuItem::OnMouseLeave(POINT pt)
 	//}
 }
 
-void WINAPI duMenuItem::OnMouseLDown(POINT pt)
+void duMenuItem::OnMouseLDown(POINT pt)
 {
 	m_fPress = TRUE;
 }
 
-void WINAPI duMenuItem::OnMouseLUp(POINT pt)
+void duMenuItem::OnMouseLUp(POINT pt)
 {
 	if (m_pPopupMenu)
 		return;
@@ -160,12 +159,12 @@ void WINAPI duMenuItem::OnMouseLUp(POINT pt)
 	}
 }
 
-void WINAPI duMenuItem::OnMouseDbClick(POINT pt)
+void duMenuItem::OnMouseDbClick(POINT pt)
 {
 	
 }
 
-void WINAPI duMenuItem::SetChildMenu(LPCTSTR lpszMenu)
+void duMenuItem::SetChildMenu(LPCTSTR lpszMenu)
 {
 	if (lpszMenu)
 		_tcsncpy(m_szChildMenu, lpszMenu, MAX_NAME);
@@ -173,7 +172,7 @@ void WINAPI duMenuItem::SetChildMenu(LPCTSTR lpszMenu)
 		ZeroMemory(m_szChildMenu, MAX_NAME * sizeof(TCHAR));
 }
 
-void WINAPI duMenuItem::SetIcon(LPCTSTR lpszIcon)
+void duMenuItem::SetIcon(LPCTSTR lpszIcon)
 {
 	if (lpszIcon)
 		_tcsncpy(m_szIcon, lpszIcon, MAX_NAME);
@@ -181,12 +180,12 @@ void WINAPI duMenuItem::SetIcon(LPCTSTR lpszIcon)
 		ZeroMemory(m_szIcon, MAX_NAME * sizeof(TCHAR));
 }
 
-BOOL WINAPI duMenuItem::IsPopupItem()
+BOOL duMenuItem::IsPopupItem()
 {
 	return _tcslen(m_szChildMenu) > 0 ? TRUE : FALSE;
 }
 
-void WINAPI duMenuItem::SetPopupWindow(LPCTSTR lpszWin)
+void duMenuItem::SetPopupWindow(LPCTSTR lpszWin)
 {
 	if (lpszWin)
 		_tcsncpy(m_szPopupWindow, lpszWin, MAX_NAME);
@@ -194,7 +193,7 @@ void WINAPI duMenuItem::SetPopupWindow(LPCTSTR lpszWin)
 		ZeroMemory(m_szPopupWindow, MAX_NAME * sizeof(TCHAR));
 }
 
-void WINAPI duMenuItem::SetDisable(BOOL fDisable)
+void duMenuItem::SetDisable(BOOL fDisable)
 {
 	if (IsPopupItem())
 		return;

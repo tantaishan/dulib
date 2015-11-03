@@ -8,7 +8,6 @@
 //  History:    Nov-10-2009   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duHeaderCtrl.h"
 #include "duDrawHelper.h"
 #include "duListCtrl.h"
@@ -53,7 +52,7 @@ duHeaderCtrl::~duHeaderCtrl()
 	
 }
 
-void WINAPI duHeaderCtrl::RegisterControlProperty()
+void duHeaderCtrl::RegisterControlProperty()
 {
 	RegisterProperty(_T("borderwidth"), DU_PROPERTY_LONG, &m_nBorderWidth);
 
@@ -86,7 +85,7 @@ void WINAPI duHeaderCtrl::RegisterControlProperty()
 	RegisterProperty(_T("listctrl"), DU_PROPERTY_STRING, m_szListCtrl);
 }
 
-void WINAPI duHeaderCtrl::OnCreate()
+void duHeaderCtrl::OnCreate()
 {
 	/*
 	//640
@@ -101,7 +100,7 @@ void WINAPI duHeaderCtrl::OnCreate()
 	*/
 }
 
-void WINAPI duHeaderCtrl::DrawObject(HDC hDC)
+void duHeaderCtrl::DrawObject(HDC hDC)
 {
 	duRect rcHeader;
 	Plugin_GetRect(this, &rcHeader);
@@ -236,7 +235,7 @@ void WINAPI duHeaderCtrl::DrawObject(HDC hDC)
 	::DeleteDC(hMemDC);
 }
 
-void WINAPI duHeaderCtrl::OnMouseMove(POINT point)
+void duHeaderCtrl::OnMouseMove(POINT point)
 {
 	duPoint pt(point);
 	if (m_fTracking)
@@ -338,7 +337,7 @@ void WINAPI duHeaderCtrl::OnMouseMove(POINT point)
 	}
 }
 
-void WINAPI duHeaderCtrl::OnMouseLeave(POINT pt)
+void duHeaderCtrl::OnMouseLeave(POINT pt)
 {
 	if (m_pHot)
 	{
@@ -349,7 +348,7 @@ void WINAPI duHeaderCtrl::OnMouseLeave(POINT pt)
 	}
 }
 
-BOOL WINAPI duHeaderCtrl::OnSetCursor()
+BOOL duHeaderCtrl::OnSetCursor()
 {
 	duPoint pt;
 	GetCursorPos(&pt);
@@ -398,7 +397,7 @@ BOOL WINAPI duHeaderCtrl::OnSetCursor()
 	return duPlugin::OnSetCursor();
 }
 
-void WINAPI duHeaderCtrl::OnMouseLDown(POINT point)
+void duHeaderCtrl::OnMouseLDown(POINT point)
 {
 	duPoint pt(point);
 	if (m_pHot)
@@ -452,7 +451,7 @@ void WINAPI duHeaderCtrl::OnMouseLDown(POINT point)
 	}
 }
 
-void WINAPI duHeaderCtrl::OnMouseLUp(POINT pt)
+void duHeaderCtrl::OnMouseLUp(POINT pt)
 {
 	Plugin_ReleaseCapture(this);
 	m_fTracking = FALSE;
@@ -476,7 +475,7 @@ void WINAPI duHeaderCtrl::OnMouseLUp(POINT pt)
 	}
 }
 
-BOOL WINAPI duHeaderCtrl::InsertItem(int nIndex, LPCTSTR lpszText, BOOL bPercent, int nWidthOrPercent, LPCTSTR lpszIcon)
+BOOL duHeaderCtrl::InsertItem(int nIndex, LPCTSTR lpszText, BOOL bPercent, int nWidthOrPercent, LPCTSTR lpszIcon)
 {
 	int nItemCount = GetItemCount();
 	if (nIndex == -1)
@@ -517,12 +516,12 @@ BOOL WINAPI duHeaderCtrl::InsertItem(int nIndex, LPCTSTR lpszText, BOOL bPercent
 	return TRUE;
 }
 
-int WINAPI duHeaderCtrl::GetItemCount()
+int duHeaderCtrl::GetItemCount()
 {
 	return (int)m_vtItems.size();
 }
 
-int WINAPI duHeaderCtrl::GetTotalWidth()
+int duHeaderCtrl::GetTotalWidth()
 {
 	int nTotalWidth = 0;
 	int i;
@@ -540,7 +539,7 @@ int WINAPI duHeaderCtrl::GetTotalWidth()
 	return nTotalWidth;
 }
 
-void WINAPI duHeaderCtrl::SetOffsetX(int nOffsetX)
+void duHeaderCtrl::SetOffsetX(int nOffsetX)
 {
 	m_nOffsetX = nOffsetX;
 	//CRect rc;
@@ -576,7 +575,7 @@ int duHeaderCtrl::GetItemIndex(HeaderCtrlItem *pHeaderItem)
 	return -1;
 }
 
-int WINAPI duHeaderCtrl::GetItemWidth(int nIndex)
+int duHeaderCtrl::GetItemWidth(int nIndex)
 {
 	HeaderCtrlItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -585,7 +584,7 @@ int WINAPI duHeaderCtrl::GetItemWidth(int nIndex)
 	return pItem->nWidth;
 }
 
-void WINAPI duHeaderCtrl::SetItemWidth(int nIndex, int nWidth)
+void duHeaderCtrl::SetItemWidth(int nIndex, int nWidth)
 {
 	HeaderCtrlItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -598,7 +597,7 @@ void WINAPI duHeaderCtrl::SetItemWidth(int nIndex, int nWidth)
 		pListCtrl->AdjustColumnWidth(nIndex, nWidth);
 }
 
-LPCTSTR WINAPI duHeaderCtrl::GetItemText(int nIndex)
+LPCTSTR duHeaderCtrl::GetItemText(int nIndex)
 {
 	HeaderCtrlItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -607,7 +606,7 @@ LPCTSTR WINAPI duHeaderCtrl::GetItemText(int nIndex)
 	return pItem->strText.c_str();
 }
 
-void WINAPI duHeaderCtrl::SetItemText(int nIndex, LPCTSTR lpszText)
+void duHeaderCtrl::SetItemText(int nIndex, LPCTSTR lpszText)
 {
 	HeaderCtrlItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -619,7 +618,7 @@ void WINAPI duHeaderCtrl::SetItemText(int nIndex, LPCTSTR lpszText)
 		pItem->strText = _T("");
 }
 
-LPCTSTR WINAPI duHeaderCtrl::GetItemIcon(int nIndex)
+LPCTSTR duHeaderCtrl::GetItemIcon(int nIndex)
 {
 	HeaderCtrlItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -628,7 +627,7 @@ LPCTSTR WINAPI duHeaderCtrl::GetItemIcon(int nIndex)
 	return pItem->strIcon.c_str();
 }
 
-void WINAPI duHeaderCtrl::SetItemIcon(int nIndex, LPCTSTR lpszIcon)
+void duHeaderCtrl::SetItemIcon(int nIndex, LPCTSTR lpszIcon)
 {
 	HeaderCtrlItem *pItem = GetItem(nIndex);
 	if (pItem == NULL)
@@ -640,7 +639,7 @@ void WINAPI duHeaderCtrl::SetItemIcon(int nIndex, LPCTSTR lpszIcon)
 		pItem->strIcon = _T("");
 }
 
-void WINAPI duHeaderCtrl::SetCheckBoxImage(LPCTSTR lpszImage)
+void duHeaderCtrl::SetCheckBoxImage(LPCTSTR lpszImage)
 {
 	if (lpszImage)
 		_tcscpy(m_szCheckBox, lpszImage);
@@ -648,7 +647,7 @@ void WINAPI duHeaderCtrl::SetCheckBoxImage(LPCTSTR lpszImage)
 		ZeroMemory(m_szCheckBox, MAX_NAME * sizeof(TCHAR));
 }
 
-void WINAPI duHeaderCtrl::SetListCtrl(LPCTSTR lpszCtrl)
+void duHeaderCtrl::SetListCtrl(LPCTSTR lpszCtrl)
 {
 	if (lpszCtrl)
 		_tcscpy(m_szListCtrl, lpszCtrl);
@@ -656,7 +655,7 @@ void WINAPI duHeaderCtrl::SetListCtrl(LPCTSTR lpszCtrl)
 		ZeroMemory(m_szListCtrl, MAX_NAME * sizeof(TCHAR));
 }
 
-void WINAPI duHeaderCtrl::SetItemStyle(LPCTSTR lpszStyle)
+void duHeaderCtrl::SetItemStyle(LPCTSTR lpszStyle)
 {
 	if (lpszStyle)
 		_tcscpy(m_szItemStyle, lpszStyle);
@@ -664,7 +663,7 @@ void WINAPI duHeaderCtrl::SetItemStyle(LPCTSTR lpszStyle)
 		ZeroMemory(m_szItemStyle, MAX_NAME * sizeof(TCHAR));
 }
 
-void WINAPI duHeaderCtrl::SetSortStyle(LPCTSTR lpszStyle)
+void duHeaderCtrl::SetSortStyle(LPCTSTR lpszStyle)
 {
 	if (lpszStyle)
 		_tcscpy(m_szSortStyle, lpszStyle);
@@ -672,7 +671,7 @@ void WINAPI duHeaderCtrl::SetSortStyle(LPCTSTR lpszStyle)
 		ZeroMemory(m_szSortStyle, MAX_NAME * sizeof(TCHAR));
 }
 
-void WINAPI duHeaderCtrl::SetSepImage(LPCTSTR lpszImage)
+void duHeaderCtrl::SetSepImage(LPCTSTR lpszImage)
 {
 	if (lpszImage)
 		_tcscpy(m_szSepImage, lpszImage);

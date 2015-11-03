@@ -10,37 +10,36 @@
 //--------------------------------------------------------------------------
 #pragma once
 #include "duUtility.h"
-#include "duObject.h"
 
 class duResManager;
 
 // duStyleBase
 //
 //
-class duStyleBase : public duObject
+class duStyleBase
 {
 public:
-	virtual int WINAPI GetType() = 0;
-	virtual void WINAPI Draw(HDC hDC, LPRECT lpDstRect, LPCTSTR lpszText, int nAlpha) = 0;
-	virtual BOOL WINAPI OnCreate(TiXmlElement *pElement);
+	virtual int GetType() = 0;
+	virtual void Draw(HDC hDC, LPRECT lpDstRect, LPCTSTR lpszText, int nAlpha) = 0;
+	virtual BOOL OnCreate(TiXmlElement *pElement);
 	
-	virtual int WINAPI GetLeft() { return m_nLeft; }
-	virtual void WINAPI SetLeft(int nLeft) { m_nLeft = nLeft; }
-	virtual int WINAPI GetTop() { return m_nTop; }
-	virtual void WINAPI SetTop(int nTop) { m_nTop = nTop; }
-	virtual int WINAPI GetRight() { return m_nRight; }
-	virtual void WINAPI SetRight(int nRight) { m_nRight = nRight; }
-	virtual int WINAPI GetBottom() { return m_nBottom; }
-	virtual void WINAPI SetBottom(int nBottom) { m_nBottom = nBottom; }
-	virtual int WINAPI GetWidth() { return m_nWidth; }
-	virtual void WINAPI SetWidth(int nWidth) { m_nWidth = nWidth; }
-	virtual int WINAPI GetHeight() { return m_nHeight; }
-	virtual void WINAPI SetHeight(int nHeight) { m_nHeight = nHeight; }
-	virtual UINT WINAPI GetState() { return m_uState; }
-	virtual void WINAPI SetState(UINT uState) { m_uState = uState; }
+	virtual int GetLeft() { return m_nLeft; }
+	virtual void SetLeft(int nLeft) { m_nLeft = nLeft; }
+	virtual int GetTop() { return m_nTop; }
+	virtual void SetTop(int nTop) { m_nTop = nTop; }
+	virtual int GetRight() { return m_nRight; }
+	virtual void SetRight(int nRight) { m_nRight = nRight; }
+	virtual int GetBottom() { return m_nBottom; }
+	virtual void SetBottom(int nBottom) { m_nBottom = nBottom; }
+	virtual int GetWidth() { return m_nWidth; }
+	virtual void SetWidth(int nWidth) { m_nWidth = nWidth; }
+	virtual int GetHeight() { return m_nHeight; }
+	virtual void SetHeight(int nHeight) { m_nHeight = nHeight; }
+	virtual UINT GetState() { return m_uState; }
+	virtual void SetState(UINT uState) { m_uState = uState; }
 
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duStyleBase"); }
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duStyleBase"); }
 
 public:
 	duStyleBase();
@@ -66,37 +65,37 @@ protected:
 class duImageStyle : public duStyleBase
 {
 public:
-	virtual int WINAPI GetType() { return STYLE_IMAGE; }
-	virtual void WINAPI Draw(HDC hDC, LPRECT lpDstRect, LPCTSTR lpszText, int nAlpha);
+	virtual int GetType() { return STYLE_IMAGE; }
+	virtual void Draw(HDC hDC, LPRECT lpDstRect, LPCTSTR lpszText, int nAlpha);
 	
-	virtual BOOL WINAPI OnCreate(TiXmlElement *pElement);
+	virtual BOOL OnCreate(TiXmlElement *pElement);
 	
-	virtual UINT WINAPI GetLeftPart() { return m_uLeftPart; }
-	virtual void WINAPI SetLeftPart(UINT uLeftPart) { m_uLeftPart = uLeftPart; }
-	virtual UINT WINAPI GetTopPart() { return m_uTopPart; }
-	virtual void WINAPI SetTopPart(UINT uTopPart) { m_uTopPart = uTopPart; }
-	virtual UINT WINAPI GetRightPart() { return m_uRightPart; }
-	virtual void WINAPI SetRightPart(UINT uRightPart) { m_uRightPart = uRightPart; }
-	virtual UINT WINAPI GetBottomPart() { return m_uBottomPart; }
-	virtual void WINAPI SetBottomPart(UINT uBottomPart) { m_uBottomPart = uBottomPart; }
+	virtual UINT GetLeftPart() { return m_uLeftPart; }
+	virtual void SetLeftPart(UINT uLeftPart) { m_uLeftPart = uLeftPart; }
+	virtual UINT GetTopPart() { return m_uTopPart; }
+	virtual void SetTopPart(UINT uTopPart) { m_uTopPart = uTopPart; }
+	virtual UINT GetRightPart() { return m_uRightPart; }
+	virtual void SetRightPart(UINT uRightPart) { m_uRightPart = uRightPart; }
+	virtual UINT GetBottomPart() { return m_uBottomPart; }
+	virtual void SetBottomPart(UINT uBottomPart) { m_uBottomPart = uBottomPart; }
 
-	virtual UINT WINAPI GetSelectLeft() { return m_uSelectLeft; }
-	virtual void WINAPI SetSelectLeft(UINT uSelectLeft) { m_uSelectLeft = uSelectLeft; }
-	virtual UINT WINAPI GetSelectTop() { return m_uSelectTop; }
-	virtual void WINAPI SetSelectTop(UINT uSelectTop) { m_uSelectTop = uSelectTop; }
-	virtual UINT WINAPI GetSelectWidth() { return m_uSelectWidth; }
-	virtual void WINAPI SetSelectWidth(UINT uSelectWidth) { m_uSelectWidth = uSelectWidth; }
-	virtual UINT WINAPI GetSelectHeight() { return m_uSelectHeight; }
-	virtual void WINAPI SetSelectHeight(UINT uSelectHeight) { m_uSelectHeight = uSelectHeight; }
+	virtual UINT GetSelectLeft() { return m_uSelectLeft; }
+	virtual void SetSelectLeft(UINT uSelectLeft) { m_uSelectLeft = uSelectLeft; }
+	virtual UINT GetSelectTop() { return m_uSelectTop; }
+	virtual void SetSelectTop(UINT uSelectTop) { m_uSelectTop = uSelectTop; }
+	virtual UINT GetSelectWidth() { return m_uSelectWidth; }
+	virtual void SetSelectWidth(UINT uSelectWidth) { m_uSelectWidth = uSelectWidth; }
+	virtual UINT GetSelectHeight() { return m_uSelectHeight; }
+	virtual void SetSelectHeight(UINT uSelectHeight) { m_uSelectHeight = uSelectHeight; }
 	
-	virtual LPCTSTR WINAPI GetPicFile() { return m_strPicFile.c_str(); }
-	virtual void WINAPI SetPicFile(LPCTSTR lpszName);
+	virtual LPCTSTR GetPicFile() { return m_strPicFile.c_str(); }
+	virtual void SetPicFile(LPCTSTR lpszName);
 
-	virtual LPCTSTR WINAPI GetPaintMode() { return m_strPaintMode.c_str(); }
-	virtual void WINAPI SetPaintMode(LPCTSTR lpszPaintMode);
+	virtual LPCTSTR GetPaintMode() { return m_strPaintMode.c_str(); }
+	virtual void SetPaintMode(LPCTSTR lpszPaintMode);
 
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duImageStyle"); }
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duImageStyle"); }
 
 public:
 	duImageStyle();
@@ -122,27 +121,27 @@ protected:
 class duTextStyle : public duStyleBase
 { 
 public:
-	virtual int WINAPI GetType() { return STYLE_TEXT; }
-	virtual void WINAPI Draw(HDC hDC, LPRECT lpDstRect, LPCTSTR lpszext, int nAlpha);
+	virtual int GetType() { return STYLE_TEXT; }
+	virtual void Draw(HDC hDC, LPRECT lpDstRect, LPCTSTR lpszext, int nAlpha);
 	
-	virtual BOOL WINAPI OnCreate(TiXmlElement *pElement);
+	virtual BOOL OnCreate(TiXmlElement *pElement);
 	
-	virtual HFONT WINAPI GetHFont();
-	virtual void WINAPI CalcTextRect(LPCTSTR lpszText, LPSIZE lpOutSize);
+	virtual HFONT GetHFont();
+	virtual void CalcTextRect(LPCTSTR lpszText, LPSIZE lpOutSize);
 
-	virtual LPCTSTR WINAPI GetFont() { return m_strFont.c_str(); }
-	virtual void WINAPI SetFont(LPCTSTR lpszFontName);
-	virtual COLORREF WINAPI GetTextColor() { return m_clrText; }
-	virtual void WINAPI SetTextColor(COLORREF clrText) { m_clrText = clrText; }
-	virtual BOOL WINAPI IsSingleLine() { return m_fSingleline; }
-	virtual void WINAPI SetSingleLine(BOOL fSingleLine) { m_fSingleline = fSingleLine; }
-	virtual LPCTSTR WINAPI GetHAlign() { return m_strHorz.c_str(); }
-	virtual void WINAPI SetHAlign(LPCTSTR lpszHorzAlign);
-	virtual LPCTSTR WINAPI GetVAlign() { return m_strVert.c_str(); }
-	virtual void WINAPI SetVAlign(LPCTSTR lpszVertAlign);
+	virtual LPCTSTR GetFont() { return m_strFont.c_str(); }
+	virtual void SetFont(LPCTSTR lpszFontName);
+	virtual COLORREF GetTextColor() { return m_clrText; }
+	virtual void SetTextColor(COLORREF clrText) { m_clrText = clrText; }
+	virtual BOOL IsSingleLine() { return m_fSingleline; }
+	virtual void SetSingleLine(BOOL fSingleLine) { m_fSingleline = fSingleLine; }
+	virtual LPCTSTR GetHAlign() { return m_strHorz.c_str(); }
+	virtual void SetHAlign(LPCTSTR lpszHorzAlign);
+	virtual LPCTSTR GetVAlign() { return m_strVert.c_str(); }
+	virtual void SetVAlign(LPCTSTR lpszVertAlign);
 
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duTextStyle"); }
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duTextStyle"); }
 
 public:
 	duTextStyle();
@@ -162,26 +161,26 @@ protected:
 class duRectStyle : public duStyleBase
 {
 public:
-	virtual int WINAPI GetType() { return STYLE_RECT; }
-	virtual void WINAPI Draw(HDC hDC, LPRECT lpDstRect, LPCTSTR lpszText, int nAlpha);
+	virtual int GetType() { return STYLE_RECT; }
+	virtual void Draw(HDC hDC, LPRECT lpDstRect, LPCTSTR lpszText, int nAlpha);
 	
-	virtual BOOL WINAPI OnCreate(TiXmlElement *pElement);
+	virtual BOOL OnCreate(TiXmlElement *pElement);
 
-	virtual COLORREF WINAPI GetFillColor() { return m_clrFill; }
-	virtual void WINAPI SetFillColor(COLORREF clr) { m_clrFill = clr; }
-	virtual COLORREF WINAPI GetBorderColor() { return m_clrBorder; }
-	virtual void WINAPI SetBorderColor(COLORREF clr) { m_clrBorder = clr; }
-	virtual BOOL WINAPI IsFillRect() { return m_fFill; }
-	virtual void WINAPI SetFillRect(BOOL fFill) { m_fFill = fFill; }
-	virtual BOOL WINAPI IsDrawBorder() { return m_fBorder; }
-	virtual void WINAPI SetDrawBorder(BOOL fBorder) { m_fBorder = fBorder; }
-	virtual LPCTSTR WINAPI GetBorderType() { return m_strPenType.c_str(); }
-	virtual void WINAPI SetBorderType(LPCTSTR lpszBorderType);
-	virtual UINT WINAPI GetBorderWidth() { return m_uPenWidth; }
-	virtual void WINAPI SetBorderWidth(UINT uBorderWidth) { m_uPenWidth = uBorderWidth; }
+	virtual COLORREF GetFillColor() { return m_clrFill; }
+	virtual void SetFillColor(COLORREF clr) { m_clrFill = clr; }
+	virtual COLORREF GetBorderColor() { return m_clrBorder; }
+	virtual void SetBorderColor(COLORREF clr) { m_clrBorder = clr; }
+	virtual BOOL IsFillRect() { return m_fFill; }
+	virtual void SetFillRect(BOOL fFill) { m_fFill = fFill; }
+	virtual BOOL IsDrawBorder() { return m_fBorder; }
+	virtual void SetDrawBorder(BOOL fBorder) { m_fBorder = fBorder; }
+	virtual LPCTSTR GetBorderType() { return m_strPenType.c_str(); }
+	virtual void SetBorderType(LPCTSTR lpszBorderType);
+	virtual UINT GetBorderWidth() { return m_uPenWidth; }
+	virtual void SetBorderWidth(UINT uBorderWidth) { m_uPenWidth = uBorderWidth; }
 
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duRectStyle"); }
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duRectStyle"); }
 
 public:
 	duRectStyle();
@@ -205,24 +204,24 @@ protected:
 class duLineStyle : public duStyleBase
 {
 public:
-	virtual int WINAPI GetType() { return STYLE_LINE; }
-	virtual void WINAPI Draw(HDC hDC, LPRECT lpDstRect, LPCTSTR lpszText, int nAlpha);
+	virtual int GetType() { return STYLE_LINE; }
+	virtual void Draw(HDC hDC, LPRECT lpDstRect, LPCTSTR lpszText, int nAlpha);
 	
-	virtual BOOL WINAPI OnCreate(TiXmlElement *pElement);
+	virtual BOOL OnCreate(TiXmlElement *pElement);
 	
-	virtual COLORREF WINAPI GetLineColor() { return m_clrLine; }
-	virtual void WINAPI SetLineColor(COLORREF clr) { m_clrLine = clr; }
-	virtual UINT WINAPI GetLineWidth() { return m_uLineWidth; }
-	virtual void WINAPI SetLineWidth(UINT uLineWidth) { m_uLineWidth = uLineWidth; }
-	virtual LPCTSTR WINAPI GetLineType() { return m_strLineType.c_str(); }
-	virtual void WINAPI SetLineType(LPCTSTR lpszLineType);
-	virtual BOOL WINAPI GetStartPoint(LPPOINT lpOutPoint);
-	virtual void WINAPI SetStartPoint(LPPOINT lpStartPoint);
-	virtual BOOL WINAPI GetEndPoint(LPPOINT lpOutPoint);
-	virtual void WINAPI SetEndPoint(LPPOINT lpEndPoint);
+	virtual COLORREF GetLineColor() { return m_clrLine; }
+	virtual void SetLineColor(COLORREF clr) { m_clrLine = clr; }
+	virtual UINT GetLineWidth() { return m_uLineWidth; }
+	virtual void SetLineWidth(UINT uLineWidth) { m_uLineWidth = uLineWidth; }
+	virtual LPCTSTR GetLineType() { return m_strLineType.c_str(); }
+	virtual void SetLineType(LPCTSTR lpszLineType);
+	virtual BOOL GetStartPoint(LPPOINT lpOutPoint);
+	virtual void SetStartPoint(LPPOINT lpStartPoint);
+	virtual BOOL GetEndPoint(LPPOINT lpOutPoint);
+	virtual void SetEndPoint(LPPOINT lpEndPoint);
 
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duLineStyle"); }
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duLineStyle"); }
 
 public:
 	duLineStyle();

@@ -28,39 +28,39 @@ enum ScrollBarHit
 class duScroll : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
-	virtual void WINAPI OnMouseLeave(POINT pt);
-	virtual void WINAPI OnMouseLDown(POINT pt);
-	virtual void WINAPI OnMouseLUp(POINT pt);
-	virtual void WINAPI OnMouseMove(POINT pt);
-	virtual void WINAPI OnMouseWheel(UINT fwKeys, int zDelta, POINT pt);
-	virtual void WINAPI OnTimer(UINT nEventId);
-	virtual void WINAPI Resize(LPRECT lpNewRect);
-	virtual void WINAPI RefreshScrollBar();
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
+	virtual void OnMouseLeave(POINT pt);
+	virtual void OnMouseLDown(POINT pt);
+	virtual void OnMouseLUp(POINT pt);
+	virtual void OnMouseMove(POINT pt);
+	virtual void OnMouseWheel(UINT fwKeys, int zDelta, POINT pt);
+	virtual void OnTimer(UINT nEventId);
+	virtual void Resize(LPRECT lpNewRect);
+	virtual void RefreshScrollBar();
 
-	virtual int  WINAPI GetMaxPos() { return m_nMaxPos; }
-	virtual void WINAPI SetMaxPos(int nMaxPos);
-	virtual int  WINAPI GetPos() { return m_nPos; }
-	virtual void WINAPI SetPos(int nPos);
-	virtual int  WINAPI GetPage() { return m_nPage; }
-	virtual void WINAPI SetPage(int nPage);
-	virtual int  WINAPI GetArrowHeight() { return m_nArrowHeight; }
-	virtual void WINAPI SetArrowHeight(int nArrowHeight);
-	virtual BOOL WINAPI IsVert() { return m_fVert; }
-	virtual void WINAPI SetVert(BOOL bVert);
-	virtual int  WINAPI GetStep() { return m_nStep; }
-	virtual void WINAPI SetStep(int nStep);
-	virtual LPCTSTR WINAPI GetUpStyle() { return m_szUpStyle; }
-	virtual void WINAPI SetUpStyle(LPCTSTR lpszStyle);
-	virtual LPCTSTR WINAPI GetDownStyle() { return m_szDownStyle; }
-	virtual void WINAPI SetDownStyle(LPCTSTR lpszStyle);
-	virtual LPCTSTR WINAPI GetThumbStyle() { return m_szThumbStyle; }
-	virtual void WINAPI SetThumbStyle(LPCTSTR lpszStyle);
+	virtual int  GetMaxPos() { return m_nMaxPos; }
+	virtual void SetMaxPos(int nMaxPos);
+	virtual int  GetPos() { return m_nPos; }
+	virtual void SetPos(int nPos);
+	virtual int  GetPage() { return m_nPage; }
+	virtual void SetPage(int nPage);
+	virtual int  GetArrowHeight() { return m_nArrowHeight; }
+	virtual void SetArrowHeight(int nArrowHeight);
+	virtual BOOL IsVert() { return m_fVert; }
+	virtual void SetVert(BOOL bVert);
+	virtual int  GetStep() { return m_nStep; }
+	virtual void SetStep(int nStep);
+	virtual LPCTSTR GetUpStyle() { return m_szUpStyle; }
+	virtual void SetUpStyle(LPCTSTR lpszStyle);
+	virtual LPCTSTR GetDownStyle() { return m_szDownStyle; }
+	virtual void SetDownStyle(LPCTSTR lpszStyle);
+	virtual LPCTSTR GetThumbStyle() { return m_szThumbStyle; }
+	virtual void SetThumbStyle(LPCTSTR lpszStyle);
 	
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duScroll"); }	
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duScroll"); }	
 
 public:
 	duScroll(void);

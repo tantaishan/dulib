@@ -27,27 +27,27 @@
 class duFlash : public duHwndObj
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
-	virtual void WINAPI Resize(LPRECT lpRect);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
+	virtual void Resize(LPRECT lpRect);
 	
-	virtual LPCTSTR WINAPI GetURL();
-	virtual void WINAPI SetURL(LPCTSTR lpszURL);
+	virtual LPCTSTR GetURL();
+	virtual void SetURL(LPCTSTR lpszURL);
 
-	virtual IUnknown *WINAPI GetControl() { return (IUnknown *)m_pFlash; }
-	virtual IUnknown *WINAPI GetContainer() { return m_pContainer; }
-	virtual BOOL WINAPI Play(LPCTSTR lpszMovie);
-	virtual BOOL WINAPI Stop();
-	virtual UINT WINAPI GetPlayState();
-	virtual void WINAPI Pause();
-	virtual LPCTSTR WINAPI GetMovie() { return m_szMovie; }
+	virtual IUnknown *GetControl() { return (IUnknown *)m_pFlash; }
+	virtual IUnknown *GetContainer() { return m_pContainer; }
+	virtual BOOL Play(LPCTSTR lpszMovie);
+	virtual BOOL Stop();
+	virtual UINT GetPlayState();
+	virtual void Pause();
+	virtual LPCTSTR GetMovie() { return m_szMovie; }
 
-	virtual BOOL WINAPI IsAllowFullScreen();
-	virtual void WINAPI SetAllowFullScreen(BOOL fAllowFullScreen);
+	virtual BOOL IsAllowFullScreen();
+	virtual void SetAllowFullScreen(BOOL fAllowFullScreen);
 	
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duFlash"); }
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duFlash"); }
 	
 public:
 	duFlash();

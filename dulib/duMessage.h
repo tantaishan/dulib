@@ -9,7 +9,6 @@
 //
 //--------------------------------------------------------------------------
 #pragma once
-#include "stdafx.h"
 #include <windows.h>
 #include <commctrl.h>
 #include <tchar.h>

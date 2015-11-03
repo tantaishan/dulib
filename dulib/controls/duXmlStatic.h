@@ -70,19 +70,19 @@ typedef struct _tagXMLSTATICLINE
 class duXmlStatic : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
-	virtual void WINAPI OnMouseLeave(POINT pt);
-	virtual void WINAPI OnMouseLDown(POINT pt);
-	virtual void WINAPI OnMouseLUp(POINT pt);
-	virtual void WINAPI OnMouseMove(POINT pt);
-	virtual void WINAPI SetText(LPCTSTR lpszText);
-	virtual BOOL WINAPI OnSetCursor();
-	virtual void WINAPI Resize(LPRECT lpRect/*=NULL*/);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
+	virtual void OnMouseLeave(POINT pt);
+	virtual void OnMouseLDown(POINT pt);
+	virtual void OnMouseLUp(POINT pt);
+	virtual void OnMouseMove(POINT pt);
+	virtual void SetText(LPCTSTR lpszText);
+	virtual BOOL OnSetCursor();
+	virtual void Resize(LPRECT lpRect/*=NULL*/);
 	
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duXmlStatic"); }	
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duXmlStatic"); }	
 
 public:
 	duXmlStatic();

@@ -18,22 +18,17 @@
 #include "duFont.h"
 #include "duCursor.h"
 #include "duMessage.h"
-#include "duObject.h"
 #include "duPlugin.h"
 #include "duProperty.h"
 #include "duStyleGroup.h"
 #include "duZorderList.h"
 #include "duRedrawLayer.h"
-#include "ScriptObject.h"
 
-#include "controls/AxControl.h"
 #include "controls/duAnimation.h"
 #include "controls/duButton.h"
 #include "controls/duCheckBox.h"
 #include "controls/duComboBox.h"
 #include "controls/duEdit.h"
-#include "controls/duFlash.h"
-#include "controls/duFlashEventSink.h"
 #include "controls/duGifCtrl.h"
 #include "controls/duGridLayout.h"
 #include "controls/duHeaderCtrl.h"
@@ -76,60 +71,64 @@
 
 extern "C"
 {
-	duWindowManager *WINAPI LoadStyleA(LPCSTR lpszXml);
-	duWindowManager *WINAPI LoadStyleW(LPCWSTR lpszXml);
-	duWindowManager *WINAPI LoadStyleZipA(LPCSTR lpszZip, LPCSTR lpszZipPassword);
-	duWindowManager *WINAPI LoadStyleZipW(LPCWSTR lpszZip, LPCSTR lpszZipPassword);
-	duWindowManager *WINAPI LoadResourceStyleZipW(LPCWSTR lpszZipData,ULONG nResZipSize, LPCSTR lpszZipPassword);
+	duWindowManager* LoadStyleA(LPCSTR lpszXml);
+	duWindowManager* LoadStyleW(LPCWSTR lpszXml);
+	duWindowManager* LoadStyleZipA(LPCSTR lpszZip, LPCSTR lpszZipPassword);
+	duWindowManager* LoadStyleZipW(LPCWSTR lpszZip, LPCSTR lpszZipPassword);
+	duWindowManager* LoadResourceStyleZipW(LPCWSTR lpszZipData, ULONG nResZipSize, LPCSTR lpszZipPassword);
+					 
+	duWindowManager* LoadStyleZipMemory(BYTE *pData, int nSize);
+	//duWindowManager* LoadStyleBduA(LPCWSTR lpszZip);
+	//duWindowManager*LoadStyleBduW(LPCWSTR lpszZip);
+	//duWindowManager*LoadStyleBduMemory(BYTE *pData, int nSize);
 
-	duWindowManager *WINAPI LoadStyleZipMemory(BYTE *pData, int nSize);
-	duWindowManager *WINAPI LoadStyleBduA(LPCWSTR lpszZip);
-	duWindowManager *WINAPI LoadStyleBduW(LPCWSTR lpszZip);
-	duWindowManager *WINAPI LoadStyleBduMemory(BYTE *pData, int nSize);
-	BOOL WINAPI ReleaseStyle(duWindowManager *pWinManager);
-	BOOL WINAPI WindowManager_Attach(duWindowManager *pWinManager, HWND hWnd, LPCWSTR lpWindowName);
-	BOOL WINAPI MatchString(LPCTSTR lpszPat, LPCTSTR lpszStr);
-	BOOL WINAPI Plugin_Redraw(duPlugin *pPlugin, BOOL fNotify);
-	BOOL WINAPI Plugin_IsVisible(duPlugin *pPlugin);
-	void WINAPI Plugin_SetVisible(duPlugin *pPlugin, BOOL fVisible);
-	BOOL WINAPI Plugin_IsValid(duPlugin *pPlugin);
-	duPlugin *WINAPI Plugin_Clone(duPlugin *pTemplate, duPlugin *pParent, duPlugin *pPrevious, UINT nSuffix);
-	BOOL WINAPI Plugin_Delete(duPlugin *pPlugin);
-	BOOL WINAPI Plugin_GetVisibleRect(duPlugin *pPlugin, LPRECT lpRect);
-	void WINAPI Plugin_GetRect(duPlugin *pPlugin, LPRECT lpRect);
-	void WINAPI Plugin_Resize(duPlugin *pPlugin, LPRECT lpRect);
-	BOOL WINAPI Plugin_MoveUp(duPlugin *pPlugin);
-	BOOL WINAPI Plugin_MoveDown(duPlugin *pPlugin);
-	void WINAPI DrawByStyle(duPlugin *pPlugin, LPCTSTR lpszStyle, HDC hDC, LPRECT lpDstRect, UINT uState, LPCTSTR lpszText, int nAlpha);
-	duPlugin *WINAPI GetPluginByName(HWND hWnd, LPCTSTR lpszName);
-	duPlugin *WINAPI GetFocusPlugin(HWND hWnd);
-	void WINAPI SetFocusPlugin(HWND hWnd, duPlugin *pPlugin);
-	int WINAPI ReadXmlAttributeText2(void *pEle, const TCHAR *keyName, TCHAR *pVal, int maxlen);
-	int WINAPI ReadXmlAttributeInt(void *pEle, const TCHAR *keyName);
-	float WINAPI ReadXmlAttributeFloat(void *pEle, const TCHAR *keyName);
-	double WINAPI ReadXmlAttributeDouble(void *pEle, const TCHAR *keyName);
-	COLORREF WINAPI ReadXmlAttributeColor(void *pEle, const TCHAR *keyName);
-	void WINAPI ReadXmlAttributeBOOL(void *pEle, const TCHAR *keyName, BOOL *pbResult);
-	void WINAPI ReadXmlAttributeSize(void *pEle, const TCHAR *keyName, int *cx, int *cy);
-	UINT WINAPI ReadXmlAttributeState(void *pEle, const TCHAR *keyName);
-	void WINAPI ReadXmlAttributePoint(void *pEle, const TCHAR *keyName, POINT *pPoint);
-	void WINAPI WriteXmlAttributeText(void *pEle, const TCHAR *keyName, const TCHAR *Val);
-	void WINAPI WriteXmlAttributeInt(void *pEle, const TCHAR *keyName, int Val);
-	void WINAPI WriteXmlAttributeBOOL(void *pEle, const TCHAR *keyName, BOOL Val);
-	void WINAPI WriteXmlAttributeFloat(void *pEle, const TCHAR *keyName, float Val);
-	void WINAPI WriteXmlAttributeDouble(void *pEle, const TCHAR *keyName, double Val);
-	void WINAPI WriteXmlAttributeColor(void *pEle, const TCHAR *keyName, COLORREF clr);
-	void WINAPI WriteXmlAttributeState(void *pEle, const TCHAR *keyName, int nState);
-	void WINAPI WriteXmlAttributePoint(void *pEle, const TCHAR *keyName, POINT pPoint);
-	void *WINAPI XmlFirstChild(void *pEle, const TCHAR *eleName);
-	void *WINAPI XmlNextSibling(void *pEle, const TCHAR *eleName);
-	void *WINAPI XmlCreateElement(const TCHAR *eleName);
-	void WINAPI XmlDeleteElement(void *pEle);
-	void *WINAPI XmlLinkEndChild(void *pParent, void *pInsert);
-	void WINAPI XmlDeleteChild(void *pParent, void *pChild);
-	void *WINAPI XmlClone(void *pEle);
-	const TCHAR *WINAPI XmlElementValue(void *pEle);
-	void *WINAPI XmlCloneOne(void *pEle);
+	void Dulib_Init();
+	void Dulib_Release();
+
+	BOOL ReleaseStyle(duWindowManager *pWinManager);
+	BOOL WindowManager_Attach(duWindowManager *pWinManager, HWND hWnd, LPCWSTR lpWindowName);
+	BOOL MatchString(LPCTSTR lpszPat, LPCTSTR lpszStr);
+	BOOL Plugin_Redraw(duPlugin *pPlugin, BOOL fNotify);
+	BOOL Plugin_IsVisible(duPlugin *pPlugin);
+	void Plugin_SetVisible(duPlugin *pPlugin, BOOL fVisible);
+	BOOL Plugin_IsValid(duPlugin *pPlugin);
+	duPlugin *Plugin_Clone(duPlugin *pTemplate, duPlugin *pParent, duPlugin *pPrevious, UINT nSuffix);
+	BOOL Plugin_Delete(duPlugin *pPlugin);
+	BOOL Plugin_GetVisibleRect(duPlugin *pPlugin, LPRECT lpRect);
+	void Plugin_GetRect(duPlugin *pPlugin, LPRECT lpRect);
+	void Plugin_Resize(duPlugin *pPlugin, LPRECT lpRect);
+	BOOL Plugin_MoveUp(duPlugin *pPlugin);
+	BOOL Plugin_MoveDown(duPlugin *pPlugin);
+	void DrawByStyle(duPlugin *pPlugin, LPCTSTR lpszStyle, HDC hDC, LPRECT lpDstRect, UINT uState, LPCTSTR lpszText, int nAlpha);
+	duPlugin* GetPluginByName(HWND hWnd, LPCTSTR lpszName);
+	duPlugin* GetFocusPlugin(HWND hWnd);
+	void SetFocusPlugin(HWND hWnd, duPlugin *pPlugin);
+	int ReadXmlAttributeText2(void *pEle, const TCHAR *keyName, TCHAR *pVal, int maxlen);
+	int ReadXmlAttributeInt(void *pEle, const TCHAR *keyName);
+	float ReadXmlAttributeFloat(void *pEle, const TCHAR *keyName);
+	double ReadXmlAttributeDouble(void *pEle, const TCHAR *keyName);
+	COLORREF ReadXmlAttributeColor(void *pEle, const TCHAR *keyName);
+	void ReadXmlAttributeBOOL(void *pEle, const TCHAR *keyName, BOOL *pbResult);
+	void ReadXmlAttributeSize(void *pEle, const TCHAR *keyName, int *cx, int *cy);
+	UINT ReadXmlAttributeState(void *pEle, const TCHAR *keyName);
+	void ReadXmlAttributePoint(void *pEle, const TCHAR *keyName, POINT *pPoint);
+	void WriteXmlAttributeText(void *pEle, const TCHAR *keyName, const TCHAR *Val);
+	void WriteXmlAttributeInt(void *pEle, const TCHAR *keyName, int Val);
+	void WriteXmlAttributeBOOL(void *pEle, const TCHAR *keyName, BOOL Val);
+	void WriteXmlAttributeFloat(void *pEle, const TCHAR *keyName, float Val);
+	void WriteXmlAttributeDouble(void *pEle, const TCHAR *keyName, double Val);
+	void WriteXmlAttributeColor(void *pEle, const TCHAR *keyName, COLORREF clr);
+	void WriteXmlAttributeState(void *pEle, const TCHAR *keyName, int nState);
+	void WriteXmlAttributePoint(void *pEle, const TCHAR *keyName, POINT pPoint);
+	void* XmlFirstChild(void *pEle, const TCHAR *eleName);
+	void* XmlNextSibling(void *pEle, const TCHAR *eleName);
+	void* XmlCreateElement(const TCHAR *eleName);
+	void XmlDeleteElement(void *pEle);
+	void* XmlLinkEndChild(void *pParent, void *pInsert);
+	void XmlDeleteChild(void *pParent, void *pChild);
+	void* XmlClone(void *pEle);
+	const TCHAR* XmlElementValue(void *pEle);
+	void* XmlCloneOne(void *pEle);
 
 };
 

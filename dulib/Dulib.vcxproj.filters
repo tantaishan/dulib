@@ -17,9 +17,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="controls\AxControl.cpp">
-      <Filter>controls</Filter>
-    </ClCompile>
     <ClCompile Include="controls\duAnimation.cpp">
       <Filter>controls</Filter>
     </ClCompile>
@@ -33,12 +30,6 @@
       <Filter>controls</Filter>
     </ClCompile>
     <ClCompile Include="controls\duEdit.cpp">
-      <Filter>controls</Filter>
-    </ClCompile>
-    <ClCompile Include="controls\duFlash.cpp">
-      <Filter>controls</Filter>
-    </ClCompile>
-    <ClCompile Include="controls\duFlashEventSink.cpp">
       <Filter>controls</Filter>
     </ClCompile>
     <ClCompile Include="controls\duGifCtrl.cpp">
@@ -185,9 +176,6 @@
     <ClCompile Include="duMessage.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="duObject.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="duPlugin.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -209,9 +197,6 @@
     <ClCompile Include="duStyleGroup.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="duTypeLib.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="duTypes.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -222,12 +207,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="duZorderList.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="InvokeVTable.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="ScriptObject.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="unzip.cpp">
@@ -245,14 +224,17 @@
     <ClCompile Include="tinyXmlW\tinyxmlparser.cpp">
       <Filter>tinyXmlW</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>源文件</Filter>
+    <ClCompile Include="controls\duFlash.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\duFlashEventSink.cpp">
+      <Filter>controls</Filter>
+    </ClCompile>
+    <ClCompile Include="controls\AxControl.cpp">
+      <Filter>controls</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="controls\AxControl.h">
-      <Filter>controls</Filter>
-    </ClInclude>
     <ClInclude Include="controls\duAnimation.h">
       <Filter>controls</Filter>
     </ClInclude>
@@ -266,12 +248,6 @@
       <Filter>controls</Filter>
     </ClInclude>
     <ClInclude Include="controls\duEdit.h">
-      <Filter>controls</Filter>
-    </ClInclude>
-    <ClInclude Include="controls\duFlash.h">
-      <Filter>controls</Filter>
-    </ClInclude>
-    <ClInclude Include="controls\duFlashEventSink.h">
       <Filter>controls</Filter>
     </ClInclude>
     <ClInclude Include="controls\duGifCtrl.h">
@@ -394,9 +370,6 @@
     <ClInclude Include="controls\duXmlStatic.h">
       <Filter>controls</Filter>
     </ClInclude>
-    <ClInclude Include="controls\Flash.h">
-      <Filter>controls</Filter>
-    </ClInclude>
     <ClInclude Include="controls\MenuPopup.h">
       <Filter>controls</Filter>
     </ClInclude>
@@ -419,9 +392,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="duMessage.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="duObject.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="duPlugin.h">
@@ -448,9 +418,6 @@
     <ClInclude Include="duStyleGroup.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="duTypeLib.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="duTypes.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -463,9 +430,6 @@
     <ClInclude Include="duZorderList.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ScriptObject.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="unzip.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -475,8 +439,14 @@
     <ClInclude Include="tinyXmlW\tinyxml.h">
       <Filter>tinyXmlW</Filter>
     </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>头文件</Filter>
+    <ClInclude Include="controls\duFlash.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\duFlashEventSink.h">
+      <Filter>controls</Filter>
+    </ClInclude>
+    <ClInclude Include="controls\AxControl.h">
+      <Filter>controls</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

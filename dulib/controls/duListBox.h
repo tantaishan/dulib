@@ -33,51 +33,51 @@ typedef struct _tagListBoxItem
 class duListBox : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
-	virtual void WINAPI OnVScroll(ScrollBarAction sbAction, int nPos);
-	virtual void WINAPI OnMouseWheel(UINT fwKeys, int zDelta, POINT pt);
-	virtual void WINAPI OnMouseLeave(POINT pt);
-	virtual void WINAPI OnMouseLDown(POINT pt);
-	virtual void WINAPI OnMouseLUp(POINT pt);
-	virtual void WINAPI OnMouseRDown(POINT pt);
-	virtual void WINAPI OnMouseRUp(POINT pt);
-	virtual void WINAPI OnMouseHover(POINT pt);
-	virtual void WINAPI OnMouseMove(POINT pt);
-	virtual void WINAPI OnMouseDbClick(POINT pt);
-	virtual void WINAPI Resize(LPRECT lpRect/*=NULL*/);
-	virtual void WINAPI OnTimer(UINT nEventId);
-	virtual void WINAPI OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
+	virtual void OnVScroll(ScrollBarAction sbAction, int nPos);
+	virtual void OnMouseWheel(UINT fwKeys, int zDelta, POINT pt);
+	virtual void OnMouseLeave(POINT pt);
+	virtual void OnMouseLDown(POINT pt);
+	virtual void OnMouseLUp(POINT pt);
+	virtual void OnMouseRDown(POINT pt);
+	virtual void OnMouseRUp(POINT pt);
+	virtual void OnMouseHover(POINT pt);
+	virtual void OnMouseMove(POINT pt);
+	virtual void OnMouseDbClick(POINT pt);
+	virtual void Resize(LPRECT lpRect/*=NULL*/);
+	virtual void OnTimer(UINT nEventId);
+	virtual void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
 
-	virtual BOOL WINAPI UpdateScroll();
+	virtual BOOL UpdateScroll();
 	
-	virtual int WINAPI GetSel();
-	virtual void WINAPI SetSel(int nIndex);
-	virtual int WINAPI GetItemCount();
-	virtual BOOL WINAPI InsertItem(int nIndex, LPCTSTR lpszText, LPCTSTR lpszIcon);
-	virtual BOOL WINAPI DeleteItem(int nIndex);
-	virtual void WINAPI DeleteAll();
-	virtual LPCTSTR WINAPI GetItemText(int nIndex);
-	virtual BOOL WINAPI SetItemText(int nIndex, LPCTSTR lpszText);
-	virtual LPCTSTR WINAPI GetItemIcon(int nIndex);
-	virtual BOOL WINAPI SetItemIcon(int nIndex, LPCTSTR lpszIcon);
-	virtual UINT WINAPI GetItemIconX(int nIndex);
-	virtual BOOL WINAPI SetItemIconX(int nIndex, UINT uIconX);
-	virtual UINT WINAPI GetItemIconY(int nIndex);
-	virtual BOOL WINAPI SetItemIconY(int nIndex, UINT uIconY);
-	virtual UINT WINAPI GetItemIconWidth(int nIndex);
-	virtual BOOL WINAPI SetItemIconWidth(int nIndex, UINT uIconWidth);
-	virtual UINT WINAPI GetItemIconHeight(int nIndex);
-	virtual BOOL WINAPI SetItemIconHeight(int nIndex, UINT uIconHeight);
-	virtual BOOL WINAPI IsItemDisable(int nIndex);
-	virtual BOOL WINAPI SetItemDisable(int nIndex, BOOL fDisable);
+	virtual int GetSel();
+	virtual void SetSel(int nIndex);
+	virtual int GetItemCount();
+	virtual BOOL InsertItem(int nIndex, LPCTSTR lpszText, LPCTSTR lpszIcon);
+	virtual BOOL DeleteItem(int nIndex);
+	virtual void DeleteAll();
+	virtual LPCTSTR GetItemText(int nIndex);
+	virtual BOOL SetItemText(int nIndex, LPCTSTR lpszText);
+	virtual LPCTSTR GetItemIcon(int nIndex);
+	virtual BOOL SetItemIcon(int nIndex, LPCTSTR lpszIcon);
+	virtual UINT GetItemIconX(int nIndex);
+	virtual BOOL SetItemIconX(int nIndex, UINT uIconX);
+	virtual UINT GetItemIconY(int nIndex);
+	virtual BOOL SetItemIconY(int nIndex, UINT uIconY);
+	virtual UINT GetItemIconWidth(int nIndex);
+	virtual BOOL SetItemIconWidth(int nIndex, UINT uIconWidth);
+	virtual UINT GetItemIconHeight(int nIndex);
+	virtual BOOL SetItemIconHeight(int nIndex, UINT uIconHeight);
+	virtual BOOL IsItemDisable(int nIndex);
+	virtual BOOL SetItemDisable(int nIndex, BOOL fDisable);
 
-	virtual duScroll *WINAPI GetVertScrollBar();
-	virtual void WINAPI SetVertScrollBar(LPCTSTR lpszScroll);
+	virtual duScroll *GetVertScrollBar();
+	virtual void SetVertScrollBar(LPCTSTR lpszScroll);
 	
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duListBox"); }	
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duListBox"); }	
 
 public:
 	duListBox();

@@ -276,7 +276,7 @@ public:
 	duPoint CenterPoint() const throw();
 	// swap the left and right
 	void SwapLeftRight() throw();
-	static void WINAPI SwapLeftRight(LPRECT lpRect) throw();
+	static void SwapLeftRight(LPRECT lpRect) throw();
 
 	// convert between CRect and LPRECT/LPCRECT (no need for &)
 	operator LPRECT() throw();

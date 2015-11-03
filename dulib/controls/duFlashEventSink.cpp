@@ -8,7 +8,6 @@
 //  History:
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duFlashEventSink.h"
 #include "duFlash.h"
 

@@ -8,7 +8,6 @@
 //  History:    Nov-10-95   DavePl  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duProperty.h"
 
 duPropertyGroup::duPropertyGroup(TiXmlElement *pElement) :

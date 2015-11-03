@@ -8,7 +8,6 @@
 //  History:    Nov-10-95   DavePl  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duWindow.h"
 
 duWindow::duWindow() :
@@ -34,7 +33,7 @@ duWindow::~duWindow()
 	//_TRACE(_T("name [%s] ~duWindow\n"), GetName());
 }
 
-void WINAPI duWindow::RegisterControlProperty()
+void duWindow::RegisterControlProperty()
 {
 	RegisterProperty(_T("captionheight"), DU_PROPERTY_LONG, &m_nCaptionHeight);
 	RegisterProperty(_T("minwidth"), DU_PROPERTY_LONG, &m_uMinWidth);
@@ -48,7 +47,7 @@ void WINAPI duWindow::RegisterControlProperty()
 	RegisterProperty(_T("layered"), DU_PROPERTY_BOOL, &m_fLayered);
 }
 
-void WINAPI  duWindow::OnCreate()
+void  duWindow::OnCreate()
 {
 	SetCached(TRUE);
 
@@ -60,7 +59,7 @@ void WINAPI  duWindow::OnCreate()
 	}
 }
 
-void WINAPI duWindow::DrawObject(HDC hDC)
+void duWindow::DrawObject(HDC hDC)
 {
 	duStyleGroup *pStyleGroup = (duStyleGroup *)GetResObj(GetStyle(), DU_RES_STYLEGROUP);
 	if (pStyleGroup == NULL)
@@ -74,7 +73,7 @@ void WINAPI duWindow::DrawObject(HDC hDC)
 	pStyleGroup->Draw(hDC, &rcCtrl, GetState(), GetText(), GetAlpha());
 }
 
-void WINAPI duWindow::OnMouseLDown(POINT pt)
+void duWindow::OnMouseLDown(POINT pt)
 {
 	if (m_nCaptionHeight == 0)
 		return;
@@ -106,7 +105,7 @@ void WINAPI duWindow::OnMouseLDown(POINT pt)
 	//}
 }
 
-void WINAPI duWindow::SetRgnName(LPCTSTR lpszRgnName)
+void duWindow::SetRgnName(LPCTSTR lpszRgnName)
 {
 	if (lpszRgnName)
 		_tcsncpy(m_strRgnName, lpszRgnName, MAX_NAME);

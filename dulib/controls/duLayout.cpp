@@ -8,7 +8,6 @@
 //  History:    JAN-09-2010   Denny Chen  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duLayout.h"
 
 duLayout::duLayout() :
@@ -27,7 +26,7 @@ duLayout::~duLayout()
 	Plugin_UnHookWindowMessage(this);
 }
 
-void WINAPI duLayout::RegisterControlProperty()
+void duLayout::RegisterControlProperty()
 {
 	RegisterProperty(_T("type"), DU_PROPERTY_LONG, &m_nLayoutType);
 	RegisterProperty(_T("startx"), DU_PROPERTY_LONG, &m_nStartX);
@@ -37,14 +36,14 @@ void WINAPI duLayout::RegisterControlProperty()
 	RegisterProperty(_T("alwayshot"), DU_PROPERTY_BOOL, &m_fAlwaysHot);
 }
 
-void WINAPI duLayout::OnCreate()
+void duLayout::OnCreate()
 {
 	AdjustChilds();
 	if (m_fAlwaysHot)
 		Plugin_HookWindowMessage(this);
 }
 
-void WINAPI duLayout::DrawObject(HDC hDC)
+void duLayout::DrawObject(HDC hDC)
 {
 	duStyleGroup *pStyleGroup = (duStyleGroup *)GetResObj(GetStyle(), DU_RES_STYLEGROUP);
 	if (pStyleGroup == NULL)
@@ -58,7 +57,7 @@ void WINAPI duLayout::DrawObject(HDC hDC)
 	pStyleGroup->Draw(hDC, &rcCtrl, GetState(), GetText(), GetAlpha());
 }
 
-LRESULT WINAPI duLayout::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT duLayout::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	if (!m_fAlwaysHot || !Plugin_IsVisible(this))
 		return 0;
@@ -94,7 +93,7 @@ LRESULT WINAPI duLayout::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 	return 0;
 }
 
-void WINAPI duLayout::OnChildShow(duPlugin *pChild, BOOL fVisible)
+void duLayout::OnChildShow(duPlugin *pChild, BOOL fVisible)
 {
 	if (!Plugin_IsValid(pChild))
 		return;
@@ -107,7 +106,7 @@ void WINAPI duLayout::OnChildShow(duPlugin *pChild, BOOL fVisible)
 	}
 }
 
-void WINAPI duLayout::Resize(LPRECT lpRect)
+void duLayout::Resize(LPRECT lpRect)
 {
 	duPlugin *pParent = GetParent();
 	if (pParent)
@@ -164,7 +163,7 @@ void WINAPI duLayout::Resize(LPRECT lpRect)
 	}
 }
 
-void WINAPI duLayout::OnChildResize(duPlugin *pChild)
+void duLayout::OnChildResize(duPlugin *pChild)
 {
 	if (!Plugin_IsValid(pChild))
 		return;
@@ -177,7 +176,7 @@ void WINAPI duLayout::OnChildResize(duPlugin *pChild)
 	}
 }
 
-void WINAPI duLayout::AdjustChilds()
+void duLayout::AdjustChilds()
 {
 	switch(m_nLayoutType)
 	{
@@ -207,7 +206,7 @@ void WINAPI duLayout::AdjustChilds()
 	}
 }
 
-void WINAPI duLayout::SetAlwaysHot(BOOL fAlwaysHot)
+void duLayout::SetAlwaysHot(BOOL fAlwaysHot)
 {
 	if (fAlwaysHot != m_fAlwaysHot)
 	{
@@ -220,7 +219,7 @@ void WINAPI duLayout::SetAlwaysHot(BOOL fAlwaysHot)
 	}
 }
 
-void WINAPI duLayout::AdjustLeftRight()
+void duLayout::AdjustLeftRight()
 {
 	duRect rectLayout;
 	rectLayout.SetRectEmpty();
@@ -253,7 +252,7 @@ void WINAPI duLayout::AdjustLeftRight()
 	}
 }
 
-void WINAPI duLayout::AdjustRightLeft()
+void duLayout::AdjustRightLeft()
 {
 	duRect rectLayout;
 	rectLayout.SetRectEmpty();
@@ -287,7 +286,7 @@ void WINAPI duLayout::AdjustRightLeft()
 	}
 }
 
-void WINAPI duLayout::AdjustTopBottom()
+void duLayout::AdjustTopBottom()
 {
 	duRect rectLayout;
 	rectLayout.SetRectEmpty();
@@ -321,7 +320,7 @@ void WINAPI duLayout::AdjustTopBottom()
 	}
 }
 
-void WINAPI duLayout::AdjustBottomTop()
+void duLayout::AdjustBottomTop()
 {
 	duRect rectLayout;
 	rectLayout.SetRectEmpty();
@@ -355,7 +354,7 @@ void WINAPI duLayout::AdjustBottomTop()
 	}
 }
 
-void WINAPI duLayout::AdjustHorzBrimming()
+void duLayout::AdjustHorzBrimming()
 {
 	int nChildCount = GetVisibleChildCount(this);
 	if (nChildCount == 0)
@@ -408,7 +407,7 @@ void WINAPI duLayout::AdjustHorzBrimming()
 	}
 }
 
-void WINAPI duLayout::AdjustVertBrimming()
+void duLayout::AdjustVertBrimming()
 {
 	int nChildCount = GetVisibleChildCount(this);
 	if (nChildCount == 0)
@@ -461,7 +460,7 @@ void WINAPI duLayout::AdjustVertBrimming()
 	}
 }
 
-void WINAPI duLayout::AdjustGrid()
+void duLayout::AdjustGrid()
 {
 	duRect rectLayout;
 	Plugin_GetRect(this, rectLayout);
@@ -521,7 +520,7 @@ void WINAPI duLayout::AdjustGrid()
 	}
 }
 
-duPlugin *WINAPI GetPreVisible(duPlugin *pPlugin)
+duPlugin *GetPreVisible(duPlugin *pPlugin)
 {
 	if (pPlugin == NULL)
 		return NULL;
@@ -541,7 +540,7 @@ duPlugin *WINAPI GetPreVisible(duPlugin *pPlugin)
 	return pTemp;
 }
 
-duPlugin *WINAPI GetNextVisible(duPlugin *pPlugin)
+duPlugin *GetNextVisible(duPlugin *pPlugin)
 {
 	if (pPlugin == NULL)
 		return NULL;
@@ -561,7 +560,7 @@ duPlugin *WINAPI GetNextVisible(duPlugin *pPlugin)
 	return pTemp;
 }
 
-int WINAPI GetVisibleChildCount(duPlugin *pPlugin)
+int GetVisibleChildCount(duPlugin *pPlugin)
 {
 	if (pPlugin == NULL)
 		return 0;

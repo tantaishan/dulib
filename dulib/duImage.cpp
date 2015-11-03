@@ -8,7 +8,6 @@
 //  History:    Nov-10-95   DavePl  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duImage.h"
 #include "duWindowManager.h"
 
@@ -39,7 +38,7 @@ duImage::~duImage()
 	Destroy();
 }
 
-BOOL WINAPI duImage::OnCreate(TiXmlElement *pElement)
+BOOL duImage::OnCreate(TiXmlElement *pElement)
 {
 	if (pElement == NULL)
 		return FALSE;
@@ -105,7 +104,7 @@ void duImage::Destroy()
 	}
 }
 
-BOOL WINAPI duImage::CreateImage(int nWidth, int nHeight)
+BOOL duImage::CreateImage(int nWidth, int nHeight)
 {
 	if (nWidth <= 0 || nHeight <= 0)
 		return FALSE;
@@ -138,7 +137,7 @@ BOOL WINAPI duImage::CreateImage(int nWidth, int nHeight)
 	return TRUE;
 }
 
-BOOL WINAPI duImage::LoadFromFile(LPCTSTR lpszFile)
+BOOL duImage::LoadFromFile(LPCTSTR lpszFile)
 {
 	if (lpszFile == NULL || *lpszFile == 0)
 		return FALSE;
@@ -184,7 +183,7 @@ BOOL WINAPI duImage::LoadFromFile(LPCTSTR lpszFile)
 	return FALSE;
 }
 
-BOOL WINAPI duImage::LoadFromMemory(PBYTE pData, int nSize)
+BOOL duImage::LoadFromMemory(PBYTE pData, int nSize)
 {
 	if (pData == NULL || nSize <= 0)
 		return FALSE;
@@ -216,7 +215,7 @@ BOOL WINAPI duImage::LoadFromMemory(PBYTE pData, int nSize)
 	return FALSE;
 }
 
-BOOL WINAPI duImage::LoadFromStream(IStream *pStream)
+BOOL duImage::LoadFromStream(IStream *pStream)
 {
 	if (pStream == NULL)
 		return FALSE;
@@ -302,7 +301,7 @@ BOOL WINAPI duImage::LoadFromStream(IStream *pStream)
 	return TRUE;
 }
 
-BOOL WINAPI duImage::LoadFromHICON(HICON hIcon)
+BOOL duImage::LoadFromHICON(HICON hIcon)
 {
 	if (hIcon == NULL)
 		return FALSE;
@@ -361,32 +360,32 @@ void duImage::LoadFrame(HDC hDC, Image *pImage, HBITMAP &hBitmap, PBYTE &pBits)
 	::SelectObject(hDC, hOldBmp);
 }
 
-PBYTE WINAPI duImage::GetBits()
+PBYTE duImage::GetBits()
 {
 	return m_pBits;
 }
 
-HBITMAP WINAPI duImage::GetBitmap()
+HBITMAP duImage::GetBitmap()
 {
 	return m_hBitmap;
 }
 
-int WINAPI duImage::GetWidth()
+int duImage::GetWidth()
 {
 	return m_nWidth;
 }
 
-int WINAPI duImage::GetHeight()
+int duImage::GetHeight()
 {
 	return m_nHeight;
 }
 
-int WINAPI duImage::GetFrameCount()
+int duImage::GetFrameCount()
 {
 	return m_nFrameCount;
 }
 
-HBITMAP WINAPI duImage::GetFrameBitmap(int nIndex)
+HBITMAP duImage::GetFrameBitmap(int nIndex)
 {
 	if (nIndex >= 0 && nIndex < m_nFrameCount)
 		return m_phFrameBitmap[nIndex];
@@ -394,7 +393,7 @@ HBITMAP WINAPI duImage::GetFrameBitmap(int nIndex)
 	return NULL;
 }
 
-PBYTE WINAPI duImage::GetFrameBits(int nIndex)
+PBYTE duImage::GetFrameBits(int nIndex)
 {
 	if (nIndex >= 0 && nIndex < m_nFrameCount)
 		return m_pFrameBits[nIndex];
@@ -402,7 +401,7 @@ PBYTE WINAPI duImage::GetFrameBits(int nIndex)
 	return NULL;
 }
 
-UINT WINAPI duImage::GetFrameDelay(int nIndex)
+UINT duImage::GetFrameDelay(int nIndex)
 {
 	if (nIndex >= 0 && nIndex < m_nFrameCount)
 		return m_puFrameDelay[nIndex];
@@ -436,7 +435,7 @@ BOOL duImage::BeginHSLConvert()
 	return TRUE;
 }
 
-BOOL WINAPI duImage::AdjustHSL(int nHua, int nPerSat, int nPerLum)
+BOOL duImage::AdjustHSL(int nHua, int nPerSat, int nPerLum)
 {
 	if (m_pHSL == NULL)
 		return FALSE;
@@ -479,7 +478,7 @@ BOOL WINAPI duImage::AdjustHSL(int nHua, int nPerSat, int nPerLum)
 	return TRUE;
 }
 
-void WINAPI duImage::EndHSLConvert()
+void duImage::EndHSLConvert()
 {
 }
 
@@ -542,7 +541,7 @@ inline void duImage::HSL2RGB(WORD h, WORD s, WORD l, BYTE *r, BYTE *g, BYTE *b)
 	}
 }
 
-BYTE duImage::Hue2RGB(WORD n1, WORD n2, WORD hue)
+inline BYTE duImage::Hue2RGB(WORD n1, WORD n2, WORD hue)
 {	
 	if (hue < 0)
 		hue += HSLMAX;
@@ -559,12 +558,12 @@ BYTE duImage::Hue2RGB(WORD n1, WORD n2, WORD hue)
 		return (n1);
 }
 
-LPCTSTR WINAPI duImage::GetValue()
+LPCTSTR duImage::GetValue()
 {
 	return m_strImage;
 }
 
-void WINAPI duImage::SetValue(LPCTSTR strImagePath)
+void duImage::SetValue(LPCTSTR strImagePath)
 {
 	if(strImagePath)
 	{
@@ -578,7 +577,7 @@ void WINAPI duImage::SetValue(LPCTSTR strImagePath)
 
 
 //返回新建灰色图片指针.当此灰色图片不再被使用时,应调用duImage::FinalRelease函数将其销毁.
-duImage *WINAPI duImage::CreateGrayImage()
+duImage *duImage::CreateGrayImage()
 {
 	duResManager *pResManager = GetResManager();
 	if (pResManager)
@@ -618,7 +617,7 @@ duImage *WINAPI duImage::CreateGrayImage()
 	return NULL;
 }
 
-duImage *WINAPI duImage::CreateStretchSmooth(int nWidth, int nHeight)
+duImage *duImage::CreateStretchSmooth(int nWidth, int nHeight)
 {
 	//
 	// TODO: 应用于Gif图像

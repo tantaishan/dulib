@@ -8,7 +8,6 @@
 //  History:    Mar-08-2011   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duRemoteCtrl.h"
 #include "duScroll.h"
 #include "duHwndObj.h"
@@ -28,7 +27,7 @@ duRemoteCtrl::~duRemoteCtrl()
 {
 }
 
-void WINAPI duRemoteCtrl::RegisterControlProperty()
+void duRemoteCtrl::RegisterControlProperty()
 {
 	RegisterProperty(_T("vertscrollbar"),  DU_PROPERTY_STRING, m_szVertScroll);
 	RegisterProperty(_T("horzscrollbar"),  DU_PROPERTY_STRING, m_szHorzScroll);
@@ -36,11 +35,11 @@ void WINAPI duRemoteCtrl::RegisterControlProperty()
 	
 }
 
-void WINAPI duRemoteCtrl::OnCreate()
+void duRemoteCtrl::OnCreate()
 {
 }
 
-void WINAPI duRemoteCtrl::DrawObject(HDC hDC)
+void duRemoteCtrl::DrawObject(HDC hDC)
 {
 	duRect rcRemoteCtrl;
 	Plugin_GetRect(this, &rcRemoteCtrl);
@@ -51,13 +50,13 @@ void WINAPI duRemoteCtrl::DrawObject(HDC hDC)
 		pStyleGroup->Draw(hDC, &rcRemoteCtrl, GetState(), GetText(), GetAlpha());
 }
 
-void WINAPI duRemoteCtrl::Resize(LPRECT lpRect/*=NULL*/)
+void duRemoteCtrl::Resize(LPRECT lpRect/*=NULL*/)
 {
 	duPlugin::Resize(lpRect);
 	SetViewSize(m_nViewWidth, m_nViewHeight);
 }
 
-void WINAPI duRemoteCtrl::OnVScroll(ScrollBarAction sbAction, int nPos)
+void duRemoteCtrl::OnVScroll(ScrollBarAction sbAction, int nPos)
 {
 	switch (sbAction)
 	{
@@ -87,7 +86,7 @@ void WINAPI duRemoteCtrl::OnVScroll(ScrollBarAction sbAction, int nPos)
 	}
 }
 
-void WINAPI duRemoteCtrl::OnHScroll(ScrollBarAction sbAction, int nPos)
+void duRemoteCtrl::OnHScroll(ScrollBarAction sbAction, int nPos)
 {
 	switch (sbAction)
 	{
@@ -116,7 +115,7 @@ void WINAPI duRemoteCtrl::OnHScroll(ScrollBarAction sbAction, int nPos)
 	}
 }
 
-void WINAPI duRemoteCtrl::SetHorzScrollBar(LPCTSTR lpszScroll)
+void duRemoteCtrl::SetHorzScrollBar(LPCTSTR lpszScroll)
 {
 	if (lpszScroll)
 		_tcsncpy(m_szHorzScroll, lpszScroll, MAX_NAME);
@@ -124,7 +123,7 @@ void WINAPI duRemoteCtrl::SetHorzScrollBar(LPCTSTR lpszScroll)
 		ZeroMemory(m_szHorzScroll, sizeof(TCHAR) * MAX_NAME);
 }
 
-void WINAPI duRemoteCtrl::SetVertScrollBar(LPCTSTR lpszScroll)
+void duRemoteCtrl::SetVertScrollBar(LPCTSTR lpszScroll)
 {
 	if (lpszScroll)
 		_tcsncpy(m_szVertScroll, lpszScroll, MAX_NAME);
@@ -132,7 +131,7 @@ void WINAPI duRemoteCtrl::SetVertScrollBar(LPCTSTR lpszScroll)
 		ZeroMemory(m_szVertScroll, sizeof(TCHAR) * MAX_NAME);
 }
 
-void WINAPI duRemoteCtrl::SetViewSize(int nWidth, int nHeight)
+void duRemoteCtrl::SetViewSize(int nWidth, int nHeight)
 {
 	if (nWidth < 0)
 		nWidth = 0;
@@ -190,7 +189,7 @@ void WINAPI duRemoteCtrl::SetViewSize(int nWidth, int nHeight)
 	NotifyUser(DUM_REMOTECTRLSCROLL, m_nXOffset, m_nYOffset);
 }
 
-void WINAPI duRemoteCtrl::SetHwndObj(LPCTSTR lpszHwndObj)
+void duRemoteCtrl::SetHwndObj(LPCTSTR lpszHwndObj)
 {
 	if (lpszHwndObj)
 		_tcsncpy(m_szHwndObj, lpszHwndObj, MAX_NAME);

@@ -35,23 +35,23 @@ typedef struct _tagReportHeaderItem
 class duReportHeader
 {
 public:
-	void WINAPI DrawHeader(HDC hDC);
-	int WINAPI GetItemCount();
-	void WINAPI SetReportView(duReportView *pReportView) { m_pReportView = pReportView; }
-	LPTSTR WINAPI GetStyle() { return m_szItemStyle; }
-	int WINAPI GetTotalWidth();
-	void WINAPI OnMouseLDown(POINT pt);
-	void WINAPI OnMouseLUp(POINT pt);
-	void WINAPI OnMouseRDown(POINT pt);
-	void WINAPI OnMouseRUp(POINT pt);
-	void WINAPI OnMouseHover(POINT pt);
-	void WINAPI OnMouseMove(POINT pt);
-	void WINAPI OnMouseDbClick(POINT pt);
-	void WINAPI OnMouseLeave();
-	BOOL WINAPI OnSetCursor(POINT pt);
-	BOOL WINAPI InsertItem(int nCol, int nWidth, LPCTSTR lpszText);
-	int WINAPI GetColumnWidth(int nCol);
-	BOOL WINAPI DeleteColumn(int nCol);
+	void DrawHeader(HDC hDC);
+	int GetItemCount();
+	void SetReportView(duReportView *pReportView) { m_pReportView = pReportView; }
+	LPTSTR GetStyle() { return m_szItemStyle; }
+	int GetTotalWidth();
+	void OnMouseLDown(POINT pt);
+	void OnMouseLUp(POINT pt);
+	void OnMouseRDown(POINT pt);
+	void OnMouseRUp(POINT pt);
+	void OnMouseHover(POINT pt);
+	void OnMouseMove(POINT pt);
+	void OnMouseDbClick(POINT pt);
+	void OnMouseLeave();
+	BOOL OnSetCursor(POINT pt);
+	BOOL InsertItem(int nCol, int nWidth, LPCTSTR lpszText);
+	int GetColumnWidth(int nCol);
+	BOOL DeleteColumn(int nCol);
 	
 public:
 	duReportHeader();

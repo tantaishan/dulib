@@ -26,33 +26,33 @@ typedef struct tagStaticTextInfo
 class duStaticEx : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
 
-	virtual void WINAPI SetText(LPCTSTR lpszText);
+	virtual void SetText(LPCTSTR lpszText);
 
-	virtual void WINAPI Resize(LPRECT lpRect);
+	virtual void Resize(LPRECT lpRect);
 
-	virtual LPCTSTR WINAPI GetFont();
-	virtual void WINAPI SetFont(LPCTSTR lpszFont);
+	virtual LPCTSTR GetFont();
+	virtual void SetFont(LPCTSTR lpszFont);
 
-	virtual COLORREF WINAPI GetTextColor();
-	virtual void WINAPI SetTextColor(COLORREF clrText);
+	virtual COLORREF GetTextColor();
+	virtual void SetTextColor(COLORREF clrText);
 
 
-	virtual int WINAPI GetLineSpace();
-	virtual void WINAPI SetLineSpace(int nLineSpace);
+	virtual int GetLineSpace();
+	virtual void SetLineSpace(int nLineSpace);
 
-	virtual int WINAPI CalcTextCache();
+	virtual int CalcTextCache();
 
-	virtual int WINAPI GetLineCount() { return  m_vtTextCache.size();}
-	virtual LPCTSTR WINAPI GetLineText(int index);
-	virtual void WINAPI GetLineTextRect(int index, LPSIZE lpOutSize);
+	virtual int GetLineCount() { return  m_vtTextCache.size();}
+	virtual LPCTSTR GetLineText(int index);
+	virtual void GetLineTextRect(int index, LPSIZE lpOutSize);
 	
 	
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duStaticEx"); }	
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duStaticEx"); }	
 	
 public:
 	duStaticEx();

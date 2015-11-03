@@ -21,36 +21,36 @@
 class duScrollContainer : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
 
-	virtual void WINAPI Resize(LPRECT lpRect/*=NULL*/);
-	virtual void WINAPI OnMouseWheel(UINT fwKeys, int zDelta, POINT pt);
-	virtual void WINAPI OnVScroll(ScrollBarAction sbAction, int nPos);
-	virtual void WINAPI OnHScroll(ScrollBarAction sbAction, int nPos);
-	//virtual void WINAPI OnChildShow(duPlugin *pChild, BOOL fVisible);
-	virtual LRESULT WINAPI OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	virtual void Resize(LPRECT lpRect/*=NULL*/);
+	virtual void OnMouseWheel(UINT fwKeys, int zDelta, POINT pt);
+	virtual void OnVScroll(ScrollBarAction sbAction, int nPos);
+	virtual void OnHScroll(ScrollBarAction sbAction, int nPos);
+	//virtual void OnChildShow(duPlugin *pChild, BOOL fVisible);
+	virtual LRESULT OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 	
-	virtual LPCTSTR WINAPI GetHorzScroll() { return m_szHorzScroll; }
-	virtual LPCTSTR WINAPI GetVertScroll() { return m_szVertScroll; }
+	virtual LPCTSTR GetHorzScroll() { return m_szHorzScroll; }
+	virtual LPCTSTR GetVertScroll() { return m_szVertScroll; }
 	virtual LPCTSTR GetView() { return m_szView; }
-	virtual BOOL WINAPI UpdateScroll();
-	virtual void WINAPI GetViewSize(LPSIZE lpSize);
+	virtual BOOL UpdateScroll();
+	virtual void GetViewSize(LPSIZE lpSize);
 
-	virtual void WINAPI SetHorzScrollBar(LPCTSTR lpszScroll);
-	virtual void WINAPI SetVertScrollBar(LPCTSTR lpszScroll);
-	virtual void WINAPI SetView(LPCTSTR lpszView);
+	virtual void SetHorzScrollBar(LPCTSTR lpszScroll);
+	virtual void SetVertScrollBar(LPCTSTR lpszScroll);
+	virtual void SetView(LPCTSTR lpszView);
 	
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duScrollContainer"); }	
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duScrollContainer"); }	
 
 public:
 	duScrollContainer(void);
 	~duScrollContainer(void);
 	
 public:
-	POINT WINAPI GetViewPoint();
+	POINT GetViewPoint();
 	void SetViewTop(int nTop);
 	void SetViewLeft(int nLeft);
 

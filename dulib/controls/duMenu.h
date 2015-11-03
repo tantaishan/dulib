@@ -21,30 +21,30 @@ class duMenuItem;
 class duMenu : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
 
-	virtual void WINAPI AdjustChild();
-	virtual HWND WINAPI GetMenuHandle() { return m_hWndMenu; }
-	virtual void WINAPI SetMenuHandle(HWND hWndMenu) { m_hWndMenu = hWndMenu; }
+	virtual void AdjustChild();
+	virtual HWND GetMenuHandle() { return m_hWndMenu; }
+	virtual void SetMenuHandle(HWND hWndMenu) { m_hWndMenu = hWndMenu; }
 
-	virtual duMenu *WINAPI GetParentMenu() { return m_pParentMenu; }
-	virtual void WINAPI SetParentMenu(duMenu *pMenu) { m_pParentMenu = pMenu; }
+	virtual duMenu *GetParentMenu() { return m_pParentMenu; }
+	virtual void SetParentMenu(duMenu *pMenu) { m_pParentMenu = pMenu; }
 
-	virtual HWND WINAPI GetOwnerHwnd() { return m_hWndOwner; }
-	virtual void WINAPI SetOwnerHwnd(HWND hWndOwner) { m_hWndOwner = hWndOwner; }
+	virtual HWND GetOwnerHwnd() { return m_hWndOwner; }
+	virtual void SetOwnerHwnd(HWND hWndOwner) { m_hWndOwner = hWndOwner; }
 
-	virtual duMenuItem *WINAPI MenuItemFromClientPoint(LPPOINT ppt);
-	virtual duMenu *WINAPI GetNextPopupMenu();
-	virtual duMenuItem *WINAPI GetHotMenu();
+	virtual duMenuItem *MenuItemFromClientPoint(LPPOINT ppt);
+	virtual duMenu *GetNextPopupMenu();
+	virtual duMenuItem *GetHotMenu();
 
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duMenu"); }
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duMenu"); }
 
 protected:
 	
-	duPlugin *WINAPI GetPreVisible(duPlugin *pPlugin);
+	duPlugin *GetPreVisible(duPlugin *pPlugin);
 	
 public:
 	duMenu();

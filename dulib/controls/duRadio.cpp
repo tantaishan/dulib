@@ -8,7 +8,6 @@
 //  History:    Nov-17-2009   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duRadio.h"
 #include "duDrawHelper.h"
 #include "duCtrlManager.h"
@@ -29,7 +28,7 @@ duRadio::~duRadio()
 {
 }
 
-void WINAPI duRadio::RegisterControlProperty()
+void duRadio::RegisterControlProperty()
 {
 	RegisterProperty(_T("icon"), DU_PROPERTY_IMAGE, &m_szIcon);
 	RegisterProperty(_T("iconx"), DU_PROPERTY_LONG, &m_nIconX);
@@ -42,13 +41,13 @@ void WINAPI duRadio::RegisterControlProperty()
 	RegisterProperty(_T("tooltip"), DU_PROPERTY_STRING, m_szToolTip);
 }
 
-void WINAPI duRadio::OnCreate()
+void duRadio::OnCreate()
 {
 	if (m_fChecked)
 		SetChecked(TRUE);
 }
 
-void WINAPI duRadio::DrawObject(HDC hDC)
+void duRadio::DrawObject(HDC hDC)
 {
 	duRect rcRadio;
 	Plugin_GetRect(this, &rcRadio);
@@ -89,7 +88,7 @@ void duRadio::GetIconRect(duRect &rcIcon)
 	rcIcon.bottom = rcIcon.top + m_nIconHeight;
 }
 
-void WINAPI duRadio::OnMouseIn(POINT pt)
+void duRadio::OnMouseIn(POINT pt)
 {
 	duCtrlManager *pCtrlManager = GetCtrlManager(m_hWnd);
 	if (pCtrlManager == NULL)
@@ -108,7 +107,7 @@ void WINAPI duRadio::OnMouseIn(POINT pt)
 	Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duRadio::OnMouseLeave(POINT pt)
+void duRadio::OnMouseLeave(POINT pt)
 {
 	duCtrlManager *pCtrlManager = GetCtrlManager(m_hWnd);
 	if (pCtrlManager == NULL)
@@ -126,7 +125,7 @@ void WINAPI duRadio::OnMouseLeave(POINT pt)
 	Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duRadio::OnMouseLDown(POINT pt)
+void duRadio::OnMouseLDown(POINT pt)
 {
 	UINT uState = GetState();
 	if (IS_STATE_CHECKED(uState))
@@ -137,7 +136,7 @@ void WINAPI duRadio::OnMouseLDown(POINT pt)
 	Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duRadio::OnMouseLUp(POINT pt)
+void duRadio::OnMouseLUp(POINT pt)
 {
 	UINT uState = GetState();
 	if (uState == DU_STATE_PRESS)
@@ -151,7 +150,7 @@ void WINAPI duRadio::OnMouseLUp(POINT pt)
 //		Plugin_SetState(this, DU_STATE_NORMAL);
 }
 
-BOOL WINAPI duRadio::IsChecked()
+BOOL duRadio::IsChecked()
 {
 	UINT uState = GetState();
 	if (IS_STATE_CHECKED(uState))
@@ -160,7 +159,7 @@ BOOL WINAPI duRadio::IsChecked()
 	return FALSE;
 }
 
-void WINAPI duRadio::SetChecked(BOOL fChecked)
+void duRadio::SetChecked(BOOL fChecked)
 {
 	duPlugin *pParent = GetParent();
 	if (pParent)
@@ -191,7 +190,7 @@ void WINAPI duRadio::SetChecked(BOOL fChecked)
 }
 
 
-void WINAPI duRadio::SetIcon(LPCTSTR lpszIconName)
+void duRadio::SetIcon(LPCTSTR lpszIconName)
 {
 	if (lpszIconName)
 		_tcsncpy(m_szIcon, lpszIconName, MAX_NAME);
@@ -199,7 +198,7 @@ void WINAPI duRadio::SetIcon(LPCTSTR lpszIconName)
 		ZeroMemory(m_szIcon, sizeof(TCHAR) * MAX_NAME);
 }
 
-void WINAPI duRadio::SetTooltipText(LPCTSTR lpszText)
+void duRadio::SetTooltipText(LPCTSTR lpszText)
 {
 	if (lpszText)
 		_tcsncpy(m_szToolTip, lpszText, MAX_NAME);

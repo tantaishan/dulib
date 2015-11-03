@@ -18,29 +18,29 @@
 class duRemoteCtrl : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
 
-	virtual void WINAPI Resize(LPRECT lpRect/*=NULL*/);
-	virtual void WINAPI OnVScroll(ScrollBarAction sbAction, int nPos);
-	virtual void WINAPI OnHScroll(ScrollBarAction sbAction, int nPos);
+	virtual void Resize(LPRECT lpRect/*=NULL*/);
+	virtual void OnVScroll(ScrollBarAction sbAction, int nPos);
+	virtual void OnHScroll(ScrollBarAction sbAction, int nPos);
 
-	virtual LPCTSTR WINAPI GetHorzScroll() { return m_szHorzScroll; }
-	virtual void WINAPI SetHorzScrollBar(LPCTSTR lpszScroll);
+	virtual LPCTSTR GetHorzScroll() { return m_szHorzScroll; }
+	virtual void SetHorzScrollBar(LPCTSTR lpszScroll);
 
-	virtual LPCTSTR WINAPI GetVertScroll() { return m_szVertScroll; }
-	virtual void WINAPI SetVertScrollBar(LPCTSTR lpszScroll);
+	virtual LPCTSTR GetVertScroll() { return m_szVertScroll; }
+	virtual void SetVertScrollBar(LPCTSTR lpszScroll);
 
-	virtual LPCTSTR WINAPI GetHwndObj() { return m_szHwndObj; }
-	virtual void WINAPI SetHwndObj(LPCTSTR lpszHwndObj);
+	virtual LPCTSTR GetHwndObj() { return m_szHwndObj; }
+	virtual void SetHwndObj(LPCTSTR lpszHwndObj);
 
-	virtual int WINAPI GetViewWidth() { return m_nViewWidth; }
-	virtual int WINAPI GetViewHeight() { return m_nViewHeight; }
-	virtual void WINAPI SetViewSize(int nWidth, int nHeight);
+	virtual int GetViewWidth() { return m_nViewWidth; }
+	virtual int GetViewHeight() { return m_nViewHeight; }
+	virtual void SetViewSize(int nWidth, int nHeight);
 
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duRemoteCtrl"); }
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duRemoteCtrl"); }
 
 public:
 	duRemoteCtrl(void);

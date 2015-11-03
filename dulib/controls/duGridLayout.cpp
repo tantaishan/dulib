@@ -8,7 +8,6 @@
 //  History:    JAN-09-2010   Denny Chen  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duGridLayout.h"
 
 
@@ -30,7 +29,7 @@ duGridLayout::~duGridLayout()
 	
 }
 
-void WINAPI duGridLayout::RegisterControlProperty()
+void duGridLayout::RegisterControlProperty()
 {
 	RegisterProperty(_T("grid"), DU_PROPERTY_BOOL, &m_fGrid);
 	RegisterProperty(_T("startx"), DU_PROPERTY_LONG, &m_nStartX);
@@ -42,13 +41,13 @@ void WINAPI duGridLayout::RegisterControlProperty()
 	RegisterProperty(_T("itemheight"), DU_PROPERTY_LONG, &m_nItemHeight);
 }
 
-void WINAPI duGridLayout::OnCreate()
+void duGridLayout::OnCreate()
 {
 	if (m_fGrid)
 		AdjustGrid();
 }
 
-void WINAPI duGridLayout::DrawObject(HDC hDC)
+void duGridLayout::DrawObject(HDC hDC)
 {
 	duStyleGroup *pStyleGroup = (duStyleGroup *)GetResObj(GetStyle(), DU_RES_STYLEGROUP);
 	if (pStyleGroup == NULL)
@@ -61,7 +60,7 @@ void WINAPI duGridLayout::DrawObject(HDC hDC)
 	pStyleGroup->Draw(hDC, &rcCtrl, GetState(), GetText(), GetAlpha());
 }
 
-void WINAPI duGridLayout::AdjustGrid()
+void duGridLayout::AdjustGrid()
 {
 	duPlugin *pChild = GetFirstChild();
 	int nCount = 0;

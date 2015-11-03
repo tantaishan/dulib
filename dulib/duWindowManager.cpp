@@ -8,18 +8,17 @@
 //  History:    Nov-10-95   DavePl  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duWindowManager.h"
 #include "duResManager.h"
 #include <shlwapi.h>
 #include <WindowsX.h>
 
 extern HINSTANCE g_hInstance;
-extern duTypeLib *g_pTypeLib;
 extern set<duPlugin *> *g_setValid;
 extern ULONG_PTR g_gdiplusToken;
 extern GdiplusStartupInput g_gdiplusStartupInput;
 BOOL g_bYaheiExist;
+
 
 //////////////////////////////////////////////////////////////////////////
 // Constructor/Distructor
@@ -33,27 +32,10 @@ duWindowManager::duWindowManager() :
 {
 	ZeroMemory(m_szSkinPath, MAX_PATH * sizeof(TCHAR));
 	m_mapCtrlManager.clear();
-
-	g_hInstance = GetInstanceModule(NULL);
-
-	g_pTypeLib = new duTypeLib;
-	g_pTypeLib->InitTypeInfo((HMODULE)g_hInstance);
-
-	InitCommonControls();
-	g_setValid = new set<duPlugin *>;
-	g_setValid->clear();
-	GdiplusStartup(&g_gdiplusToken, &g_gdiplusStartupInput, NULL); 
-
 }
 
 duWindowManager::~duWindowManager()
 {
-	if (m_pJavaScript)
-	{
-		delete m_pJavaScript;
-		m_pJavaScript = NULL;
-	}
-
 	if (m_pDocXml)
 	{
 		delete m_pDocXml;
@@ -72,28 +54,13 @@ duWindowManager::~duWindowManager()
 		m_pTrialImage = NULL;
 	}
 
-	//SAFE_DELETE(m_pResManager);
-	//m_mapCtrlManager.clear();
-
-	//if (g_setValid)
-	//{
-	//	g_setValid->clear();
-	//	delete g_setValid;
-	//	g_setValid = NULL;
-	//}			
-
-	//if (g_pTypeLib)
-	//{
-	//	delete g_pTypeLib;
-	//	g_pTypeLib = NULL;
-	//}
-
-	//GdiplusShutdown(g_gdiplusToken);
+	SAFE_DELETE(m_pResManager);
+	m_mapCtrlManager.clear();
 }
 
 //////////////////////////////////////////////////////////////////////////
 // Interface
-BOOL WINAPI duWindowManager::Attach(HWND hWnd, LPCTSTR lpWindowName)
+BOOL duWindowManager::Attach(HWND hWnd, LPCTSTR lpWindowName)
 {
 	if (hWnd == NULL || !::IsWindow(hWnd))
 		return FALSE;
@@ -112,22 +79,22 @@ BOOL WINAPI duWindowManager::Attach(HWND hWnd, LPCTSTR lpWindowName)
 	return FALSE;
 }
 
-LPCTSTR WINAPI duWindowManager::GetSkinPath()
+LPCTSTR duWindowManager::GetSkinPath()
 {
 	return m_szSkinPath;
 }
 
-duPlugin *WINAPI duWindowManager::CreateControl(LPCTSTR lpszType, LPCTSTR lpszName, duPlugin *pParent)
+duPlugin *duWindowManager::CreateControl(LPCTSTR lpszType, LPCTSTR lpszName, duPlugin *pParent)
 {
 	return NULL;
 }
 
-int WINAPI duWindowManager::GetWindowCount()
+int duWindowManager::GetWindowCount()
 {
 	return (int)m_mapCtrlManager.size();
 }
 
-HWND WINAPI duWindowManager::GetWindowAt(int nIndex)
+HWND duWindowManager::GetWindowAt(int nIndex)
 {
 	int i = 0;
 	map<HWND, duCtrlManager *>::iterator iter = m_mapCtrlManager.begin();
@@ -147,13 +114,6 @@ BOOL duWindowManager::RemoveHwnd(HWND hWnd)
 	return TRUE;
 }
 
-ITypeInfo *duWindowManager::GetTypeInfoByName(LPCTSTR lpszTypeName)
-{
-	return g_pTypeLib->GetTypeInfo((LPWSTR)lpszTypeName);
-}
-
-
-
 BOOL  CALLBACK FPC_EnumFontProc (LPLOGFONT lplf, LPTEXTMETRIC lptm, DWORD dwType, LPARAM lpData)	
 {
 	/*TCHAR szBuf[1024];
@@ -169,7 +129,7 @@ BOOL  CALLBACK FPC_EnumFontProc (LPLOGFONT lplf, LPTEXTMETRIC lptm, DWORD dwType
 }
 //////////////////////////////////////////////////////////////////////////
 // Member
-BOOL WINAPI duWindowManager::OpenSkin(LPCTSTR lpszXmlFile)
+BOOL duWindowManager::OpenSkin(LPCTSTR lpszXmlFile)
 {
 	if (lpszXmlFile == NULL || *lpszXmlFile == 0)
 		return FALSE;
@@ -178,8 +138,6 @@ BOOL WINAPI duWindowManager::OpenSkin(LPCTSTR lpszXmlFile)
 
 	
 	LPCTSTR lpszTypeName = GetTypeInfoName();
-	ITypeInfo *pTypeInfo = GetTypeInfoByName(lpszTypeName);
-	SetTypeInfo(pTypeInfo);
 
 	_tcsncpy(m_szSkinPath, lpszXmlFile, MAX_PATH);
 	TCHAR *lpszChar = _tcsrchr(m_szSkinPath, '\\');
@@ -245,7 +203,6 @@ BOOL WINAPI duWindowManager::OpenSkin(LPCTSTR lpszXmlFile)
 
 	}
 
-	m_pJavaScript = new duJavaScript;
 	hMem = NULL;
 	pStream = NULL;
 	pByte = GetResource(_T("DirectUI.js"), hMem, pStream);
@@ -261,23 +218,18 @@ BOOL WINAPI duWindowManager::OpenSkin(LPCTSTR lpszXmlFile)
 	pW = (wchar_t *)p;
 	pW++;
 	lstrcat(pW, _T("\r\nCollectGarbage();\r\n"));
-	m_pJavaScript->InitJavaScript(pW);
 	SAFE_DELETE_ARRAY(p);
 
 	lpszTypeName = m_pResManager->GetTypeInfoName();
-	pTypeInfo = GetTypeInfoByName(lpszTypeName);
-	m_pResManager->SetTypeInfo(pTypeInfo);
 
 	ReleaseResource(hMem, pStream);
 
-	m_pJavaScript->AddObject(_T("winManager"), this);
-	m_pJavaScript->AddObject(_T("resManager"), m_pResManager);
 	return TRUE;
 }
 
 
 
-BOOL WINAPI duWindowManager::OpenSkinZip(LPCTSTR lpszZipFile, LPCSTR lpszZipPassword)
+BOOL duWindowManager::OpenSkinZip(LPCTSTR lpszZipFile, LPCSTR lpszZipPassword)
 {
 	if (lpszZipFile == NULL || *lpszZipFile == 0 || !::PathFileExists(lpszZipFile))
 		return FALSE;
@@ -290,7 +242,7 @@ BOOL WINAPI duWindowManager::OpenSkinZip(LPCTSTR lpszZipFile, LPCSTR lpszZipPass
 	return OpenSkin(lpszZipFile);
 }
 
-BOOL WINAPI duWindowManager::OpenSkinMemory(BYTE *pData, int nSize)
+BOOL duWindowManager::OpenSkinMemory(BYTE *pData, int nSize)
 {
 	if (pData == NULL || nSize <= 0)
 		return FALSE;
@@ -303,15 +255,12 @@ BOOL WINAPI duWindowManager::OpenSkinMemory(BYTE *pData, int nSize)
 	return OpenSkin(_T("Memory\\"));
 }
 
-BOOL WINAPI duWindowManager::ExecScript(LPCTSTR lpszFuncName, int nParamCount, VARIANT *pParams)
+BOOL duWindowManager::ExecScript(LPCTSTR lpszFuncName, int nParamCount, VARIANT *pParams)
 {
-	if (m_pJavaScript)
-		return m_pJavaScript->ExecScript(lpszFuncName, nParamCount, pParams);
-
 	return FALSE;
 }
 
-PBYTE WINAPI duWindowManager::GetResource(LPCTSTR lpszResName, HANDLE &hMem, IStream *&pStream)
+PBYTE duWindowManager::GetResource(LPCTSTR lpszResName, HANDLE &hMem, IStream *&pStream)
 {
 	if (lpszResName == NULL)
 		return NULL;
@@ -372,7 +321,7 @@ PBYTE WINAPI duWindowManager::GetResource(LPCTSTR lpszResName, HANDLE &hMem, ISt
 	return NULL;
 }
 
-PBYTE WINAPI duWindowManager::GetZipResource(LPCTSTR lpszResName, HANDLE &hMem, IStream *&pStream)
+PBYTE duWindowManager::GetZipResource(LPCTSTR lpszResName, HANDLE &hMem, IStream *&pStream)
 {
 	if (lpszResName == NULL || m_hZip == NULL)
 		return NULL;
@@ -442,7 +391,7 @@ void duWindowManager::ResetEditHFont()
 }
 
 
-VOID WINAPI duWindowManager::ReleaseResource(HANDLE hMem, IStream *pStream)
+VOID duWindowManager::ReleaseResource(HANDLE hMem, IStream *pStream)
 {
 	if (pStream)
 	{
@@ -478,13 +427,13 @@ TiXmlElement *duWindowManager::GetWindowXmlElement(LPCTSTR lpszWindowName)
 	return NULL;
 }
 
-void WINAPI duWindowManager::OutputDebugString(LPCTSTR lpszOutput)
+void duWindowManager::OutputDebugString(LPCTSTR lpszOutput)
 {
 	::OutputDebugString(lpszOutput);
 	::OutputDebugString(_T("\r\n"));
 }
 
-BOOL WINAPI duWindowManager::ShowWindow(HWND hWnd, int nCmdShow)
+BOOL duWindowManager::ShowWindow(HWND hWnd, int nCmdShow)
 {
 	if ((nCmdShow == SW_SHOWMINIMIZED) || (nCmdShow == SW_MINIMIZE))
 	{
@@ -500,37 +449,37 @@ BOOL WINAPI duWindowManager::ShowWindow(HWND hWnd, int nCmdShow)
 	return ::ShowWindow(hWnd, nCmdShow);
 }
 
-BOOL WINAPI duWindowManager::DestroyWindow(HWND hWnd)
+BOOL duWindowManager::DestroyWindow(HWND hWnd)
 {
 	return ::PostMessage(hWnd, WM_CLOSE, NULL, NULL);
 }
 
-void WINAPI duWindowManager::PostQuitMessage(int nExitCode)
+void duWindowManager::PostQuitMessage(int nExitCode)
 {
 	::PostQuitMessage(nExitCode);
 }
 
-BOOL WINAPI duWindowManager::SetWindowPos(HWND hWnd, HWND hWndInsertAfter, int X, int Y, int cx, int cy, UINT uFlags)
+BOOL duWindowManager::SetWindowPos(HWND hWnd, HWND hWndInsertAfter, int X, int Y, int cx, int cy, UINT uFlags)
 {
 	return ::SetWindowPos(hWnd, hWndInsertAfter, X, Y, cx, cy, uFlags);
 }
 
-int WINAPI duWindowManager::GetRed(int color)
+int duWindowManager::GetRed(int color)
 {
 	return GetRValue(color);
 }
 
-int WINAPI duWindowManager::GetGreen(int color)
+int duWindowManager::GetGreen(int color)
 {
 	return GetGValue(color);
 }
 
-int WINAPI duWindowManager::GetBlue(int color)
+int duWindowManager::GetBlue(int color)
 {
 	return GetBValue(color);
 }
 
-BOOL WINAPI duWindowManager::ChangeSkin(LPCTSTR lpszFile)
+BOOL duWindowManager::ChangeSkin(LPCTSTR lpszFile)
 {
 	if (lpszFile == NULL || *lpszFile == 0 || !::PathFileExists(lpszFile))
 		return FALSE;
@@ -578,7 +527,6 @@ BOOL WINAPI duWindowManager::ChangeSkin(LPCTSTR lpszFile)
 		return FALSE;
 	}
 	
-	duJavaScript *pJavaScript = new duJavaScript;
 	hMem = NULL;
 	pStream = NULL;
 	PBYTE pByte = GetResource(_T("DirectUI.js"), hMem, pStream);
@@ -586,7 +534,6 @@ BOOL WINAPI duWindowManager::ChangeSkin(LPCTSTR lpszFile)
 	{
 		delete pResManager;
 		delete pDocXml;
-		delete pJavaScript;
 		_tcsncpy(m_szSkinPath, szOldSkinPath, MAX_PATH);
 		return FALSE;
 	}
@@ -600,16 +547,10 @@ BOOL WINAPI duWindowManager::ChangeSkin(LPCTSTR lpszFile)
 	pW = (wchar_t *)p;
 	pW++;
 	lstrcat(pW, _T("\r\nCollectGarbage();\r\n"));
-	pJavaScript->InitJavaScript(pW);
 	SAFE_DELETE_ARRAY(p);
-	
-	pJavaScript->AddObject(_T("winManager"), this);
-	pJavaScript->AddObject(_T("resManager"), pResManager);
-	
+
 	if (m_pDocXml)
 		delete m_pDocXml;
-	if (m_pJavaScript)
-		delete m_pJavaScript;
 	if (m_pResManager)
 		delete m_pResManager;
 
@@ -618,13 +559,12 @@ BOOL WINAPI duWindowManager::ChangeSkin(LPCTSTR lpszFile)
 	
 	m_pDocXml = pDocXml;
 	m_pResManager = pResManager;
-	m_pJavaScript = pJavaScript;
 
 	ResetEditHFont();
 	return TRUE;
 }
 
-void WINAPI duWindowManager::Redraw(duPlugin *pPlugin)
+void duWindowManager::Redraw(duPlugin *pPlugin)
 {
 	Plugin_Redraw(pPlugin, TRUE);
 }

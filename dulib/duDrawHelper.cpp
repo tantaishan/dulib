@@ -8,10 +8,9 @@
 //  History:    Nov-10-95   DavePl  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duDrawHelper.h"
 
-BOOL WINAPI DrawNormal(HDC hDstDC, int nXOriginDest, int nYOriginDest, int nWidthDest, int nHeightDest, 
+BOOL DrawNormal(HDC hDstDC, int nXOriginDest, int nYOriginDest, int nWidthDest, int nHeightDest, 
 								duImage *pImage, int nXOriginSrc, int nYOriginSrc, int nAlpha)
 {
 	if (pImage == NULL || pImage->GetBitmap() == NULL || pImage->GetBits() == NULL ||
@@ -31,7 +30,7 @@ BOOL WINAPI DrawNormal(HDC hDstDC, int nXOriginDest, int nYOriginDest, int nWidt
 	return TRUE;
 }
 
-BOOL WINAPI DrawStretch(HDC hDstDC, int nXOriginDest, int nYOriginDest, int nWidthDest, int nHeightDest, 
+BOOL DrawStretch(HDC hDstDC, int nXOriginDest, int nYOriginDest, int nWidthDest, int nHeightDest, 
 								 duImage *pImage, int nXOriginSrc, int nYOriginSrc, int nWidthSrc, int nHeightSrc, int nAlpha)
 {
 	if (pImage == NULL || pImage->GetBitmap() == NULL || pImage->GetBits() == NULL ||
@@ -52,7 +51,7 @@ BOOL WINAPI DrawStretch(HDC hDstDC, int nXOriginDest, int nYOriginDest, int nWid
 	return TRUE;
 }
 
-BOOL WINAPI DrawTile(HDC hDstDC, int nXOriginDest, int nYOriginDest, int nWidthDest, int nHeightDest, 
+BOOL DrawTile(HDC hDstDC, int nXOriginDest, int nYOriginDest, int nWidthDest, int nHeightDest, 
 							  duImage *pImage, int nXOriginSrc, int nYOriginSrc, int nWidthSrc, int nHeightSrc, int nAlpha)
 {
 	if (pImage == NULL || pImage->GetBitmap() == NULL || pImage->GetBits() == NULL ||
@@ -93,7 +92,7 @@ BOOL WINAPI DrawTile(HDC hDstDC, int nXOriginDest, int nYOriginDest, int nWidthD
 	return TRUE;
 }
 
-BOOL WINAPI DrawVertStretch(HDC hDstDC, int nXOriginDest, int nYOriginDest, int nWidthDest, int nHeightDest, 
+BOOL DrawVertStretch(HDC hDstDC, int nXOriginDest, int nYOriginDest, int nWidthDest, int nHeightDest, 
 									 duImage *pImage, int nXOriginSrc, int nYOriginSrc, int nWidthSrc, int nHeightSrc, 
 									 int nTopPart, int nBottomPart, int nAlpha)
 {
@@ -137,7 +136,7 @@ BOOL WINAPI DrawVertStretch(HDC hDstDC, int nXOriginDest, int nYOriginDest, int 
 	return TRUE;
 }
 
-BOOL WINAPI DrawHorzStretch(HDC hDstDC, int nXOriginDest, int nYOriginDest, int nWidthDest, int nHeightDest, 
+BOOL DrawHorzStretch(HDC hDstDC, int nXOriginDest, int nYOriginDest, int nWidthDest, int nHeightDest, 
 									 duImage *pImage, int nXOriginSrc, int nYOriginSrc, int nWidthSrc, int nHeightSrc,
 									 int nLeftPart, int nRightPart, int nAlpha)
 {
@@ -182,7 +181,7 @@ BOOL WINAPI DrawHorzStretch(HDC hDstDC, int nXOriginDest, int nYOriginDest, int 
 	return TRUE;
 }
 
-BOOL WINAPI DrawAllPartStretch(HDC hDstDC, int nXOriginDest, int nYOriginDest, int nWidthDest, int nHeightDest, 
+BOOL DrawAllPartStretch(HDC hDstDC, int nXOriginDest, int nYOriginDest, int nWidthDest, int nHeightDest, 
 										duImage *pImage, int nXOriginSrc, int nYOriginSrc, int nWidthSrc, int nHeightSrc,
 										int nLeftPart, int nRightPart, int nTopPart, int nBottomPart, int nAlpha)
 {

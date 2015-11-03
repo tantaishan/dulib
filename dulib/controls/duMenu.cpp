@@ -8,7 +8,6 @@
 //  History:    Nov-10-2009   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duMenu.h"
 #include "duMenuItem.h"
 
@@ -25,22 +24,22 @@ duMenu::~duMenu()
 	
 }
 
-void WINAPI duMenu::RegisterControlProperty()
+void duMenu::RegisterControlProperty()
 {
 	
 }
 
-void WINAPI duMenu::OnCreate()
+void duMenu::OnCreate()
 {
 	AdjustChild();
 }
 
-void WINAPI duMenu::DrawObject(HDC hDC)
+void duMenu::DrawObject(HDC hDC)
 {
 	
 }
 
-void WINAPI duMenu::AdjustChild()
+void duMenu::AdjustChild()
 {
 	duRect rectLayout;
 	rectLayout.SetRectEmpty();
@@ -74,7 +73,7 @@ void WINAPI duMenu::AdjustChild()
 	}
 }
 
-duPlugin *WINAPI duMenu::GetPreVisible(duPlugin *pPlugin)
+duPlugin *duMenu::GetPreVisible(duPlugin *pPlugin)
 {
 	if (pPlugin == NULL)
 		return NULL;
@@ -94,7 +93,7 @@ duPlugin *WINAPI duMenu::GetPreVisible(duPlugin *pPlugin)
 	return pTemp;
 }
 
-duMenuItem *WINAPI duMenu::MenuItemFromClientPoint(LPPOINT ppt)
+duMenuItem *duMenu::MenuItemFromClientPoint(LPPOINT ppt)
 {
 	duPlugin *pPlugin = GetFirstChild();
 	while (pPlugin)
@@ -113,7 +112,7 @@ duMenuItem *WINAPI duMenu::MenuItemFromClientPoint(LPPOINT ppt)
 	return NULL;
 }
 
-duMenu *WINAPI duMenu::GetNextPopupMenu()
+duMenu *duMenu::GetNextPopupMenu()
 {
 	duPlugin *pPlugin = GetFirstChild();
 	while (pPlugin)
@@ -131,7 +130,7 @@ duMenu *WINAPI duMenu::GetNextPopupMenu()
 	return NULL;
 }
 
-duMenuItem *WINAPI duMenu::GetHotMenu()
+duMenuItem *duMenu::GetHotMenu()
 {
 	duPlugin *pPlugin = GetFirstChild();
 	while (pPlugin)

@@ -8,7 +8,6 @@
 //  History:    Nov-10-95   DavePl  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duUtility.h"
 #include "duPlugin.h"
 #include "duResBase.h"
@@ -39,7 +38,7 @@ void _TRACE(LPCTSTR lpszFormat, ...)
 	va_end(args);
 }
 
-UINT WINAPI GetUniTimer()
+UINT GetUniTimer()
 {
 	static UINT g_nTimer = 0x0F00;
 	return g_nTimer++;
@@ -241,7 +240,7 @@ Rect_Vert:
 }
 
 
-BOOL WINAPI InitBitmapInfo(BITMAPINFO *lpBitmapInfo, int nWidth, int nHeight)
+BOOL InitBitmapInfo(BITMAPINFO *lpBitmapInfo, int nWidth, int nHeight)
 {
 	if (lpBitmapInfo == NULL || nWidth <= 0 || nHeight <= 0)
 		return FALSE;
@@ -586,12 +585,12 @@ BOOL IsStateChecked(int uState)
 	return FALSE;
 }
 
-duCtrlManager *WINAPI GetCtrlManager(HWND hWnd)
+duCtrlManager *GetCtrlManager(HWND hWnd)
 {
 	return (duCtrlManager *)::GetProp(hWnd, ATOMPLUGIN);
 }
 
-duResManager *WINAPI GetResManager(HWND hWnd)
+duResManager *GetResManager(HWND hWnd)
 {	
 	duCtrlManager *pCtrlManager = GetCtrlManager(hWnd);
 	if (pCtrlManager == NULL)
@@ -606,7 +605,7 @@ duResManager *WINAPI GetResManager(HWND hWnd)
 
 void CopyPixel(RGBQUAD *pBits, int nBitmapWidth, int nBitmapHeight, HDC hDC, int x, int y);
 
-int WINAPI DrawText32Bpp(HDC hDC, duFont *font, COLORREF clrText, LPCTSTR lpString, int nCount, LPRECT lpRect, UINT uFormat, int nAlpha)
+int DrawText32Bpp(HDC hDC, duFont *font, COLORREF clrText, LPCTSTR lpString, int nCount, LPRECT lpRect, UINT uFormat, int nAlpha)
 {
 	if (hDC == NULL || lpString == NULL || nCount <= 0 || lpRect == NULL)
 		return 0;
@@ -811,7 +810,7 @@ void Combo32Bitmap(RGBQUAD *pBits32, int nWidth, int nHeight, BYTE *pBits, BYTE 
 	}
 }
 
-void WINAPI DrawTextPlus(HDC hDC, HBITMAP hCurBitmap, COLORREF clrText, HFONT hFont, LPCTSTR lpString, int nCount, BOOL fSingleLine ,UINT uFormat)
+void DrawTextPlus(HDC hDC, HBITMAP hCurBitmap, COLORREF clrText, HFONT hFont, LPCTSTR lpString, int nCount, BOOL fSingleLine ,UINT uFormat)
 {
 	BITMAP bitmap;
 	ZeroMemory(&bitmap, sizeof(BITMAP));

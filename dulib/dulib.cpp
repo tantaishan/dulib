@@ -1,24 +1,21 @@
 // dulib.cpp : Defines the entry point for the DLL application.
 //
-#include "stdafx.h"
 #include "duUtility.h"
 #include "dulib.h"
 #include "duWindow.h"
 #include "duWindowManager.h"
 #include "duCtrlManager.h"
-#include "duTypeLib.h"
 
 GdiplusStartupInput g_gdiplusStartupInput;
 ULONG_PTR g_gdiplusToken;
 set<duPlugin *> *g_setValid;
 HINSTANCE g_hInstance;
-duTypeLib *g_pTypeLib;
-ATOM WINAPI RegisterMenuClass();
+ATOM RegisterMenuClass();
 
 extern "C"
 {
 
-	duWindowManager *WINAPI LoadStyleZipMemory(BYTE *pData, int nSize)
+	duWindowManager *LoadStyleZipMemory(BYTE *pData, int nSize)
 	{
 		if (!pData || nSize <= 0)
 			return NULL;
@@ -38,7 +35,7 @@ extern "C"
 		return pWinManager;
 	}
 
-	duWindowManager *WINAPI LoadStyleZipW(LPCWSTR lpszZip, LPCSTR lpszZipPassword)
+	duWindowManager *LoadStyleZipW(LPCWSTR lpszZip, LPCSTR lpszZipPassword)
 	{
 		if (!lpszZip || !*lpszZip)
 			return NULL;
@@ -57,7 +54,7 @@ extern "C"
 		return pWinManager;
 	}
 
-	duWindowManager *WINAPI LoadResourceStyleZipW(LPCWSTR lpszZipData,ULONG nResZipSize, LPCSTR lpszZipPassword)
+	duWindowManager *LoadResourceStyleZipW(LPCWSTR lpszZipData,ULONG nResZipSize, LPCSTR lpszZipPassword)
 	{
 		::CoInitialize(NULL);
 
@@ -73,7 +70,7 @@ extern "C"
 		return pWinManager;
 	}
 
-	duWindowManager* WINAPI LoadStyleZipA(LPCSTR lpszZip, LPCSTR lpszZipPassword)
+	duWindowManager* LoadStyleZipA(LPCSTR lpszZip, LPCSTR lpszZipPassword)
 	{
 		if (!lpszZip || !*lpszZip)
 			return NULL;
@@ -91,7 +88,7 @@ extern "C"
 	}
 
 
-	duWindowManager *WINAPI LoadStyleW(const wchar_t *lpszXml)
+	duWindowManager *LoadStyleW(const wchar_t *lpszXml)
 	{
 		if (!lpszXml || !*lpszXml)
 			return NULL;
@@ -110,7 +107,7 @@ extern "C"
 		return pWinManager;
 	}
 
-	duWindowManager *WINAPI LoadStyleA(const char *lpszXml)
+	duWindowManager *LoadStyleA(const char *lpszXml)
 	{
 		if (!lpszXml || !*lpszXml)
 			return NULL;
@@ -126,7 +123,29 @@ extern "C"
 		return pWinManager;
 	}
 
-	BOOL WINAPI WindowManager_Attach(duWindowManager *pWinManager, HWND hWnd, LPCTSTR lpWindowName)
+	void Dulib_Init()
+	{
+		g_hInstance = GetModuleHandle(NULL);
+
+		InitCommonControls();
+		g_setValid = new set<duPlugin *>;
+		g_setValid->clear();
+		GdiplusStartup(&g_gdiplusToken, &g_gdiplusStartupInput, NULL);
+	}
+
+	void Dulib_Release()
+	{
+		if (g_setValid)
+		{
+			g_setValid->clear();
+			delete g_setValid;
+			g_setValid = NULL;
+		}
+
+		GdiplusShutdown(g_gdiplusToken);
+	}
+
+	BOOL WindowManager_Attach(duWindowManager *pWinManager, HWND hWnd, LPCTSTR lpWindowName)
 	{
 		if (pWinManager == NULL || !::IsWindow(hWnd) || lpWindowName == NULL)
 			return FALSE;
@@ -134,7 +153,7 @@ extern "C"
 		return pWinManager->Attach(hWnd, lpWindowName);
 	}
 
-	BOOL WINAPI ReleaseStyle(duWindowManager *pWinManager)
+	BOOL ReleaseStyle(duWindowManager *pWinManager)
 	{
 		if (pWinManager == NULL)
 			return FALSE;
@@ -144,7 +163,7 @@ extern "C"
 		return TRUE;
 	}
 
-	BOOL WINAPI MatchString(LPCTSTR lpszPat, LPCTSTR lpszStr)
+	BOOL MatchString(LPCTSTR lpszPat, LPCTSTR lpszStr)
 	{
 		if (lpszPat == NULL || lpszStr == NULL)
 			return FALSE;

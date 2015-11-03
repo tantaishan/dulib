@@ -8,17 +8,15 @@
 //  History:    Nov-10-95   DavePl  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duPlugin.h"
 #include "duStyle.h"
 #include "duWindowManager.h"
 #include "duResManager.h"
 #include "duHwndObj.h"
-#include "duFlash.h"
 
 extern set<duPlugin *> *g_setValid;
 
-duPlugin *WINAPI CreateDirectUIControl(LPCTSTR lpszType);
+duPlugin *CreateDirectUIControl(LPCTSTR lpszType);
 
 duPlugin::duPlugin() :
 	 m_fVisible(TRUE)
@@ -70,7 +68,7 @@ duPlugin::~duPlugin()
 	Plugin_DeleteValid(this);
 }
 
-void WINAPI duPlugin::SetName(LPCTSTR lpszName)
+void duPlugin::SetName(LPCTSTR lpszName)
 {
 	if (lpszName)
 		_tcsncpy(m_strName, lpszName, MAX_NAME);
@@ -78,7 +76,7 @@ void WINAPI duPlugin::SetName(LPCTSTR lpszName)
 		ZeroMemory(m_strName, MAX_NAME * sizeof(TCHAR));
 }
 
-void WINAPI duPlugin::SetStyle(LPCTSTR lpszStyle)
+void duPlugin::SetStyle(LPCTSTR lpszStyle)
 {
 	if (lpszStyle)
 		_tcsncpy(m_strStyle, lpszStyle, MAX_NAME);
@@ -86,7 +84,7 @@ void WINAPI duPlugin::SetStyle(LPCTSTR lpszStyle)
 		ZeroMemory(m_strStyle, MAX_NAME * sizeof(TCHAR));
 }
 
-void WINAPI duPlugin::SetText(LPCTSTR lpszText)
+void duPlugin::SetText(LPCTSTR lpszText)
 {
 	if (lpszText)
 		m_strText = lpszText;
@@ -94,7 +92,7 @@ void WINAPI duPlugin::SetText(LPCTSTR lpszText)
 		m_strText = _T("");
 }
 
-void WINAPI duPlugin::SetCursor(LPCTSTR lpszCursor)
+void duPlugin::SetCursor(LPCTSTR lpszCursor)
 {
 	if (lpszCursor)
 		_tcsncpy(m_strCursor, lpszCursor, MAX_NAME);
@@ -102,13 +100,13 @@ void WINAPI duPlugin::SetCursor(LPCTSTR lpszCursor)
 		ZeroMemory(m_strCursor, MAX_NAME * sizeof(TCHAR));
 }
 
-void WINAPI duPlugin::SetRect(LPRECT lpRect)
+void duPlugin::SetRect(LPRECT lpRect)
 {
 	if (lpRect)
 		::CopyRect(&m_rect, lpRect);
 }
 
-void WINAPI duPlugin::SetCachedBitmap(HBITMAP hBitmap)
+void duPlugin::SetCachedBitmap(HBITMAP hBitmap)
 {
 	if (m_hBitmap)
 	{
@@ -119,7 +117,7 @@ void WINAPI duPlugin::SetCachedBitmap(HBITMAP hBitmap)
 	m_hBitmap = hBitmap;
 }
 
-int WINAPI duPlugin::GetPropertyCount()
+int duPlugin::GetPropertyCount()
 {
 	if (m_pProperty == NULL)
 		return 0;
@@ -127,7 +125,7 @@ int WINAPI duPlugin::GetPropertyCount()
 	return m_pProperty->GetPropertyCount();
 }
 
-LPCTSTR WINAPI duPlugin::GetPropertyName(int nNameIndex)
+LPCTSTR duPlugin::GetPropertyName(int nNameIndex)
 {
 	if (m_pProperty == NULL)
 		return NULL;
@@ -135,7 +133,7 @@ LPCTSTR WINAPI duPlugin::GetPropertyName(int nNameIndex)
 	return m_pProperty->GetPropertyName(nNameIndex);
 }
 
-int WINAPI duPlugin::GetChildCount()
+int duPlugin::GetChildCount()
 {
 	int c = 0;
 	duPlugin *pTemp = m_pFirstChild;
@@ -147,14 +145,14 @@ int WINAPI duPlugin::GetChildCount()
 	return c;
 }
 
-BOOL WINAPI duPlugin::RegisterProperty(LPCTSTR lpszPropName, duVARIANT_TYPE vt, void *duVariant)
+BOOL duPlugin::RegisterProperty(LPCTSTR lpszPropName, duVARIANT_TYPE vt, void *duVariant)
 {
 	if (m_pProperty)
 		return m_pProperty->AddProperty(lpszPropName, vt, duVariant);
 	return FALSE;
 }
 
-void WINAPI duPlugin::Resize(LPRECT lpRect/* = NULL */)
+void duPlugin::Resize(LPRECT lpRect/* = NULL */)
 {
 	duPlugin *pParent = GetParent();
 	if (pParent)
@@ -183,7 +181,7 @@ void WINAPI duPlugin::Resize(LPRECT lpRect/* = NULL */)
 	}
 }
 
-BOOL WINAPI duPlugin::OnSetCursor()
+BOOL duPlugin::OnSetCursor()
 {
 	LPCTSTR lpszCurName = GetCursor();
 	duCursor *pCursor = (duCursor *)GetResObj(lpszCurName, DU_RES_CURSOR);
@@ -203,7 +201,7 @@ BOOL WINAPI duPlugin::OnSetCursor()
 	return TRUE;
 }
 
-duResBase *WINAPI duPlugin::GetResObj(LPCTSTR lpszResName, UINT uResType)
+duResBase *duPlugin::GetResObj(LPCTSTR lpszResName, UINT uResType)
 {
 	duResManager *pResManager = GetResManager(m_hWnd);
 	if (pResManager)
@@ -212,7 +210,7 @@ duResBase *WINAPI duPlugin::GetResObj(LPCTSTR lpszResName, UINT uResType)
 	return NULL;
 }
 
-duPlugin *WINAPI duPlugin::GetPluginByName(LPCTSTR lpszName)
+duPlugin *duPlugin::GetPluginByName(LPCTSTR lpszName)
 {
 	if (lpszName == NULL)
 		return NULL;
@@ -339,8 +337,6 @@ BOOL duPlugin::CreateChildPlugin(TiXmlElement *pElement, duCtrlManager *pCtrlMan
 
 	duWindowManager *pWinManager = pCtrlManager->GetWindowManager();
 	LPCTSTR lpszTypeName = pNewPlugin->GetTypeInfoName();
-	ITypeInfo *pTypeInfo = pWinManager->GetTypeInfoByName(lpszTypeName);
-	pNewPlugin->SetTypeInfo(pTypeInfo);
 
 	Plugin_SetParent(pNewPlugin, this, NULL);
 	pNewPlugin->OnCreate(pElement, pCtrlManager);
@@ -371,7 +367,7 @@ TiXmlElement *duPlugin::GetXmlElement()
 	return NULL;
 }
 
-HBITMAP WINAPI duPlugin::GetBkHBitmap()
+HBITMAP duPlugin::GetBkHBitmap()
 {
 	duCtrlManager *pCtrlManager = GetCtrlManager(m_hWnd);
 	if (pCtrlManager == NULL)
@@ -380,7 +376,7 @@ HBITMAP WINAPI duPlugin::GetBkHBitmap()
 	return pCtrlManager->GetBkHBitmap(this);
 }
 
-HBITMAP WINAPI duPlugin::GetSnapshot()
+HBITMAP duPlugin::GetSnapshot()
 {
 	duCtrlManager *pCtrlManager = GetCtrlManager(m_hWnd);
 	if (pCtrlManager == NULL)
@@ -392,7 +388,7 @@ HBITMAP WINAPI duPlugin::GetSnapshot()
 extern "C"
 {
 
-duPlugin *WINAPI Plugin_SetParent(duPlugin *pPlugin, duPlugin *pParent, LPCTSTR lpszPre)
+duPlugin *Plugin_SetParent(duPlugin *pPlugin, duPlugin *pParent, LPCTSTR lpszPre)
 {
 	if (pPlugin == NULL)
 		return NULL;
@@ -484,7 +480,7 @@ duPlugin *WINAPI Plugin_SetParent(duPlugin *pPlugin, duPlugin *pParent, LPCTSTR 
 	return pOldParent;
 }
 
-BOOL WINAPI Plugin_IsValid(duPlugin *pPlugin)
+BOOL Plugin_IsValid(duPlugin *pPlugin)
 {
 	if (pPlugin == NULL)
 		return FALSE;
@@ -496,7 +492,7 @@ BOOL WINAPI Plugin_IsValid(duPlugin *pPlugin)
 	return FALSE;
 }
 
-void WINAPI Plugin_AddValid(duPlugin *pPlugin)
+void Plugin_AddValid(duPlugin *pPlugin)
 {
 	if (pPlugin == NULL)
 		return;
@@ -504,7 +500,7 @@ void WINAPI Plugin_AddValid(duPlugin *pPlugin)
 	g_setValid->insert(pPlugin);
 }
 
-void WINAPI Plugin_DeleteValid(duPlugin *pPlugin)
+void Plugin_DeleteValid(duPlugin *pPlugin)
 {
 	if (pPlugin == NULL)
 		return;
@@ -512,7 +508,7 @@ void WINAPI Plugin_DeleteValid(duPlugin *pPlugin)
 	g_setValid->erase(pPlugin);
 }
 
-BOOL WINAPI Plugin_IsVisible(duPlugin *pPlugin)
+BOOL Plugin_IsVisible(duPlugin *pPlugin)
 {
 	if (pPlugin->IsVisible())
 	{
@@ -531,7 +527,7 @@ BOOL WINAPI Plugin_IsVisible(duPlugin *pPlugin)
 	return FALSE;
 }
 
-BOOL WINAPI Plugin_GetVisibleRect(duPlugin *pPlugin, LPRECT lpRect)
+BOOL Plugin_GetVisibleRect(duPlugin *pPlugin, LPRECT lpRect)
 {
 	duRect rectParent;
 	
@@ -553,7 +549,7 @@ BOOL WINAPI Plugin_GetVisibleRect(duPlugin *pPlugin, LPRECT lpRect)
 	return TRUE;
 }
 
-BOOL WINAPI Plugin_Redraw(duPlugin *pPlugin, BOOL fNotify)
+BOOL Plugin_Redraw(duPlugin *pPlugin, BOOL fNotify)
 {
 	if (pPlugin == NULL)
 		return FALSE;
@@ -568,7 +564,7 @@ BOOL WINAPI Plugin_Redraw(duPlugin *pPlugin, BOOL fNotify)
 	return pCtrlManager->RedrawPlugin(pPlugin);
 }
 
-BOOL WINAPI Plugin_SetCached(duPlugin *pPlugin, BOOL fCached)
+BOOL Plugin_SetCached(duPlugin *pPlugin, BOOL fCached)
 {
 	if (!Plugin_IsValid(pPlugin) || fCached == pPlugin->IsCached())
 		return FALSE;
@@ -608,7 +604,7 @@ BOOL WINAPI Plugin_SetCached(duPlugin *pPlugin, BOOL fCached)
 	return TRUE;
 }
 
-BOOL WINAPI Plugin_GetType(duPlugin *pPlugin, LPTSTR lpString, int nMaxCount)
+BOOL Plugin_GetType(duPlugin *pPlugin, LPTSTR lpString, int nMaxCount)
 {
 	if (!Plugin_IsValid(pPlugin) || lpString == NULL || nMaxCount <= 0)
 		return FALSE;
@@ -619,7 +615,7 @@ BOOL WINAPI Plugin_GetType(duPlugin *pPlugin, LPTSTR lpString, int nMaxCount)
 	return TRUE;
 }
 
-BOOL WINAPI Plugin_GetName(duPlugin *pPlugin, LPTSTR lpString, int nMaxCount)
+BOOL Plugin_GetName(duPlugin *pPlugin, LPTSTR lpString, int nMaxCount)
 {
 	if (!Plugin_IsValid(pPlugin) || lpString == NULL || nMaxCount <= 0)
 		return FALSE;
@@ -630,7 +626,7 @@ BOOL WINAPI Plugin_GetName(duPlugin *pPlugin, LPTSTR lpString, int nMaxCount)
 	return TRUE;
 }
 
-BOOL WINAPI Plugin_GetStyle(duPlugin *pPlugin, LPTSTR lpString, int nMaxCount)
+BOOL Plugin_GetStyle(duPlugin *pPlugin, LPTSTR lpString, int nMaxCount)
 {
 	if (!Plugin_IsValid(pPlugin) || lpString == NULL || nMaxCount <= 0)
 		return FALSE;
@@ -641,7 +637,7 @@ BOOL WINAPI Plugin_GetStyle(duPlugin *pPlugin, LPTSTR lpString, int nMaxCount)
 	return TRUE;
 }
 
-BOOL WINAPI Plugin_GetCursor(duPlugin *pPlugin, LPTSTR lpString, int nMaxCount)
+BOOL Plugin_GetCursor(duPlugin *pPlugin, LPTSTR lpString, int nMaxCount)
 {
 	if (!Plugin_IsValid(pPlugin) || lpString == NULL || nMaxCount <= 0)
 		return FALSE;
@@ -652,7 +648,7 @@ BOOL WINAPI Plugin_GetCursor(duPlugin *pPlugin, LPTSTR lpString, int nMaxCount)
 	return TRUE;
 }
 
-int WINAPI Plugin_GetTextLength(duPlugin *pPlugin)
+int Plugin_GetTextLength(duPlugin *pPlugin)
 {
 	if (!Plugin_IsValid(pPlugin))
 		return 0;
@@ -660,7 +656,7 @@ int WINAPI Plugin_GetTextLength(duPlugin *pPlugin)
 	return pPlugin->GetTextLength();
 }
 
-BOOL WINAPI Plugin_GetText(duPlugin *pPlugin, LPTSTR lpString, int nMaxCount)
+BOOL Plugin_GetText(duPlugin *pPlugin, LPTSTR lpString, int nMaxCount)
 {
 	if (!Plugin_IsValid(pPlugin) || lpString == NULL || nMaxCount <= 0)
 		return FALSE;
@@ -671,7 +667,7 @@ BOOL WINAPI Plugin_GetText(duPlugin *pPlugin, LPTSTR lpString, int nMaxCount)
 	return TRUE;
 }
 
-void WINAPI Plugin_GetRect(duPlugin *pPlugin, LPRECT lpRect)
+void Plugin_GetRect(duPlugin *pPlugin, LPRECT lpRect)
 {
 	//if (!Plugin_IsValid(pPlugin) || lpRect == NULL)
 	//	return;
@@ -680,7 +676,7 @@ void WINAPI Plugin_GetRect(duPlugin *pPlugin, LPRECT lpRect)
 	pPlugin->GetRect(lpRect);
 }
 
-void WINAPI Plugin_SetFocus(duPlugin *pPlugin, BOOL fFocus)
+void Plugin_SetFocus(duPlugin *pPlugin, BOOL fFocus)
 {
 	duCtrlManager *pCtrlManager = GetCtrlManager(pPlugin->GetHwnd());
 	if (pCtrlManager == NULL)
@@ -726,7 +722,7 @@ void Plugin_SetHwndObjVisible(duPlugin *pParent, BOOL fVisible)
 	dqChild.clear();
 }
 
-void WINAPI Plugin_SetVisible(duPlugin *pPlugin, BOOL fVisible)
+void Plugin_SetVisible(duPlugin *pPlugin, BOOL fVisible)
 {
 	if (!Plugin_IsValid(pPlugin))
 		return;
@@ -770,7 +766,7 @@ void WINAPI Plugin_SetVisible(duPlugin *pPlugin, BOOL fVisible)
 		pCtrlManager->ReleaseCapture(NULL);
 }
 
-void WINAPI Plugin_Resize(duPlugin *pPlugin, LPRECT lpRect)
+void Plugin_Resize(duPlugin *pPlugin, LPRECT lpRect)
 {
 	if (!Plugin_IsValid(pPlugin))
 		return;
@@ -797,7 +793,7 @@ void WINAPI Plugin_Resize(duPlugin *pPlugin, LPRECT lpRect)
 	}
 }
 
-UINT WINAPI duPlugin::GetState()
+UINT duPlugin::GetState()
 {
 	BOOL fChecked = IS_STATE_CHECKED(m_uState);
 	BOOL fDisable = IsDisable();
@@ -840,7 +836,7 @@ LRESULT duPlugin::NotifyUser(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	if (pCtrlManager == NULL)
 		return 0;
 
-	pCtrlManager->CallScript(this, uMsg, wParam, lParam);
+	//pCtrlManager->CallScript(this, uMsg, wParam, lParam);
 
 	duNotify notify;
 	notify.uMsg = uMsg;
@@ -849,17 +845,17 @@ LRESULT duPlugin::NotifyUser(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	return ::SendMessage(m_hWnd, WM_DIRECTUI_NOTIFY, (WPARAM)this, (LPARAM)&notify);
 }
 
-UINT WINAPI Plugin_GetState(duPlugin *pPlugin)
+UINT Plugin_GetState(duPlugin *pPlugin)
 {
 	return pPlugin->GetState();
 }
 
-void WINAPI Plugin_SetState(duPlugin *pPlugin, UINT uState)
+void Plugin_SetState(duPlugin *pPlugin, UINT uState)
 {
 	pPlugin->SetState(uState);
 }
 
-BOOL WINAPI Plugin_SetTimer(duPlugin *pPlugin, UINT uTimerId, UINT uElapse)
+BOOL Plugin_SetTimer(duPlugin *pPlugin, UINT uTimerId, UINT uElapse)
 {
 	if (!Plugin_IsValid(pPlugin))
 		return FALSE;
@@ -871,7 +867,7 @@ BOOL WINAPI Plugin_SetTimer(duPlugin *pPlugin, UINT uTimerId, UINT uElapse)
 	return pCtrlManager->SetTimer(pPlugin, uTimerId, uElapse);
 }
 
-BOOL WINAPI Plugin_KillTimer(duPlugin *pPlugin, UINT uTimerId)
+BOOL Plugin_KillTimer(duPlugin *pPlugin, UINT uTimerId)
 {
 	if (!Plugin_IsValid(pPlugin))
 		return FALSE;
@@ -883,7 +879,7 @@ BOOL WINAPI Plugin_KillTimer(duPlugin *pPlugin, UINT uTimerId)
 	return pCtrlManager->KillTimer(pPlugin, uTimerId);
 }
 
-duPlugin *WINAPI Plugin_SetCapture(duPlugin *pPlugin)
+duPlugin *Plugin_SetCapture(duPlugin *pPlugin)
 {
 	if (!Plugin_IsValid(pPlugin))
 		return NULL;
@@ -895,7 +891,7 @@ duPlugin *WINAPI Plugin_SetCapture(duPlugin *pPlugin)
 	return pCtrlManager->SetCapture(pPlugin);
 }
 
-BOOL WINAPI Plugin_ReleaseCapture(duPlugin *pPlugin)
+BOOL Plugin_ReleaseCapture(duPlugin *pPlugin)
 {
 	if (!Plugin_IsValid(pPlugin))
 		return FALSE;
@@ -907,7 +903,7 @@ BOOL WINAPI Plugin_ReleaseCapture(duPlugin *pPlugin)
 	return pCtrlManager->ReleaseCapture(pPlugin);
 }
 
-void WINAPI DrawByStyle(duPlugin *pPlugin, LPCTSTR lpszStyle, HDC hDC, LPRECT lpDstRect, UINT uState, LPCTSTR lpszText, int nAlpha)
+void DrawByStyle(duPlugin *pPlugin, LPCTSTR lpszStyle, HDC hDC, LPRECT lpDstRect, UINT uState, LPCTSTR lpszText, int nAlpha)
 {
 	if (!Plugin_IsValid(pPlugin) || lpszStyle == NULL || hDC == NULL || lpDstRect == NULL)
 		return;
@@ -919,7 +915,7 @@ void WINAPI DrawByStyle(duPlugin *pPlugin, LPCTSTR lpszStyle, HDC hDC, LPRECT lp
 	pStyleGroup->Draw(hDC, lpDstRect, uState, lpszText, nAlpha);
 }
 
-BOOL WINAPI Plugin_HookWindowMessage(duPlugin *pPlugin)
+BOOL Plugin_HookWindowMessage(duPlugin *pPlugin)
 {
 	if (!Plugin_IsValid(pPlugin))
 		return FALSE;
@@ -931,7 +927,7 @@ BOOL WINAPI Plugin_HookWindowMessage(duPlugin *pPlugin)
 	return pCtrlManager->HookWindowMessage(pPlugin);
 }
 
-BOOL WINAPI Plugin_UnHookWindowMessage(duPlugin *pPlugin)
+BOOL Plugin_UnHookWindowMessage(duPlugin *pPlugin)
 {
 	if (!Plugin_IsValid(pPlugin))
 		return FALSE;
@@ -943,7 +939,7 @@ BOOL WINAPI Plugin_UnHookWindowMessage(duPlugin *pPlugin)
 	return pCtrlManager->UnHookWindowMessage(pPlugin);
 }
 
-duPlugin *WINAPI Plugin_GetCapture(duPlugin *pPlugin)
+duPlugin *Plugin_GetCapture(duPlugin *pPlugin)
 {
 	if (!Plugin_IsValid(pPlugin))
 		return FALSE;
@@ -955,7 +951,7 @@ duPlugin *WINAPI Plugin_GetCapture(duPlugin *pPlugin)
 	return pCtrlManager->GetCapture();
 }
 
-BOOL WINAPI Plugin_Delete(duPlugin *pPlugin)
+BOOL Plugin_Delete(duPlugin *pPlugin)
 {
 	if (!Plugin_IsValid(pPlugin))
 		return FALSE;
@@ -967,7 +963,7 @@ BOOL WINAPI Plugin_Delete(duPlugin *pPlugin)
 	return pCtrlManager->DeletePlugin(pPlugin);
 }
 
-duPlugin *WINAPI Plugin_Clone(duPlugin *pTemplate, duPlugin *pParent, duPlugin *pPrevious, UINT nSuffix)
+duPlugin *Plugin_Clone(duPlugin *pTemplate, duPlugin *pParent, duPlugin *pPrevious, UINT nSuffix)
 {
 	if (!Plugin_IsValid(pTemplate) || !Plugin_IsValid(pParent))
 		return NULL;
@@ -988,7 +984,7 @@ duPlugin *WINAPI Plugin_Clone(duPlugin *pTemplate, duPlugin *pParent, duPlugin *
 	return pCtrlManager->Clone(pTemplate, pParent, pPrevious, nSuffix);
 }
 
-BOOL WINAPI Plugin_SetDisable(duPlugin *pPlugin, BOOL fDisable)
+BOOL Plugin_SetDisable(duPlugin *pPlugin, BOOL fDisable)
 {
 	if (!Plugin_IsValid(pPlugin))
 		return FALSE;
@@ -1016,17 +1012,17 @@ BOOL WINAPI Plugin_SetDisable(duPlugin *pPlugin, BOOL fDisable)
 
 	return fOldDisable;
 }
-UINT64 WINAPI Plugin_GetParam64(duPlugin *pPlugin)
+UINT64 Plugin_GetParam64(duPlugin *pPlugin)
 {
 	return pPlugin->GetParam64();
 }
 
-void WINAPI Plugin_SetParam64(duPlugin *pPlugin, UINT64 nlParam)
+void Plugin_SetParam64(duPlugin *pPlugin, UINT64 nlParam)
 {
 	pPlugin->SetParam64(nlParam);
 }
 
-void WINAPI Plugin_SetTabOrder(duPlugin *pPlugin, int nTabOrder)
+void Plugin_SetTabOrder(duPlugin *pPlugin, int nTabOrder)
 {
 	if (nTabOrder < 0)
 		nTabOrder = 0;
@@ -1034,7 +1030,7 @@ void WINAPI Plugin_SetTabOrder(duPlugin *pPlugin, int nTabOrder)
 	pPlugin->SetTabOrder(nTabOrder);
 }
 
-int WINAPI Plugin_GetTabOrder(duPlugin *pPlugin)
+int Plugin_GetTabOrder(duPlugin *pPlugin)
 {
 	return pPlugin->GetTabOrder();
 }

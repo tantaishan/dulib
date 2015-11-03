@@ -9,7 +9,6 @@
 //
 //--------------------------------------------------------------------------
 
-#include "stdafx.h"
 #include "duLink.h"
 
 duLink::duLink()
@@ -21,12 +20,12 @@ duLink::~duLink()
 {
 }
 
-void WINAPI duLink::RegisterControlProperty()
+void duLink::RegisterControlProperty()
 {
 	RegisterProperty(_T("url"), DU_PROPERTY_STRING, &m_szURL);
 }
 
-void WINAPI duLink::DrawObject(HDC hDC)
+void duLink::DrawObject(HDC hDC)
 {
 	duRect rcButton;
 	Plugin_GetRect(this, &rcButton);
@@ -37,25 +36,25 @@ void WINAPI duLink::DrawObject(HDC hDC)
 		pStyleGroup->Draw(hDC, &rcButton, GetState(), GetText(), GetAlpha());
 }
 
-void WINAPI duLink::OnMouseIn(POINT pt)
+void duLink::OnMouseIn(POINT pt)
 {
 	Plugin_SetState(this, DU_STATE_OVER);
 	Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duLink::OnMouseLeave(POINT pt)
+void duLink::OnMouseLeave(POINT pt)
 {
 	Plugin_SetState(this, DU_STATE_NORMAL);
 	Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duLink::OnMouseLDown(POINT pt)
+void duLink::OnMouseLDown(POINT pt)
 {
 	Plugin_SetState(this, DU_STATE_PRESS);
 	Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duLink::OnMouseLUp(POINT pt)
+void duLink::OnMouseLUp(POINT pt)
 {
 	UINT uState = GetState();
 
@@ -69,18 +68,18 @@ void WINAPI duLink::OnMouseLUp(POINT pt)
 	}
 }
 
-LPCTSTR WINAPI duLink::GetURL()
+LPCTSTR duLink::GetURL()
 {
 	return m_szURL;
 }
 
-void WINAPI duLink::SetURL(LPCTSTR lpszURL)
+void duLink::SetURL(LPCTSTR lpszURL)
 {
 	if(lpszURL)
 		_tcsncpy(m_szURL, lpszURL, MAX_URL_LENGTH);
 }
 
-void WINAPI duLink::OpenURL()
+void duLink::OpenURL()
 {
      ShellExecute(NULL, _T("open"), m_szURL, NULL, NULL, SW_SHOW);
 }

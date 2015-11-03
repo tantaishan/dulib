@@ -8,7 +8,6 @@
 //  History:    Nov-10-2009   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duGifCtrl.h"
 #include "duCtrlManager.h"
 
@@ -23,18 +22,18 @@ duGifCtrl::~duGifCtrl()
 {
 }
 
-void WINAPI duGifCtrl::RegisterControlProperty()
+void duGifCtrl::RegisterControlProperty()
 {
 	RegisterProperty(_T("gif"), DU_PROPERTY_STRING, m_szGifName);
 }
 
-void WINAPI duGifCtrl::OnCreate()
+void duGifCtrl::OnCreate()
 {
 	m_nTimerId = GetUniTimer();
 	Play();
 }
 
-void WINAPI duGifCtrl::DrawObject(HDC hDC)
+void duGifCtrl::DrawObject(HDC hDC)
 {
 	duImage *pImage = (duImage *)GetResObj(m_szGifName, DU_RES_IMAGE);
 	if (pImage == NULL)
@@ -57,7 +56,7 @@ void WINAPI duGifCtrl::DrawObject(HDC hDC)
 	::DeleteDC(hSrcDC);
 }
 
-void WINAPI duGifCtrl::OnTimer(UINT nEventId)
+void duGifCtrl::OnTimer(UINT nEventId)
 {
 	if (nEventId != m_nTimerId)
 		return;
@@ -81,12 +80,12 @@ void WINAPI duGifCtrl::OnTimer(UINT nEventId)
 	m_nCurFrame = (m_nCurFrame + 1) % nFrameCount;
 }
 
-void WINAPI duGifCtrl::OnMouseLDown(POINT pt)
+void duGifCtrl::OnMouseLDown(POINT pt)
 {
 	Plugin_SetState(this, DU_STATE_PRESS);
 }
 
-void WINAPI duGifCtrl::OnMouseLUp(POINT pt)
+void duGifCtrl::OnMouseLUp(POINT pt)
 {
 	if (GetState() == DU_STATE_PRESS)
 	{
@@ -95,7 +94,7 @@ void WINAPI duGifCtrl::OnMouseLUp(POINT pt)
 	}
 }
 
-void WINAPI duGifCtrl::Play()
+void duGifCtrl::Play()
 {
 	Plugin_KillTimer(this, m_nTimerId);
 	duImage *pImage = (duImage *)GetResObj(m_szGifName, DU_RES_IMAGE);
@@ -111,19 +110,19 @@ void WINAPI duGifCtrl::Play()
 	Plugin_SetTimer(this, m_nTimerId, nFrameDelay);
 }
 
-void WINAPI duGifCtrl::StopPlay()
+void duGifCtrl::StopPlay()
 {
 	Plugin_KillTimer(this, m_nTimerId);
 	m_nCurFrame = 0;
 	Plugin_Redraw(this, TRUE);
 }
 
-LPCTSTR WINAPI duGifCtrl::GetGif()
+LPCTSTR duGifCtrl::GetGif()
 {
 	return m_szGifName;
 }
 
-void WINAPI duGifCtrl::SetGif(LPCTSTR lpszName)
+void duGifCtrl::SetGif(LPCTSTR lpszName)
 {
 	if (lpszName)
 		_tcscpy(m_szGifName, lpszName);

@@ -9,7 +9,6 @@
 // Microsoft Foundation Classes product.
 #pragma once
 
-#include "stdafx.h"
 #include "duTypes.h"
 
 // CSize
@@ -147,7 +146,7 @@ duPoint duRect::CenterPoint() const throw()
 	{ return duPoint((left+right)/2, (top+bottom)/2); }
 void duRect::SwapLeftRight() throw()
 	{ SwapLeftRight(LPRECT(this)); }
-void WINAPI duRect::SwapLeftRight(LPRECT lpRect) throw()
+void duRect::SwapLeftRight(LPRECT lpRect) throw()
 	{ LONG temp = lpRect->left; lpRect->left = lpRect->right; lpRect->right = temp; }
 duRect::operator LPRECT() throw()
 	{ return this; }

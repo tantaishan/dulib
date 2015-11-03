@@ -8,7 +8,6 @@
 //  History:    Nov-10-95   DavePl  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duStyle.h"
 #include "duResBase.h"
 #include "duImage.h"
@@ -30,7 +29,7 @@ duStyleBase::duStyleBase() :
 {
 }
 
-BOOL WINAPI duStyleBase::OnCreate(TiXmlElement *pElement)
+BOOL duStyleBase::OnCreate(TiXmlElement *pElement)
 {
 	m_nLeft = ReadXmlAttributeInt(pElement, _T("left"));
 	m_nTop = ReadXmlAttributeInt(pElement, _T("top"));
@@ -58,7 +57,7 @@ duImageStyle::duImageStyle() :
 {
 }
 
-void WINAPI duImageStyle::Draw(HDC hDC, LPRECT lpDstRect, LPCTSTR lpszText, int nAlpha)
+void duImageStyle::Draw(HDC hDC, LPRECT lpDstRect, LPCTSTR lpszText, int nAlpha)
 {
 	if (hDC == NULL || lpDstRect == NULL || nAlpha == 0)
 		return;
@@ -121,7 +120,7 @@ void WINAPI duImageStyle::Draw(HDC hDC, LPRECT lpDstRect, LPCTSTR lpszText, int 
 	}
 }
 
-BOOL WINAPI duImageStyle::OnCreate(TiXmlElement *pElement)
+BOOL duImageStyle::OnCreate(TiXmlElement *pElement)
 {
 	duStyleBase::OnCreate(pElement);
 
@@ -141,7 +140,7 @@ BOOL WINAPI duImageStyle::OnCreate(TiXmlElement *pElement)
 	return TRUE;
 }
 
-void WINAPI duImageStyle::SetPicFile(LPCTSTR lpszName) 
+void duImageStyle::SetPicFile(LPCTSTR lpszName) 
 { 
 	if (lpszName) 
 		m_strPicFile = lpszName; 
@@ -149,7 +148,7 @@ void WINAPI duImageStyle::SetPicFile(LPCTSTR lpszName)
 		m_strPicFile = _T(""); 
 }
 
-void WINAPI duImageStyle::SetPaintMode(LPCTSTR lpszMode) 
+void duImageStyle::SetPaintMode(LPCTSTR lpszMode) 
 { 
 	if (lpszMode) 
 		m_strPaintMode = lpszMode; 
@@ -158,7 +157,7 @@ void WINAPI duImageStyle::SetPaintMode(LPCTSTR lpszMode)
 }
 
 //////////////////////////////////////////////////////////////////////////
-duTextStyle::duTextStyle() : 
+duTextStyle::duTextStyle() :
 	 m_clrText(RGB(0,0,0))
 	,m_fSingleline(TRUE)
 	,m_strHorz(_T(""))
@@ -167,7 +166,7 @@ duTextStyle::duTextStyle() :
 {
 }
 
-BOOL WINAPI duTextStyle::OnCreate(TiXmlElement *pElement)
+BOOL duTextStyle::OnCreate(TiXmlElement *pElement)
 {
 	duStyleBase::OnCreate(pElement);
 
@@ -180,7 +179,7 @@ BOOL WINAPI duTextStyle::OnCreate(TiXmlElement *pElement)
 	return TRUE;
 }
 
-void WINAPI duTextStyle::Draw(HDC hDC, LPRECT lpDstRect, LPCTSTR lpszText, int nAlpha)
+void duTextStyle::Draw(HDC hDC, LPRECT lpDstRect, LPCTSTR lpszText, int nAlpha)
 {
 	if (hDC == NULL || lpDstRect == NULL || lpszText == NULL || *lpszText == 0 || nAlpha == 0)
 		return;
@@ -212,7 +211,7 @@ void WINAPI duTextStyle::Draw(HDC hDC, LPRECT lpDstRect, LPCTSTR lpszText, int n
 	DrawText32Bpp(hDC, font, m_clrText, lpszText, _tcslen(lpszText), &rectDest, uFormat, nAlpha);
 }
 
-HFONT WINAPI duTextStyle::GetHFont()
+HFONT duTextStyle::GetHFont()
 {
 	duFont *pFont = (duFont *)m_pResManager->GetResObj(m_strFont.c_str(), DU_RES_FONT);
 	if (pFont)
@@ -221,7 +220,7 @@ HFONT WINAPI duTextStyle::GetHFont()
 	return NULL;
 }
 
-void WINAPI duTextStyle::CalcTextRect(LPCTSTR lpszText, LPSIZE lpOutSize)
+void duTextStyle::CalcTextRect(LPCTSTR lpszText, LPSIZE lpOutSize)
 {
 	if (lpOutSize == NULL|| lpszText == NULL)
 		return;
@@ -252,7 +251,7 @@ void WINAPI duTextStyle::CalcTextRect(LPCTSTR lpszText, LPSIZE lpOutSize)
 	lpOutSize->cy = rcText.Height();
 }
 
-void WINAPI duTextStyle::SetFont(LPCTSTR lpszFontName) 
+void duTextStyle::SetFont(LPCTSTR lpszFontName) 
 { 
 	if (lpszFontName) 
 		m_strFont = lpszFontName; 
@@ -260,7 +259,7 @@ void WINAPI duTextStyle::SetFont(LPCTSTR lpszFontName)
 		m_strFont = _T(""); 
 }
 
-void WINAPI duTextStyle::SetHAlign(LPCTSTR lpszHorzAlign) 
+void duTextStyle::SetHAlign(LPCTSTR lpszHorzAlign) 
 { 
 	if (lpszHorzAlign) 
 		m_strHorz = lpszHorzAlign; 
@@ -268,7 +267,7 @@ void WINAPI duTextStyle::SetHAlign(LPCTSTR lpszHorzAlign)
 		m_strHorz = _T("");
 }
 
-void WINAPI duTextStyle::SetVAlign(LPCTSTR lpszVertAlign) 
+void duTextStyle::SetVAlign(LPCTSTR lpszVertAlign) 
 { 
 	if (lpszVertAlign) 
 		m_strVert = lpszVertAlign; 
@@ -291,7 +290,7 @@ duRectStyle::~duRectStyle()
 {
 }
 
-BOOL WINAPI duRectStyle::OnCreate(TiXmlElement *pElement)
+BOOL duRectStyle::OnCreate(TiXmlElement *pElement)
 {
 	duStyleBase::OnCreate(pElement);
 
@@ -307,7 +306,7 @@ BOOL WINAPI duRectStyle::OnCreate(TiXmlElement *pElement)
 	return TRUE;
 }
 
-void WINAPI duRectStyle::Draw(HDC hDC, LPRECT lpDstRect, LPCTSTR lpszText, int nAlpha)
+void duRectStyle::Draw(HDC hDC, LPRECT lpDstRect, LPCTSTR lpszText, int nAlpha)
 {
 	if (hDC == NULL || lpDstRect == NULL)
 		return;
@@ -352,7 +351,7 @@ DashStyle duRectStyle::GetPenSolidType()
 	return nPenStyle;
 }
 
-void WINAPI duRectStyle::SetBorderType(LPCTSTR lpszBorderType) 
+void duRectStyle::SetBorderType(LPCTSTR lpszBorderType) 
 {
 	if (lpszBorderType) 
 		m_strPenType = lpszBorderType;
@@ -375,7 +374,7 @@ duLineStyle::~duLineStyle()
 {
 }
 
-void WINAPI duLineStyle::Draw(HDC hDC, LPRECT lpDstRect, LPCTSTR lpszText, int nAlpha)
+void duLineStyle::Draw(HDC hDC, LPRECT lpDstRect, LPCTSTR lpszText, int nAlpha)
 {
 	if (hDC == NULL || lpDstRect == NULL)
 		return;
@@ -414,7 +413,7 @@ void WINAPI duLineStyle::Draw(HDC hDC, LPRECT lpDstRect, LPCTSTR lpszText, int n
 	gs.DrawLines(&pen, points, 2);
 }
 
-BOOL WINAPI duLineStyle::OnCreate(TiXmlElement *pElement)
+BOOL duLineStyle::OnCreate(TiXmlElement *pElement)
 {
 	duStyleBase::OnCreate(pElement);
 	
@@ -444,7 +443,7 @@ DashStyle duLineStyle::GetPenSolidType()
 	return nPenStyle;
 }
 
-void WINAPI duLineStyle::SetLineType(LPCTSTR lpszLineType)
+void duLineStyle::SetLineType(LPCTSTR lpszLineType)
 {
 	if (lpszLineType == NULL)
 		m_strLineType = _T("solid");
@@ -452,7 +451,7 @@ void WINAPI duLineStyle::SetLineType(LPCTSTR lpszLineType)
 		m_strLineType = lpszLineType;
 }
 
-BOOL WINAPI duLineStyle::GetStartPoint(LPPOINT lpOutPoint)
+BOOL duLineStyle::GetStartPoint(LPPOINT lpOutPoint)
 {
 	if (lpOutPoint)
 	{
@@ -463,7 +462,7 @@ BOOL WINAPI duLineStyle::GetStartPoint(LPPOINT lpOutPoint)
 	return FALSE;
 }
 
-void WINAPI duLineStyle::SetStartPoint(LPPOINT lpStartPoint)
+void duLineStyle::SetStartPoint(LPPOINT lpStartPoint)
 {
 	if (lpStartPoint == NULL)
 		m_ptStart.x = m_ptStart.y = 0;
@@ -474,7 +473,7 @@ void WINAPI duLineStyle::SetStartPoint(LPPOINT lpStartPoint)
 	}
 }
 
-BOOL WINAPI duLineStyle::GetEndPoint(LPPOINT lpOutPoint)
+BOOL duLineStyle::GetEndPoint(LPPOINT lpOutPoint)
 {
 	if (lpOutPoint)
 	{
@@ -485,7 +484,7 @@ BOOL WINAPI duLineStyle::GetEndPoint(LPPOINT lpOutPoint)
 	return FALSE;
 }
 
-void WINAPI duLineStyle::SetEndPoint(LPPOINT lpEndPoint)
+void duLineStyle::SetEndPoint(LPPOINT lpEndPoint)
 {
 	if (lpEndPoint == NULL)
 		m_ptEnd.x = m_ptEnd.y = 0;

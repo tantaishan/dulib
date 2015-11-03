@@ -22,19 +22,19 @@
 class duCursor : public duResBase
 {
 public:
-	virtual UINT WINAPI GetType() { return DU_RES_CURSOR; }
-	virtual BOOL WINAPI OnCreate(TiXmlElement *pElement);
+	virtual UINT GetType() { return DU_RES_CURSOR; }
+	virtual BOOL OnCreate(TiXmlElement *pElement);
 
-	virtual LPCTSTR WINAPI GetValue() { return m_strCursor; } 
-	virtual void WINAPI SetValue(LPCTSTR lpszCursor);
-	virtual HCURSOR WINAPI GetHCursor() { return m_hCursor; }
-	virtual void WINAPI SetHCursor(HCURSOR hCursor);
+	virtual LPCTSTR GetValue() { return m_strCursor; } 
+	virtual void SetValue(LPCTSTR lpszCursor);
+	virtual HCURSOR GetHCursor() { return m_hCursor; }
+	virtual void SetHCursor(HCURSOR hCursor);
 
-	virtual HCURSOR WINAPI LoadFromFile(LPCTSTR lpszFile);
-	virtual HCURSOR WINAPI LoadFromMemory(PBYTE pData, int nSize);
+	virtual HCURSOR LoadFromFile(LPCTSTR lpszFile);
+	virtual HCURSOR LoadFromMemory(PBYTE pData, int nSize);
 
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duCursor"); }
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duCursor"); }
 
 public:
 	duCursor();

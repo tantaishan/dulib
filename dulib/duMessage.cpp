@@ -8,7 +8,6 @@
 //  History:    Jan-05-2010   Denny Chen  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duMessage.h"
 
 MessageStruct g_messageStruct[] = 

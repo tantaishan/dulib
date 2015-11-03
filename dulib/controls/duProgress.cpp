@@ -8,7 +8,6 @@
 //  History:    MAR-16-2010   Denny Chen  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duProgress.h"
 
 duProgress::duProgress() :
@@ -25,7 +24,7 @@ duProgress::~duProgress()
 {
 }
 
-void WINAPI duProgress::RegisterControlProperty()
+void duProgress::RegisterControlProperty()
 {
     RegisterProperty(_T("progresspos"), DU_PROPERTY_FLOAT, &m_flPos);
 	RegisterProperty(_T("leftborder"), DU_PROPERTY_LONG, &m_nLeftBorder);
@@ -35,11 +34,11 @@ void WINAPI duProgress::RegisterControlProperty()
 	RegisterProperty(_T("progressstyle"), DU_PROPERTY_STYLEGROUP, m_szProgressStyle);
 }
 
-void WINAPI duProgress::OnCreate()
+void duProgress::OnCreate()
 {
 }
 
-void WINAPI duProgress::DrawObject(HDC hDC)
+void duProgress::DrawObject(HDC hDC)
 {
 	duRect rcProgress;
 	Plugin_GetRect(this, &rcProgress);
@@ -86,7 +85,7 @@ duRect duProgress::GetInnerRect(duRect &rect, float pos)
 	return innerRect;
 }
 
-void WINAPI duProgress::SetProgressStyle(LPCTSTR lpszStyle)
+void duProgress::SetProgressStyle(LPCTSTR lpszStyle)
 {
 	if (lpszStyle)
 		_tcsncpy(m_szProgressStyle, lpszStyle, MAX_NAME);

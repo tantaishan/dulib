@@ -81,7 +81,7 @@ using namespace std;
 
 typedef std::basic_string<TCHAR> generic_string;
 
-
+#define TIXML_USE_STL
 
 // Help out windows:
 #if defined( _DEBUG ) && !defined( DEBUG )

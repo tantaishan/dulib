@@ -8,7 +8,6 @@
 //  History:    Mar-23-2011   Eric Qian Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duLEDTimer.h"
 
 duLEDTimer::duLEDTimer() :
@@ -22,18 +21,18 @@ duLEDTimer::~duLEDTimer()
 	Plugin_KillTimer(this, m_nTimerID);
 }
 
-void WINAPI duLEDTimer::RegisterControlProperty()
+void duLEDTimer::RegisterControlProperty()
 {
 	RegisterProperty(_T("imagefont"), DU_PROPERTY_STRING, m_szImageFont);
 }
 
-void WINAPI duLEDTimer::OnCreate()
+void duLEDTimer::OnCreate()
 {
 	m_nTimerID = GetUniTimer();
 	Plugin_SetTimer(this, m_nTimerID, 1000);
 }
 
-void WINAPI duLEDTimer::DrawObject(HDC hDC)
+void duLEDTimer::DrawObject(HDC hDC)
 {
 	duRect rcLEDTimer;
 	Plugin_GetRect(this, &rcLEDTimer);
@@ -115,7 +114,7 @@ void WINAPI duLEDTimer::DrawObject(HDC hDC)
 	::DeleteDC(hMemDC);
 }
 
-void WINAPI duLEDTimer::OnTimer(UINT nEventId)
+void duLEDTimer::OnTimer(UINT nEventId)
 {
 	if (nEventId != m_nTimerID)
 		return;
@@ -131,7 +130,7 @@ void WINAPI duLEDTimer::OnTimer(UINT nEventId)
 	Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duLEDTimer::SetImageFont(LPCTSTR lpszImageFont)
+void duLEDTimer::SetImageFont(LPCTSTR lpszImageFont)
 {
 	if (lpszImageFont)
 		_tcsncpy(m_szImageFont, lpszImageFont, MAX_NAME);

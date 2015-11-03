@@ -21,36 +21,38 @@
 class duListCtrl : public duScrollView
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
-	virtual void WINAPI GetViewSize(LPSIZE lpSize);
-	virtual void WINAPI OnVScroll(ScrollBarAction sbAction, int nPos);
-	virtual void WINAPI OnHScroll(ScrollBarAction sbAction, int nPos);
-	virtual LRESULT WINAPI OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-	virtual void WINAPI Resize(LPRECT lpRect/*=NULL*/);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
+	virtual void GetViewSize(LPSIZE lpSize);
+	virtual void OnVScroll(ScrollBarAction sbAction, int nPos);
+	virtual void OnHScroll(ScrollBarAction sbAction, int nPos);
+	virtual LRESULT OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	virtual void Resize(LPRECT lpRect/*=NULL*/);
 	
-	virtual duPlugin *WINAPI InsertLine(int nIndex, LPCTSTR lpszTemplate);
-	virtual duPlugin *WINAPI GetLine(int nIndex);
-	virtual int WINAPI GetLineCount();
-	virtual int WINAPI GetTotalHeight();
-	virtual duPlugin *WINAPI GetFirstVisibleLine();
-	virtual BOOL WINAPI MoveLine(int nIndex, int nNewIndex);
-	virtual BOOL WINAPI DeleteLine(int nIndex, BOOL fAdjust);
-	virtual void WINAPI ResetLine();
+	virtual duPlugin *InsertLine(int nIndex, LPCTSTR lpszTemplate);
+	virtual duPlugin *GetLine(int nIndex);
+	virtual int GetLineCount();
+	virtual int GetTotalHeight();
+	virtual duPlugin *GetFirstVisibleLine();
+	virtual BOOL MoveLine(int nIndex, int nNewIndex);
+	virtual BOOL DeleteLine(int nIndex, BOOL fAdjust);
+	virtual BOOL DeleteLine(duPlugin* pItem, BOOL fAjust);
+	virtual void DeleteAll();
+	virtual void ResetLine();
 
-	virtual void WINAPI VertScroll(int nPos);
-	virtual void WINAPI HorzScroll(int nPos);
-	virtual void WINAPI AdjustColumn();
-	virtual void WINAPI AdjustColumnWidth(int nCol, int nWidth);
-	virtual int WINAPI GetSel();
-	virtual void WINAPI SetSel(int nSel);
+	virtual void VertScroll(int nPos);
+	virtual void HorzScroll(int nPos);
+	virtual void AdjustColumn();
+	virtual void AdjustColumnWidth(int nCol, int nWidth);
+	virtual int GetSel();
+	virtual void SetSel(int nSel);
 
-	virtual LPCTSTR WINAPI GetHeaderCtrl() { return m_szHeaderCtrl; }
-	virtual void WINAPI SetHeaderCtrl(LPCTSTR lpszHeader);
+	virtual LPCTSTR GetHeaderCtrl() { return m_szHeaderCtrl; }
+	virtual void SetHeaderCtrl(LPCTSTR lpszHeader);
 	
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duListCtrl"); }
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duListCtrl"); }
 
 public:
 	duListCtrl();

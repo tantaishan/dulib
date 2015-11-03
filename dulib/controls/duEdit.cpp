@@ -6,7 +6,6 @@
 //  History:    Nov-23-2009   Steven Li  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duEdit.h"
 #include "duCtrlManager.h"
 
@@ -79,7 +78,7 @@ duEdit::~duEdit()
 	Plugin_UnHookWindowMessage(this);
 }
 
-void WINAPI duEdit::RegisterControlProperty()
+void duEdit::RegisterControlProperty()
 {
 	RegisterProperty(_T("leftborder"),   DU_PROPERTY_LONG, &m_nLeftBorder);
 	RegisterProperty(_T("topborder"),    DU_PROPERTY_LONG, &m_nTopBorder);
@@ -96,7 +95,7 @@ void WINAPI duEdit::RegisterControlProperty()
 	RegisterProperty(_T("number"), DU_PROPERTY_BOOL, &m_fNumber);
 }
 
-void WINAPI duEdit::OnCreate()
+void duEdit::OnCreate()
 {
 	if (m_fReadOnly)
 		m_dwStyle |= ES_READONLY;
@@ -136,7 +135,7 @@ void WINAPI duEdit::OnCreate()
     }
 }
 
-void WINAPI duEdit::DrawObject(HDC hDC)
+void duEdit::DrawObject(HDC hDC)
 {
 	duRect rcEdit;
 	rcEdit.SetRectEmpty();
@@ -205,7 +204,7 @@ INT duEdit::PaintText(HDC hDC, INT x, INT y, INT line, INT col, INT count, BOOL 
 }
 
 
-LRESULT WINAPI duEdit::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT duEdit::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	if (uMsg == WM_MOUSEMOVE)
 	{
@@ -253,7 +252,7 @@ LRESULT WINAPI duEdit::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 #endif //#ifdef _UNICODE
 }
 
-BOOL WINAPI duEdit::OnSetCursor()
+BOOL duEdit::OnSetCursor()
 {
 	duPoint pt;
 	::GetCursorPos(&pt);
@@ -276,7 +275,7 @@ BOOL WINAPI duEdit::OnSetCursor()
 	return (BOOL)::SetCursor(::LoadCursor(NULL, IDC_ARROW));
 }
 
-void WINAPI duEdit::OnMouseMove(POINT pt)
+void duEdit::OnMouseMove(POINT pt)
 {
 	duRect rcEdit;
 	rcEdit.SetRectEmpty();
@@ -284,7 +283,7 @@ void WINAPI duEdit::OnMouseMove(POINT pt)
 	OnMouseMove(pt.x - rcEdit.left, pt.y - rcEdit.top);
 }
 
-void WINAPI duEdit::OnMouseDbClick(POINT pt)
+void duEdit::OnMouseDbClick(POINT pt)
 {
 	INT s;
 	INT e = m_nSelectionEnd;
@@ -306,7 +305,7 @@ void WINAPI duEdit::OnMouseDbClick(POINT pt)
 	Plugin_SetTimer(this, m_lTimerId, 100);
 }
 
-void WINAPI duEdit::OnMouseLDown(POINT pt)
+void duEdit::OnMouseLDown(POINT pt)
 {
 	duRect rcEdit;
 	rcEdit.SetRectEmpty();
@@ -314,7 +313,7 @@ void WINAPI duEdit::OnMouseLDown(POINT pt)
 	OnLButtonDown(pt.x - rcEdit.left, pt.y - rcEdit.top);
 }
 
-void WINAPI duEdit::OnMouseLUp(POINT pt)
+void duEdit::OnMouseLUp(POINT pt)
 {
 	if (m_fCaptureState)
 	{
@@ -325,7 +324,7 @@ void WINAPI duEdit::OnMouseLUp(POINT pt)
 	m_fCaptureState = FALSE;
 }
 
-void WINAPI duEdit::OnMouseRDown(POINT pt)
+void duEdit::OnMouseRDown(POINT pt)
 {
 	if (!(m_wflags & EF_FOCUSED))
 		::SetFocus(m_hWnd);
@@ -343,11 +342,11 @@ void WINAPI duEdit::OnMouseRDown(POINT pt)
 	}
 }
 
-void WINAPI duEdit::OnMouseRUp(POINT pt)
+void duEdit::OnMouseRUp(POINT pt)
 {
 }
 
-void WINAPI duEdit::OnTimer(UINT nEventId)
+void duEdit::OnTimer(UINT nEventId)
 {
 	if (nEventId != m_lTimerId)
 		return;
@@ -515,7 +514,7 @@ void duEdit::CalcLineWidthSL()
 	m_nTextWidth = size.cx;
 }
 
-int WINAPI duEdit::CharFromPos(int x, int y)
+int duEdit::CharFromPos(int x, int y)
 {
 	INT index;
 	HDC hDC;
@@ -1294,7 +1293,7 @@ BOOL duEdit::OnEmUndo()
 	return TRUE;
 }
 
-void WINAPI duEdit::OnPaste()
+void duEdit::OnPaste()
 {
 	HGLOBAL hsrc;
 	LPWSTR src;
@@ -1315,7 +1314,7 @@ void WINAPI duEdit::OnPaste()
 	CloseClipboard();
 }
 
-void WINAPI duEdit::OnCopy()
+void duEdit::OnCopy()
 {
 	INT s = min(m_nSelectionStart, m_nSelectionEnd);
 	INT e = max(m_nSelectionStart, m_nSelectionEnd);
@@ -1339,7 +1338,7 @@ void WINAPI duEdit::OnCopy()
 	CloseClipboard();
 }
 
-void WINAPI duEdit::OnClear()
+void duEdit::OnClear()
 {
 	if(m_dwStyle & ES_READONLY)
 	    return;
@@ -1347,7 +1346,7 @@ void WINAPI duEdit::OnClear()
 	OnEmReplaceSel(TRUE, empty_stringW, TRUE, TRUE);
 }
 
-void WINAPI duEdit::OnCut()
+void duEdit::OnCut()
 {
 	OnCopy();
 	OnClear();
@@ -1440,7 +1439,7 @@ INT duEdit::OnGetText(INT count, LPWSTR dst, BOOL unicode)
     }
 }
 
-void WINAPI duEdit::OnKeyDown(UINT key, UINT nRepCnt, UINT nFlags)
+void duEdit::OnKeyDown(UINT key, UINT nRepCnt, UINT nFlags)
 {
 	BOOL shift;
 	BOOL control;
@@ -1528,7 +1527,7 @@ void WINAPI duEdit::OnKeyDown(UINT key, UINT nRepCnt, UINT nFlags)
 	}
 }
 
-BOOL WINAPI duEdit::OnKillFocus(duPlugin *pNewFocus)
+BOOL duEdit::OnKillFocus(duPlugin *pNewFocus)
 {
 	m_wflags &= ~EF_FOCUSED;
 
@@ -1591,7 +1590,7 @@ LRESULT duEdit::OnMouseMove(INT x, INT y)
 	return 0;
 }
 
-BOOL WINAPI duEdit::OnSetFocus(duPlugin *pOldFocus)
+BOOL duEdit::OnSetFocus(duPlugin *pOldFocus)
 {
 	m_fShowCaret = TRUE;
 	m_wflags |= EF_FOCUSED;
@@ -1659,7 +1658,7 @@ LRESULT duEdit::OnSysKeyDown(INT key, DWORD key_data)
 	return 0;
 }
 
-void WINAPI duEdit::Resize(LPRECT lpRect/*=NULL*/)
+void duEdit::Resize(LPRECT lpRect/*=NULL*/)
 {
 	duPlugin::Resize(lpRect);
 	
@@ -1812,7 +1811,7 @@ void duEdit::Destroy()
 	HeapFree(GetProcessHeap(), 0, m_lpszUndoText);
 }
 
-LRESULT WINAPI duEdit::EditWndProc_common(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam, BOOL unicode)
+LRESULT duEdit::EditWndProc_common(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam, BOOL unicode)
 {
 	LRESULT result = 0;
 	if (msg != WM_NCDESTROY)
@@ -2030,7 +2029,7 @@ void duEdit::_RedrawEdit()
 		pCtrlManager->_ShowCaret();
 }
 
-void WINAPI duEdit::SetText(LPCTSTR lpszText)
+void duEdit::SetText(LPCTSTR lpszText)
 {
 	m_fRedraw = FALSE;
 
@@ -2052,7 +2051,7 @@ void WINAPI duEdit::SetText(LPCTSTR lpszText)
 	_RedrawEdit();
 }
 
-DWORD WINAPI duEdit::GetSel()
+DWORD duEdit::GetSel()
 {
 	UINT s = m_nSelectionStart;
 	UINT e = m_nSelectionEnd;
@@ -2061,7 +2060,7 @@ DWORD WINAPI duEdit::GetSel()
 	return MAKELONG(s, e);
 }
 
-void WINAPI duEdit::PosFromChar(int nIndex, LPPOINT lppt)
+void duEdit::PosFromChar(int nIndex, LPPOINT lppt)
 {
 	if (lppt == NULL)
 		return;
@@ -2071,7 +2070,7 @@ void WINAPI duEdit::PosFromChar(int nIndex, LPPOINT lppt)
 	lppt->y = GET_Y_LPARAM(lRes);
 }
 
-void WINAPI duEdit::SetLimitText(UINT uMax)
+void duEdit::SetLimitText(UINT uMax)
 {
     if (uMax == 0xFFFFFFFF)
         m_uBufferLimit = -1;
@@ -2082,18 +2081,18 @@ void WINAPI duEdit::SetLimitText(UINT uMax)
 		m_uBufferLimit = BUFLIMIT_SINGLE;
 }
 
-void WINAPI duEdit::ReplaceSel(LPCTSTR lpszNewText, BOOL fCanUndo)
+void duEdit::ReplaceSel(LPCTSTR lpszNewText, BOOL fCanUndo)
 {
 	OnEmReplaceSel(fCanUndo, lpszNewText, TRUE, TRUE);
 }
 
-void WINAPI duEdit::SetSel(int nStartChar, int nEndChar)
+void duEdit::SetSel(int nStartChar, int nEndChar)
 {
 	EMSetSel(nStartChar, nEndChar);
 }
 
 
-void WINAPI duEdit::SetReadOnly(BOOL fReadOnly)
+void duEdit::SetReadOnly(BOOL fReadOnly)
 {
 	m_fReadOnly = fReadOnly;
 	if (m_fReadOnly)
@@ -2106,7 +2105,7 @@ void WINAPI duEdit::SetReadOnly(BOOL fReadOnly)
 	}
 }
 
-void WINAPI duEdit::SetPassword(BOOL fPassword)
+void duEdit::SetPassword(BOOL fPassword)
 {
 	m_fPassword = fPassword;
 	if (m_fPassword)
@@ -2119,7 +2118,7 @@ void WINAPI duEdit::SetPassword(BOOL fPassword)
 	}
 }
 
-void WINAPI duEdit::SetNumber(BOOL fNumber)
+void duEdit::SetNumber(BOOL fNumber)
 {
 	m_fNumber = fNumber;
 	if (m_fNumber)
@@ -2132,7 +2131,7 @@ void WINAPI duEdit::SetNumber(BOOL fNumber)
 	}
 }
 
-void WINAPI duEdit::SetFont(LPCTSTR lpszFont)
+void duEdit::SetFont(LPCTSTR lpszFont)
 {
 	if (lpszFont)
 	{
@@ -2146,35 +2145,35 @@ void WINAPI duEdit::SetFont(LPCTSTR lpszFont)
 		ZeroMemory(m_szFont, sizeof(TCHAR) * MAX_NAME);
 }
 
-void WINAPI duEdit::SetTextColor(COLORREF clrText)
+void duEdit::SetTextColor(COLORREF clrText)
 {
 	m_clrText = clrText;
 }
 
-void WINAPI duEdit::SetSelectTextColor(COLORREF clrSelectText)
+void duEdit::SetSelectTextColor(COLORREF clrSelectText)
 {
 	m_clrSelectText = clrSelectText;
 }
 
-void WINAPI duEdit::SetSelectColor(COLORREF clrSelect)
+void duEdit::SetSelectColor(COLORREF clrSelect)
 {
 	m_clrSelect = clrSelect;
 }
 
-void WINAPI duEdit::SetLeftBorder(int nLeftBorder)
+void duEdit::SetLeftBorder(int nLeftBorder)
 {
 	m_nLeftBorder = nLeftBorder;
 }
 
-void WINAPI duEdit::SetTopBorder(int nTopBorder)
+void duEdit::SetTopBorder(int nTopBorder)
 {
 	m_nTopBorder = nTopBorder;
 }
-void WINAPI duEdit::SetRightBorder(int nRightBorder)
+void duEdit::SetRightBorder(int nRightBorder)
 {
 	m_nRightBorder = nRightBorder;
 }
-void WINAPI duEdit::SetBottomBorder(int nBottomBorder)
+void duEdit::SetBottomBorder(int nBottomBorder)
 {
 	m_nBottomBorder = nBottomBorder;
 }

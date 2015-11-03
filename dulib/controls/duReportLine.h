@@ -22,8 +22,8 @@ class duReportView;
 class duReportLine
 {
 public:
-	void WINAPI DrawLine(HDC hDC, LPRECT lprcLine, int nLine);
-	void WINAPI SetReportView(duReportView *pReportView) { m_pReportView = pReportView; }
+	void DrawLine(HDC hDC, LPRECT lprcLine, int nLine);
+	void SetReportView(duReportView *pReportView) { m_pReportView = pReportView; }
 	
 	int GetHeight() { return m_nHeight; }
 	void SetHeight(int nHeight) { m_nHeight = nHeight; }

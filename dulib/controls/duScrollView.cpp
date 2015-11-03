@@ -8,7 +8,6 @@
 //  History:    Mar-08-2011   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duScrollView.h"
 
 duScrollView::duScrollView(void) :
@@ -27,20 +26,20 @@ duScrollView::~duScrollView(void)
 {
 }
 
-void WINAPI duScrollView::RegisterControlProperty()
+void duScrollView::RegisterControlProperty()
 {
 	RegisterProperty(_T("vertscrollbar"),  DU_PROPERTY_STRING, m_szVertScroll);
 	RegisterProperty(_T("horzscrollbar"),  DU_PROPERTY_STRING, m_szHorzScroll);
 	RegisterProperty(_T("image"),  DU_PROPERTY_STRING, m_szImage);
 }
 
-void WINAPI duScrollView::OnCreate()
+void duScrollView::OnCreate()
 {
 	UpdateScroll();
 	SetCached(TRUE);
 }
 
-void WINAPI duScrollView::DrawObject(HDC hDC)
+void duScrollView::DrawObject(HDC hDC)
 {
 	POINT ptView = GetViewPoint();
 	
@@ -64,13 +63,13 @@ void WINAPI duScrollView::DrawObject(HDC hDC)
 	::DeleteObject(hRgnClip);
 }
 
-void WINAPI duScrollView::Resize(LPRECT lpRect/*=NULL*/)
+void duScrollView::Resize(LPRECT lpRect/*=NULL*/)
 {
 	duPlugin::Resize(lpRect);
 	UpdateScroll();
 }
 
-void WINAPI duScrollView::OnMouseLDown(POINT pt)
+void duScrollView::OnMouseLDown(POINT pt)
 {
 	duRect rcScrollView;
 	rcScrollView.SetRectEmpty();
@@ -82,7 +81,7 @@ void WINAPI duScrollView::OnMouseLDown(POINT pt)
 	OnViewMouseLDown(pt);
 }
 
-void WINAPI duScrollView::OnMouseLUp(POINT pt)
+void duScrollView::OnMouseLUp(POINT pt)
 {
 	duRect rcScrollView;
 	rcScrollView.SetRectEmpty();
@@ -94,7 +93,7 @@ void WINAPI duScrollView::OnMouseLUp(POINT pt)
 	OnViewMouseLUp(pt);
 }
 
-void WINAPI duScrollView::OnMouseRDown(POINT pt)
+void duScrollView::OnMouseRDown(POINT pt)
 {
 	duRect rcScrollView;
 	rcScrollView.SetRectEmpty();
@@ -106,7 +105,7 @@ void WINAPI duScrollView::OnMouseRDown(POINT pt)
 	OnViewMouseRDown(pt);
 }
 
-void WINAPI duScrollView::OnMouseRUp(POINT pt)
+void duScrollView::OnMouseRUp(POINT pt)
 {
 	duRect rcScrollView;
 	rcScrollView.SetRectEmpty();
@@ -118,7 +117,7 @@ void WINAPI duScrollView::OnMouseRUp(POINT pt)
 	OnViewMouseRUp(pt);
 }
 
-void WINAPI duScrollView::OnMouseHover(POINT pt)
+void duScrollView::OnMouseHover(POINT pt)
 {
 	duRect rcScrollView;
 	rcScrollView.SetRectEmpty();
@@ -130,7 +129,7 @@ void WINAPI duScrollView::OnMouseHover(POINT pt)
 	OnViewMouseHover(pt);
 }
 
-void WINAPI duScrollView::OnMouseMove(POINT pt)
+void duScrollView::OnMouseMove(POINT pt)
 {
 	duRect rcScrollView;
 	rcScrollView.SetRectEmpty();
@@ -142,7 +141,7 @@ void WINAPI duScrollView::OnMouseMove(POINT pt)
 	OnViewMouseMove(pt);
 }
 
-void WINAPI duScrollView::OnMouseDbClick(POINT pt)
+void duScrollView::OnMouseDbClick(POINT pt)
 {
 	duRect rcScrollView;
 	rcScrollView.SetRectEmpty();
@@ -154,7 +153,7 @@ void WINAPI duScrollView::OnMouseDbClick(POINT pt)
 	OnViewMouseDbClick(pt);
 }
 
-void WINAPI duScrollView::OnMouseWheel(UINT fwKeys, int zDelta, POINT pt)
+void duScrollView::OnMouseWheel(UINT fwKeys, int zDelta, POINT pt)
 {
 	duScroll *pVScroll = (duScroll *)GetPluginByName(m_szVertScroll);
 	if (pVScroll == NULL)
@@ -164,7 +163,7 @@ void WINAPI duScrollView::OnMouseWheel(UINT fwKeys, int zDelta, POINT pt)
 		pVScroll->OnMouseWheel(fwKeys, zDelta, pt);
 }
 
-BOOL WINAPI duScrollView::OnSetCursor()
+BOOL duScrollView::OnSetCursor()
 {
 	POINT pt;
 	::GetCursorPos(&pt);
@@ -192,7 +191,7 @@ BOOL WINAPI duScrollView::OnSetCursor()
 	return duPlugin::OnSetCursor();
 }
 
-void WINAPI duScrollView::OnVScroll(ScrollBarAction sbAction, int nPos)
+void duScrollView::OnVScroll(ScrollBarAction sbAction, int nPos)
 {
 	switch (sbAction)
 	{
@@ -222,7 +221,7 @@ void WINAPI duScrollView::OnVScroll(ScrollBarAction sbAction, int nPos)
 	}
 }
 
-void WINAPI duScrollView::OnHScroll(ScrollBarAction sbAction, int nPos)
+void duScrollView::OnHScroll(ScrollBarAction sbAction, int nPos)
 {
 	switch (sbAction)
 	{
@@ -251,7 +250,7 @@ void WINAPI duScrollView::OnHScroll(ScrollBarAction sbAction, int nPos)
 	}
 }
 
-void WINAPI duScrollView::OnChildShow(duPlugin *pChild, BOOL fVisible)
+void duScrollView::OnChildShow(duPlugin *pChild, BOOL fVisible)
 {
 	if (!Plugin_IsValid(pChild))
 		return;
@@ -266,7 +265,7 @@ void WINAPI duScrollView::OnChildShow(duPlugin *pChild, BOOL fVisible)
 	}
 }
 
-void WINAPI duScrollView::GetViewSize(LPSIZE lpSize)
+void duScrollView::GetViewSize(LPSIZE lpSize)
 {
 	if (lpSize == NULL)
 		return;
@@ -277,13 +276,13 @@ void WINAPI duScrollView::GetViewSize(LPSIZE lpSize)
 	lpSize->cy = pImage->GetHeight();
 }
 
-POINT WINAPI duScrollView::GetViewPoint()
+POINT duScrollView::GetViewPoint()
 {
 	POINT pt = {m_nXOffset, m_nYOffset};
 	return pt;
 }
 
-void WINAPI duScrollView::DrawView(HDC hDC)
+void duScrollView::DrawView(HDC hDC)
 {
 	duImage *pImage = (duImage *)GetResObj(m_szImage, DU_RES_IMAGE);
 	if (pImage == NULL)
@@ -292,7 +291,7 @@ void WINAPI duScrollView::DrawView(HDC hDC)
 	DrawNormal(hDC, 0, 0, pImage->GetWidth(), pImage->GetHeight(), pImage, 0, 0, GetAlpha());
 }
 
-BOOL WINAPI duScrollView::UpdateScroll()
+BOOL duScrollView::UpdateScroll()
 {	
 	duScroll *pVScroll = (duScroll *)GetPluginByName(m_szVertScroll);
 	duScroll *pHScroll = (duScroll *)GetPluginByName(m_szHorzScroll);
@@ -425,7 +424,7 @@ BOOL WINAPI duScrollView::UpdateScroll()
 	return TRUE;
 }
 
-duRect WINAPI duScrollView::_GetClientRect()
+duRect duScrollView::_GetClientRect()
 {
 	duScroll *pVScroll = (duScroll *)GetPluginByName(m_szVertScroll);
 	duScroll *pHScroll = (duScroll *)GetPluginByName(m_szHorzScroll);
@@ -454,7 +453,7 @@ duRect WINAPI duScrollView::_GetClientRect()
 	return rcScrollView;
 }
 
-void WINAPI duScrollView::SetHorzScrollBar(LPCTSTR lpszScroll)
+void duScrollView::SetHorzScrollBar(LPCTSTR lpszScroll)
 {
 	if (lpszScroll)
 		_tcsncpy(m_szHorzScroll, lpszScroll, MAX_NAME);
@@ -462,7 +461,7 @@ void WINAPI duScrollView::SetHorzScrollBar(LPCTSTR lpszScroll)
 		ZeroMemory(m_szHorzScroll, sizeof(TCHAR) * MAX_NAME);
 }
 
-void WINAPI duScrollView::SetVertScrollBar(LPCTSTR lpszScroll)
+void duScrollView::SetVertScrollBar(LPCTSTR lpszScroll)
 {
 	if (lpszScroll)
 		_tcsncpy(m_szVertScroll, lpszScroll, MAX_NAME);

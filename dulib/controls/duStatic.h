@@ -16,17 +16,17 @@
 class duStatic : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
-	virtual void WINAPI OnMouseIn(POINT pt);
-	virtual void WINAPI OnMouseLeave(POINT pt);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
+	virtual void OnMouseIn(POINT pt);
+	virtual void OnMouseLeave(POINT pt);
 	
-	virtual BOOL WINAPI IsShowToolTip() { return m_fShowToolTip; }
-	virtual void WINAPI SetShowToolTip(BOOL fShow) { m_fShowToolTip = fShow; }
+	virtual BOOL IsShowToolTip() { return m_fShowToolTip; }
+	virtual void SetShowToolTip(BOOL fShow) { m_fShowToolTip = fShow; }
 	
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duStatic"); }
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duStatic"); }
 
 protected:
 	BOOL m_fShowToolTip;

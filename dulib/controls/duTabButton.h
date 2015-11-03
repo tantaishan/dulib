@@ -19,62 +19,62 @@
 class duTabButton : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
 
-	virtual void WINAPI OnMouseIn(POINT ppt);
-	virtual void WINAPI OnMouseLeave(POINT ppt);
-	virtual void WINAPI OnMouseLDown(POINT ppt);
-	virtual void WINAPI OnMouseLUp(POINT ppt);
-	virtual void WINAPI OnRedraw();
-	virtual void WINAPI OnTimer(UINT nEventId);
-	virtual void WINAPI OnKeyDown(UINT key, UINT nRepCnt, UINT nFlags);
+	virtual void OnMouseIn(POINT ppt);
+	virtual void OnMouseLeave(POINT ppt);
+	virtual void OnMouseLDown(POINT ppt);
+	virtual void OnMouseLUp(POINT ppt);
+	virtual void OnRedraw();
+	virtual void OnTimer(UINT nEventId);
+	virtual void OnKeyDown(UINT key, UINT nRepCnt, UINT nFlags);
 
-	virtual BOOL WINAPI IsSelected();
-	virtual void WINAPI SetSelected(BOOL fSel);
+	virtual BOOL IsSelected();
+	virtual void SetSelected(BOOL fSel);
 
-	virtual BOOL WINAPI IsAutoSize() { return m_fAutoSize; }
-	virtual void WINAPI SetAutoSize(BOOL fAutoSize) { m_fAutoSize = fAutoSize; }
+	virtual BOOL IsAutoSize() { return m_fAutoSize; }
+	virtual void SetAutoSize(BOOL fAutoSize) { m_fAutoSize = fAutoSize; }
 
-	virtual int WINAPI GetFixLeft() { return m_nFixLeft; } 
-	virtual void WINAPI SetFixLeft(int nFixLeft) { m_nFixLeft = nFixLeft; }
+	virtual int GetFixLeft() { return m_nFixLeft; } 
+	virtual void SetFixLeft(int nFixLeft) { m_nFixLeft = nFixLeft; }
 
-	virtual int WINAPI GetFixRight() { return m_nFixRight; }
-	virtual void WINAPI SetFixRight(int nFixRight) { m_nFixRight = nFixRight; }
+	virtual int GetFixRight() { return m_nFixRight; }
+	virtual void SetFixRight(int nFixRight) { m_nFixRight = nFixRight; }
 
-	virtual int WINAPI GetIconX() { return m_nIconX; }
-	virtual void WINAPI SetIconX(int nIconX) { m_nIconX = nIconX; }
+	virtual int GetIconX() { return m_nIconX; }
+	virtual void SetIconX(int nIconX) { m_nIconX = nIconX; }
 
-	virtual int WINAPI GetIconY() { return m_nIconY; }
-	virtual void WINAPI SetIconY(int nIconY) { m_nIconY = nIconY; }
+	virtual int GetIconY() { return m_nIconY; }
+	virtual void SetIconY(int nIconY) { m_nIconY = nIconY; }
 
-	virtual int WINAPI GetIconWidth() { return m_nIconWidth; }
-	virtual void WINAPI SetIconWidth(int nIconWidth) { m_nIconWidth = nIconWidth; }
+	virtual int GetIconWidth() { return m_nIconWidth; }
+	virtual void SetIconWidth(int nIconWidth) { m_nIconWidth = nIconWidth; }
 
-	virtual int WINAPI GetIconHeight() { return m_nIconHeight; }
-	virtual void WINAPI SetIconHeight(int nIconHeight) { m_nIconHeight = nIconHeight; }
+	virtual int GetIconHeight() { return m_nIconHeight; }
+	virtual void SetIconHeight(int nIconHeight) { m_nIconHeight = nIconHeight; }
 
-	virtual LPCTSTR WINAPI GetIcon() { return m_szIcon; }
-	virtual void WINAPI SetIcon(LPCTSTR lpszIconName);
+	virtual LPCTSTR GetIcon() { return m_szIcon; }
+	virtual void SetIcon(LPCTSTR lpszIconName);
 
-	virtual BOOL WINAPI IsFade() { return m_fFade; }
-	virtual void WINAPI SetFade(BOOL fFade) { m_fFade = fFade; }
+	virtual BOOL IsFade() { return m_fFade; }
+	virtual void SetFade(BOOL fFade) { m_fFade = fFade; }
 
-	virtual int WINAPI GetFadeInSpeed() { return m_nFadeInSpeed; }
-	virtual void WINAPI SetFadeInSpeed(int nFadeInSpeed) { m_nFadeInSpeed = nFadeInSpeed; }
+	virtual int GetFadeInSpeed() { return m_nFadeInSpeed; }
+	virtual void SetFadeInSpeed(int nFadeInSpeed) { m_nFadeInSpeed = nFadeInSpeed; }
 
-	virtual int WINAPI GetFadeOutSpeed() { return m_nFadeOutSpeed; }
-	virtual void WINAPI SetFadeOutSpeed(int nFadeOutSpeed) { m_nFadeOutSpeed = nFadeOutSpeed; }
+	virtual int GetFadeOutSpeed() { return m_nFadeOutSpeed; }
+	virtual void SetFadeOutSpeed(int nFadeOutSpeed) { m_nFadeOutSpeed = nFadeOutSpeed; }
 
-	virtual LPCTSTR WINAPI GetTooltipText(){return (LPCTSTR)m_szToolTip;}
-	virtual void WINAPI SetTooltipText(LPCTSTR lpszText);
+	virtual LPCTSTR GetTooltipText(){return (LPCTSTR)m_szToolTip;}
+	virtual void SetTooltipText(LPCTSTR lpszText);
 	
-	virtual LPCTSTR WINAPI GetTabPage() { return m_szTabPage; }
-	virtual void WINAPI SetTabPage(LPCTSTR lpszTabPage);
+	virtual LPCTSTR GetTabPage() { return m_szTabPage; }
+	virtual void SetTabPage(LPCTSTR lpszTabPage);
 
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duTabButton"); }	
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duTabButton"); }	
 
 public:
 	duTabButton();
@@ -82,7 +82,6 @@ public:
 
 	void _SetSelected(BOOL bSelected);	
 
-protected:
 	void ResizeByText(LPCTSTR lpszText);
 	void GetIconRect(duRect &rcIcon);
 	void FadeRedraw(UINT uFadeInState, UINT uFadeOutState);

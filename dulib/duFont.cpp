@@ -8,7 +8,6 @@
 //  History:    Nov-10-95   DavePl  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duFont.h"
 
 duFont::duFont() :
@@ -27,7 +26,7 @@ duFont::~duFont()
 	SAFE_DELETE_OBJECT(m_hFont);
 }
 
-BOOL WINAPI duFont::OnCreate(TiXmlElement *pElement)
+BOOL duFont::OnCreate(TiXmlElement *pElement)
 {
 	if (pElement == NULL)
 		return FALSE;
@@ -43,7 +42,7 @@ BOOL WINAPI duFont::OnCreate(TiXmlElement *pElement)
 	return TRUE;
 }
 
-void WINAPI duFont::SetFontFace(LPCTSTR lpszFace)
+void duFont::SetFontFace(LPCTSTR lpszFace)
 {
 	if (lpszFace)
 		_tcsncpy(m_szFace, lpszFace, MAX_NAME);
@@ -51,7 +50,7 @@ void WINAPI duFont::SetFontFace(LPCTSTR lpszFace)
 		ZeroMemory(m_szFace, MAX_NAME * sizeof(TCHAR));
 }
 
-HFONT WINAPI duFont::CreateFont()
+HFONT duFont::CreateFont()
 {
 	SAFE_DELETE_OBJECT(m_hFont);
 

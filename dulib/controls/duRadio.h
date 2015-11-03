@@ -19,41 +19,41 @@
 class duRadio : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
 	
-	virtual void WINAPI OnMouseIn(POINT pt);
-	virtual void WINAPI OnMouseLeave(POINT pt);
-	virtual void WINAPI OnMouseLDown(POINT pt);
-	virtual void WINAPI OnMouseLUp(POINT pt);
+	virtual void OnMouseIn(POINT pt);
+	virtual void OnMouseLeave(POINT pt);
+	virtual void OnMouseLDown(POINT pt);
+	virtual void OnMouseLUp(POINT pt);
 
-	virtual BOOL WINAPI IsChecked();
-	virtual void WINAPI SetChecked(BOOL fChecked);
+	virtual BOOL IsChecked();
+	virtual void SetChecked(BOOL fChecked);
 	
-	virtual int WINAPI GetGroupId() { return m_nGroupId; }
+	virtual int GetGroupId() { return m_nGroupId; }
 
-	virtual int WINAPI GetIconX() { return m_nIconX; }
-	virtual void WINAPI SetIconX(int nIconX) { m_nIconX = nIconX; }
+	virtual int GetIconX() { return m_nIconX; }
+	virtual void SetIconX(int nIconX) { m_nIconX = nIconX; }
 
-	virtual int WINAPI GetIconY() { return m_nIconY; }
-	virtual void WINAPI SetIconY(int nIconY) { m_nIconY = nIconY; }
+	virtual int GetIconY() { return m_nIconY; }
+	virtual void SetIconY(int nIconY) { m_nIconY = nIconY; }
 
-	virtual int WINAPI GetIconWidth() { return m_nIconWidth; }
-	virtual void WINAPI SetIconWidth(int nIconWidth) { m_nIconWidth = nIconWidth; }
+	virtual int GetIconWidth() { return m_nIconWidth; }
+	virtual void SetIconWidth(int nIconWidth) { m_nIconWidth = nIconWidth; }
 
-	virtual int WINAPI GetIconHeight() { return m_nIconHeight; }
-	virtual void WINAPI SetIconHeight(int nIconHeight) { m_nIconHeight = nIconHeight; }
+	virtual int GetIconHeight() { return m_nIconHeight; }
+	virtual void SetIconHeight(int nIconHeight) { m_nIconHeight = nIconHeight; }
 
-	virtual LPCTSTR WINAPI GetIcon() { return m_szIcon; }
-	virtual void WINAPI SetIcon(LPCTSTR lpszIconName);
+	virtual LPCTSTR GetIcon() { return m_szIcon; }
+	virtual void SetIcon(LPCTSTR lpszIconName);
 
-	virtual LPCTSTR WINAPI GetTooltipText(){return (LPCTSTR)m_szToolTip;}
-	virtual void WINAPI SetTooltipText(LPCTSTR lpszText);
+	virtual LPCTSTR GetTooltipText(){return (LPCTSTR)m_szToolTip;}
+	virtual void SetTooltipText(LPCTSTR lpszText);
 	
 
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duRadio"); }	
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duRadio"); }	
 
 public:
 	duRadio();

@@ -8,7 +8,6 @@
 //  History:    Nov-10-95   DavePl  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duCtrlManager.h"
 #include "controls/duWindow.h"
 #include "controls/duButton.h"
@@ -45,13 +44,13 @@
 #include "controls/duListCtrl.h"
 #include "controls/duTreeListCtrl.h"
 #include "controls/duTreeListItem.h"
-#include "controls/duFlash.h"
 #include "controls/duAnimation.h"
 #include "controls/duGridLayout.h"
 #include "controls/duPie.h"
 #include "controls/duMenu.h"
 #include "controls/duMLEdit.h"
 #include "controls/duRemoteCtrl.h"
+#include "controls/duFlash.h"
 
 extern MessageStruct g_messageStruct[];
 
@@ -141,7 +140,7 @@ BOOL duCtrlManager::Create(HWND hWnd, TiXmlElement *pElement)
 	if (pCtrl == NULL)
 		return FALSE;
 
-	pCtrl->SetTypeInfo(m_pWinManager->GetTypeInfoByName(pCtrl->GetTypeInfoName()));
+	//pCtrl->SetTypeInfo(m_pWinManager->GetTypeInfoByName(pCtrl->GetTypeInfoName()));
 
 	::SetProp(hWnd, ATOMPLUGIN, (HANDLE)this);
 
@@ -455,24 +454,7 @@ MouseMove_Exit:
 		{
 			if (wParam == VK_TAB)
 			{
-				//OnTabKey();
-				//int nIndex = -1;
-				//duPlugin *pFocusPlugin = GetFocusPlugin(m_hWnd);
-				//int i;
-				//for (i = 0;i < 6; i++)
-				//{
-				//	if (m_pTabOrder[i] == pFocusPlugin)
-				//	{
-				//		nIndex = i;
-				//		break;
-				//	}
-				//}
-				//
-				//nIndex++;
-				//if (nIndex > 5)
-				//	nIndex = 0;
-
-				//SetFocusPlugin(m_hWnd, m_pTabOrder[nIndex]);
+				OnTabKey();
 			}
 
 			if (Plugin_IsValid(m_pFocus))
@@ -1802,7 +1784,7 @@ duPlugin *duCtrlManager::Clone(duPlugin *pTemplate, duPlugin *pParent, duPlugin 
 	if (pNewPlugin == NULL)
 		return NULL;
 
-	pNewPlugin->SetTypeInfo(m_pWinManager->GetTypeInfoByName(pNewPlugin->GetTypeInfoName()));
+	//pNewPlugin->SetTypeInfo(m_pWinManager->GetTypeInfoByName(pNewPlugin->GetTypeInfoName()));
 
 	pNewPlugin->SetParent(pParent);
 	if (!pNewPlugin->OnCreate(pXmlTemplate, this))
@@ -1889,29 +1871,29 @@ void duCtrlManager::AddSuffix(duPlugin *pPlugin, UINT nSuffix)
 	}
 }
 
-BOOL duCtrlManager::CallScript(duPlugin *pPlugin, UINT uMsg, WPARAM wParam, LPARAM lParam)
-{
-	if (!Plugin_IsValid(pPlugin) || !m_pZorderList || !m_pWinManager)
-		return FALSE;
-
-	duPlugin *pRoot = m_pZorderList->GetRoot();
-	if (!Plugin_IsValid(pRoot))
-		return FALSE;
-
-	TCHAR szFunName[MAX_SCRIPT_NAME];
-	_stprintf(szFunName, _T("%s_%s_%s"), pRoot->GetName(), pPlugin->GetName(), g_messageStruct[uMsg].szMessage);
-
-	VARIANTARG varParams[3];
-
-	varParams[2].vt       = VT_DISPATCH;
-	varParams[2].pdispVal = pPlugin;
-	varParams[1].vt       = g_messageStruct[uMsg].wParamType;
-	varParams[1].ulVal    = (ULONG)wParam;
-	varParams[0].vt       = g_messageStruct[uMsg].lParamType;
-	varParams[0].ulVal    = (ULONG)lParam;
-
-	return m_pWinManager->ExecScript(szFunName, 3, varParams);
-}
+// BOOL duCtrlManager::CallScript(duPlugin *pPlugin, UINT uMsg, WPARAM wParam, LPARAM lParam)
+// {
+// 	if (!Plugin_IsValid(pPlugin) || !m_pZorderList || !m_pWinManager)
+// 		return FALSE;
+// 
+// 	duPlugin *pRoot = m_pZorderList->GetRoot();
+// 	if (!Plugin_IsValid(pRoot))
+// 		return FALSE;
+// 
+// 	TCHAR szFunName[MAX_SCRIPT_NAME];
+// 	_stprintf(szFunName, _T("%s_%s_%s"), pRoot->GetName(), pPlugin->GetName(), g_messageStruct[uMsg].szMessage);
+// 
+// 	VARIANTARG varParams[3];
+// 
+// 	varParams[2].vt       = VT_DISPATCH;
+// 	varParams[2].pdispVal = pPlugin;
+// 	varParams[1].vt       = g_messageStruct[uMsg].wParamType;
+// 	varParams[1].ulVal    = (ULONG)wParam;
+// 	varParams[0].vt       = g_messageStruct[uMsg].lParamType;
+// 	varParams[0].ulVal    = (ULONG)lParam;
+// 
+// 	return m_pWinManager->ExecScript(szFunName, 3, varParams);
+// }
 
 void duCtrlManager::DrawTrialBitmap(HDC hDC)
 {
@@ -1992,10 +1974,11 @@ void duCtrlManager::OnTabKey()
 	if (nIndex >= vtTabPlugin.size())
 		nIndex = 0;
 
-	SetFocusPlugin(vtTabPlugin[nIndex], TRUE);
+	if (vtTabPlugin.size())
+		SetFocusPlugin(vtTabPlugin[nIndex], TRUE);
 }
 
-duPlugin *WINAPI CreateDirectUIControl(LPCTSTR lpszType)
+duPlugin *CreateDirectUIControl(LPCTSTR lpszType)
 {
 	if (lpszType == NULL)
 		return NULL;
@@ -2091,7 +2074,7 @@ duPlugin *WINAPI CreateDirectUIControl(LPCTSTR lpszType)
 	return pIPlugin;
 }
 
-LRESULT WINAPI DirectUIWinProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT DirectUIWinProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	duCtrlManager *pCtrlManager = GetCtrlManager(hWnd);
 	if (pCtrlManager == NULL)
@@ -2100,7 +2083,7 @@ LRESULT WINAPI DirectUIWinProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPara
 	return pCtrlManager->WndProc(hWnd, uMsg, wParam, lParam);
 }
 
-extern "C" duPlugin *WINAPI GetPluginByName(HWND hWnd, LPCTSTR lpszName)
+extern "C" duPlugin *GetPluginByName(HWND hWnd, LPCTSTR lpszName)
 {
 	duCtrlManager *pCtrlManager = GetCtrlManager(hWnd);
 	if (pCtrlManager == NULL)
@@ -2109,7 +2092,7 @@ extern "C" duPlugin *WINAPI GetPluginByName(HWND hWnd, LPCTSTR lpszName)
 	return pCtrlManager->GetPluginByName(lpszName);
 }
 
-extern "C" duPlugin *WINAPI GetFocusPlugin(HWND hWnd)
+extern "C" duPlugin *GetFocusPlugin(HWND hWnd)
 {
 	duCtrlManager *pCtrlManager = GetCtrlManager(hWnd);
 	if (pCtrlManager == NULL)
@@ -2118,7 +2101,7 @@ extern "C" duPlugin *WINAPI GetFocusPlugin(HWND hWnd)
 	return pCtrlManager->GetFocusPlugin();
 }
 
-extern "C" void WINAPI SetFocusPlugin(HWND hWnd, duPlugin *pPlugin)
+extern "C" void SetFocusPlugin(HWND hWnd, duPlugin *pPlugin)
 {
 	duCtrlManager *pCtrlManager = GetCtrlManager(hWnd);
 	if (pCtrlManager == NULL)
@@ -2127,7 +2110,7 @@ extern "C" void WINAPI SetFocusPlugin(HWND hWnd, duPlugin *pPlugin)
 	pCtrlManager->SetFocusPlugin(pPlugin, TRUE);
 }
 
-extern "C" int WINAPI SetMaxTipWidth(HWND hWnd, int nWidth)
+extern "C" int SetMaxTipWidth(HWND hWnd, int nWidth)
 {
 	duCtrlManager *pCtrlManager = GetCtrlManager(hWnd);
 	if (pCtrlManager == NULL)

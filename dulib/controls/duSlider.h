@@ -19,40 +19,40 @@
 class duSlider : public duPlugin
 {
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
 
-	virtual void WINAPI OnMouseLeave(POINT pt);
-	virtual void WINAPI OnMouseLDown(POINT pt);
-	virtual void WINAPI OnMouseLUp(POINT pt);
-	virtual void WINAPI OnMouseMove(POINT pt);
+	virtual void OnMouseLeave(POINT pt);
+	virtual void OnMouseLDown(POINT pt);
+	virtual void OnMouseLUp(POINT pt);
+	virtual void OnMouseMove(POINT pt);
 
-	virtual void WINAPI Resize(LPRECT lpRect);
+	virtual void Resize(LPRECT lpRect);
 
-	virtual int  WINAPI GetPos();
-	virtual void WINAPI SetPos(int nPos);
+	virtual int  GetPos();
+	virtual void SetPos(int nPos);
 
-	virtual int  WINAPI GetMaxPos();
-	virtual void WINAPI SetMaxPos(int nMaxPos);
+	virtual int  GetMaxPos();
+	virtual void SetMaxPos(int nMaxPos);
 
-	virtual int  WINAPI GetThumbWidth();
-	virtual void WINAPI SetThumbWidth(int nWidth);
+	virtual int  GetThumbWidth();
+	virtual void SetThumbWidth(int nWidth);
 
-	virtual int  WINAPI GetThumbHeight();
-	virtual void WINAPI SetThumbHeight(int nHeight);
+	virtual int  GetThumbHeight();
+	virtual void SetThumbHeight(int nHeight);
 
-	virtual BOOL  WINAPI IsVert();
-	virtual void  WINAPI SetVert(BOOL bVert);
+	virtual BOOL  IsVert();
+	virtual void  SetVert(BOOL bVert);
 
-	virtual LPCTSTR WINAPI GetForeStyle();
-	virtual void WINAPI SetForeStyle(LPCTSTR lpszStyle);
+	virtual LPCTSTR GetForeStyle();
+	virtual void SetForeStyle(LPCTSTR lpszStyle);
 
-	virtual LPCTSTR WINAPI GetThumbStyle();
-	virtual void WINAPI SetThumbStyle(LPCTSTR lpszStyle);
+	virtual LPCTSTR GetThumbStyle();
+	virtual void SetThumbStyle(LPCTSTR lpszStyle);
 
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duSlider"); }	
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duSlider"); }	
 	
 public:
 	duSlider();

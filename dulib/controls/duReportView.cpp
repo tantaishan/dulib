@@ -8,7 +8,6 @@
 //  History:    Mar-08-2011   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duReportView.h"
 
 duReportView::duReportView() :
@@ -52,7 +51,7 @@ duReportView::~duReportView()
 	}
 }
 
-void WINAPI duReportView::RegisterControlProperty()
+void duReportView::RegisterControlProperty()
 {
 	RegisterProperty(_T("headerheight"),  DU_PROPERTY_LONG, &m_nHeaderHeight);
 	RegisterProperty(_T("headerstyle"),  DU_PROPERTY_STRING, m_pHeaderCtrl->GetStyle());
@@ -64,12 +63,12 @@ void WINAPI duReportView::RegisterControlProperty()
 	duScrollView::RegisterControlProperty();
 }
 
-void WINAPI duReportView::OnCreate()
+void duReportView::OnCreate()
 {
 	duScrollView::OnCreate();
 }
 
-void WINAPI duReportView::DrawObject(HDC hDC)
+void duReportView::DrawObject(HDC hDC)
 {
 	duRect rcReportView;
 	rcReportView.SetRectEmpty();
@@ -166,18 +165,18 @@ void WINAPI duReportView::DrawObject(HDC hDC)
 	::DeleteDC(hMemDC);
 }
 
-void WINAPI duReportView::DrawView(HDC hDC)
+void duReportView::DrawView(HDC hDC)
 {
 }
 
-void WINAPI duReportView::GetViewSize(LPSIZE lpSize)
+void duReportView::GetViewSize(LPSIZE lpSize)
 {
 	duRect rcClient = _GetClientRect();
 	lpSize->cx = m_pHeaderCtrl->GetTotalWidth();
 	lpSize->cy = GetTotalHeight();
 }
 
-void WINAPI duReportView::OnMouseLDown(POINT pt)
+void duReportView::OnMouseLDown(POINT pt)
 {
 	duRect rcReportView;
 	rcReportView.SetRectEmpty();
@@ -195,7 +194,7 @@ void WINAPI duReportView::OnMouseLDown(POINT pt)
 	duScrollView::OnMouseLDown(pt);
 }
 
-void WINAPI duReportView::OnMouseLUp(POINT pt)
+void duReportView::OnMouseLUp(POINT pt)
 {
 	duRect rcReportView;
 	rcReportView.SetRectEmpty();
@@ -212,7 +211,7 @@ void WINAPI duReportView::OnMouseLUp(POINT pt)
 		duScrollView::OnMouseLUp(pt);
 }
 
-void WINAPI duReportView::OnMouseRDown(POINT pt)
+void duReportView::OnMouseRDown(POINT pt)
 {
 	duRect rcReportView;
 	rcReportView.SetRectEmpty();
@@ -230,7 +229,7 @@ void WINAPI duReportView::OnMouseRDown(POINT pt)
 	duScrollView::OnMouseRDown(pt);
 }
 
-void WINAPI duReportView::OnMouseRUp(POINT pt)
+void duReportView::OnMouseRUp(POINT pt)
 {
 	duRect rcReportView;
 	rcReportView.SetRectEmpty();
@@ -248,7 +247,7 @@ void WINAPI duReportView::OnMouseRUp(POINT pt)
 	duScrollView::OnMouseRUp(pt);
 }
 
-void WINAPI duReportView::OnMouseHover(POINT pt)
+void duReportView::OnMouseHover(POINT pt)
 {
 	duRect rcReportView;
 	rcReportView.SetRectEmpty();
@@ -266,7 +265,7 @@ void WINAPI duReportView::OnMouseHover(POINT pt)
 	duScrollView::OnMouseHover(pt);
 }
 
-void WINAPI duReportView::OnMouseMove(POINT pt)
+void duReportView::OnMouseMove(POINT pt)
 {
 	duRect rcReportView;
 	rcReportView.SetRectEmpty();
@@ -295,7 +294,7 @@ void WINAPI duReportView::OnMouseMove(POINT pt)
 	}
 }
 
-void WINAPI duReportView::OnMouseDbClick(POINT pt)
+void duReportView::OnMouseDbClick(POINT pt)
 {
 	duRect rcReportView;
 	rcReportView.SetRectEmpty();
@@ -313,7 +312,7 @@ void WINAPI duReportView::OnMouseDbClick(POINT pt)
 	duScrollView::OnMouseDbClick(pt);
 }
 
-void WINAPI duReportView::OnViewMouseLDown(POINT pt)
+void duReportView::OnViewMouseLDown(POINT pt)
 {
 	if (m_nHotLine == -1)
 		return;
@@ -326,14 +325,14 @@ void WINAPI duReportView::OnViewMouseLDown(POINT pt)
 	Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duReportView::OnViewMouseLUp(POINT pt)
+void duReportView::OnViewMouseLUp(POINT pt)
 {
 /*
 	m_pHeaderCtrl->OnMouseLUp(pt);
 */
 }
 
-void WINAPI duReportView::OnViewMouseRDown(POINT pt)
+void duReportView::OnViewMouseRDown(POINT pt)
 {
 /*
 	CRect rcHeader;
@@ -346,7 +345,7 @@ void WINAPI duReportView::OnViewMouseRDown(POINT pt)
 */
 }
 
-void WINAPI duReportView::OnViewMouseRUp(POINT pt)
+void duReportView::OnViewMouseRUp(POINT pt)
 {
 /*
 	CRect rcHeader;
@@ -359,7 +358,7 @@ void WINAPI duReportView::OnViewMouseRUp(POINT pt)
 */
 }
 
-void WINAPI duReportView::OnViewMouseHover(POINT pt)
+void duReportView::OnViewMouseHover(POINT pt)
 {
 /*
 	CRect rcHeader;
@@ -372,7 +371,7 @@ void WINAPI duReportView::OnViewMouseHover(POINT pt)
 */
 }
 
-void WINAPI duReportView::OnViewMouseMove(POINT pt)
+void duReportView::OnViewMouseMove(POINT pt)
 {
 	duRect rcReportView;
 	rcReportView.SetRectEmpty();
@@ -451,7 +450,7 @@ void WINAPI duReportView::OnViewMouseMove(POINT pt)
 	}
 }
 
-void WINAPI duReportView::OnViewMouseDbClick(POINT pt)
+void duReportView::OnViewMouseDbClick(POINT pt)
 {
 /*
 	CRect rcHeader;
@@ -464,7 +463,7 @@ void WINAPI duReportView::OnViewMouseDbClick(POINT pt)
 */
 }
 
-void WINAPI duReportView::OnMouseLeave(POINT pt)
+void duReportView::OnMouseLeave(POINT pt)
 {
 	m_pHeaderCtrl->OnMouseLeave();
 	
@@ -480,7 +479,7 @@ void WINAPI duReportView::OnMouseLeave(POINT pt)
 	}
 }
 
-BOOL WINAPI duReportView::OnViewSetCursor(POINT pt)
+BOOL duReportView::OnViewSetCursor(POINT pt)
 {
 	POINT ptView = GetViewPoint();
 	if (pt.y - ptView.y <= m_nHeaderHeight)
@@ -492,7 +491,7 @@ BOOL WINAPI duReportView::OnViewSetCursor(POINT pt)
 	return FALSE;
 }
 
-BOOL WINAPI duReportView::InsertColumn(int nCol, int nWidth, LPCTSTR lpszText)
+BOOL duReportView::InsertColumn(int nCol, int nWidth, LPCTSTR lpszText)
 {
 	int nNewCol = m_pHeaderCtrl->InsertItem(nCol, nWidth, lpszText);
 	if (nNewCol == -1)
@@ -506,7 +505,7 @@ BOOL WINAPI duReportView::InsertColumn(int nCol, int nWidth, LPCTSTR lpszText)
 	return TRUE;
 }
 
-int WINAPI duReportView::InsertLine(int nLine, int nHeight)
+int duReportView::InsertLine(int nLine, int nHeight)
 {
 	if (nLine == -1)
 		nLine = m_nLineCount;
@@ -539,7 +538,7 @@ int WINAPI duReportView::InsertLine(int nLine, int nHeight)
 	return nLine;
 }
 
-void WINAPI duReportView::SetCellStyle(LPCTSTR lpszStyle)
+void duReportView::SetCellStyle(LPCTSTR lpszStyle)
 {
 	if (lpszStyle)
 		_tcsncpy(m_szCellStyle, lpszStyle, MAX_NAME);
@@ -547,7 +546,7 @@ void WINAPI duReportView::SetCellStyle(LPCTSTR lpszStyle)
 		ZeroMemory(m_szCellStyle, MAX_NAME * sizeof(TCHAR));
 }
 
-void WINAPI duReportView::SetLineStyle(LPCTSTR lpszStyle)
+void duReportView::SetLineStyle(LPCTSTR lpszStyle)
 {
 	if (lpszStyle)
 		_tcsncpy(m_szLineStyle, lpszStyle, MAX_NAME);
@@ -555,7 +554,7 @@ void WINAPI duReportView::SetLineStyle(LPCTSTR lpszStyle)
 		ZeroMemory(m_szLineStyle, MAX_NAME * sizeof(TCHAR));
 }
 
-LPCTSTR WINAPI duReportView::GetCellText(int nLine, int nCol)
+LPCTSTR duReportView::GetCellText(int nLine, int nCol)
 {
 	duReportCell *pCell = GetCell(nLine, nCol);
 	if (pCell)
@@ -563,14 +562,14 @@ LPCTSTR WINAPI duReportView::GetCellText(int nLine, int nCol)
 	return NULL;
 }
 
-void WINAPI duReportView::SetCellText(int nLine, int nCol, LPCTSTR lpszText)
+void duReportView::SetCellText(int nLine, int nCol, LPCTSTR lpszText)
 {
 	duReportCell *pCell = GetCell(nLine, nCol);
 	if (pCell)
 		pCell->SetText(lpszText);
 }
 
-BOOL WINAPI duReportView::DeleteColumn(int nCol)
+BOOL duReportView::DeleteColumn(int nCol)
 {
 	if (m_pHeaderCtrl->DeleteColumn(nCol))
 	{
@@ -584,7 +583,7 @@ BOOL WINAPI duReportView::DeleteColumn(int nCol)
 	return FALSE;
 }
 
-BOOL WINAPI duReportView::DeleteLine(int nLine)
+BOOL duReportView::DeleteLine(int nLine)
 {
 	int nLineCount = GetLineCount();
 	if (nLine < 0 || nLine >= nLineCount)
@@ -610,7 +609,7 @@ BOOL WINAPI duReportView::DeleteLine(int nLine)
 	return TRUE;
 }
 
-void WINAPI duReportView::GetHeaderRect(LPRECT lpRect)
+void duReportView::GetHeaderRect(LPRECT lpRect)
 {
 	if (lpRect)
 		::SetRectEmpty(lpRect);
@@ -668,7 +667,7 @@ duReportLine *duReportView::GetLine(int nLine)
 	return m_vtLine[nLine];
 }
 
-int WINAPI duReportView::GetColumnWidth(int nCol)
+int duReportView::GetColumnWidth(int nCol)
 {
 	return m_pHeaderCtrl->GetColumnWidth(nCol);
 }

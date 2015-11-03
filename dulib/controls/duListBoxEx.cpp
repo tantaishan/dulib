@@ -8,7 +8,6 @@
 //  History:    MAR-16-2010   Denny Chen  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duListBoxEx.h"
 
 duListBoxEx::duListBoxEx() :
@@ -27,13 +26,13 @@ duListBoxEx::~duListBoxEx()
 {
 }
 
-void WINAPI duListBoxEx::RegisterControlProperty()
+void duListBoxEx::RegisterControlProperty()
 {
 	RegisterProperty(_T("itemstyle"), DU_PROPERTY_STYLEGROUP,  &m_szItemStyle);
 	RegisterProperty(_T("vertscrollbar"),  DU_PROPERTY_STRING, m_szVertScrollBar);
 }
 
-void WINAPI duListBoxEx::OnCreate()
+void duListBoxEx::OnCreate()
 {
 	duScroll *pVertScrollBar = (duScroll *)GetPluginByName(m_szVertScrollBar);
 	if (pVertScrollBar)
@@ -43,7 +42,7 @@ void WINAPI duListBoxEx::OnCreate()
 	Plugin_HookWindowMessage(this);
 }
 
-void WINAPI duListBoxEx::DrawObject(HDC hDC)
+void duListBoxEx::DrawObject(HDC hDC)
 {
 	duRect rcListBox;
 	Plugin_GetRect(this, &rcListBox);
@@ -100,7 +99,7 @@ void WINAPI duListBoxEx::DrawObject(HDC hDC)
 	}
 }
 
-LRESULT WINAPI duListBoxEx::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+LRESULT duListBoxEx::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	if (!Plugin_IsVisible(this))
 	{
@@ -286,7 +285,7 @@ LRESULT WINAPI duListBoxEx::OnWndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARA
 	return 0;
 }
 
-void WINAPI duListBoxEx::OnVScroll(ScrollBarAction sbAction, int nPos)
+void duListBoxEx::OnVScroll(ScrollBarAction sbAction, int nPos)
 {
 	switch (sbAction)
 	{
@@ -317,13 +316,13 @@ void WINAPI duListBoxEx::OnVScroll(ScrollBarAction sbAction, int nPos)
 	}
 }
 
-void WINAPI duListBoxEx::OnChildShow(duPlugin *pChild, BOOL fVisible)
+void duListBoxEx::OnChildShow(duPlugin *pChild, BOOL fVisible)
 {
 	RefreshPane();
 	//Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duListBoxEx::OnChildDelete(duPlugin *pChild)
+void duListBoxEx::OnChildDelete(duPlugin *pChild)
 {
 	if (pChild == m_pHotItem)
 		m_pHotItem = NULL;
@@ -333,12 +332,12 @@ void WINAPI duListBoxEx::OnChildDelete(duPlugin *pChild)
 		m_pSelItem = NULL;
 }
 
-LPCTSTR WINAPI duListBoxEx::GetItemStyle()
+LPCTSTR duListBoxEx::GetItemStyle()
 {
 	return m_szItemStyle;
 }
 
-void WINAPI duListBoxEx::SetItemStyle(LPCTSTR pStyle)
+void duListBoxEx::SetItemStyle(LPCTSTR pStyle)
 {
 	if (pStyle)
 		_tcsncpy(m_szItemStyle, pStyle, MAX_NAME);
@@ -346,7 +345,7 @@ void WINAPI duListBoxEx::SetItemStyle(LPCTSTR pStyle)
 		ZeroMemory(m_szItemStyle, MAX_NAME * sizeof(TCHAR));
 }
 
-void WINAPI duListBoxEx::RefreshPane()
+void duListBoxEx::RefreshPane()
 {
 	duRect rcListBox;
 	Plugin_GetRect(this, &rcListBox);
@@ -397,7 +396,7 @@ void WINAPI duListBoxEx::RefreshPane()
 	Resize(NULL);
 }
 
-void WINAPI duListBoxEx::Resize(LPRECT lpRect/*=NULL*/)
+void duListBoxEx::Resize(LPRECT lpRect/*=NULL*/)
 {
 	duPlugin *pParent = GetParent();
 	if (pParent)
@@ -471,12 +470,12 @@ void WINAPI duListBoxEx::Resize(LPRECT lpRect/*=NULL*/)
 	}
 }
 
-duScroll *WINAPI duListBoxEx::GetVertScrollBar()
+duScroll *duListBoxEx::GetVertScrollBar()
 {
 	return (duScroll *)GetPluginByName(m_szVertScrollBar);
 }
 
-void WINAPI duListBoxEx::SetVertScrollBar(LPCTSTR lpszScroll)
+void duListBoxEx::SetVertScrollBar(LPCTSTR lpszScroll)
 {
 	if (lpszScroll)
 		_tcsncpy(m_szVertScrollBar, lpszScroll, MAX_NAME);

@@ -29,28 +29,28 @@ typedef struct tagOutlookBarItem
 class duOutlookBar : public duPlugin
 {	
 public:
-	virtual void WINAPI RegisterControlProperty();
-	virtual void WINAPI OnCreate();
-	virtual void WINAPI DrawObject(HDC hDC);
+	virtual void RegisterControlProperty();
+	virtual void OnCreate();
+	virtual void DrawObject(HDC hDC);
 
-	virtual void WINAPI OnMouseLeave(POINT pt);
-	virtual void WINAPI OnMouseLDown(POINT pt);
-	virtual void WINAPI OnMouseLUp(POINT pt);
-	virtual void WINAPI OnMouseMove(POINT pt);
+	virtual void OnMouseLeave(POINT pt);
+	virtual void OnMouseLDown(POINT pt);
+	virtual void OnMouseLUp(POINT pt);
+	virtual void OnMouseMove(POINT pt);
 
-	virtual int WINAPI GetItemCount();
-	virtual BOOL WINAPI InsertItem(int nIndex, LPCTSTR lpszText, duPlugin *pChild);
-	virtual LPCTSTR WINAPI GetItemText(int nIndex);
-	virtual void WINAPI SetItemText(int nIndex, LPCTSTR lpszText);
-	virtual duPlugin * WINAPI GetItem(int nIndex);
-	virtual void WINAPI SetItem(int nIndex, duPlugin *pChild);
-	virtual BOOL WINAPI DeleteItem(int nIndex);
+	virtual int GetItemCount();
+	virtual BOOL InsertItem(int nIndex, LPCTSTR lpszText, duPlugin *pChild);
+	virtual LPCTSTR GetItemText(int nIndex);
+	virtual void SetItemText(int nIndex, LPCTSTR lpszText);
+	virtual duPlugin * GetItem(int nIndex);
+	virtual void SetItem(int nIndex, duPlugin *pChild);
+	virtual BOOL DeleteItem(int nIndex);
 
-	virtual int WINAPI GetSelectedItem();
-	virtual void WINAPI SetSelectedItem(int nIndex);
+	virtual int GetSelectedItem();
+	virtual void SetSelectedItem(int nIndex);
 
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duOutlookBar"); }	
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duOutlookBar"); }	
 public:
 	duOutlookBar();
 	~duOutlookBar();

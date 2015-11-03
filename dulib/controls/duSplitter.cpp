@@ -8,7 +8,6 @@
 //  History:    Mar-08-2010   Denny Chen  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duSplitter.h"
 
 duSplitter::duSplitter() :
@@ -28,7 +27,7 @@ duSplitter::~duSplitter()
 {
 }
 
-void WINAPI duSplitter::RegisterControlProperty()
+void duSplitter::RegisterControlProperty()
 {
 	RegisterProperty(_T("firstminpixel"),    DU_PROPERTY_LONG,   &m_nFMinPixel);
 	RegisterProperty(_T("secondminpixel"),   DU_PROPERTY_LONG,   &m_nSMinPixel);
@@ -38,11 +37,11 @@ void WINAPI duSplitter::RegisterControlProperty()
 	RegisterProperty(_T("dockfirst"),        DU_PROPERTY_BOOL,   &m_fDockFirst);
 }
 
-void WINAPI duSplitter::OnCreate()
+void duSplitter::OnCreate()
 {
 }
 
-void WINAPI duSplitter::DrawObject(HDC hDC)
+void duSplitter::DrawObject(HDC hDC)
 {
 	duRect rectSplitter;
 	Plugin_GetRect(this, &rectSplitter);
@@ -51,13 +50,13 @@ void WINAPI duSplitter::DrawObject(HDC hDC)
 	DrawByStyle(this, GetStyle(), hDC, &rectSplitter, GetState(), GetText(), GetAlpha());
 }
 
-void WINAPI duSplitter::OnMouseLeave(POINT pt)
+void duSplitter::OnMouseLeave(POINT pt)
 {
 	Plugin_SetState(this, DU_STATE_NORMAL);
 	Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duSplitter::OnMouseLDown(POINT pt)
+void duSplitter::OnMouseLDown(POINT pt)
 {
 	duPlugin *pFPlugin = GetPluginByName(m_szFName);
 	duPlugin *pSPlugin = GetPluginByName(m_szSName);
@@ -78,7 +77,7 @@ void WINAPI duSplitter::OnMouseLDown(POINT pt)
 	}
 }
 
-void WINAPI duSplitter::OnMouseLUp(POINT pt)
+void duSplitter::OnMouseLUp(POINT pt)
 {
 	duPlugin *pFPlugin = GetPluginByName(m_szFName);
 	duPlugin *pSPlugin = GetPluginByName(m_szSName);
@@ -139,7 +138,7 @@ void WINAPI duSplitter::OnMouseLUp(POINT pt)
 	::InvalidateRect(m_hWnd, NULL, TRUE);
 }
 
-void WINAPI duSplitter::OnMouseMove(POINT pt)
+void duSplitter::OnMouseMove(POINT pt)
 {
 	duPlugin *pFPlugin = GetPluginByName(m_szFName);
 	duPlugin *pSPlugin = GetPluginByName(m_szSName);
@@ -256,7 +255,7 @@ void WINAPI duSplitter::OnMouseMove(POINT pt)
 	}
 }
 
-void WINAPI duSplitter::MoveHorz(int nDistance)
+void duSplitter::MoveHorz(int nDistance)
 {
 	duPlugin *pFPlugin = GetPluginByName(m_szFName);
 	duPlugin *pSPlugin = GetPluginByName(m_szSName);
@@ -329,7 +328,7 @@ void WINAPI duSplitter::MoveHorz(int nDistance)
 	NotifyUser(DUM_SPLITTERMOVED, NULL, NULL);
 }
 
-void WINAPI duSplitter::MoveVert(int nDistance)
+void duSplitter::MoveVert(int nDistance)
 {
 	duPlugin *pFPlugin = GetPluginByName(m_szFName);
 	duPlugin *pSPlugin = GetPluginByName(m_szSName);

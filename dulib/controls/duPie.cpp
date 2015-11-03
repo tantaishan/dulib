@@ -8,7 +8,6 @@
 //  History:    JAN-09-2010   Denny Chen  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duPie.h"
 
 duPie::duPie() :
@@ -24,19 +23,19 @@ duPie::~duPie()
 
 }
 
-void WINAPI duPie::RegisterControlProperty()
+void duPie::RegisterControlProperty()
 {
 	RegisterProperty(_T("percent"), DU_PROPERTY_FLOAT, &m_fPercent);
 	RegisterProperty(_T("colorall"), DU_PROPERTY_COLOR, &m_clrAll);
 	RegisterProperty(_T("colorpercent"), DU_PROPERTY_COLOR, &m_clrPercent);
 }
 
-void WINAPI duPie::OnCreate()
+void duPie::OnCreate()
 {
 	
 }
 
-void WINAPI duPie::DrawObject(HDC hDC)
+void duPie::DrawObject(HDC hDC)
 {
 	duRect rcPie;
 	GetRect(&rcPie);

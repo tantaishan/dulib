@@ -8,7 +8,6 @@
 //  History:    Nov-10-2009   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duFlash.h"
 #include "AxControl.h"
 
@@ -44,12 +43,12 @@ duFlash::~duFlash()
 	}
 }
 
-void WINAPI duFlash::RegisterControlProperty()
+void duFlash::RegisterControlProperty()
 {
 	RegisterProperty(_T("url"), DU_PROPERTY_STRING, &m_szURL);
 }
 
-void WINAPI duFlash::OnCreate()
+void duFlash::OnCreate()
 {
 	IUnknown *pControl = NULL;
 	IUnknown *pContainer = NULL;
@@ -79,11 +78,11 @@ void WINAPI duFlash::OnCreate()
 	pContainer->Release();
 }
 
-void WINAPI duFlash::DrawObject(HDC hDC)
+void duFlash::DrawObject(HDC hDC)
 {
 }
 
-void WINAPI duFlash::Resize(LPRECT lpRect)
+void duFlash::Resize(LPRECT lpRect)
 {
 	duHwndObj::Resize(lpRect);
 	
@@ -98,12 +97,12 @@ void WINAPI duFlash::Resize(LPRECT lpRect)
 	}
 }
 
-LPCTSTR WINAPI duFlash::GetURL()
+LPCTSTR duFlash::GetURL()
 {
 	return m_szURL;
 }
 
-void WINAPI duFlash::SetURL(LPCTSTR lpszURL)
+void duFlash::SetURL(LPCTSTR lpszURL)
 {
 	if(lpszURL)
 		_tcsncpy(m_szURL, lpszURL, MAX_URL_LENGTH);
@@ -114,7 +113,7 @@ void WINAPI duFlash::SetURL(LPCTSTR lpszURL)
 		m_pFlash->put_Movie(m_szURL);
 }
 
-BOOL WINAPI duFlash::IsAllowFullScreen()
+BOOL duFlash::IsAllowFullScreen()
 {
 	if (m_pFlash)
 	{
@@ -135,7 +134,7 @@ BOOL WINAPI duFlash::IsAllowFullScreen()
 	return FALSE;
 }
 
-void WINAPI duFlash::SetAllowFullScreen(BOOL fAllowFullScreen)
+void duFlash::SetAllowFullScreen(BOOL fAllowFullScreen)
 {
 	if (m_pFlash)
 	{
@@ -146,7 +145,7 @@ void WINAPI duFlash::SetAllowFullScreen(BOOL fAllowFullScreen)
 	}
 }
 
-BOOL WINAPI duFlash::Play(LPCTSTR lpszMovie)
+BOOL duFlash::Play(LPCTSTR lpszMovie)
 {
 	if (m_pFlash == NULL)
 		return FALSE;
@@ -172,7 +171,7 @@ BOOL WINAPI duFlash::Play(LPCTSTR lpszMovie)
 	return TRUE;
 }
 
-BOOL WINAPI duFlash::Stop()
+BOOL duFlash::Stop()
 {
 	if (m_pFlash == NULL)
 		return FALSE;
@@ -181,7 +180,7 @@ BOOL WINAPI duFlash::Stop()
 	return TRUE;
 }
 
-UINT WINAPI duFlash::GetPlayState()
+UINT duFlash::GetPlayState()
 {
 	if (m_pFlash == NULL)
 		return FLASH_PLAYER_ERROR;
@@ -211,7 +210,7 @@ UINT WINAPI duFlash::GetPlayState()
 	return FLASH_PLAYER_ERROR;
 }
 
-void WINAPI duFlash::Pause()
+void duFlash::Pause()
 {
 	if (m_pFlash == NULL)
 		return;

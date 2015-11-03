@@ -8,7 +8,6 @@
 //  History:    Nov-13-2009   Eric Qian  Created
 //
 //--------------------------------------------------------------------------
-#include "stdafx.h"
 #include "duCheckBox.h"
 #include "duDrawHelper.h"
 #include "duCtrlManager.h"
@@ -41,7 +40,7 @@ duCheckBox::~duCheckBox(void)
 }
 
 //////////////////////////////////////////////////////////////////////////
-void WINAPI duCheckBox::RegisterControlProperty()
+void duCheckBox::RegisterControlProperty()
 {
 	RegisterProperty(_T("autosize"), DU_PROPERTY_BOOL, &m_fAutoSize);
 	RegisterProperty(_T("fixleft"), DU_PROPERTY_LONG, &m_nFixLeft);
@@ -60,7 +59,7 @@ void WINAPI duCheckBox::RegisterControlProperty()
 	RegisterProperty(_T("tooltip"), DU_PROPERTY_STRING, m_szToolTip);
 }
 
-void WINAPI duCheckBox::OnCreate()
+void duCheckBox::OnCreate()
 {
 	if (m_nFadeInSpeed == 0)
 		m_nFadeInSpeed = 40;
@@ -78,7 +77,7 @@ void WINAPI duCheckBox::OnCreate()
 	m_fChecked ? Plugin_SetState(this, DU_STATE_CHECKED) : Plugin_SetState(this, DU_STATE_NORMAL);
 }
 
-void WINAPI duCheckBox::DrawObject(HDC hDC)
+void duCheckBox::DrawObject(HDC hDC)
 {
 
 	duRect rectChkBox;
@@ -113,7 +112,7 @@ void WINAPI duCheckBox::DrawObject(HDC hDC)
 }
 
 
-void WINAPI duCheckBox::OnMouseIn(POINT pt)
+void duCheckBox::OnMouseIn(POINT pt)
 {
 	duCtrlManager *pCtrlManager = GetCtrlManager(m_hWnd);
 	if (pCtrlManager == NULL)
@@ -138,7 +137,7 @@ void WINAPI duCheckBox::OnMouseIn(POINT pt)
 		Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duCheckBox::OnMouseLeave(POINT pt)
+void duCheckBox::OnMouseLeave(POINT pt)
 {
 	duCtrlManager *pCtrlManager = GetCtrlManager(m_hWnd);
 	if (pCtrlManager == NULL)
@@ -163,7 +162,7 @@ void WINAPI duCheckBox::OnMouseLeave(POINT pt)
 		Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duCheckBox::OnMouseLDown(POINT pt)
+void duCheckBox::OnMouseLDown(POINT pt)
 {
 	UINT uState = GetState();
 	if (IS_STATE_CHECKED(uState))
@@ -174,7 +173,7 @@ void WINAPI duCheckBox::OnMouseLDown(POINT pt)
 	Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duCheckBox::OnMouseLUp(POINT pt)
+void duCheckBox::OnMouseLUp(POINT pt)
 {
 	UINT uState = GetState();
 	if (IS_STATE_CHECKED(uState))
@@ -209,7 +208,7 @@ void WINAPI duCheckBox::OnMouseLUp(POINT pt)
 	Plugin_Redraw(this, TRUE);
 }
 
-void WINAPI duCheckBox::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+void duCheckBox::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
 // ×¢ÊÍ¼üÅÌ¿ì½Ý¼ü£¬ modify by Alex Liang, 2014-10-22
 /*
@@ -247,7 +246,7 @@ void WINAPI duCheckBox::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 */
 }
 
-void WINAPI duCheckBox::SetText(LPCTSTR lpszText)
+void duCheckBox::SetText(LPCTSTR lpszText)
 {
 	if (m_fAutoSize)
 		ResizeByText(lpszText);
@@ -255,18 +254,18 @@ void WINAPI duCheckBox::SetText(LPCTSTR lpszText)
 	duPlugin::SetText(lpszText);
 }
 
-BOOL WINAPI duCheckBox::IsChecked()
+BOOL duCheckBox::IsChecked()
 {
 	return m_fChecked;
 }
 
-void WINAPI duCheckBox::SetChecked(BOOL fChecked)
+void duCheckBox::SetChecked(BOOL fChecked)
 {
 	m_fChecked = fChecked;
 	fChecked ? Plugin_SetState(this, DU_STATE_CHECKED) : Plugin_SetState(this, DU_STATE_NORMAL);
 }
 
-void WINAPI duCheckBox::SetIcon(LPCTSTR lpszIcon)
+void duCheckBox::SetIcon(LPCTSTR lpszIcon)
 {
 	if (lpszIcon)
 		_tcsncpy(m_szIcon, lpszIcon, MAX_NAME);
@@ -274,7 +273,7 @@ void WINAPI duCheckBox::SetIcon(LPCTSTR lpszIcon)
 		ZeroMemory(m_szIcon, sizeof(TCHAR) * MAX_NAME);
 }
 
-void WINAPI duCheckBox::ResizeByText(LPCTSTR lpszText)
+void duCheckBox::ResizeByText(LPCTSTR lpszText)
 {
 	duStyleGroup *pStyleGroup = (duStyleGroup *)GetResObj(GetStyle(), DU_RES_STYLEGROUP);
 	if (pStyleGroup)
@@ -286,13 +285,13 @@ void WINAPI duCheckBox::ResizeByText(LPCTSTR lpszText)
 	}
 }
 
-void WINAPI duCheckBox::OnRedraw()
+void duCheckBox::OnRedraw()
 {
 	m_fFadeDrawing = FALSE;
 	Plugin_KillTimer(this, m_nFadeTimer);
 }
 
-void WINAPI duCheckBox::OnTimer(UINT nEventId)
+void duCheckBox::OnTimer(UINT nEventId)
 {
 	if (!m_fFade || !m_fFadeDrawing)
 	{
@@ -361,7 +360,7 @@ void duCheckBox::FadeRedraw(UINT uFadeInState, UINT uFadeOutState)
 }
 
 
-void WINAPI duCheckBox::SetTooltipText(LPCTSTR lpszText)
+void duCheckBox::SetTooltipText(LPCTSTR lpszText)
 {
 	if (lpszText)
 		_tcsncpy(m_szToolTip, lpszText, MAX_NAME);

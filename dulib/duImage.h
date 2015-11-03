@@ -27,36 +27,36 @@ typedef struct tagCOLORHSL
 class duImage : public duResBase
 {
 public:
-	virtual UINT WINAPI GetType() { return DU_RES_IMAGE; }
-	virtual BOOL WINAPI OnCreate(TiXmlElement *pElement);
+	virtual UINT GetType() { return DU_RES_IMAGE; }
+	virtual BOOL OnCreate(TiXmlElement *pElement);
 
-	virtual BOOL WINAPI CreateImage(int nWidth, int nHeight);
-	virtual BOOL WINAPI LoadFromFile(LPCTSTR lpszFile);
-	virtual BOOL WINAPI LoadFromMemory(PBYTE pData, int nSize);
-	virtual BOOL WINAPI LoadFromStream(IStream *pStream);
+	virtual BOOL CreateImage(int nWidth, int nHeight);
+	virtual BOOL LoadFromFile(LPCTSTR lpszFile);
+	virtual BOOL LoadFromMemory(PBYTE pData, int nSize);
+	virtual BOOL LoadFromStream(IStream *pStream);
 
-	virtual PBYTE WINAPI GetBits();
-	virtual HBITMAP WINAPI GetBitmap();
-	virtual int WINAPI GetWidth();
-	virtual int WINAPI GetHeight();
-	virtual int WINAPI GetFrameCount();
-	virtual HBITMAP WINAPI GetFrameBitmap(int nIndex);
-	virtual PBYTE WINAPI GetFrameBits(int nIndex);
-	virtual UINT WINAPI GetFrameDelay(int nIndex);
+	virtual PBYTE GetBits();
+	virtual HBITMAP GetBitmap();
+	virtual int GetWidth();
+	virtual int GetHeight();
+	virtual int GetFrameCount();
+	virtual HBITMAP GetFrameBitmap(int nIndex);
+	virtual PBYTE GetFrameBits(int nIndex);
+	virtual UINT GetFrameDelay(int nIndex);
 	
-	virtual BOOL WINAPI BeginHSLConvert();
-	virtual BOOL WINAPI AdjustHSL(int nHua, int nPerSat, int nPerLum);
-	virtual void WINAPI EndHSLConvert();
+	virtual BOOL BeginHSLConvert();
+	virtual BOOL AdjustHSL(int nHua, int nPerSat, int nPerLum);
+	virtual void EndHSLConvert();
 
-	virtual LPCTSTR WINAPI GetValue();
-	virtual void WINAPI SetValue(LPCTSTR strImagePath);
+	virtual LPCTSTR GetValue();
+	virtual void SetValue(LPCTSTR strImagePath);
 	
-	virtual duImage *WINAPI CreateGrayImage();
-	virtual duImage *WINAPI CreateStretchSmooth(int nWidth, int nHeight);
-	virtual BOOL WINAPI LoadFromHICON(HICON hIcon);
+	virtual duImage *CreateGrayImage();
+	virtual duImage *CreateStretchSmooth(int nWidth, int nHeight);
+	virtual BOOL LoadFromHICON(HICON hIcon);
 	
-	virtual void WINAPI FinalRelease() { delete this; }
-	virtual LPCTSTR WINAPI GetTypeInfoName() { return _T("duImage"); }
+	virtual void FinalRelease() { delete this; }
+	virtual LPCTSTR GetTypeInfoName() { return _T("duImage"); }
 
 public:
 	duImage();
